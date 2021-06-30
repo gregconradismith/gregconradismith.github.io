@@ -1,0 +1,971 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Tools &#8212; Cyclic Representations of Receptor Complexes</title>
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="My First Markdown File" href="myfirstmarkdown.html" />
+    <link rel="prev" title="Sampling edges of graphs" href="SamplingEdgesOfGraphs.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      <img src="_static/Greg.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Cyclic Representations of Receptor Complexes</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   Cyclic representations of receptor complexes
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Markdown Research Notes
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="example_reduced_graph_powers.html">
+   Example Reduced Graph Powers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="sampling_edges_of_graphs.html">
+   Graph Edge Sampling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="wang_algebra.html">
+   Wang algebra
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Jupyterlab .ipynb Notebooks
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="SymmetricFunctionExploration.html">
+   Symmetric function exploration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="ReducedFromCartesianPower.html">
+   Reduced Power Graph
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="SamplingEdgesOfGraphs.html">
+   Sampling edges of graphs
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   My Tools
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Jupyter Helps
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="myfirstmarkdown.html">
+   My First Markdown File
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebookswithcontent.html">
+   Notebooks with Markdown Content
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/MyTools.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMyTools.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/MyTools.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   My Tools
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-using-these-tools-on-monomial-receptor-models">
+   Examples of using these tools on
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     monomial
+    </span>
+   </code>
+   receptor models
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-dimer-and-higher-order-oligomer-receptor-models">
+   Examples of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     dimer
+    </span>
+   </code>
+   and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     higher-order
+    </span>
+    <span class="pre">
+     oligomer
+    </span>
+   </code>
+   receptor models.
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spanning-trees-of-receptor-oligomers-and-contexts-of-transitions-on-monomer-model">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Spanning
+    </span>
+    <span class="pre">
+     trees
+    </span>
+   </code>
+   of receptor oligomers and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     contexts
+    </span>
+   </code>
+   of transitions on monomer model
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="my-tools">
+<h1>My Tools<a class="headerlink" href="#my-tools" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_vertex_monomials</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">method</span><span class="o">==</span><span class="s1">&#39;alpha&#39;</span> <span class="ow">and</span> <span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="n">monomials_default</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;h&#39;</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="s1">&#39;j&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]</span>
+        <span class="n">monomials</span><span class="o">=</span><span class="n">monomials_default</span><span class="p">[:</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">monomials</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">())]</span>
+    <span class="n">V</span><span class="o">=</span><span class="n">PolynomialRing</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="n">monomials</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;invlex&#39;</span><span class="p">)</span>
+    <span class="n">V</span><span class="o">.</span><span class="n">inject_variables</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">is_directed</span><span class="p">():</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">DiGraph</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">vertices</span><span class="p">():</span>
+        <span class="n">H</span><span class="o">.</span><span class="n">add_vertex</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">H</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">V</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">is_directed</span><span class="p">():</span>
+                <span class="n">H</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">V</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span><span class="n">V</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="n">e</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>   
+    <span class="k">return</span> <span class="n">H</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">add_edge_monomials</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span><span class="n">edge_vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">,</span><span class="s1">&#39;f&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;h&#39;</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="s1">&#39;j&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">]):</span>
+    <span class="c1">#V=G.vertices()</span>
+    <span class="c1">#if method==&#39;default&#39; and V[0]==0: # e01, ... need vertices to be integers here </span>
+    <span class="k">if</span> <span class="n">method</span><span class="o">==</span><span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="c1"># e01, ... need vertices to be integers here </span>
+        <span class="n">E</span><span class="o">=</span><span class="n">PolynomialRing</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">(),</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">(),</span><span class="n">var_array</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e&#39;</span><span class="p">],</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;invlex&#39;</span><span class="p">)</span>
+        <span class="n">E</span><span class="o">.</span><span class="n">inject_variables</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">E</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()</span><span class="o">*</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">is_directed</span><span class="p">():</span>
+                    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">E</span><span class="o">.</span><span class="n">gen</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()</span><span class="o">*</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>  
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">is_directed</span><span class="p">():</span>
+            <span class="n">edge_vars</span> <span class="o">=</span> <span class="n">edge_vars</span><span class="p">[:</span><span class="n">G</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">edge_vars_bar</span> <span class="o">=</span> <span class="p">[</span> <span class="n">ev</span><span class="o">+</span><span class="s1">&#39;bar&#39;</span> <span class="k">for</span> <span class="n">ev</span> <span class="ow">in</span> <span class="n">edge_vars</span> <span class="p">]</span> 
+            <span class="n">E</span><span class="o">=</span><span class="n">PolynomialRing</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="n">edge_vars</span><span class="o">+</span><span class="n">edge_vars_bar</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;invlex&#39;</span><span class="p">)</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">inject_variables</span><span class="p">()</span>
+            <span class="n">evars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">gens</span><span class="p">()[:</span><span class="n">G</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">evars</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="n">evars_bar</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">gens</span><span class="p">()[</span><span class="n">G</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">:])</span>   
+            <span class="n">evars_bar</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">evars</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+                    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">evars_bar</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">edge_vars</span> <span class="o">=</span> <span class="n">edge_vars</span><span class="p">[:</span><span class="n">G</span><span class="o">.</span><span class="n">size</span><span class="p">()]</span>
+            <span class="n">E</span><span class="o">=</span><span class="n">PolynomialRing</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="n">edge_vars</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="s1">&#39;invlex&#39;</span><span class="p">)</span>
+            <span class="n">E</span><span class="o">.</span><span class="n">inject_variables</span><span class="p">()</span>
+            <span class="n">evars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">E</span><span class="o">.</span><span class="n">gens</span><span class="p">()[:</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()])</span>
+            <span class="n">evars</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&lt;</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">evars</span><span class="o">.</span><span class="n">pop</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">G</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_laplacian_matrix_old</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+    <span class="n">A</span><span class="o">=</span><span class="n">matrix</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">())</span>
+    <span class="n">V</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">vertices</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">V</span><span class="p">[</span><span class="n">j</span><span class="p">]):</span>
+                <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">edge_label</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">V</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+    <span class="n">L</span><span class="o">=</span><span class="n">diagonal_matrix</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">A</span><span class="p">))</span><span class="o">-</span><span class="n">A</span>
+    <span class="k">return</span> <span class="n">L</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">combinatorial_laplacian</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">combinatorial_coefficients</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">v</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">vertices</span><span class="p">()</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">SR</span><span class="p">,</span> <span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">(),</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">:</span> <span class="n">G</span><span class="o">.</span><span class="n">edge_label</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">combinatorial_coefficients</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()):</span>
+                <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]):</span>
+                    <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">=</span><span class="n">combinatorial_coefficient</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">diagonal_matrix</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">transpose</span><span class="p">()))</span>
+    <span class="n">L</span><span class="o">=</span><span class="n">D</span><span class="o">-</span><span class="n">A</span>
+    <span class="k">return</span> <span class="n">L</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tree_polynomial</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">root</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">combinatorial_coefficients</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">L</span><span class="o">=</span><span class="n">combinatorial_laplacian</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">combinatorial_coefficients</span><span class="p">)</span>
+    <span class="n">I</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">nrows</span><span class="p">()))</span>
+    <span class="n">I</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">T</span><span class="o">=</span><span class="n">det</span><span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="n">I</span><span class="p">,</span><span class="n">I</span><span class="p">])</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coefficient_transition_context_from_reduced_graph_power</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">):</span>
+    <span class="c1">#if not G.has_edge(f,g):</span>
+    <span class="c1">#    print(&#39;***&#39;,f,g)</span>
+    <span class="c1">#    return None, None, None, None </span>
+    <span class="c1">#else:</span>
+    <span class="n">V</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">vertices</span><span class="p">()</span>
+    <span class="n">elabel</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">edge_label</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">coeff</span><span class="o">=</span><span class="n">elabel</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">fr</span><span class="o">=</span><span class="n">elabel</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">to</span><span class="o">=</span><span class="n">elabel</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">=</span><span class="n">elabel</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">coeff</span><span class="p">,</span> <span class="p">(</span><span class="n">fr</span><span class="p">,</span><span class="n">to</span><span class="p">),</span> <span class="n">context</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coefficient_transition_context_from_tuple</span><span class="p">(</span><span class="n">from_tuple</span><span class="p">,</span><span class="n">to_tuple</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">from_tuple</span><span class="p">)</span><span class="o">!=</span><span class="nb">len</span><span class="p">(</span><span class="n">to_tuple</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Tuples must be the same size.&#39;</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">vector</span><span class="p">(</span><span class="n">to_tuple</span><span class="p">)</span><span class="o">-</span><span class="n">vector</span><span class="p">(</span><span class="n">from_tuple</span><span class="p">))</span>
+    <span class="n">fr</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">to</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">coeff</span><span class="o">=</span><span class="n">from_tuple</span><span class="p">[</span><span class="n">fr</span><span class="p">]</span>
+    <span class="n">context</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">from_tuple</span><span class="p">)</span> 
+    <span class="n">context</span><span class="p">[</span><span class="n">fr</span><span class="p">]</span><span class="o">=</span><span class="n">context</span><span class="p">[</span><span class="n">fr</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">coeff</span><span class="p">,</span> <span class="p">(</span><span class="n">fr</span><span class="p">,</span><span class="n">to</span><span class="p">),</span> <span class="n">context</span> 
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">Cartesian_power</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="c1"># Make Cartesian power G^k (unreduced)</span>
+    <span class="n">Gk</span><span class="o">=</span><span class="n">G</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">Gk</span> <span class="o">=</span> <span class="n">Gk</span><span class="o">.</span><span class="n">cartesian_product</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+    <span class="c1"># Make each vertex a tuple</span>
+    <span class="n">vflat</span><span class="o">=</span><span class="nb">list</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Gk</span><span class="o">.</span><span class="n">order</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Gk</span><span class="o">.</span><span class="n">order</span><span class="p">()):</span>
+        <span class="n">v</span><span class="o">=</span><span class="n">Gk</span><span class="o">.</span><span class="n">vertices</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">vflat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+    <span class="n">Gk</span><span class="o">.</span><span class="n">relabel</span><span class="p">(</span><span class="n">vflat</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Gk</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reduced_Cartesian_power</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">V</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">vertices</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">!=</span><span class="mi">0</span><span class="p">:</span> <span class="c1"># construct reduced Cartesian power using monomials</span>
+        <span class="n">f</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">kk</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="o">*</span><span class="nb">sum</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">vertices</span><span class="p">())</span>
+        <span class="n">fmon</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">monomials</span><span class="p">()</span>
+        <span class="n">fmon</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">is_directed</span><span class="p">():</span>
+            <span class="n">Gk</span> <span class="o">=</span> <span class="n">DiGraph</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span> 
+            <span class="n">Gk</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">fi</span> <span class="ow">in</span> <span class="n">fmon</span><span class="p">:</span> 
+            <span class="k">for</span> <span class="n">fj</span> <span class="ow">in</span> <span class="n">fmon</span><span class="p">:</span>
+                <span class="n">df</span><span class="o">=</span><span class="n">fj</span><span class="o">/</span><span class="n">fi</span>
+                <span class="n">aj</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">numerator</span><span class="p">()</span>
+                <span class="n">ai</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">denominator</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span><span class="n">aj</span><span class="p">):</span>
+                    <span class="n">coeff</span><span class="o">=</span><span class="n">fi</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">ai</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">edge_label</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span><span class="n">aj</span><span class="p">):</span>
+                        <span class="n">Gk</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">fi</span><span class="p">,</span><span class="n">fj</span><span class="p">,(</span><span class="n">coeff</span><span class="p">,</span><span class="n">G</span><span class="o">.</span><span class="n">edge_label</span><span class="p">(</span><span class="n">ai</span><span class="p">,</span><span class="n">aj</span><span class="p">),</span><span class="n">fj</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">fi</span><span class="p">)))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">Gk</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">fi</span><span class="p">,</span><span class="n">fj</span><span class="p">,(</span><span class="n">coeff</span><span class="p">,(</span><span class="n">ai</span><span class="p">,</span><span class="n">aj</span><span class="p">),</span><span class="n">fj</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">fi</span><span class="p">)))</span>
+                        <span class="c1">#print(fi,fj,(ai,aj),fj.gcd(fi))</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># construct reduced Cartesian power using tuples of integers </span>
+        <span class="n">Gk</span> <span class="o">=</span> <span class="n">Cartesian_power</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">k</span><span class="p">)</span> <span class="c1"># reduced </span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">Gk</span><span class="o">.</span><span class="n">vertices</span><span class="p">():</span> <span class="c1"># do reduction by merging vertices  </span>
+            <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">Gk</span><span class="o">.</span><span class="n">vertices</span><span class="p">():</span>
+                <span class="n">sv</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+                <span class="n">su</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">u</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">v</span><span class="o">!=</span><span class="n">u</span> <span class="ow">and</span> <span class="n">sv</span><span class="o">==</span><span class="n">su</span> <span class="ow">and</span> <span class="n">v</span><span class="o">&lt;</span><span class="n">u</span> <span class="ow">and</span> <span class="n">Gk</span><span class="o">.</span><span class="n">has_vertex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">and</span> <span class="n">Gk</span><span class="o">.</span><span class="n">has_vertex</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
+                    <span class="n">Gk</span><span class="o">.</span><span class="n">merge_vertices</span><span class="p">([</span><span class="n">v</span><span class="p">,</span><span class="n">u</span><span class="p">])</span>
+        <span class="n">vcount</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">Gk</span><span class="o">.</span><span class="n">order</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Gk</span><span class="o">.</span><span class="n">order</span><span class="p">()):</span>
+            <span class="n">vc</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">G</span><span class="o">.</span><span class="n">order</span><span class="p">()</span> <span class="c1"># yes, G, not Gk, the number of vertices in monomial model </span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">Gk</span><span class="o">.</span><span class="n">vertices</span><span class="p">()[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">vc</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">=</span><span class="n">vc</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span>
+            <span class="n">vcount</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">vc</span><span class="p">)</span> 
+        <span class="n">Gk</span><span class="o">.</span><span class="n">relabel</span><span class="p">(</span><span class="n">vcount</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">Gk</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+            <span class="c1">#print(e[0],e[1],coefficient_transition_context_from_tuple(e[0],e[1]))</span>
+            <span class="n">Gk</span><span class="o">.</span><span class="n">set_edge_label</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">coefficient_transition_context_from_tuple</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">Gk</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="examples-of-using-these-tools-on-monomial-receptor-models">
+<h1>Examples of using these tools on <code class="docutils literal notranslate"><span class="pre">monomial</span></code> receptor models<a class="headerlink" href="#examples-of-using-these-tools-on-monomial-receptor-models" title="Permalink to this headline">¶</a></h1>
+<p>Variables from a polynomial ring added as edge labels.  The default is show below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sage.graphs.graph_plot</span>
+<span class="n">sage</span><span class="o">.</span><span class="n">graphs</span><span class="o">.</span><span class="n">graph_plot</span><span class="o">.</span><span class="n">DEFAULT_SHOW_OPTIONS</span><span class="p">[</span><span class="s1">&#39;figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">sage</span><span class="o">.</span><span class="n">graphs</span><span class="o">.</span><span class="n">graph_plot</span><span class="o">.</span><span class="n">DEFAULT_SHOW_OPTIONS</span><span class="p">[</span><span class="s1">&#39;transparent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">true</span>
+
+<span class="n">G</span><span class="o">=</span><span class="n">graphs</span><span class="o">.</span><span class="n">CycleGraph</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">G</span><span class="o">=</span><span class="n">add_edge_monomials</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">edge_labels</span><span class="o">=</span><span class="n">true</span><span class="p">,</span><span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span><span class="n">edge_labels_background</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defining e00, e01, e02, e03, e10, e11, e12, e13, e20, e21, e22, e23, e30, e31, e32, e33
+</pre></div>
+</div>
+<img alt="_images/MyTools_12_1.png" src="_images/MyTools_12_1.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 1, e01), (0, 2, e02), (1, 2, e12), (2, 3, e23)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Variables from a polynomial ring added as edge labels.  Use method=’alpha’ fir easy-to-read variables.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">=</span><span class="n">add_edge_monomials</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;alpha&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">edge_labels</span><span class="o">=</span><span class="n">true</span><span class="p">,</span><span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span><span class="n">edge_labels_background</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+<span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defining a, b, c, d
+</pre></div>
+</div>
+<img alt="_images/MyTools_14_1.png" src="_images/MyTools_14_1.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 1, a), (0, 2, b), (1, 2, c), (2, 3, d)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">combinatorial_lapacian(G)</span></code> function returns the Laplacian with the variables that label edges of graph <code class="docutils literal notranslate"><span class="pre">G</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">L</span><span class="o">=</span><span class="n">combinatorial_laplacian</span><span class="p">(</span><span class="n">G</span><span class="p">);</span> <span class="n">L</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[    a + b        -a        -b         0]
+[       -a     a + c        -c         0]
+[       -b        -c b + c + d        -d]
+[        0         0        -d         d]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Similarly for the <code class="docutils literal notranslate"><span class="pre">tree_polynomial(G)</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span><span class="o">=</span><span class="n">tree_polynomial</span><span class="p">(</span><span class="n">G</span><span class="p">);</span> <span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a*b*d + a*c*d + b*c*d
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here I create a directed graph with default edge monomials and another with easy-to-read edge monomials.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="o">=</span><span class="n">graphs</span><span class="o">.</span><span class="n">CycleGraph</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> 
+<span class="n">D</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="n">D1</span><span class="o">=</span><span class="n">add_edge_monomials</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">D1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">edge_labels</span><span class="o">=</span><span class="n">true</span><span class="p">,</span><span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span><span class="n">edge_labels_background</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">D1</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+<span class="n">D2</span><span class="o">=</span><span class="n">add_edge_monomials</span><span class="p">(</span><span class="n">D</span><span class="p">,</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;alpha&#39;</span><span class="p">)</span>
+<span class="n">D2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">edge_labels</span><span class="o">=</span><span class="n">true</span><span class="p">,</span><span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">,</span><span class="n">edge_labels_background</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">D2</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defining e00, e01, e02, e03, e10, e11, e12, e13, e20, e21, e22, e23, e30, e31, e32, e33
+</pre></div>
+</div>
+<img alt="_images/MyTools_20_1.png" src="_images/MyTools_20_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 1, e01), (0, 2, e02), (1, 0, e10), (1, 2, e12), (2, 0, e20), (2, 1, e21), (2, 3, e23), (3, 2, e32)]
+Defining a, b, c, d, abar, bbar, cbar, dbar
+</pre></div>
+</div>
+<img alt="_images/MyTools_20_3.png" src="_images/MyTools_20_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 1, a), (0, 2, b), (1, 0, abar), (1, 2, c), (2, 0, bbar), (2, 1, cbar), (2, 3, d), (3, 2, dbar)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The combinatorial laplacian and tree polynomial using labeled arcs of symmetric directed graph <span class="math notranslate nohighlight">\(D_2\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">combinatorial_laplacian</span><span class="p">(</span><span class="n">D2</span><span class="p">),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span><span class="n">tree_polynomial</span><span class="p">(</span><span class="n">D2</span><span class="p">))</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[          a + b              -a              -b               0]
+[          -abar        abar + c              -c               0]
+[          -bbar           -cbar bbar + cbar + d              -d]
+[              0               0           -dbar            dbar] 
+
+ a*bbar*dbar + a*cbar*dbar + b*cbar*dbar
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="examples-of-dimer-and-higher-order-oligomer-receptor-models">
+<h1>Examples of <code class="docutils literal notranslate"><span class="pre">dimer</span></code> and <code class="docutils literal notranslate"><span class="pre">higher-order</span> <span class="pre">oligomer</span></code> receptor models.<a class="headerlink" href="#examples-of-dimer-and-higher-order-oligomer-receptor-models" title="Permalink to this headline">¶</a></h1>
+<p>The undirected reduced graph power <span class="math notranslate nohighlight">\(C_3^{(2)}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">=</span><span class="n">graphs</span><span class="o">.</span><span class="n">CycleGraph</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">G</span><span class="o">=</span><span class="n">add_vertex_monomials</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">Gk</span> <span class="o">=</span> <span class="n">reduced_Cartesian_power</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">Gk</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defining a0, a1, a2
+</pre></div>
+</div>
+<img alt="_images/MyTools_25_1.png" src="_images/MyTools_25_1.png" />
+</div>
+</div>
+<p>The symmetric directed version of <span class="math notranslate nohighlight">\(C_3^{(2)}\)</span>.  Each edge label is a 3-tuple: (coefficient, (origin, destination), context)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="o">=</span><span class="n">graphs</span><span class="o">.</span><span class="n">CycleGraph</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> 
+<span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="n">D</span><span class="o">=</span><span class="n">add_vertex_monomials</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">Dk</span> <span class="o">=</span> <span class="n">reduced_Cartesian_power</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">Dk</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">edge_labels</span><span class="o">=</span><span class="n">true</span><span class="p">,</span><span class="n">edge_labels_background</span><span class="o">=</span><span class="s1">&#39;cyan&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defining a0, a1, a2
+</pre></div>
+</div>
+<img alt="_images/MyTools_27_1.png" src="_images/MyTools_27_1.png" />
+</div>
+</div>
+<p>The symmetric directed version of <span class="math notranslate nohighlight">\(C_5^{(3)}\)</span>.  The <code class="docutils literal notranslate"><span class="pre">coefficient_transition_context_from_reduced_graph_power</span></code> function retrieves information about edge labels even though they are not plotted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="o">=</span><span class="n">graphs</span><span class="o">.</span><span class="n">CycleGraph</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> 
+<span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="n">D</span><span class="o">=</span><span class="n">add_vertex_monomials</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">Dk</span> <span class="o">=</span> <span class="n">reduced_Cartesian_power</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">vk1</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">vk2</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">while</span> <span class="ow">not</span> <span class="n">Dk</span><span class="o">.</span><span class="n">has_edge</span><span class="p">(</span><span class="n">vk1</span><span class="p">,</span><span class="n">vk2</span><span class="p">):</span>
+    <span class="n">vk1</span><span class="o">=</span><span class="n">Dk</span><span class="o">.</span><span class="n">random_vertex</span><span class="p">()</span>
+    <span class="n">vk2</span><span class="o">=</span><span class="n">Dk</span><span class="o">.</span><span class="n">random_vertex</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vk1</span><span class="p">,</span><span class="n">vk2</span><span class="p">,</span><span class="n">coefficient_transition_context_from_reduced_graph_power</span><span class="p">(</span><span class="n">Dk</span><span class="p">,</span><span class="n">vk1</span><span class="p">,</span><span class="n">vk2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defining a0, a1, a2, a3, a4
+a0*a1*a4 a0^2*a4 (1, (a1, a0), a0*a4)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The symmetric directed version of the <code class="docutils literal notranslate"><span class="pre">unreduced</span></code> Cartesian power <span class="math notranslate nohighlight">\(P_n^{k}\)</span>.  By default, the vertex labels are <span class="math notranslate nohighlight">\(k\)</span>-tuples, each element of which is the state <span class="math notranslate nohighlight">\((0, 1, \ldots, n-1)\)</span> of one of the <span class="math notranslate nohighlight">\(k\)</span> monomers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">5</span>
+<span class="n">k</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">Gk</span> <span class="o">=</span> <span class="n">Cartesian_power</span><span class="p">(</span><span class="n">graphs</span><span class="o">.</span><span class="n">PathGraph</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Gk</span><span class="o">.</span><span class="n">vertices</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0, 0), (0, 0, 1), (0, 0, 2), (0, 0, 3), (0, 0, 4), (0, 1, 0), (0, 1, 1), (0, 1, 2), (0, 1, 3), (0, 1, 4), (0, 2, 0), (0, 2, 1), (0, 2, 2), (0, 2, 3), (0, 2, 4), (0, 3, 0), (0, 3, 1), (0, 3, 2), (0, 3, 3), (0, 3, 4), (0, 4, 0), (0, 4, 1), (0, 4, 2), (0, 4, 3), (0, 4, 4), (1, 0, 0), (1, 0, 1), (1, 0, 2), (1, 0, 3), (1, 0, 4), (1, 1, 0), (1, 1, 1), (1, 1, 2), (1, 1, 3), (1, 1, 4), (1, 2, 0), (1, 2, 1), (1, 2, 2), (1, 2, 3), (1, 2, 4), (1, 3, 0), (1, 3, 1), (1, 3, 2), (1, 3, 3), (1, 3, 4), (1, 4, 0), (1, 4, 1), (1, 4, 2), (1, 4, 3), (1, 4, 4), (2, 0, 0), (2, 0, 1), (2, 0, 2), (2, 0, 3), (2, 0, 4), (2, 1, 0), (2, 1, 1), (2, 1, 2), (2, 1, 3), (2, 1, 4), (2, 2, 0), (2, 2, 1), (2, 2, 2), (2, 2, 3), (2, 2, 4), (2, 3, 0), (2, 3, 1), (2, 3, 2), (2, 3, 3), (2, 3, 4), (2, 4, 0), (2, 4, 1), (2, 4, 2), (2, 4, 3), (2, 4, 4), (3, 0, 0), (3, 0, 1), (3, 0, 2), (3, 0, 3), (3, 0, 4), (3, 1, 0), (3, 1, 1), (3, 1, 2), (3, 1, 3), (3, 1, 4), (3, 2, 0), (3, 2, 1), (3, 2, 2), (3, 2, 3), (3, 2, 4), (3, 3, 0), (3, 3, 1), (3, 3, 2), (3, 3, 3), (3, 3, 4), (3, 4, 0), (3, 4, 1), (3, 4, 2), (3, 4, 3), (3, 4, 4), (4, 0, 0), (4, 0, 1), (4, 0, 2), (4, 0, 3), (4, 0, 4), (4, 1, 0), (4, 1, 1), (4, 1, 2), (4, 1, 3), (4, 1, 4), (4, 2, 0), (4, 2, 1), (4, 2, 2), (4, 2, 3), (4, 2, 4), (4, 3, 0), (4, 3, 1), (4, 3, 2), (4, 3, 3), (4, 3, 4), (4, 4, 0), (4, 4, 1), (4, 4, 2), (4, 4, 3), (4, 4, 4)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>When the Cartesian power <span class="math notranslate nohighlight">\(P_n^{k}\)</span> is <code class="docutils literal notranslate"><span class="pre">reduced</span></code> to <span class="math notranslate nohighlight">\(P_n^{(k)}\)</span>, the vertex labels are <span class="math notranslate nohighlight">\(n\)</span>-tuples, the <span class="math notranslate nohighlight">\(i\)</span>-th element of which is the number of monomers in the <span class="math notranslate nohighlight">\(i\)</span>-th state (a value from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(k\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Gk</span> <span class="o">=</span> <span class="n">reduced_Cartesian_power</span><span class="p">(</span><span class="n">graphs</span><span class="o">.</span><span class="n">PathGraph</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">k</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Gk</span><span class="o">.</span><span class="n">vertices</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(0, 0, 0, 0, 3), (0, 0, 0, 1, 2), (0, 0, 0, 2, 1), (0, 0, 0, 3, 0), (0, 0, 1, 0, 2), (0, 0, 1, 1, 1), (0, 0, 1, 2, 0), (0, 0, 2, 0, 1), (0, 0, 2, 1, 0), (0, 0, 3, 0, 0), (0, 1, 0, 0, 2), (0, 1, 0, 1, 1), (0, 1, 0, 2, 0), (0, 1, 1, 0, 1), (0, 1, 1, 1, 0), (0, 1, 2, 0, 0), (0, 2, 0, 0, 1), (0, 2, 0, 1, 0), (0, 2, 1, 0, 0), (0, 3, 0, 0, 0), (1, 0, 0, 0, 2), (1, 0, 0, 1, 1), (1, 0, 0, 2, 0), (1, 0, 1, 0, 1), (1, 0, 1, 1, 0), (1, 0, 2, 0, 0), (1, 1, 0, 0, 1), (1, 1, 0, 1, 0), (1, 1, 1, 0, 0), (1, 2, 0, 0, 0), (2, 0, 0, 0, 1), (2, 0, 0, 1, 0), (2, 0, 1, 0, 0), (2, 1, 0, 0, 0), (3, 0, 0, 0, 0)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here I use <span class="math notranslate nohighlight">\(C_5^{(3)}\)</span> and return the coefficient, transition and context for a randomly selected edge.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="o">=</span><span class="n">graphs</span><span class="o">.</span><span class="n">CycleGraph</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> 
+<span class="n">D</span><span class="o">=</span><span class="n">D</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="n">Dk</span> <span class="o">=</span> <span class="n">reduced_Cartesian_power</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ek</span> <span class="o">=</span> <span class="n">Dk</span><span class="o">.</span><span class="n">random_edge</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transition&#39;</span><span class="p">,</span> <span class="n">ek</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;to&#39;</span><span class="p">,</span> <span class="n">ek</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;has&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;has coefficient, transition, and context:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coefficient_transition_context_from_reduced_graph_power</span><span class="p">(</span><span class="n">Dk</span><span class="p">,</span><span class="n">ek</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ek</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transition (0, 2, 0, 0, 0) to (1, 1, 0, 0, 0) has
+has coefficient, transition, and context:
+(2, (1, 0), [0, 1, 0, 0, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefficient_transition_context_from_tuple</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, (1, 0), [0, 2, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;These two function ought to return the same tuples:&#39;</span><span class="p">,</span>\
+<span class="n">coefficient_transition_context_from_reduced_graph_power</span><span class="p">(</span><span class="n">Dk</span><span class="p">,</span><span class="n">ek</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ek</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">==</span><span class="n">coefficient_transition_context_from_tuple</span><span class="p">(</span><span class="n">ek</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ek</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>These two function ought to return the same tuples: True
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="spanning-trees-of-receptor-oligomers-and-contexts-of-transitions-on-monomer-model">
+<h1><code class="docutils literal notranslate"><span class="pre">Spanning</span> <span class="pre">trees</span></code> of receptor oligomers and <code class="docutils literal notranslate"><span class="pre">contexts</span></code> of transitions on monomer model<a class="headerlink" href="#spanning-trees-of-receptor-oligomers-and-contexts-of-transitions-on-monomer-model" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_random_spanning_tree</span><span class="p">(</span><span class="n">G</span><span class="p">,</span><span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">is_directed</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not yet&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">T</span><span class="o">=</span><span class="n">G</span><span class="o">.</span><span class="n">random_spanning_tree</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">G</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">vertex_labels</span><span class="o">=</span><span class="n">false</span><span class="p">,</span><span class="n">vertex_size</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">edge_colors</span><span class="o">=</span><span class="p">{</span><span class="n">color</span> <span class="p">:</span> <span class="n">T</span> <span class="p">})</span>
+    <span class="k">return</span> <span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Gk</span><span class="o">=</span><span class="n">reduced_Cartesian_power</span><span class="p">(</span><span class="n">add_vertex_monomials</span><span class="p">(</span><span class="n">graphs</span><span class="o">.</span><span class="n">CycleGraph</span><span class="p">(</span><span class="mi">4</span><span class="p">)),</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">Tk</span><span class="o">=</span><span class="n">my_random_spanning_tree</span><span class="p">(</span><span class="n">Gk</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Tk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defining a0, a1, a2, a3
+</pre></div>
+</div>
+<img alt="_images/MyTools_40_1.png" src="_images/MyTools_40_1.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(a0^3, a0^2*a3), (a0^2*a3, a0*a1*a3), (a0*a1*a3, a0*a1*a2), (a0*a1*a2, a0*a2^2), (a0*a1*a2, a1^2*a2), (a1^2*a2, a1*a2^2), (a1*a2^2, a1*a2*a3), (a1*a2*a3, a1*a3^2), (a1*a2*a3, a1^2*a3), (a1*a2^2, a2^3), (a1*a2*a3, a2^2*a3), (a0*a1*a3, a0^2*a1), (a1*a2*a3, a0*a2*a3), (a0*a2*a3, a0*a3^2), (a1*a3^2, a2*a3^2), (a2*a3^2, a3^3), (a0^2*a3, a0^2*a2), (a0^2*a1, a0*a1^2), (a0*a1^2, a1^3)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">G</span><span class="o">.</span><span class="n">delete_edges</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+<span class="n">G</span><span class="o">.</span><span class="n">allow_multiple_edges</span><span class="p">(</span><span class="n">new</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ek</span> <span class="ow">in</span> <span class="n">Tk</span><span class="p">:</span>
+    <span class="n">coeff</span><span class="p">,</span> <span class="n">transition</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="n">coefficient_transition_context_from_reduced_graph_power</span><span class="p">(</span><span class="n">Gk</span><span class="p">,</span><span class="n">ek</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ek</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">transition</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">transition</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">context</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">G</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>    
+<span class="n">G</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">edge_labels</span><span class="o">=</span><span class="n">true</span><span class="p">,</span><span class="n">color_by_label</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(a0, a1, a0*a1), (a0, a1, a1^2), (a0, a1, a1*a2), (a0, a1, a0*a3), (a0, a1, a2*a3), (a0, a3, a0^2), (a0, a3, a0*a1), (a1, a2, a0*a2), (a1, a2, a1*a2), (a1, a2, a2^2), (a1, a2, a1*a3), (a1, a2, a2*a3), (a1, a2, a3^2), (a2, a3, a0^2), (a2, a3, a0*a1), (a2, a3, a1*a2), (a2, a3, a0*a3), (a2, a3, a1*a3), (a2, a3, a3^2)]
+</pre></div>
+</div>
+<img alt="_images/MyTools_41_1.png" src="_images/MyTools_41_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">D</span><span class="o">=</span><span class="n">add_vertex_monomials</span><span class="p">(</span><span class="n">graphs</span><span class="o">.</span><span class="n">CycleGraph</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span><span class="o">.</span><span class="n">to_directed</span><span class="p">()</span>
+<span class="n">Dk</span> <span class="o">=</span> <span class="n">reduced_Cartesian_power</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">root_index</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">Tk</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">Dk</span><span class="o">.</span><span class="n">in_branchings</span><span class="p">(</span><span class="n">Dk</span><span class="o">.</span><span class="n">vertices</span><span class="p">()[</span><span class="n">root_index</span><span class="p">],</span><span class="n">spanning</span><span class="o">=</span><span class="kc">True</span><span class="p">))[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]:</span>
+    <span class="n">D</span><span class="o">.</span><span class="n">delete_edges</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+    <span class="n">D</span><span class="o">.</span><span class="n">allow_multiple_edges</span><span class="p">(</span><span class="n">new</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ek</span> <span class="ow">in</span> <span class="n">Tk</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+        <span class="n">coeff</span><span class="p">,</span> <span class="n">transition</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="n">coefficient_transition_context_from_reduced_graph_power</span><span class="p">(</span><span class="n">Tk</span><span class="p">,</span><span class="n">ek</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">ek</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">D</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">transition</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">transition</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">context</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">Tk</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+    <span class="n">Dk</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">edge_colors</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;red&#39;</span> <span class="p">:</span> <span class="n">Tk</span><span class="o">.</span><span class="n">edges</span><span class="p">()</span> <span class="p">},</span><span class="n">layout</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">edges</span><span class="p">())</span>
+    <span class="n">D</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">edge_labels</span><span class="o">=</span><span class="n">true</span><span class="p">,</span><span class="n">color_by_label</span><span class="o">=</span><span class="n">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Defining a0, a1, a2, a3
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> [(a0*a1, a1*a3, (1, (a0, a3), a1)), (a1^2, a0*a1, (2, (a1, a0), a1)), (a0*a2, a0*a1, (1, (a2, a1), a0)), (a1*a2, a2^2, (1, (a1, a2), a2)), (a2^2, a2*a3, (2, (a2, a3), a2)), (a0*a3, a0^2, (1, (a3, a0), a0)), (a1*a3, a1*a2, (1, (a3, a2), a1)), (a2*a3, a3^2, (1, (a2, a3), a3)), (a3^2, a0*a3, (2, (a3, a0), a3))]
+</pre></div>
+</div>
+<img alt="_images/MyTools_42_2.png" src="_images/MyTools_42_2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(a0, a3, a1), (a1, a0, a1), (a1, a2, a2), (a2, a1, a0), (a2, a3, a2), (a2, a3, a3), (a3, a0, a0), (a3, a0, a3), (a3, a2, a1)]
+</pre></div>
+</div>
+<img alt="_images/MyTools_42_4.png" src="_images/MyTools_42_4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> [(a0*a1, a1*a3, (1, (a0, a3), a1)), (a1^2, a0*a1, (2, (a1, a0), a1)), (a0*a2, a1*a2, (1, (a0, a1), a2)), (a1*a2, a2^2, (1, (a1, a2), a2)), (a2^2, a2*a3, (2, (a2, a3), a2)), (a0*a3, a0^2, (1, (a3, a0), a0)), (a1*a3, a1*a2, (1, (a3, a2), a1)), (a2*a3, a3^2, (1, (a2, a3), a3)), (a3^2, a0*a3, (2, (a3, a0), a3))]
+</pre></div>
+</div>
+<img alt="_images/MyTools_42_6.png" src="_images/MyTools_42_6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(a0, a1, a2), (a0, a3, a1), (a1, a0, a1), (a1, a2, a2), (a2, a3, a2), (a2, a3, a3), (a3, a0, a0), (a3, a0, a3), (a3, a2, a1)]
+</pre></div>
+</div>
+<img alt="_images/MyTools_42_8.png" src="_images/MyTools_42_8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> [(a0*a1, a0*a2, (1, (a1, a2), a0)), (a1^2, a0*a1, (2, (a1, a0), a1)), (a0*a2, a1*a2, (1, (a0, a1), a2)), (a1*a2, a2^2, (1, (a1, a2), a2)), (a2^2, a2*a3, (2, (a2, a3), a2)), (a0*a3, a0^2, (1, (a3, a0), a0)), (a1*a3, a0*a1, (1, (a3, a0), a1)), (a2*a3, a3^2, (1, (a2, a3), a3)), (a3^2, a0*a3, (2, (a3, a0), a3))]
+</pre></div>
+</div>
+<img alt="_images/MyTools_42_10.png" src="_images/MyTools_42_10.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(a0, a1, a2), (a1, a0, a1), (a1, a2, a0), (a1, a2, a2), (a2, a3, a2), (a2, a3, a3), (a3, a0, a0), (a3, a0, a1), (a3, a0, a3)]
+</pre></div>
+</div>
+<img alt="_images/MyTools_42_12.png" src="_images/MyTools_42_12.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> [(a0*a1, a0*a2, (1, (a1, a2), a0)), (a1^2, a0*a1, (2, (a1, a0), a1)), (a0*a2, a1*a2, (1, (a0, a1), a2)), (a1*a2, a2^2, (1, (a1, a2), a2)), (a2^2, a2*a3, (2, (a2, a3), a2)), (a0*a3, a0^2, (1, (a3, a0), a0)), (a1*a3, a1*a2, (1, (a3, a2), a1)), (a2*a3, a3^2, (1, (a2, a3), a3)), (a3^2, a0*a3, (2, (a3, a0), a3))]
+</pre></div>
+</div>
+<img alt="_images/MyTools_42_14.png" src="_images/MyTools_42_14.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(a0, a1, a2), (a1, a0, a1), (a1, a2, a0), (a1, a2, a2), (a2, a3, a2), (a2, a3, a3), (a3, a0, a0), (a3, a0, a3), (a3, a2, a1)]
+</pre></div>
+</div>
+<img alt="_images/MyTools_42_16.png" src="_images/MyTools_42_16.png" />
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "sage-9.3"
+        },
+        kernelOptions: {
+            kernelName: "sage-9.3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'sage-9.3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="SamplingEdgesOfGraphs.html" title="previous page">Sampling edges of graphs</a>
+    <a class='right-next' id="next-link" href="myfirstmarkdown.html" title="next page">My First Markdown File</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Greg Conradi Smith<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

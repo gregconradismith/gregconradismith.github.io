@@ -46,7 +46,7 @@ G.show3d()
 ```
 
 Here I am trying to refer to another page in my book, whose name is 
-not {doc}`intro`, but rather {doc}`SymmetricFuctionExploration`
+not {doc}`intro`, but rather {doc}`SymmetricFunctionExploration`
 
 
 ## Here I am including a figure 
@@ -103,5 +103,5 @@ Did you think you were going to see a figure?
 ```
 
 ```{note}
-I am unable to include tikzmagic in code blocks within .md files.  At this point I can not get TikZ to work within a code-cell of an .md file, even though it works in .ipynb (see [](notebooks.ipynb) for working example).
+I am unable to include tikzmagic in code blocks within .md files.  At this point I can not get TikZ to work within a code-cell of an .md file, even though it works in .ipynb (see [](notebookswithcontent.ipynb) for working example).
 ```
