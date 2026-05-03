@@ -10,7 +10,6 @@ author_profile: true
 - [Cellular Biophysics and Modeling course](https://cellularbiophysicsandmodeling.wordpress.com/)
 - [Computational Neuroscience](https://apsc450computationalneuroscience.wordpress.com/)
 - [Science & Authority](https://scienceauthority.wordpress.com/)
-- [Matroids one-page PDF](https://gregconradismith.wordpress.com/wp-content/uploads/2023/01/matroids_onepage.pdf)
 
 **Cold Spring Harbor Laboratory International Summer School on Computational Cell Biology (2008-2013)**
 
