@@ -8,16 +8,16 @@ author_profile: true
 You can also find my articles on [Google Scholar]({{ site.author.googlescholar }}){% if site.author.pubmed %} and [PubMed]({{ site.author.pubmed }}){% endif %}.
 {% endif %}
 
+*Note that Conradi Smith GD = Smith GD (my name changed in 2017). Students and research associates who were under my supervision are <span style="text-decoration:underline">underlined</span>. \*These authors contributed equally.*
+
 ### Books
 
 Conradi Smith GD. **Cellular Biophysics and Modeling: The Computational Biology of Excitable Cells.** Cambridge University Press. March 2019. 394 pages. [\[doi:10.1017/9780511793905\]](https://doi.org/10.1017/9780511793905) [\[Amazon\]](https://www.amazon.com/dp/0521183057)
 
 Conradi Smith GD. **Receptor Modeling Jupyter Book.** 2025. [Jupyter Book](https://gregconradismith.github.io/receptor-modeling-jupyter-book/intro.html)
-_Exposition of how cell surface receptors can be modeled using Sagemath, an open-source mathematics software system. The focus is on algebraic analysis of conformational coupling in oligomeric receptor models. An unrefereed deliverable supported by NSF DMS grant #1951646, *Cycle representations of receptor complex signal transduction.*_
+An unrefereed deliverable supported by NSF DMS grant #1951646, *Cycle representations of receptor complex signal transduction.*
 
 ### Research Articles
-
-*Note that Conradi Smith GD = Smith GD (my name changed in 2017). Students and research associates who were under my supervision are <span style="text-decoration:underline">underlined</span>. \*These authors contributed equally.*
 
 <span style="text-decoration:underline">Sakly S</span>, Conradi Smith GD. **Phase separation dynamics of SynGAP & PSD-95 in post-synaptic densities.** *In preparation.*
 
@@ -165,14 +165,3 @@ Smith GD, Pearson J, and Keizer J. **Modeling intracellular Ca<sup>2+</sup> wave
 
 Smith GD. **Modeling local and global **Ca<sup>2+</sup>** signals using reaction-diffusion equations.** In: *Computational Neuroscience: Realistic Modeling for Experimentalists*, De Schutter E, editor. Pages 49-85. CRC Press. 2000. [\[doi:10.1201/9781420039290.ch3\]](http://dx.doi.org/doi:10.1201/9781420039290.ch3)
 
-### Proceedings
-
-Lamprecht R, Smith GD and Kemper P. **Modeling Calcium Signaling Complexes in Mobius.** Virginia Modeling, Analysis and Simulation Center (VMASC) Capstone Conference}, April 2009.
-
-<span style="text-decoration:underline">Williams GSB</span>, Huertas MA, Sobie EA, Jafri MS, and Smith GD. **Non-spatial whole cell models of global **Ca<sup>2+</sup>** responses that account for heterogeneous domain **Ca<sup>2+</sup>** concentrations.** *Conference on Frontiers of Applied and Computational Mathematics: New Jersey Institute of Technology.* Edited by Blackmore D, Bose A, and Petropoulos P. 5:231-239, 2008. [\[doi:10.1142/9789812835291_00258\]](http://dx.doi.org/doi:10.1142/9789812835291_0025)
-
-<span style="text-decoration:underline">DeRemigio H</span>, Kemper P, LaMar MD, and Smith GD. **Markov chain models of coupled intracellular calcium channels: Kronecker structured representations and benchmark stationary distribution calculations.** *Pacific Symposium on Biocomputing* 13:354-365, 2008.
-
-Huertas MA and Smith GD. **A two-dimensional population density approach to modeling the dLGN/PGN network.** *Neurocomputing* 69:1286-1290, 2006. [\[doi:10.1016/j.neucom.2005.12.093\]](http://dx.doi.org/doi:10.1016/j.neucom.2005.12.093)
-
-Huertas MA, <span style="text-decoration:underline">Groff JR</span>, and Smith GD. **The effect of feedback inhibition on throughput properties of the dLGN/PGN.** *Neurocomputing* 65-66:499-505, 2005. [\[doi:10.1016/j.neucom.2004.11.007\]](http://dx.doi.org/doi:10.1016/j.neucom.2004.11.007)
