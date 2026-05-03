@@ -18,7 +18,7 @@ Director, Mathematical Biology Initiative, [William & Mary](http://www.wm.edu/),
 
 Associate Professor, [Department of Applied Science](https://cdsp.wm.edu/applied-science/), [William & Mary](http://www.wm.edu/), 2005-2012
 
-Visiting Associate Professor,[Mathematical Biosciences Institute](http://mbi.osu.edu/), [The Ohio State University](http://www.osu.edu/), 2007-2008
+Visiting Associate Professor, [Mathematical Biosciences Institute](http://mbi.osu.edu/), [The Ohio State University](http://www.osu.edu/), 2007-2008
 
 Assistant Professor, [Department of Applied Science](https://cdsp.wm.edu/applied-science/), [William & Mary](http://www.wm.edu/), 2001-2005
 
