@@ -41,7 +41,7 @@ author:
   orcid            : "https://orcid.org/0000-0002-1054-6790"
   semantic         : # URL
   ssrn             : # URL
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
+  pubmed           : "https://www.ncbi.nlm.nih.gov/myncbi/greg.conradi%20smith.1/bibliography/public/"
   researchgate     : # URL
   scopus           : # URL
   zotero           : # URL
@@ -79,7 +79,7 @@ author:
   weibo            : # Username
   wikipedia        : # Username
   xing             : # Username
-  youtube          : # Username
+  youtube          : "@gregconradismith7824"
   zhihu            : # Username
 
 # Publication Category - The following the list of publication categories and their headings
