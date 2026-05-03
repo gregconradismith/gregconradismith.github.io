@@ -57,11 +57,11 @@ author:
 
   # Social media
   artstation       : # Username
-  bluesky          : "bsky.app" # Replace this with you Bluesky username
+  bluesky          : # "bsky.app" # Replace this with you Bluesky username
   facebook         : # Username
   flickr           : # Username
   foursquare       : # Username
-  goodreads        : "https://www.goodreads.com/user/show/29023561-greg-conradi-smith"
+  goodreads        : "user/show/29023561-greg-conradi-smith"
   google_plus      : # Username
   keybase          : # Username
   instagram        : # Username
