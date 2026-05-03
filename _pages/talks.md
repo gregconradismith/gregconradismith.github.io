@@ -5,21 +5,14 @@ permalink: /talks/
 author_profile: true
 ---
 
-**Joint Mathematics Meetings session on Stochastic Processes in Biology**, Washington, DC, 4/26. Sakly S, <span style="text-decoration:underline">Conradi Smith GD</span>. **Phase-field modeling of the biological physics of membraneless organelles.** (*invited speaker*)
+*Joint Mathematics Meetings session on Stochastic Processes in Biology*, Washington, DC, 4/26. (w/ Sakly S) 
+**Phase-field modeling of the biological physics of membraneless organelles.** (*invited speaker*)
 
 > Membraneless organelles (MLOs) formed by liquid-liquid phase separation (LLPS) exemplify how cells achieve robust spatial organization in the presence of pervasive molecular noise. These condensates arise from multivalent interactions among proteins and nucleic acids, exhibiting dynamic, reversible compartmentalization without membrane boundaries. Their existence raises fundamental mathematical questions at the interface of stochasticity, self-organization, and cellular regulation.
 >
 > We present modeling approaches that connect molecular interactions to mesoscale organization in synaptic condensates such as the post-synaptic density. At the equilibrium level, Flory-Huggins free energy theory provides a statistical-mechanical framework for how heterotypic and homotypic interactions drive LLPS and define binodal and spinodal regions of stability. Building on this, Cahn-Hilliard-type phase-field PDEs describe the spatiotemporal evolution of concentration fields, capturing nucleation, coarsening, and the influence of fluctuations. Extensions of these models may incorporate post-translational modifications (e.g., phosphorylation), regulation by intracellular calcium signaling, and mutations that alter interaction parameters, thereby reshaping phase boundaries and condensate dynamics.
 >
 > By integrating statistical thermodynamics with continuum PDE models, this work highlights a central challenge in mathematical biology and soft-matter physics: how microscopic stochastic interactions and nonlinear spatiotemporal dynamics yield reliable mesoscale structures. The formation and dissolution of condensates such as membraneless organelles (MLOs) underscore the role of noise in both destabilizing and enabling functional cellular organization, with broad implications for synaptic plasticity and intracellular signaling.
-
-**Joint Mathematics Meetings**, Washington, DC, 4/26. <span style="text-decoration:underline">Sakly S</span>, Conradi Smith GD. **Phase separation dynamics of SynGAP & PSD-95 in post-synaptic densities.** (*poster*)
-
-> The post-synaptic density (PSD) is a dense assembly of proteins at excitatory synapses that regulates receptor trafficking, signaling pathways, and synaptic plasticity. Dysfunction of the PSD is associated with neurodevelopmental, and neurodegenerative diseases. One of the most abundant PSD proteins, SynGAP, regulates receptors through its association with the scaffolding protein PSD-95. Mutations within the SynGAP protein weaken these interactions, and are linked to intellectual disability, epilepsy, and autism spectrum disorder.
->
-> To investigate possible mechanisms of SynGAP haploinsufficiency, we analyzed a three-component Flory-Huggins model (SynGAP, PSD-95, and solvent) of liquid-liquid phase separation-mediated PSD organization [Lin et al., Biophys. J. 121:1, 2022]. Assuming energetically favored interactions between SynGAP and PSD-95, as well as PSD-95 with itself, the model reproduces the emergence of PSD-95-dense and -dilute phases within an excitatory synaptic bouton. The model also reproduces the experimentally observed phenomenon of SynGAP dispersal following long-term potentiation (LTP), which is modeled as a change in Flory-Huggins interaction parameter representing the energetics of SynGAP/PSD-95 interaction.
->
-> We have implemented numerical simulations of the Cahn-Hilliard system of partial differential equations based on the equilibrium Flory-Huggins model. Using this framework, we are exploring the spatiotemporal dynamics of escape of SynGAP from the PSD after LTP and how this process may be disrupted by insufficient SynGAP concentration.
 
 **Biomath Seminar**, William & Mary, 9/25. <span style="text-decoration:underline">Conradi Smith GD</span>. **Parking functions.** (*speaker*)
 
