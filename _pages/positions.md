@@ -22,7 +22,7 @@ Visiting Associate Professor, [Mathematical Biosciences Institute](http://mbi.os
 
 Assistant Professor, [Department of Applied Science](https://cdsp.wm.edu/applied-science/), [William & Mary](http://www.wm.edu/), 2001-2005
 
-Assistant Professor, [Department of Mathematics](http://math.la.asu.edu/), [Arizona State University](http://www.asu.edu/), 1999-2001
+Assistant Professor, [Department of Mathematics](https://math.asu.edu), [Arizona State University](http://www.asu.edu/), 1999-2001
 
 NRSA Fellow, [Center for Neural Science](http://www.cns.nyu.edu/), [New York University](http://www.nyu.edu/), 1998-1999
 
