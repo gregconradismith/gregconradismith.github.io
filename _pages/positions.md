@@ -16,11 +16,11 @@ Professor, [Department of Applied Science](https://cdsp.wm.edu/applied-science/)
 
 Director, Mathematical Biology Initiative, [William & Mary](http://www.wm.edu/), 2009-2015.
 
-Associate Professor, [Department of Applied Science](http://www.as.wm.edu/), [William & Mary](http://www.wm.edu/), 2005-2012
+Associate Professor, [Department of Applied Science](https://cdsp.wm.edu/applied-science/), [William & Mary](http://www.wm.edu/), 2005-2012
 
-Visiting Associate Professor,[ Mathematical Biosciences Institute](http://mbi.osu.edu/), [The Ohio State University](http://www.osu.edu/), 2007-2008
+Visiting Associate Professor,[Mathematical Biosciences Institute](http://mbi.osu.edu/), [The Ohio State University](http://www.osu.edu/), 2007-2008
 
-Assistant Professor, [Department of Applied Science](http://www.as.wm.edu/), [William & Mary](http://www.wm.edu/), 2001-2005
+Assistant Professor, [Department of Applied Science](https://cdsp.wm.edu/applied-science/), [William & Mary](http://www.wm.edu/), 2001-2005
 
 Assistant Professor, [Department of Mathematics](http://math.la.asu.edu/), [Arizona State University](http://www.asu.edu/), 1999-2001
 
