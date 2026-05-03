@@ -26,7 +26,7 @@ Assistant Professor, [Department of Mathematics](https://math.asu.edu), [Arizona
 
 NRSA Fellow, [Center for Neural Science](http://www.cns.nyu.edu/), [New York University](http://www.nyu.edu/), 1998-1999
 
-IRTA Fellow, [Mathematical Research Branch](http://mrb.niddk.nih.gov/), [NIDDK](http://www.niddk.nih.gov/), [NIH](http://www.nih.gov/), 1996-1998
+IRTA Fellow, Mathematical Research Branch, [NIDDK](http://www.niddk.nih.gov/), [NIH](http://www.nih.gov/), 1996-1998
 
 ### Education
 
