@@ -5,7 +5,7 @@ permalink: /talks/
 author_profile: true
 ---
 
-**Phase-field modeling of the biological physics of membraneless organelles.**  <span class="underline">Joint Mathematics Meetings session on Stochastic Processes in Biology</span>, Washington, DC, 4/26. 
+**Phase-field modeling of the biological physics of membraneless organelles.**  <span style="text-decoration:underline">Joint Mathematics Meetings session on Stochastic Processes in Biology</span>, Washington, DC, 4/26. 
 
 > Membraneless organelles (MLOs) formed by liquid-liquid phase separation (LLPS) exemplify how cells achieve robust spatial organization in the presence of pervasive molecular noise. These condensates arise from multivalent interactions among proteins and nucleic acids, exhibiting dynamic, reversible compartmentalization without membrane boundaries. Their existence raises fundamental mathematical questions at the interface of stochasticity, self-organization, and cellular regulation.
 >
@@ -13,15 +13,15 @@ author_profile: true
 >
 > By integrating statistical thermodynamics with continuum PDE models, this work highlights a central challenge in mathematical biology and soft-matter physics: how microscopic stochastic interactions and nonlinear spatiotemporal dynamics yield reliable mesoscale structures. The formation and dissolution of condensates such as membraneless organelles (MLOs) underscore the role of noise in both destabilizing and enabling functional cellular organization, with broad implications for synaptic plasticity and intracellular signaling. [This project is joint work with graduate student Sarah Sakly.]
 
-**Parking functions.**  *Biomath Seminar*, William & Mary, 9/25. 
+**Parking functions.** <span style="text-decoration:underline">Biomath Seminar</span>, William & Mary, 9/25. 
 
 > At the crossroads of many deep ideas in combinatorics is the concept of a *parking function*, which can be introduced as a playful puzzle about cars trying to find spaces along a one-way street. Beyond the puzzle, parking functions connect to trees, networks, and chip-firing dynamics -- mathematical structures that also appear in models of biological systems, from signaling cascades to self-organized criticality.
 
-**Quantifying and maximizing diversity.** *Biomath Seminar*, William & Mary, 2/25. 
+**Quantifying and maximizing diversity.** <span style="text-decoration:underline">Biomath Seminar</span>, William & Mary, 2/25. 
 
 > How can we quantify diversity in a meaningful and logical way? The most common meaning given to (bio)diversity is simply the number of species present, but this quantity is not always very informative. For instance, the number of species of great ape on the planet is 8 (Human, Bonobo, Chimpanzee, Eastern and Western gorilla, and Bornean, Sumatran, and Tapanuli orangutan), but 99.99% of all great apes belong to just one species: us. In terms of global ecology, it is arguably more accurate to say that there is effectively only one species of great ape. A more informative definition of diversity includes a spectrum of viewpoints, indexed by a real parameter *q* that specifies the greater or lesser importance given to rare species. When this mathematical approach to diversity is extended to include the similarities and differences between species, a natural question is what probability distribution maximizes diversity for a fixed similarity matrix *Z*. In principle, both the maximizing distribution and the value of the maximum diversity depend on *q*. However, it is a theorem that neither does. Every similarity matrix has an unambiguous maximum diversity, independent of *q*, and a distribution that maximizes the diversity of all orders *q* simultaneously. This talk is an exposition of recent work by [Tom Leinster](https://www.maths.ed.ac.uk/~tl/).
 
-**Membraneless organelles and the Cahn-Hilliard equation for liquid-liquid phase separation.**  *Biomath Seminar*, William & Mary, 9/24. 
+**Membraneless organelles and the Cahn-Hilliard equation for liquid-liquid phase separation.**  <span style="text-decoration:underline">Biomath Seminar</span>, William & Mary, 9/24. 
 
 > Living cells contain distinct subcompartments that facilitate spatiotemporal regulation of biological reactions. Examples of this compartmentalization include membrane-bound organelles such as secretory vesicles and endoplasmic reticulum. In addition, cells contain many organelles that do not have an enclosing membrane yet remain coherent structures. Examples of membraneless organelles include cytoplasmic structures such as stress granules, P-bodies, and germ granules, as well as nuclear assemblies such as the nucleolus, Cajal bodies, and nuclear speckles.
 >
@@ -29,13 +29,13 @@ author_profile: true
 >
 > My talk on Friday will include a brief overview of membraneless organelles followed by a more detailed presentation of the Cahn-Hilliard equation. This partial differential equation describes the process of liquid-liquid phase separation. Along the way, I will disclose recent developments in my love-hate relationship with generative AI.
 
-**High-ventilation breathwork and respiratory gas exchange.** *Mind/Brain/Wellness Seminar*, William & Mary, 4/24. 
+**High-ventilation breathwork and respiratory gas exchange.**  <span style="text-decoration:underline">Mind/Brain/Wellness Seminar</span>, William & Mary, 4/24. 
 
 > Breathwork practices invariably involve patterns of volitional breathing. But what are the physiological mechanisms downstream from controlled respiration? Given the claims that breathwork can relieve various forms of psychological distress, we ought to have some understanding of the effect of these practices on respiratory gas exchange, blood gases, and brain state. On Friday, we will discuss this question in the context of high-ventilation breathwork practices such as holotropic breathing.
 >
 > Presumably, the pathway from increased ventilation rate/depth to neurophysiology begins with eliminating carbon dioxide (CO<sub>2</sub>) from the blood. An increase in blood alkalinity leads to cerebral vasoconstriction and a shifting of the oxyhemoglobin dissociation curve, which reduces oxygen supply to the brain. Fincham et al. 2023 suggest that in this hypoxic environment, neuronal metabolism shifts towards glycolysis, which causes lactate accumulation and stimulation of adrenergic locus coeruleus. In parallel, alkalosis/hypocapnia impairs GABAergic inhibition of excitatory neurons leading to disruption of gamma oscillatory networks, hyperexcitability of neurons, and increased neurometabolic demands, which cannot be matched by adequate oxygen (O<sub>2</sub>) supply. Readings: Fincham et al. 2023 and "Physiological mechanisms involved in holotropic breathwork," Ch. 9 in *Holotropic Breathwork: A New Approach to Self-Exploration and Therapy* by Stanislav Grof and Christina Grof (SUNY Press, 2023).
 
-**Burnside's lemma and the alpha7 nicotinic acetylcholine receptor.** *Biomath Seminar*, William & Mary, 9/23.
+**Burnside's lemma and the alpha7 nicotinic acetylcholine receptor.** <span style="text-decoration:underline">Biomath Seminar</span>, William & Mary, 9/23.
 
 > How does one count objects taking account of symmetry? For example, when drawing a triangle with edges that can be either back or red, there are 2<sup>3</sup> = 8 different possibilities. However, up to symmetry, there are only 4 distinct types, which can be indexed by the number of red edges (0, 1, 2, or 3). Easy! How about this slightly harder question from a conversation earlier this week with Prof. Nadine Kabbani (GMU)?
 >
@@ -45,22 +45,22 @@ author_profile: true
 >
 > My talk on Friday will focus on a result from group theory known as Burnside's lemma, which is often helpful when counting objects up to symmetry. 
 
-**Conformational coupling of receptor dimers.**  *Society for Mathematical Biology*, Columbus, OH, 7/23. Minisymposium: Stochastic Cellular Dynamics. 
+**Conformational coupling of receptor dimers.** <span style="text-decoration:underline">ociety for Mathematical Biology</span>, Columbus, OH, 7/23. Minisymposium: Stochastic Cellular Dynamics. 
 
 > Quantitative pharmacologists construct Markov chain models to give insight into the relationship between ligand concentration and the fraction of cell surface receptors in each of several molecular conformations. Pharmacologists use these stochastic models to understand the action of natural ligands and drugs on receptor-mediated cell responses. When receptors function as two or more similar protein subunits working in concert (i.e., homodimers or oligomers), receptor models must (i) account for symmetry, (ii) satisfy thermodynamic constraints, and (iii) properly account for subunit interactions (allostery) mediated by conformational coupling. The modeling framework that satisfies these three requirements will be explicated in the context of models of G protein-coupled receptors (GPCRs), such as metabotropic glutamate receptors, that function as multi-molecule signaling complexes. For equilibrium models of receptor dimers, this approach facilitates the inference of a parsimonious subset of allosteric interactions leading to conformational coupling and dependence of receptor subunits.
 
-**Bursting in excitatory neural networks -- do spikes matter?**  *Biomath Seminar*, William & Mary, 2/23. 
+**Bursting in excitatory neural networks -- do spikes matter?**  <span style="text-decoration:underline">Biomath Seminar</span>, William & Mary, 2/23. 
 
 > A mechanistic account of neuronal activity can be made concrete as a low-dimensional firing-rate model or a high-dimensional network model consisting of individual spiking neurons. What are the pros and cons of these two levels of abstraction? Under what conditions can the activity of a spiking network be accurately represented by a firing-rate model? Which modeling framework provides more insight into mechanisms and experimentally testable predictions?
 >
 > We will discuss these questions in the context of the preBötzinger Complex (preBötC), the brainstem center that generates the inspiratory breathing rhythm. At least seven competing models have been advanced to explain preBötC rhythmogenesis, but key experiments falsify most. Del Negro, Conradi Smith, and trainees have developed a network model of the preBötC that consists of individual spiking neurons and reproduces several important empirical benchmarks. The reduced firing-rate version of the model yields counter-intuitive predictions that have subsequently been confirmed by experiment.
 
-**Epistemic networks for the misinformation age.** *Biomath Seminar*, William & Mary, 9/22.
+**Epistemic networks for the misinformation age.** <span style="text-decoration:underline">Biomath Seminar</span>, William & Mary, 9/22.
 
 > I will introduce the notion of an epistemic network model and discuss how simulations of epistemic networks might contribute to our understanding of political and/or scientific polarization. Does the structure of epistemic networks influence how quickly and accurately members of groups obtain true beliefs? Does the social pressure to conform have a negative effect on a community's ability to reach accurate consensus? Why do people who disagree about one subject tend to disagree about other subjects as well?
 >
 > As preparation for Friday's talk, read the equation-free book chapter: Singer, D. J., Grim, P., Bramson, A., Holman, B., Jung, J., & Berger, W. J. (2021). Epistemic networks and polarization. In *The Routledge Handbook of Political Epistemology* (pp. 133-144).
 
- **Genetic algebras.** *Biomath Seminar*, William & Mary, 2/22. 
+ **Genetic algebras.** <span style="text-decoration:underline">Biomath Seminar</span>, William & Mary, 2/22. 
 
 > This expository talk explores the non-associative algebraic structure that is naturally associated with Mendelian genetics. The notion of a "genetic algebra" was formalized in the 1940s by Ivor M. H. Etherington (1908-1994) and pursued by Bernstein, Gonshor, Guzzo, Hetzel, Holgate, Perezi, Schafer, Walcher, Wörz-Busekros, and many others, including J. B. S. Haldane (one of the three major figures to develop the mathematical theory of population genetics, along with Ronald Fisher and Sewall Wright). In Friday's Biomath Seminar, we will begin with the standard multiplication tables used by geneticists to represent gametic and zygotic inheritance, and show how these tables define the structure constants of a finite-dimensional algebra. We will discuss known properties of a genetic algebra such as the rank equation, the transformation matrix, weight functions, change of basis, and commutative duplication. Along the way, we will illustrate the use of genetic algebra in the mathematical analysis of self-fertilization and polyploidy.
