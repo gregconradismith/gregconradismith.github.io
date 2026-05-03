@@ -5,13 +5,13 @@ permalink: /talks/
 author_profile: true
 ---
 
-**Phase-field modeling of the biological physics of membraneless organelles.** *Joint Mathematics Meetings session on Stochastic Processes in Biology*, Washington, DC, 4/26. (w/ Sakly S) 
+**Phase-field modeling of the biological physics of membraneless organelles.**  <span class="underline">Joint Mathematics Meetings session on Stochastic Processes in Biology</span>, Washington, DC, 4/26. 
 
 > Membraneless organelles (MLOs) formed by liquid-liquid phase separation (LLPS) exemplify how cells achieve robust spatial organization in the presence of pervasive molecular noise. These condensates arise from multivalent interactions among proteins and nucleic acids, exhibiting dynamic, reversible compartmentalization without membrane boundaries. Their existence raises fundamental mathematical questions at the interface of stochasticity, self-organization, and cellular regulation.
 >
 > We present modeling approaches that connect molecular interactions to mesoscale organization in synaptic condensates such as the post-synaptic density. At the equilibrium level, Flory-Huggins free energy theory provides a statistical-mechanical framework for how heterotypic and homotypic interactions drive LLPS and define binodal and spinodal regions of stability. Building on this, Cahn-Hilliard-type phase-field PDEs describe the spatiotemporal evolution of concentration fields, capturing nucleation, coarsening, and the influence of fluctuations. Extensions of these models may incorporate post-translational modifications (e.g., phosphorylation), regulation by intracellular calcium signaling, and mutations that alter interaction parameters, thereby reshaping phase boundaries and condensate dynamics.
 >
-> By integrating statistical thermodynamics with continuum PDE models, this work highlights a central challenge in mathematical biology and soft-matter physics: how microscopic stochastic interactions and nonlinear spatiotemporal dynamics yield reliable mesoscale structures. The formation and dissolution of condensates such as membraneless organelles (MLOs) underscore the role of noise in both destabilizing and enabling functional cellular organization, with broad implications for synaptic plasticity and intracellular signaling.
+> By integrating statistical thermodynamics with continuum PDE models, this work highlights a central challenge in mathematical biology and soft-matter physics: how microscopic stochastic interactions and nonlinear spatiotemporal dynamics yield reliable mesoscale structures. The formation and dissolution of condensates such as membraneless organelles (MLOs) underscore the role of noise in both destabilizing and enabling functional cellular organization, with broad implications for synaptic plasticity and intracellular signaling. [This project is joint work with graduate student Sarah Sakly.]
 
 **Parking functions.**  *Biomath Seminar*, William & Mary, 9/25. 
 
