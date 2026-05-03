@@ -51,6 +51,10 @@ function tidy(content) {
     .trim();
 }
 
+function removeWordPressButtonBlocks(content) {
+  return content.replace(/\n?<div class="wp-block-buttons[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\n?/g, "\n");
+}
+
 function writeFile(relativePath, content) {
   fs.writeFileSync(path.join(root, relativePath), `${tidy(content)}\n`, "utf8");
 }
@@ -165,18 +169,19 @@ writeFile("_pages/teaching.md", teachingContent);
 removeFile("_pages/teaching.html");
 
 writeFile(
-  "_pages/publications.html",
+  "_pages/publications.md",
   `${frontMatter({
     layout: "single",
     title: '"Publications"',
     permalink: "/publications/",
     author_profile: true,
   })}{% if site.author.googlescholar %}
-<p>You can also find my articles on <a href="{{ site.author.googlescholar }}">Google Scholar</a>{% if site.author.pubmed %} and <a href="{{ site.author.pubmed }}">PubMed</a>{% endif %}.</p>
+You can also find my articles on [Google Scholar]({{ site.author.googlescholar }}){% if site.author.pubmed %} and [PubMed]({{ site.author.pubmed }}){% endif %}.
 {% endif %}
 
-${convert(page("publications").content, "html")}`
+${removeWordPressButtonBlocks(convert(page("publications").content, "gfm"))}`
 );
+removeFile("_pages/publications.html");
 
 const mathy = post("have-a-mathy-christmas");
 writeFile(
