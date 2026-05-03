@@ -8,26 +8,26 @@
 #      Markdown formatted page while the second is generated using JSON.
 
 main:
+  - title: "Research"
+    url: /research/
+
   - title: "Publications"
     url: /publications/
 
-  - title: "Talks"
-    url: /talks/    
-
   - title: "Teaching"
-    url: /teaching/    
-    
-  - title: "Portfolio"
-    url: /portfolio/
-        
-  - title: "Blog Posts"
-    url: /year-archive/
+    url: /teaching/
+
+  - title: "Positions"
+    url: /positions/
+
+  - title: "Statement"
+    url: /statement/
+
+  - title: "Blogs"
+    url: /blogs/
     
   - title: "CV"
     url: "/files/Greg_Conradi_Smith_Curriculum_Vitae_2026.pdf"
     
   # - title: "CV"
   #   url: /cv-json/
-    
-  - title: "Guide"
-    url: /markdown/
