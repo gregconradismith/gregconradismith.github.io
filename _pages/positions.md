@@ -6,9 +6,11 @@ author_profile: true
 ---
 ### Current
 
-Professor, [Department of Applied Science](http://www.as.wm.edu/), [William & Mary](http://www.wm.edu/), 2013-Present
+Professor, [Department of Applied Science](https://cdsp.wm.edu/applied-science/), [School of Computing, Data Sciences & Physics](https://cdsp.wm.edu), [William & Mary](http://www.wm.edu/), 2013-Present
 
-Neuroscience Program Faculty Affiliate, [William & Mary](http://www.wm.edu/), 2010-Present 
+* [Neuroscience Program](https://www.wm.edu/as/neuroscience/) Faculty Affiliate, 2010-Present 
+
+* [Computational & Applied Mathematics & Statistics (CAMS)](https://www.wm.edu/as/cams/) Faculty Affiliate, 2012-Present 
 
 ### Former
 
