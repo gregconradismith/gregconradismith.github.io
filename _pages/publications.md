@@ -10,11 +10,25 @@ You can also find my articles on [Google Scholar]({{ site.author.googlescholar }
 
 ### Books
 
+Conradi Smith GD. **Receptor Modeling Jupyter Book.** 2025. [Jupyter Book](https://gregconradismith.github.io/receptor-modeling-jupyter-book/intro.html)
+
+Exposition of how cell surface receptors can be modeled using Sagemath, an open-source mathematics software system. The focus is on algebraic analysis of conformational coupling in oligomeric receptor models. An unrefereed deliverable supported by NSF DMS grant #1951646, *Cycle representations of receptor complex signal transduction.*
+
 Conradi Smith GD. **Cellular Biophysics and Modeling: The Computational Biology of Excitable Cells.** Cambridge University Press. March 2019. 394 pages. [\[doi:10.1017/9780511793905\]](https://doi.org/10.1017/9780511793905) [\[Amazon\]](https://www.amazon.com/dp/0521183057)
 
 ### Research Articles
 
 *Note that Conradi Smith GD = Smith GD (my name changed in 2017). Students and research associates who were under my supervision are <span style="text-decoration:underline">underlined</span>. \*These authors contributed equally.*
+
+<span style="text-decoration:underline">Sakly S</span>, Conradi Smith GD. **Phase separation dynamics of SynGAP & PSD-95 in post-synaptic densities.** *In preparation.*
+
+Kalajian EJ, Stettler MK, Conradi Smith GD, Del Negro CA. **&mu;-opioid receptor signaling enhances Kir3 currents in glutamatergic preB<span class="kbd">ö</span>tzinger complex neurons.** Under review at *J. Physiol.*
+
+Cooley AM, Schlutius C, Matthews M, <span style="text-decoration:underline">Simmons E</span>, Zheng X, Thomas D, Edger PP, Platts AE, LaFountain A, George L, Williams A, Hundley D, Conradi Smith GD, Yuan Y-W, Twyford A and Puzey JR. **Genetic architectures of floral pigment and patterning in hybrid monkeyflowers.** Under review at *Genetics*.
+
+<span style="text-decoration:underline">Borrus DS</span>, Stettler MK, <span style="text-decoration:underline">Grover CJ</span>, <span style="text-decoration:underline">Kalajian EJ</span>, Gu J, Conradi Smith GD\*, Del Negro CA\*. **Inspiratory and sigh breathing rhythms depend on distinct cellular signaling mechanisms in the preB<span class="kbd">ö</span>tzinger complex.** *The Journal of Physiology (London)* 602:809-834, 2024. [\[10.1113/JP285582\]](https://physoc.onlinelibrary.wiley.com/doi/10.1113/JP285582) \*Contributed equally.
+
+<span style="text-decoration:underline">Simmons ESG</span>, Cooley AM, Puzey JR, Conradi Smith GD. **A multigenerational Turing model reproduces transgressive petal spot phenotypes in hybrid *Mimulus*.** *Bulletin of Mathematical Biology* 85:120, 2023. [\[10.1007/s11538-023-01223-7\]](https://link.springer.com/article/10.1007/s11538-023-01223-7)
 
 <span style="text-decoration:underline">Borrus DS</span>, <span style="text-decoration:underline">Grover CJ</span>, Conradi Smith GD\*, Del Negro CA\*. **Sigh breathing rhythm depends on intracellular calcium oscillations in a population of inspiratory rhythmogenic preB<span class="kbd">ö</span>tzinger complex neurons in mice.** \[[BioRxiv preprint](https://doi.org/10.1101/2022.05.05.490664)\]
 

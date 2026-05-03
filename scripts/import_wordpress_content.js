@@ -55,6 +55,41 @@ function removeWordPressButtonBlocks(content) {
   return content.replace(/\n?<div class="wp-block-buttons[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\n?/g, "\n");
 }
 
+const newPublications = String.raw`<span style="text-decoration:underline">Sakly S</span>, Conradi Smith GD. **Phase separation dynamics of SynGAP & PSD-95 in post-synaptic densities.** *In preparation.*
+
+Kalajian EJ, Stettler MK, Conradi Smith GD, Del Negro CA. **&mu;-opioid receptor signaling enhances Kir3 currents in glutamatergic preB<span class="kbd">ö</span>tzinger complex neurons.** Under review at *J. Physiol.*
+
+Cooley AM, Schlutius C, Matthews M, <span style="text-decoration:underline">Simmons E</span>, Zheng X, Thomas D, Edger PP, Platts AE, LaFountain A, George L, Williams A, Hundley D, Conradi Smith GD, Yuan Y-W, Twyford A and Puzey JR. **Genetic architectures of floral pigment and patterning in hybrid monkeyflowers.** Under review at *Genetics*.
+
+<span style="text-decoration:underline">Borrus DS</span>, Stettler MK, <span style="text-decoration:underline">Grover CJ</span>, <span style="text-decoration:underline">Kalajian EJ</span>, Gu J, Conradi Smith GD\*, Del Negro CA\*. **Inspiratory and sigh breathing rhythms depend on distinct cellular signaling mechanisms in the preB<span class="kbd">ö</span>tzinger complex.** *The Journal of Physiology (London)* 602:809-834, 2024. [\[10.1113/JP285582\]](https://physoc.onlinelibrary.wiley.com/doi/10.1113/JP285582) \*Contributed equally.
+
+<span style="text-decoration:underline">Simmons ESG</span>, Cooley AM, Puzey JR, Conradi Smith GD. **A multigenerational Turing model reproduces transgressive petal spot phenotypes in hybrid *Mimulus*.** *Bulletin of Mathematical Biology* 85:120, 2023. [\[10.1007/s11538-023-01223-7\]](https://link.springer.com/article/10.1007/s11538-023-01223-7)`;
+
+const newBooks = String.raw`Conradi Smith GD. **Receptor Modeling Jupyter Book.** 2025. [Jupyter Book](https://gregconradismith.github.io/receptor-modeling-jupyter-book/intro.html)
+
+Exposition of how cell surface receptors can be modeled using Sagemath, an open-source mathematics software system. The focus is on algebraic analysis of conformational coupling in oligomeric receptor models. An unrefereed deliverable supported by NSF DMS grant #1951646, *Cycle representations of receptor complex signal transduction.*`;
+
+function addNewBooks(content) {
+  const marker = "### Books";
+
+  if (!content.includes(marker)) {
+    throw new Error("Could not find Books heading in publications content.");
+  }
+
+  return content.replace(marker, `${marker}\n\n${newBooks}`);
+}
+
+function addNewPublications(content) {
+  const marker =
+    "*Note that Conradi Smith GD = Smith GD (my name changed in 2017). Students and research associates who were under my supervision are <span style=\"text-decoration:underline\">underlined</span>. \\*These authors contributed equally.*";
+
+  if (!content.includes(marker)) {
+    throw new Error("Could not find Research Articles note in publications content.");
+  }
+
+  return content.replace(marker, `${marker}\n\n${newPublications}`);
+}
+
 function writeFile(relativePath, content) {
   fs.writeFileSync(path.join(root, relativePath), `${tidy(content)}\n`, "utf8");
 }
@@ -179,7 +214,7 @@ writeFile(
 You can also find my articles on [Google Scholar]({{ site.author.googlescholar }}){% if site.author.pubmed %} and [PubMed]({{ site.author.pubmed }}){% endif %}.
 {% endif %}
 
-${removeWordPressButtonBlocks(convert(page("publications").content, "gfm"))}`
+${addNewPublications(addNewBooks(removeWordPressButtonBlocks(convert(page("publications").content, "gfm"))))}`
 );
 removeFile("_pages/publications.html");
 
