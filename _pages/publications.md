@@ -12,7 +12,11 @@ You can also find my articles on [Google Scholar]({{ site.author.googlescholar }
 
 ### Books
 
+<img src="{{ '/images/FrontCover.jpg' | relative_url }}" alt="Front cover of Cellular Biophysics and Modeling" class="align-left" width="180" height="256" style="max-width: 180px; margin-bottom: 1em;">
+
 Conradi Smith GD. **Cellular Biophysics and Modeling: The Computational Biology of Excitable Cells.** Cambridge University Press. March 2019. 394 pages. [\[doi:10.1017/9780511793905\]](https://doi.org/10.1017/9780511793905) [\[Amazon\]](https://www.amazon.com/dp/0521183057)
+
+<div style="clear: both;"></div>
 
 Conradi Smith GD. **Receptor Modeling Jupyter Book.** 2025. [Jupyter Book](https://gregconradismith.github.io/receptor-modeling-jupyter-book/intro.html)
 An unrefereed deliverable supported by NSF DMS grant #1951646, *Cycle representations of receptor complex signal transduction.*
