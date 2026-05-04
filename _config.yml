@@ -16,7 +16,7 @@ description              : &description "Greg Conradi Smith's academic portfolio
 url                      : https://gregconradismith.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "gregconradismith/https://gregconradismith.github.io"
+repository               : "https://gregconradismith/gregconradismith.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
@@ -26,7 +26,7 @@ author:
   avatar           : "profile.png"
   name             : "Greg Conradi Smith"
   pronouns         : # example: "she/her"  
-  bio              : "biology as a mathematical science  science among the liberal arts"
+  bio              : "biology as a mathematical science, science among the liberal arts"
   location         : "Williamsburg, Virginia"
   employer         : "William & Mary"
   uri              : # URL
@@ -66,7 +66,7 @@ author:
   keybase          : # Username
   instagram        : # Username
   lastfm           : # Username
-  linkedin         : # Username
+  linkedin         : "greg-conradi-smith-62309a3a"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username
