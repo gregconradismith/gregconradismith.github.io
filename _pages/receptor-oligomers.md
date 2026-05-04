@@ -24,4 +24,3 @@ Current work extends this framework to receptor complexes, including dimeric G-p
 
 National Science Foundation, Division of Mathematical Sciences, Mathematical Biology. **Cycle representations of receptor complex signal transduction.** PI: Gregory D. Conradi Smith. NSF DMS-1951646, 6/20-5/23.
 
-See also the original [Receptor Oligomers project page](https://wmcbl.wordpress.com/receptor-oligomers/).
