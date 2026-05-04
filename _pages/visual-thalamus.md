@@ -35,4 +35,4 @@ The population-density approach reproduced rhythmic bursting in the absence of r
 - Huertas MA and Smith GD. **A multivariate population density model of the dLGN/PGN relay.** *J. Comput. Neurosci.* 21(2):171-89, 2006. [[doi:10.1529/biophysj.105.075036](http://dx.doi.org/doi:10.1529/biophysj.105.075036)] [[PMID:16788765](https://www.ncbi.nlm.nih.gov/pubmed/16788765)]
 - Huertas MA and Smith GD. **Population density model of the driven LGN/PGN.** In: *Stochastic Methods in Neuroscience*. Laing C and Gabriel L, eds. Pages 217-241. Oxford University Press. 2009. [[doi:10.1093/acprof:oso/9780199235070.003.0008](http://dx.doi.org/doi:10.1093/acprof:oso/9780199235070.003.0008)]
 
-See also the original [Visual Thalamus project page](https://wmcbl.wordpress.com/visual-thalamus/).
+
