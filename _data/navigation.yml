@@ -8,23 +8,20 @@
 #      Markdown formatted page while the second is generated using JSON.
 
 main:
+  - title: "Positions"
+    url: /positions/
+
   - title: "Research"
     url: /research/
 
   - title: "Publications"
     url: /publications/
 
-  - title: "Talks"
-    url: /talks/
-
   - title: "Teaching"
     url: /teaching/
-
-  - title: "Biomath Seminar"
-    url: https://wmbiomath.wordpress.com
-
-  - title: "Positions"
-    url: /positions/
+  
+  - title: "Talks"
+    url: /talks/
 
   - title: "Personal"
     url: /personal/
@@ -35,5 +32,3 @@ main:
   - title: "CV"
     url: "/files/Greg_Conradi_Smith_Curriculum_Vitae_2026.pdf"
     
-  # - title: "CV"
-  #   url: /cv-json/
