@@ -6,3 +6,4 @@ author_profile: true
 ---
 
 - [Statement](/statement/)
+- [Photos](/photos/)
