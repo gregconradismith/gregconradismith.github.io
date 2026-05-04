@@ -11,9 +11,9 @@ I am a professor in the Department of Applied Science at William & Mary and a li
 
 My work uses mathematical and computational models to connect cellular mechanisms with experimentally observed biological function, especially in calcium signaling, excitable cells, and computational neuroscience. I often collaborate closely with physiologists to build models of experimental preparations, use those models to make explicit predictions, and test those predictions against future experiment.
 
-[Read more about my research](/research/) or browse my [publications](/publications/).
+[Read more about my research](/research/) and [teaching](https://gregconradismith.github.io/teaching/) or browse my [publications](/publications/).
 
-[Innovating research and education: W&M professor and students address issues of science and society](https://news.wm.edu/2023/11/16/innovating-research-and-education-wm-professor-and-students-address-issues-of-science-and-society/)
+News: [Innovating research and education: W&M professor and students address issues of science and society](https://news.wm.edu/2023/11/16/innovating-research-and-education-wm-professor-and-students-address-issues-of-science-and-society/)
 
 > As for me, my bed is made: I am against bigness and greatness in all their forms, and with the invisible molecular forces that work from individual to individual, stealing through the crannies of the world like so many soft rootlets, or like the capillary oozing of water, and yet rending the hardest monuments of men's pride, if you give them time.
 >
