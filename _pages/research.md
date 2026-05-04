@@ -20,7 +20,7 @@ The lab is closely connected with William & Mary's [biomathematics](https://wmbi
 - [Receptor Oligomers](/research/receptor-oligomers/)
 - [Eupnea & Sigh](/research/eupnea-sigh/)
 - [Petal Patterns](/research/petal-patterns/)
-- [Calcium Dynamics](https://wmcbl.wordpress.com/intracellular-calcium-dynamics/)
-- [Visual Thalamus](https://wmcbl.wordpress.com/visual-thalamus/)
+- [Calcium Dynamics](/research/calcium-dynamics/)
+- [Visual Thalamus](/research/visual-thalamus/)
 
 
