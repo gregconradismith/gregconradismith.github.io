@@ -21,4 +21,4 @@ The lab is closely connected with William & Mary's biomathematics community, inc
 - [Calcium Dynamics](https://wmcbl.wordpress.com/intracellular-calcium-dynamics/)
 - [Visual Thalamus](https://wmcbl.wordpress.com/visual-thalamus/)
 
-![The Computational Biology Lab at William & Mary](https://wmcbl.wordpress.com/wp-content/uploads/2024/06/logo.png?w=906)
+![The Computational Biology Lab at William & Mary](/images/computational-biology-lab-logo.png)
