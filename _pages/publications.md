@@ -8,7 +8,7 @@ author_profile: true
 You can also find my articles on [Google Scholar]({{ site.author.googlescholar }}){% if site.author.pubmed %} and [PubMed]({{ site.author.pubmed }}){% endif %}.
 {% endif %}
 
-*Note that Conradi Smith GD = Smith GD (my name changed in 2017). Students and research associates who were under my supervision are <span style="text-decoration:underline">underlined</span>. \*These authors contributed equally.*
+*Note that Conradi Smith GD = Smith GD (my name changed in 2017). \*These authors contributed equally.*
 
 ### Books
 
@@ -19,43 +19,43 @@ An unrefereed deliverable supported by NSF DMS grant #1951646, *Cycle representa
 
 ### Research Articles
 
-<span style="text-decoration:underline">Sakly S</span>, Conradi Smith GD. **Phase separation dynamics of SynGAP & PSD-95 in post-synaptic densities.** *In preparation.*
+Sakly S, Conradi Smith GD. **Phase separation dynamics of SynGAP & PSD-95 in post-synaptic densities.** *In preparation.*
 
 Kalajian EJ, Stettler MK, Conradi Smith GD, Del Negro CA. **&mu;-opioid receptor signaling enhances Kir3 currents in glutamatergic preB<span class="kbd">ö</span>tzinger complex neurons.** Under review at *J. Physiol.*
 
-Cooley AM, Schlutius C, Matthews M, <span style="text-decoration:underline">Simmons E</span>, Zheng X, Thomas D, Edger PP, Platts AE, LaFountain A, George L, Williams A, Hundley D, Conradi Smith GD, Yuan Y-W, Twyford A and Puzey JR. **Genetic architectures of floral pigment and patterning in hybrid monkeyflowers.** Under review at *Genetics*.
+Cooley AM, Schlutius C, Matthews M, Simmons E, Zheng X, Thomas D, Edger PP, Platts AE, LaFountain A, George L, Williams A, Hundley D, Conradi Smith GD, Yuan Y-W, Twyford A and Puzey JR. **Genetic architectures of floral pigment and patterning in hybrid monkeyflowers.** Under review at *Genetics*.
 
-<span style="text-decoration:underline">Borrus DS</span>, Stettler MK, <span style="text-decoration:underline">Grover CJ</span>, <span style="text-decoration:underline">Kalajian EJ</span>, Gu J, Conradi Smith GD\*, Del Negro CA\*. **Inspiratory and sigh breathing rhythms depend on distinct cellular signaling mechanisms in the preB<span class="kbd">ö</span>tzinger complex.** *The Journal of Physiology (London)* 602:809-834, 2024. [\[10.1113/JP285582\]](https://physoc.onlinelibrary.wiley.com/doi/10.1113/JP285582) \*Contributed equally.
+Borrus DS, Stettler MK, Grover CJ, Kalajian EJ, Gu J, Conradi Smith GD\*, Del Negro CA\*. **Inspiratory and sigh breathing rhythms depend on distinct cellular signaling mechanisms in the preB<span class="kbd">ö</span>tzinger complex.** *The Journal of Physiology (London)* 602:809-834, 2024. [\[10.1113/JP285582\]](https://physoc.onlinelibrary.wiley.com/doi/10.1113/JP285582) \*Contributed equally.
 
-<span style="text-decoration:underline">Simmons ESG</span>, Cooley AM, Puzey JR, Conradi Smith GD. **A multigenerational Turing model reproduces transgressive petal spot phenotypes in hybrid *Mimulus*.** *Bulletin of Mathematical Biology* 85:120, 2023. [\[10.1007/s11538-023-01223-7\]](https://link.springer.com/article/10.1007/s11538-023-01223-7)
+Simmons ESG, Cooley AM, Puzey JR, Conradi Smith GD. **A multigenerational Turing model reproduces transgressive petal spot phenotypes in hybrid *Mimulus*.** *Bulletin of Mathematical Biology* 85:120, 2023. [\[10.1007/s11538-023-01223-7\]](https://link.springer.com/article/10.1007/s11538-023-01223-7)
 
 David CK, Sugimura YK, Kallurkar PS, Picardo MCD, Saha MS, Conradi Smith GD, Del Negro CA. **Single cell transcriptome sequencing of inspiratory neurons of the preB**<span class="kbd">ö</span>**tzinger complex in neonatal mice.** *Scientific Data* 9:457, 2022. \[[10.1038/s41597-022-01569-y](https://doi.org/10.1038/s41597-022-01569-y)\]
 
-<span style="text-decoration:underline">Smith RD</span>, Puzey JR, Conradi Smith GD. **Population genetics of transposable element load: a mechanistic account of observed overdispersion.** *PLOS ONE* 17(7):e0270839, 2022. \[[10.1371/journal.pone.0270839](https://doi.org/10.1371/journal.pone.0270839)\]
+Smith RD, Puzey JR, Conradi Smith GD. **Population genetics of transposable element load: a mechanistic account of observed overdispersion.** *PLOS ONE* 17(7):e0270839, 2022. \[[10.1371/journal.pone.0270839](https://doi.org/10.1371/journal.pone.0270839)\]
 
 Kallurkar PS, Picardo MCD, Sugimura YK, Saha MS, Conradi Smith GD, Del Negro CA. **Transcriptomes of electrophysiologically recorded Dbx1-derived respiratory neurons of the preB<span class="kbd">ö</span>tzinger complex in neonatal mice.** *Scientific Reports* 12:2923, 2022. \[[10.1038/s41598-022-06834-z](https://www.nature.com/articles/s41598-022-06834-z)\]
 
-Kinser TJ, <span style="text-decoration:underline">Smith RD</span>, Lawrence AH, Cooley AM, Vallejo-Marin M, Conradi Smith GD, and Puzey JR. **Endosperm-based incompatibilities in hybrid monkeyflowers.** *The Plant Cell*, koab117, 2021. \[[10.1093/plcell/koab117](https://doi.org/10.1093/plcell/koab117)\]
+Kinser TJ, Smith RD, Lawrence AH, Cooley AM, Vallejo-Marin M, Conradi Smith GD, and Puzey JR. **Endosperm-based incompatibilities in hybrid monkeyflowers.** *The Plant Cell*, koab117, 2021. \[[10.1093/plcell/koab117](https://doi.org/10.1093/plcell/koab117)\]
 
 Zheng X, Om K, Stanton KA, Thomas D, Schlutius C, Cheng PA, Eggert A, Simmons E, Yuan Y-W, Conradi Smith GD, Puzey JR\**,* Cooley AM\*. **The regulatory network for petal anthocyanin pigmentation is shaped by the MYB5a/NEGAN transcription factor in *Mimulus*.** *Genetics* 217(2), iyaa036, 2021. [\[10.1093/genetics/iyaa036\]](https://doi.org/10.1093/genetics/iyaa036)
 
-<span style="text-decoration:underline">Borrus D</span>, Conradi Smith GD, Del Negro CA. **Role of synaptic inhibition in the coupling of the respiratory rhythms that underlie eupnea and sigh behaviors.** *eNeuro*, 7(3):1-20, 2020. [\[10.1523/ENEURO.0302-19.2020\]](https://doi.org/10.1523/ENEURO.0302-19.2020) [\[PMID:32393585\]](https://www.ncbi.nlm.nih.gov/pubmed/32393585)
+Borrus D, Conradi Smith GD, Del Negro CA. **Role of synaptic inhibition in the coupling of the respiratory rhythms that underlie eupnea and sigh behaviors.** *eNeuro*, 7(3):1-20, 2020. [\[10.1523/ENEURO.0302-19.2020\]](https://doi.org/10.1523/ENEURO.0302-19.2020) [\[PMID:32393585\]](https://www.ncbi.nlm.nih.gov/pubmed/32393585)
 
 Conradi Smith GD. **Allostery in oligomeric receptor models.** *Mathematical Medicine and Biology: A Journal of the IMA.* 37:313-333, 2020. [\[10.1093/imammb/dqz016\]](https://doi.org/10.1093/imammb/dqz016) [\[PMID:31822901\]](https://www.ncbi.nlm.nih.gov/pubmed/31822901) [\[BioRxiv preprint\]](https://doi.org/10.1101/330571)
 
-<span style="text-decoration:underline">Smith RD</span>, Kinser TJ, Conradi Smith GD and Puzey JR. **A likelihood ratio test for changes in homeolog expression bias.** *BMC Bioinformatics*. 20:149, 2019. [\[doi:10.1186/s12859-019-2709-5\]](https://doi.org/10.1186/s12859-019-2709-5) [\[PMID:30894122\]](https://www.ncbi.nlm.nih.gov/pubmed/30894122) [\[BioRxiv preprint\]](https://doi.org/10.1101/119438)\
+Smith RD, Kinser TJ, Conradi Smith GD and Puzey JR. **A likelihood ratio test for changes in homeolog expression bias.** *BMC Bioinformatics*. 20:149, 2019. [\[doi:10.1186/s12859-019-2709-5\]](https://doi.org/10.1186/s12859-019-2709-5) [\[PMID:30894122\]](https://www.ncbi.nlm.nih.gov/pubmed/30894122) [\[BioRxiv preprint\]](https://doi.org/10.1101/119438)\
 \
-Edger PP, <span style="text-decoration:underline">Smith RD</span>, McKain MR, Cooley AM, Vallejo-Marin M, Yuan Y, Bewick AJ, Ji L, Platts AE, Bowman MJ, Childs KL, Schmitz RJ, Smith GD, Pires JC, Puzey JR. **Subgenome dominance in an interspecific hybrid, synthetic allopolyploid, and a 140 year old naturally established neo-allopolyploid monkeyflower.** *The Plant Cell.* 29(9):2150-2167, 2017. [\[doi:10.1105/tpc.17.00010\]](http://dx.doi.org/10.1105/tpc.17.00010) [\[PMID:28814644\]](https://www.ncbi.nlm.nih.gov/pubmed/28814644)\
+Edger PP, Smith RD, McKain MR, Cooley AM, Vallejo-Marin M, Yuan Y, Bewick AJ, Ji L, Platts AE, Bowman MJ, Childs KL, Schmitz RJ, Smith GD, Pires JC, Puzey JR. **Subgenome dominance in an interspecific hybrid, synthetic allopolyploid, and a 140 year old naturally established neo-allopolyploid monkeyflower.** *The Plant Cell.* 29(9):2150-2167, 2017. [\[doi:10.1105/tpc.17.00010\]](http://dx.doi.org/10.1105/tpc.17.00010) [\[PMID:28814644\]](https://www.ncbi.nlm.nih.gov/pubmed/28814644)\
 \
-Hayes JA, Kottick A, Picardo MCD, Halleran AD, <span style="text-decoration:underline">Smith RD</span>, Smith GD, Saha MS, Del Negro CA. **Transcriptome of neonatal preB<span class="kbd">ö</span>tzinger complex neurons in Dbx1 reporter mice.** *Scientific Reports* 7(1):8669, 2017. [\[doi:10.1038/s41598-017-09418-4\]](http://dx.doi.org/10.1038/s41598-017-09418-4) [\[PMID:28819234\]](https://www.ncbi.nlm.nih.gov/pubmed/28819234)
+Hayes JA, Kottick A, Picardo MCD, Halleran AD, Smith RD, Smith GD, Saha MS, Del Negro CA. **Transcriptome of neonatal preB<span class="kbd">ö</span>tzinger complex neurons in Dbx1 reporter mice.** *Scientific Reports* 7(1):8669, 2017. [\[doi:10.1038/s41598-017-09418-4\]](http://dx.doi.org/10.1038/s41598-017-09418-4) [\[PMID:28819234\]](https://www.ncbi.nlm.nih.gov/pubmed/28819234)
 
 Hammack RH and Smith GD. **Cycle bases of reduced powers of graphs.** *ARS Mathematica Contemporanea* 12(1)183–203, 2017. [\[10.26493/1855-3974.856.4d2\]](https://doi.org/10.26493/1855-3974.856.4d2)
 
-<span style="text-decoration:underline">Wang X</span>, <span style="text-decoration:underline">Hardcastle K</span>, Weinberg SH, Smith GD. **Population density and moment-based approaches to modeling domain **Ca<sup>2+</sup>**-mediated inactivation of L-type Ca<sup>2+</sup> channels.** *Acta Biotheoretica* 64(1):11-32, 2016. [\[doi:10.1007/s10441-015-9271-y\]](http://dx.doi.org/10.1007/s10441-015-9271-y)
+Wang X, Hardcastle K, Weinberg SH, Smith GD. **Population density and moment-based approaches to modeling domain **Ca<sup>2+</sup>**-mediated inactivation of L-type Ca<sup>2+</sup> channels.** *Acta Biotheoretica* 64(1):11-32, 2016. [\[doi:10.1007/s10441-015-9271-y\]](http://dx.doi.org/10.1007/s10441-015-9271-y)
 
-<span style="text-decoration:underline">Wang X</span>, <span style="text-decoration:underline">Hao Y</span>, Weinberg SH and Smith GD. ****Ca<sup>2+</sup>**-activation kinetics modulate successive puff/spark amplitude, duration and inter-event interval correlations in a Langevin model of stochastic **Ca<sup>2+</sup>** release.** *Mathematical Biosciences* 264:101–107, 2015. [\[doi:10.1016/j.mbs.2015.03.012\]](http://authors.elsevier.com/sd/article/S0025556415000784)
+Wang X, Hao Y, Weinberg SH and Smith GD. ****Ca<sup>2+</sup>**-activation kinetics modulate successive puff/spark amplitude, duration and inter-event interval correlations in a Langevin model of stochastic **Ca<sup>2+</sup>** release.** *Mathematical Biosciences* 264:101–107, 2015. [\[doi:10.1016/j.mbs.2015.03.012\]](http://authors.elsevier.com/sd/article/S0025556415000784)
 
-<span style="text-decoration:underline">Wang X</span>, Weinberg S, <span style="text-decoration:underline">Hao Y</span>, Sobie EA and Smith GD. **Calcium homeostasis in a local/global whole cell model of permeabilized ventricular myocytes with a Langevin description of stochastic calcium release.** *American Journal of Physiology: Heart and Circulatory Physiology.* 308(5):H510-H523, 2015. [\[doi:10.1152/ajpheart.00296.2014\]](http://dx.doi.org/10.1152/ajpheart.00296.2014) [\[PMID: 25485896\]](https://www.ncbi.nlm.nih.gov/pubmed/25485896)
+Wang X, Weinberg S, Hao Y, Sobie EA and Smith GD. **Calcium homeostasis in a local/global whole cell model of permeabilized ventricular myocytes with a Langevin description of stochastic calcium release.** *American Journal of Physiology: Heart and Circulatory Physiology.* 308(5):H510-H523, 2015. [\[doi:10.1152/ajpheart.00296.2014\]](http://dx.doi.org/10.1152/ajpheart.00296.2014) [\[PMID: 25485896\]](https://www.ncbi.nlm.nih.gov/pubmed/25485896)
 
 Weinberg S and Smith GD. **The influence of **Ca<sup>2+</sup>** buffers on free \[**Ca<sup>2+</sup>**\] fluctuations and the effective volume of **Ca<sup>2+</sup>** microdomains.** *Biophysical Journal* 106(12):2693-–2709, 2014. [\[doi:10.1016/j.bpj.2014.04.045\]](http://dx.doi.org/10.1016/j.bpj.2014.04.045) [\[PMID: 24940787\]](https://www.ncbi.nlm.nih.gov/pubmed/24940787)
 
@@ -67,11 +67,11 @@ LaMar MD, Kemper P, and Smith GD. **Reduction of calcium release site models via
 
 Lamprecht R, Smith GD, and Kemper P. **Stochastic Petri net models of signaling complexes and their analysis.** *Natural Computing. Special Issue: Petri Nets and BioSystems* 10:1045-75, 2011. [\[doi:10.1007/s11047-009-9143-y\]](http://dx.doi.org/doi:10.1007/s11047-009-9143-y)
 
-<span style="text-decoration:underline">Hartman JM</span>, Sobie EA, and Smith GD. **Spontaneous calcium sparks and homeostasis in a minimal model of local and global calcium responses in quiescent ventricular myocytes.** *American Journal of Physiology: Heart and Circulatory Physiology* 299(6):H1996–2008, 2010. [\[doi:10.1152/ajpheart.00293.2010\]](http://dx.doi.org/10.1152/ajpheart.00293.2010) [\[PMID: 20852058\]](https://www.ncbi.nlm.nih.gov/pubmed/20852058)
+Hartman JM, Sobie EA, and Smith GD. **Spontaneous calcium sparks and homeostasis in a minimal model of local and global calcium responses in quiescent ventricular myocytes.** *American Journal of Physiology: Heart and Circulatory Physiology* 299(6):H1996–2008, 2010. [\[doi:10.1152/ajpheart.00293.2010\]](http://dx.doi.org/10.1152/ajpheart.00293.2010) [\[PMID: 20852058\]](https://www.ncbi.nlm.nih.gov/pubmed/20852058)
 
 Huertas MA, Smith GD, and Gyorke S. **Calcium alternans in a cardiac myocyte model that uses moment equations to represent heterogenous junctional SR calcium.** *Biophys. J.* 99(2):377-387, 2010. [\[doi:10.1016/j.bpj.2010.04.032\]](http://dx.doi.org/10.1016/j.bpj.2010.04.032) [\[PMID: 20643055\]](https://www.ncbi.nlm.nih.gov/pubmed/20643055)
 
-<span style="text-decoration:underline">Williams GSB</span>, Sobie EA, Smith GD, Jafri MS. **Models of cardiac excitation-contraction coupling in ventricular myocytes.** *Mathematical Biosciences.* 226:1-15, 2010. [\[doi:10.1016/j.mbs.2010.03.005\]](http://dx.doi.org/10.1016/j.mbs.2010.03.005)
+Williams GSB, Sobie EA, Smith GD, Jafri MS. **Models of cardiac excitation-contraction coupling in ventricular myocytes.** *Mathematical Biosciences.* 226:1-15, 2010. [\[doi:10.1016/j.mbs.2010.03.005\]](http://dx.doi.org/10.1016/j.mbs.2010.03.005)
 
 LaMar MD and Smith GD. **The effect of node-degree correlation on synchronization of identical pulse-coupled oscillators.** *Physical Review E.* 84(4):046206, 2010.[\[doi:10.1103/PhysRevE.81.046206\]](http://link.aps.org/doi/10.1103/PhysRevE.81.046206)
 
@@ -80,28 +80,28 @@ Thul R, Smith GD, Coombes S. **Sensitisation waves in a bidomain fire-diffuse-fi
 
 Siegal-Gaskins D, Grotewold E, and Smith GD. **The capacity for multistability in gene regulatory motifs.** *BMC Systems Biology* 3:96, 2009. [\[doi:10.1186/1752-0509-3-96\]](http://dx.doi.org/doi:10.1186/1752-0509-3-96)
 
-<span style="text-decoration:underline">Hao Y</span>, Kemper P, and Smith GD. **Reduction of calcium release site models via fast/slow analysis and iterative aggregation/disaggregation.** *Chaos* 19:037107, 2009. Focus issue: Intracellular Calcium Dynamics – A Change of Modeling Paradigm? [\[doi:10.1063/1.3223663\]](http://dx.doi.org/doi:10.1063/1.3223663)
+Hao Y, Kemper P, and Smith GD. **Reduction of calcium release site models via fast/slow analysis and iterative aggregation/disaggregation.** *Chaos* 19:037107, 2009. Focus issue: Intracellular Calcium Dynamics – A Change of Modeling Paradigm? [\[doi:10.1063/1.3223663\]](http://dx.doi.org/doi:10.1063/1.3223663)
 
 Goyal R, Angermann JE, Ostrovskaya O, Buchholz JN, Smith GD, Wilson SM. **Enhanced capacitative calcium entry and sarcoplasmic-reticulum calcium storage capacity with advanced age in murine mesenteric arterial smooth muscle cells.** *Exp. Gerontol.* 44(3):201-7, 2009. [\[doi:10.1016/j.exger.2008.10.007\]](http://dx.doi.org/doi:10.1016/j.exger.2008.10.007)\
 \
 Goyal R, Creel KD, Chavis E, Smith GD, Longo LD, Wilson SM. **Maturation of intracellular calcium homeostasis in sheep pulmonary arterial smooth muscle cells.** *American Journal of Physiology: Lung Cellular and Molecular Physiology* 295(5):L905-14, 2008. [\[doi:10.1152/ajplung.00053.2008\]](http://dx.doi.org/doi:10.1152/ajplung.00053.2008)
 
-<span style="text-decoration:underline">DeRemigio H</span>, LaMar MD, Kemper P, and Smith GD. **Markov chain models of coupled intracellular calcium channels: Kronecker structured representations and iterative solution methods.** *Physical Biology* 5(3):36003, 2008. [\[doi:10.1088/1478-3975/5/3/036003\]](http://dx.doi.org/doi:10.1088/1478-3975/5/3/036003) [\[PMID: 18626127\]](https://www.ncbi.nlm.nih.gov/pubmed/18626127)\
+DeRemigio H, LaMar MD, Kemper P, and Smith GD. **Markov chain models of coupled intracellular calcium channels: Kronecker structured representations and iterative solution methods.** *Physical Biology* 5(3):36003, 2008. [\[doi:10.1088/1478-3975/5/3/036003\]](http://dx.doi.org/doi:10.1088/1478-3975/5/3/036003) [\[PMID: 18626127\]](https://www.ncbi.nlm.nih.gov/pubmed/18626127)\
 \
-<span style="text-decoration:underline">Williams GSB</span>, Huertas MA, Sobie EA, Jafri MS, and Smith GD. **Moment closure for local control models of **Ca<sup>2+</sup>**-induced **Ca<sup>2+</sup>** release in cardiac myocytes.** Biophys. J. 95(4):1689-703, 2008. [\[doi:10.1529/biophysj.107.125948\]](http://%7Bhttp://dx.doi.org/doi:10.1529/biophysj.107.125948) [\[PMID: 18487291\]](https://www.ncbi.nlm.nih.gov/pubmed/18487291)
+Williams GSB, Huertas MA, Sobie EA, Jafri MS, and Smith GD. **Moment closure for local control models of **Ca<sup>2+</sup>**-induced **Ca<sup>2+</sup>** release in cardiac myocytes.** Biophys. J. 95(4):1689-703, 2008. [\[doi:10.1529/biophysj.107.125948\]](http://%7Bhttp://dx.doi.org/doi:10.1529/biophysj.107.125948) [\[PMID: 18487291\]](https://www.ncbi.nlm.nih.gov/pubmed/18487291)
 
-<span style="text-decoration:underline">Groff JR </span>and Smith GD. **Ryanodine receptor allosteric coupling and the dynamics of **Ca<sup>2+</sup>** sparks.** *Biophys. J.* 95:135-154, 2008. [\[doi:10.1529/biophysj.107.119982\]](http://dx.doi.org/doi:10.1529/biophysj.107.119982) [\[PMID: 18359795\]](https://www.ncbi.nlm.nih.gov/pubmed/18359795)
+Groff JR and Smith GD. **Ryanodine receptor allosteric coupling and the dynamics of **Ca<sup>2+</sup>** sparks.** *Biophys. J.* 95:135-154, 2008. [\[doi:10.1529/biophysj.107.119982\]](http://dx.doi.org/doi:10.1529/biophysj.107.119982) [\[PMID: 18359795\]](https://www.ncbi.nlm.nih.gov/pubmed/18359795)
 
-<span style="text-decoration:underline">Groff JR </span>and Smith GD. **Calcium-dependent inactivation and the dynamics of calcium puffs and sparks.** *J. Theor. Biol.* 253(3):483-99, 2008. [\[doi:10.1016/j.jtbi.2008.03.026\]](http://dx.doi.org/doi:10.1016/j.jtbi.2008.03.026) [\[PMID: 18486154\]](https://www.ncbi.nlm.nih.gov/pubmed/18486154)
+Groff JR and Smith GD. **Calcium-dependent inactivation and the dynamics of calcium puffs and sparks.** *J. Theor. Biol.* 253(3):483-99, 2008. [\[doi:10.1016/j.jtbi.2008.03.026\]](http://dx.doi.org/doi:10.1016/j.jtbi.2008.03.026) [\[PMID: 18486154\]](https://www.ncbi.nlm.nih.gov/pubmed/18486154)
 
-<span style="text-decoration:underline">Williams GSB</span>, <span style="text-decoration:underline">Molinelli EJ</span>, and Smith GD. **Modeling local and global intracellular calcium responses mediated by diffusely distributed inositol 1,4,5-trisphosphate receptors.** *J. Theor. Biol.* 253:170-188, 2008. [\[doi:10.1016/j.jtbi.2008.02.040\]](http://dx.doi.org/doi:10.1016/j.jtbi.2008.02.040) [\[PMID: 18405920\]](https://www.ncbi.nlm.nih.gov/pubmed/18405920)
+Williams GSB, Molinelli EJ, and Smith GD. **Modeling local and global intracellular calcium responses mediated by diffusely distributed inositol 1,4,5-trisphosphate receptors.** *J. Theor. Biol.* 253:170-188, 2008. [\[doi:10.1016/j.jtbi.2008.02.040\]](http://dx.doi.org/doi:10.1016/j.jtbi.2008.02.040) [\[PMID: 18405920\]](https://www.ncbi.nlm.nih.gov/pubmed/18405920)
 
-<span style="text-decoration:underline">DeRemigio H</span>, <span style="text-decoration:underline">Groff JR</span>, and Smith GD. **Calcium release site ultrastructure and the dynamics of puffs and sparks.** *Mathematical Medicine & Biology.* 25(1):65-85, 2008.\
+DeRemigio H, Groff JR, and Smith GD. **Calcium release site ultrastructure and the dynamics of puffs and sparks.** *Mathematical Medicine & Biology.* 25(1):65-85, 2008.\
 [\[doi:10.1093/imammb/dqn004\]](http://dx.doi.org/doi:10.1093/imammb/dqn004) [\[PMID: 18359948\]](https://www.ncbi.nlm.nih.gov/pubmed/18359948)
 
 Thul R, Smith GD, Coombes S. **A bidomain threshold model of propagating calcium waves.** *J. Mathematical Biology* 56(4):435-63, 2008. [\[doi:10.1007/s00285-007-0123-5\]](http://dx.doi.org/doi:10.1007/s00285-007-0123-5)
 
-<span style="text-decoration:underline">Williams GSB</span>, Huertas MA, Sobie EA, Jafri MS, and Smith GD. **A probability density approach to modeling local control of **Ca<sup>2+</sup>**-induced **Ca<sup>2+</sup>** release in cardiac myocytes.** *Biophys. J.* 92(7):2311-28, 2007. [\[doi:10.1529/biophysj.106.099861\]](http://dx.doi.org/doi:10.1529/biophysj.106.099861) [\[PMID: 17237200\]](https://www.ncbi.nlm.nih.gov/pubmed/17237200)
+Williams GSB, Huertas MA, Sobie EA, Jafri MS, and Smith GD. **A probability density approach to modeling local control of **Ca<sup>2+</sup>**-induced **Ca<sup>2+</sup>** release in cardiac myocytes.** *Biophys. J.* 92(7):2311-28, 2007. [\[doi:10.1529/biophysj.106.099861\]](http://dx.doi.org/doi:10.1529/biophysj.106.099861) [\[PMID: 17237200\]](https://www.ncbi.nlm.nih.gov/pubmed/17237200)
 
 Huertas H and Smith GD. **The dynamics of luminal depletion and the stochastic gating of **Ca<sup>2+</sup>**-activated **Ca<sup>2+</sup>** channels and release sites.** *J. Theor. Biol.* 246(2):332-54, 2007. [\[doi:10.1016/j.jtbi.2007.01.003\]](http://dx.doi.org/doi:10.1016/j.jtbi.2007.01.003)
 
@@ -111,11 +111,11 @@ Huertas MA and Smith GD. **A multivariate population density model of the dLGN/P
 
 Zhao X, Outlaw RA, Wang JJ, Zhu MY, Smith GD, and Holloway BC. **Thermal desorption of hydrogen from carbon nanosheets.** *J. Chem. Phys.* 124(19):194704, 2006.
 
-Huertas MA, <span style="text-decoration:underline">Groff JR</span>, and Smith GD. **Feedback inhibition and throughput properties of an integrate-and-fire-or-burst network model of retinogeniculate transmission.** *J. Comput. Neurosci.* 19(2):147-180, 2005. [\[doi:10.1007/s10827-005-1084-6\]](http://dx.doi.org/doi:10.1007/s10827-005-1084-6) [\[PMID: 16133817\]](https://www.ncbi.nlm.nih.gov/pubmed/16133817)\
+Huertas MA, Groff JR, and Smith GD. **Feedback inhibition and throughput properties of an integrate-and-fire-or-burst network model of retinogeniculate transmission.** *J. Comput. Neurosci.* 19(2):147-180, 2005. [\[doi:10.1007/s10827-005-1084-6\]](http://dx.doi.org/doi:10.1007/s10827-005-1084-6) [\[PMID: 16133817\]](https://www.ncbi.nlm.nih.gov/pubmed/16133817)\
 \
-Mazzag B, <span style="text-decoration:underline">Tignanelli C</span> and Smith GD. **The effect of residual Ca<sup>2+</sup> on the stochastic gating of Ca<sup>2+</sup>-regulated Ca<sup>2+</sup> channel models.** *J. Theor. Biol.* 235(1):121-150, 2005. [\[doi:10.1016/j.jtbi.2004.12.024\]](http://dx.doi.org/doi:10.1016/j.jtbi.2004.12.024)
+Mazzag B, Tignanelli C and Smith GD. **The effect of residual Ca<sup>2+</sup> on the stochastic gating of Ca<sup>2+</sup>-regulated Ca<sup>2+</sup> channel models.** *J. Theor. Biol.* 235(1):121-150, 2005. [\[doi:10.1016/j.jtbi.2004.12.024\]](http://dx.doi.org/doi:10.1016/j.jtbi.2004.12.024)
 
-<span style="text-decoration:underline">Nguyen VD</span>, Mathias R, and Smith GD. **A stochastic automata network descriptor for Markov chain models of instantaneously-coupled intracellular **Ca<sup>2+</sup>** channels.** *Bull. Math. Biol.* 67(3):393-432, 2005. [\[doi:10.1016/j.bulm.2004.08.010\]](http://dx.doi.org/doi:10.1016/j.bulm.2004.08.010) [\[PMID: 15820736\]](https://www.ncbi.nlm.nih.gov/pubmed/15820736)
+Nguyen VD, Mathias R, and Smith GD. **A stochastic automata network descriptor for Markov chain models of instantaneously-coupled intracellular **Ca<sup>2+</sup>** channels.** *Bull. Math. Biol.* 67(3):393-432, 2005. [\[doi:10.1016/j.bulm.2004.08.010\]](http://dx.doi.org/doi:10.1016/j.bulm.2004.08.010) [\[PMID: 15820736\]](https://www.ncbi.nlm.nih.gov/pubmed/15820736)
 
 Wilson SM, Mason HS, Smith GD, Nicholson N, Johnston L, Janiak R, and Hume JR. **Comparative capacitative **Ca<sup>2+</sup>** entry mechanisms in canine pulmonary and renal arterial smooth muscle cells.** *J. Physiol. (London)* 543(Pt 3)917-31, 2002. [\[doi:10.1113/jphysiol.2002.021998\]](http://dx.doi.org/doi:10.1113/jphysiol.2002.021998)
 
@@ -153,7 +153,7 @@ Moscicki AB, Palefsky JM, Gonzales J, Smith GD, and Schoolnik GK. **Colposcopic 
 
 ### Book Chapters
 
-<span style="text-decoration:underline">Groff JR</span>, <span style="text-decoration:underline">DeRemigio H</span>, and Smith GD. **Markov chain models of ion channels and **Ca<sup>2+</sup>** release sites.** In: *Stochastic Methods in Neuroscience*. Laing C and Gabriel L, eds. Pages 29-64. Oxford University Press. 2009. [\[doi:10.1093/acprof:oso/9780199235070.003.0002\]](http://dx.doi.org/doi:10.1093/acprof:oso/9780199235070.003.0002)
+Groff JR, DeRemigio H, and Smith GD. **Markov chain models of ion channels and **Ca<sup>2+</sup>** release sites.** In: *Stochastic Methods in Neuroscience*. Laing C and Gabriel L, eds. Pages 29-64. Oxford University Press. 2009. [\[doi:10.1093/acprof:oso/9780199235070.003.0002\]](http://dx.doi.org/doi:10.1093/acprof:oso/9780199235070.003.0002)
 
 Huertas MA and Smith GD. **Population density model of the driven LGN/PGN.** In: Stochastic Methods in Neuroscience. Laing C and Gabriel L, eds. Pages 217-241. Oxford University Press. 2009. [\[doi:10.1093/acprof:oso/9780199235070.003.0008\]](http://dx.doi.org/doi:10.1093/acprof:oso/9780199235070.003.0008)
 
@@ -164,4 +164,3 @@ Smith GD. **Modeling the stochastic gating of ion channels.** In: *Computational
 Smith GD, Pearson J, and Keizer J. **Modeling intracellular Ca<sup>2+</sup> waves and sparks.** In: *Computational Cell Biology*, Fall C, Marland E, Wagner J, Tyson J, editors. Pages 198-229. Springer-Verlag. 2002. [\[doi:10.1007/978-0-387-22459-6_8\]](http://dx.doi.org/doi:10.1007/978-0-387-22459-6_8)
 
 Smith GD. **Modeling local and global **Ca<sup>2+</sup>** signals using reaction-diffusion equations.** In: *Computational Neuroscience: Realistic Modeling for Experimentalists*, De Schutter E, editor. Pages 49-85. CRC Press. 2000. [\[doi:10.1201/9781420039290.ch3\]](http://dx.doi.org/doi:10.1201/9781420039290.ch3)
-
