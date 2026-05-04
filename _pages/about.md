@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-I am a professor in the Department of Applied Science at William & Mary and a life-long student of mathematical aspects of life sciences, especially neuroscience and with cell biology.
+I am a professor in the Department of Applied Science at William & Mary and a life-long student of mathematical aspects of life sciences, especially neuroscience and cell biology.
 
 My work uses mathematical and computational models to connect cellular mechanisms with experimentally observed biological function, especially in calcium signaling, excitable cells, and computational neuroscience. I often collaborate closely with physiologists to build models of experimental preparations, use those models to make explicit predictions, and test those predictions against future experiment.
 
