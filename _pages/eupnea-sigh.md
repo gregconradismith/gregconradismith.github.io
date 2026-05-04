@@ -27,4 +27,3 @@ Slices encapsulate a complete breathing microcircuit that generates eupnea and s
 
 National Center for Complementary & Integrative Health (NCCIH), joint NSF-NIH program Collaborative Research in Computational Neuroscience (CRCNS). **Discovering the neural mechanisms of breathing rhythms - eupnea and sigh.** PIs: Christopher Del Negro and Greg Conradi Smith. 1R01AT01816-01. 8/19-7/22.
 
-See also the original [Eupnea & Sigh project page](https://wmcbl.wordpress.com/eupnea-sigh/).
