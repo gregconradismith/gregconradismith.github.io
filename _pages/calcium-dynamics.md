@@ -35,4 +35,4 @@ A major theme was the use of probability-density and moment-closure methods to r
 - Thul R, Smith GD, Coombes S. **A bidomain threshold model of propagating calcium waves.** *J. Mathematical Biology* 56(4):435-63, 2008. [[doi:10.1007/s00285-007-0123-5](http://dx.doi.org/doi:10.1007/s00285-007-0123-5)]
 - Groff JR, DeRemigio H, and Smith GD. **Markov chain models of ion channels and Ca<sup>2+</sup> release sites.** In: *Stochastic Methods in Neuroscience*. Laing C and Gabriel L, eds. Pages 29-64. Oxford University Press. 2009. [[doi:10.1093/acprof:oso/9780199235070.003.0002](http://dx.doi.org/doi:10.1093/acprof:oso/9780199235070.003.0002)]
 
-See also the original [Calcium Dynamics project page](https://wmcbl.wordpress.com/intracellular-calcium-dynamics/).
+
