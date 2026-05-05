@@ -37,7 +37,7 @@ author_profile: true
 
 **Burnside's lemma and the alpha7 nicotinic acetylcholine receptor.** <span style="text-decoration:underline">Biomath Seminar</span>, William & Mary, 9/23.
 
-> How does one count objects taking account of symmetry? For example, when drawing a triangle with edges that can be either back or red, there are 2<sup>3</sup> = 8 different possibilities. However, up to symmetry, there are only 4 distinct types, which can be indexed by the number of red edges (0, 1, 2, or 3). Easy! How about this slightly harder question from a conversation earlier this week with Prof. Nadine Kabbani (GMU)?
+> How does one count objects taking account of symmetry? For example, when drawing a triangle with edges that can be either black or red, there are 2<sup>3</sup> = 8 different possibilities. However, up to symmetry, there are only 4 distinct types, which can be indexed by the number of red edges (0, 1, 2, or 3). Easy! How about this slightly harder question from a conversation earlier this week with Prof. Nadine Kabbani (GMU)?
 >
 > The &alpha;7 nicotinic acetylcholine receptor (nAChR) is a ligand-gated ion channel that plays an important role in cellular calcium signaling and contributes to several neurological diseases. Functional &alpha;7 nAChRs are formed through the arrangement of five subunits into homopentameric channels that conduct Na<sup>+</sup>, K<sup>+</sup>, and Ca<sup>2+</sup> ions across the plasma membrane. Agonist binding to the &alpha;7 nAChR induces fast channel activation followed by inactivation and prolonged desensitization while triggering long-lasting calcium signaling.
 >
@@ -45,7 +45,7 @@ author_profile: true
 >
 > My talk on Friday will focus on a result from group theory known as Burnside's lemma, which is often helpful when counting objects up to symmetry. 
 
-**Conformational coupling of receptor dimers.** <span style="text-decoration:underline">ociety for Mathematical Biology</span>, Columbus, OH, 7/23. Minisymposium: Stochastic Cellular Dynamics. 
+**Conformational coupling of receptor dimers.** <span style="text-decoration:underline">Society for Mathematical Biology</span>, Columbus, OH, 7/23. Minisymposium: Stochastic Cellular Dynamics.
 
 > Quantitative pharmacologists construct Markov chain models to give insight into the relationship between ligand concentration and the fraction of cell surface receptors in each of several molecular conformations. Pharmacologists use these stochastic models to understand the action of natural ligands and drugs on receptor-mediated cell responses. When receptors function as two or more similar protein subunits working in concert (i.e., homodimers or oligomers), receptor models must (i) account for symmetry, (ii) satisfy thermodynamic constraints, and (iii) properly account for subunit interactions (allostery) mediated by conformational coupling. The modeling framework that satisfies these three requirements will be explicated in the context of models of G protein-coupled receptors (GPCRs), such as metabotropic glutamate receptors, that function as multi-molecule signaling complexes. For equilibrium models of receptor dimers, this approach facilitates the inference of a parsimonious subset of allosteric interactions leading to conformational coupling and dependence of receptor subunits.
 

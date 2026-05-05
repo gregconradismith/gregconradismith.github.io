@@ -11,7 +11,7 @@ We are life scientists and neuroscientists, and also interdisciplinary applied m
 
 Graduate students in the Computational Biology Lab are members of William & Mary's [Department of Applied Science](https://cdsp.wm.edu/applied-science/) in the [School of Computing, Data Sciences & Physics](https://cdsp.wm.edu). 
 
-Undergraduate researchers affiliated with the lab often major in [Mathematics](https://www.wm.edu/as/mathematics/), [Neuroscience](https://www.wm.edu/as/neuroscience/), or [CAMS Mathematical Biology](https://www.wm.edu/as/cams/mathematical-biology/). If you are an undergraduates interested in the lab, take a look at the [CBL repository](https://github.com/gregconradismith/computational-biology-lab-at-william-and-mary-examples). 
+Undergraduate researchers affiliated with the lab often major in [Mathematics](https://www.wm.edu/as/mathematics/), [Neuroscience](https://www.wm.edu/as/neuroscience/), or [CAMS Mathematical Biology](https://www.wm.edu/as/cams/mathematical-biology/). If you are an undergraduate interested in the lab, take a look at the [CBL repository](https://github.com/gregconradismith/computational-biology-lab-at-william-and-mary-examples).
 
 The lab is closely connected with William & Mary's [biomathematics](https://wmbiomath.wordpress.com) and [data science](https://cdsp.wm.edu/data-science/) communities.
 
@@ -22,5 +22,3 @@ The lab is closely connected with William & Mary's [biomathematics](https://wmbi
 - [Petal Patterns](/research/petal-patterns/)
 - [Calcium Dynamics](/research/calcium-dynamics/)
 - [Visual Thalamus](/research/visual-thalamus/)
-
-

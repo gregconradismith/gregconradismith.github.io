@@ -73,7 +73,7 @@ Lamprecht R, Smith GD, and Kemper P. **Stochastic Petri net models of signaling 
 
 Hartman JM, Sobie EA, and Smith GD. **Spontaneous calcium sparks and homeostasis in a minimal model of local and global calcium responses in quiescent ventricular myocytes.** *American Journal of Physiology: Heart and Circulatory Physiology* 299(6):H1996–2008, 2010. [\[doi:10.1152/ajpheart.00293.2010\]](http://dx.doi.org/10.1152/ajpheart.00293.2010) [\[PMID: 20852058\]](https://www.ncbi.nlm.nih.gov/pubmed/20852058)
 
-Huertas MA, Smith GD, and Gyorke S. **Calcium alternans in a cardiac myocyte model that uses moment equations to represent heterogenous junctional SR calcium.** *Biophys. J.* 99(2):377-387, 2010. [\[doi:10.1016/j.bpj.2010.04.032\]](http://dx.doi.org/10.1016/j.bpj.2010.04.032) [\[PMID: 20643055\]](https://www.ncbi.nlm.nih.gov/pubmed/20643055)
+Huertas MA, Smith GD, and Gyorke S. **Calcium alternans in a cardiac myocyte model that uses moment equations to represent heterogeneous junctional SR calcium.** *Biophys. J.* 99(2):377-387, 2010. [\[doi:10.1016/j.bpj.2010.04.032\]](http://dx.doi.org/10.1016/j.bpj.2010.04.032) [\[PMID: 20643055\]](https://www.ncbi.nlm.nih.gov/pubmed/20643055)
 
 Williams GSB, Sobie EA, Smith GD, Jafri MS. **Models of cardiac excitation-contraction coupling in ventricular myocytes.** *Mathematical Biosciences.* 226:1-15, 2010. [\[doi:10.1016/j.mbs.2010.03.005\]](http://dx.doi.org/10.1016/j.mbs.2010.03.005)
 
@@ -92,7 +92,7 @@ Goyal R, Creel KD, Chavis E, Smith GD, Longo LD, Wilson SM. **Maturation of intr
 
 DeRemigio H, LaMar MD, Kemper P, and Smith GD. **Markov chain models of coupled intracellular calcium channels: Kronecker structured representations and iterative solution methods.** *Physical Biology* 5(3):36003, 2008. [\[doi:10.1088/1478-3975/5/3/036003\]](http://dx.doi.org/doi:10.1088/1478-3975/5/3/036003) [\[PMID: 18626127\]](https://www.ncbi.nlm.nih.gov/pubmed/18626127)\
 \
-Williams GSB, Huertas MA, Sobie EA, Jafri MS, and Smith GD. **Moment closure for local control models of **Ca<sup>2+</sup>**-induced **Ca<sup>2+</sup>** release in cardiac myocytes.** Biophys. J. 95(4):1689-703, 2008. [\[doi:10.1529/biophysj.107.125948\]](http://%7Bhttp://dx.doi.org/doi:10.1529/biophysj.107.125948) [\[PMID: 18487291\]](https://www.ncbi.nlm.nih.gov/pubmed/18487291)
+Williams GSB, Huertas MA, Sobie EA, Jafri MS, and Smith GD. **Moment closure for local control models of **Ca<sup>2+</sup>**-induced **Ca<sup>2+</sup>** release in cardiac myocytes.** Biophys. J. 95(4):1689-703, 2008. [\[doi:10.1529/biophysj.107.125948\]](https://doi.org/10.1529/biophysj.107.125948) [\[PMID: 18487291\]](https://www.ncbi.nlm.nih.gov/pubmed/18487291)
 
 Groff JR and Smith GD. **Ryanodine receptor allosteric coupling and the dynamics of **Ca<sup>2+</sup>** sparks.** *Biophys. J.* 95:135-154, 2008. [\[doi:10.1529/biophysj.107.119982\]](http://dx.doi.org/doi:10.1529/biophysj.107.119982) [\[PMID: 18359795\]](https://www.ncbi.nlm.nih.gov/pubmed/18359795)
 
@@ -127,7 +127,7 @@ Smith GD and Sherman SM. **Detectability of excitatory vs. inhibitory drive in a
 
 Coombes S, Owen MR, and Smith GD. **Mode-locking in a periodically forced integrate-and-fire-or-burst neuron model.** *Phys. Rev. E* 64(041914):1-12, 2001.[\[doi:10.1103/PhysRevE.64.041914\]](http://link.aps.org/doi/10.1103/PhysRevE.64.041914) [\[PMID: 11690059\]](https://www.ncbi.nlm.nih.gov/pubmed/11690059)
 
-Smith GD, Dai L, Muira R, Sherman A. **Asymptotic analysis of equations for the buffered diffusion of intracellular **Ca<sup>2+</sup>**.** *SIAM. J. Appl. Math.* 61(5):1816-1838, 2001. <http://www.jstor.org/stable/3061854>
+Smith GD, Dai L, Miura R, Sherman A. **Asymptotic analysis of equations for the buffered diffusion of intracellular **Ca<sup>2+</sup>**.** *SIAM. J. Appl. Math.* 61(5):1816-1838, 2001. <http://www.jstor.org/stable/3061854>
 
 Smith GD, Cox CL, Sherman SM, and Rinzel J. **A firing-rate model of spike-frequency adaptation in sinusoidally-driven thalamocortical relay neurons.** *Thalamus and Related Systems* 1(2):135-156, 2001. [\[doi:10.1016/S1472-9288(01)00012-7\]](http://dx.doi.org/10.1016/S1472-9288(01)00012-7)
 
