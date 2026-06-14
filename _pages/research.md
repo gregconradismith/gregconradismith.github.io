@@ -15,10 +15,18 @@ Undergraduate researchers affiliated with the lab often major in [Mathematics](h
 
 The lab is closely connected with William & Mary's [biomathematics](https://wmbiomath.wordpress.com) and [data science](https://cdsp.wm.edu/data-science/) communities.
 
-### Representative Projects
+### Current Projects
 
-- [Receptor Oligomers](/research/receptor-oligomers/)
-- [Eupnea & Sigh](/research/eupnea-sigh/)
-- [Petal Patterns](/research/petal-patterns/)
-- [Calcium Dynamics](/research/calcium-dynamics/)
-- [Visual Thalamus](/research/visual-thalamus/)
+- [Receptor Oligomers](/research/receptor-oligomers/): Mathematical and biophysical theory for multi-subunit receptors, with emphasis on symmetry, thermodynamic constraints, allostery, and quantitative pharmacology.
+
+- [Eupnea & Sigh](/research/eupnea-sigh/): Joint modeling and experimental work on the neural mechanisms that generate and couple normal breathing and sigh rhythms in the preBötzinger complex.
+
+- Membraneless organelles and phase separation: Phase-field and statistical-mechanical models of liquid-liquid phase separation in cellular organization, including post-synaptic density proteins.
+
+- [Petal Patterns](/research/petal-patterns/): Reaction-diffusion and spatial-statistical models of floral pigment patterns in hybrid monkeyflowers, developed in collaboration with experimental plant biologists.
+
+### Past Projects
+
+- [Calcium Dynamics](/research/calcium-dynamics/): Diffusion, buffering, stochastic release, sparks, puffs, waves, and local/global models of intracellular Ca<sup>2+</sup> signaling.
+
+- [Visual Thalamus](/research/visual-thalamus/): Conductance-based, firing-rate, and population-density models of thalamocortical relay and visual processing.
