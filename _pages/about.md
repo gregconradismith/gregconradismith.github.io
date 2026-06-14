@@ -17,6 +17,6 @@ Prospective students should start with the [research overview](/research/) and t
 
 I also write and teach about science as part of the liberal arts. A recent William & Mary story, [Innovating research and education: W&M professor and students address issues of science and society](https://news.wm.edu/2023/11/16/innovating-research-and-education-wm-professor-and-students-address-issues-of-science-and-society/), gives some context for that broader work.
 
-> "In favor of the eternal forces of truth which always work in the individual and immediately unsuccessful way."
+> "So I am against all big organizations as such, national ones first and foremost; against all big successes and big results; and in favor of the eternal forces of truth which always work in the individual and immediately unsuccessful way, under-dogs always, till history comes, long after they are dead, and puts them on the top."
 >
 > William James, letter to Mrs. Henry Whitman, June 7, 1899
