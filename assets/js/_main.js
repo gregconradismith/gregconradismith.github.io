@@ -103,12 +103,25 @@ $(document).ready(function () {
   $('#theme-toggle').on('click', toggleTheme);
 
   // Enable the sticky footer
+  var fitMainToSidebar = function () {
+    var $main = $("#main");
+    var $sidebar = $(".sidebar");
+    if ($main.length && $sidebar.length && $(window).width() >= scssLarge) {
+      $main.css("min-height", $sidebar.outerHeight(true) + "px");
+    } else {
+      $main.css("min-height", "");
+    }
+  }
   var bumpIt = function () {
     $("body").css("padding-bottom", "0");
     $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
+    fitMainToSidebar();
   }
   $(window).resize(function () {
     didResize = true;
+  });
+  $(window).on("load", function () {
+    fitMainToSidebar();
   });
   setInterval(function () {
     if (didResize) {
@@ -123,7 +136,9 @@ $(document).ready(function () {
 
   // Follow menu drop down
   $(".author__urls-wrapper button").on("click", function () {
-    $(".author__urls").fadeToggle("fast", function () { });
+    $(".author__urls").fadeToggle("fast", function () {
+      fitMainToSidebar();
+    });
     $(".author__urls-wrapper button").toggleClass("open");
   });
 
@@ -132,6 +147,7 @@ $(document).ready(function () {
     if ($('.author__urls.social-icons').css('display') == 'none' && $(window).width() >= scssLarge) {
       $(".author__urls").css('display', 'block')
     }
+    fitMainToSidebar();
   });
 
   // Init smooth scroll, this needs to be slightly more than then fixed masthead height
