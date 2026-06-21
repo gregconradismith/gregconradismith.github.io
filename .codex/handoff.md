@@ -1,25 +1,16 @@
 # Codex Handoff
 
-Date: 2026-06-20
+Date: 2026-06-21
 
 Repo: `gregconradismith.github.io`
 
 Branch: `main`
 
-Current Git status at handoff creation:
+Current Git status after the 2026-06-21 migration readiness fetch and before this handoff edit:
 
 ```bash
 ## main...origin/main
 ```
-
-Recent local/remote branch notes:
-
-- `main` is the canonical branch to continue from. It is clean and synced with
-  `origin/main` at `b4bed85` (`Keep footer below sidebar`).
-- `codex_edits` still exists locally/remotely at `f88b236`, but it is stale
-  relative to `main`; checking it out directly would omit newer handoff/docs
-  and sidebar/footer fixes.
-- There are no workflow files in `.github/workflows/` at this handoff.
 
 ## Repository Role
 
@@ -76,6 +67,18 @@ Regenerate minified JavaScript after plugin or theme JavaScript changes:
 
 ```bash
 npm run build:js
+```
+
+## Migration Readiness Snapshot
+
+- Checked on 2026-06-21 before moving computers.
+- Non-interactive `git fetch --all --prune` completed successfully.
+- Root `README.md` points to `.codex/handoff.md` when a root README exists.
+
+Pre-edit Git state after fetch:
+
+```bash
+## main...origin/main
 ```
 
 ## Notes For The Next Codex
