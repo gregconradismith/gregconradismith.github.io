@@ -297,7 +297,7 @@ const teachingContent = `${frontMatter({
 })}### Courses and Materials
 
 - [Cellular Biophysics and Modeling book](https://doi.org/10.1017/9780511793905)
-- [Cellular Biophysics and Modeling course](https://cellularbiophysicsandmodeling.wordpress.com/)
+- [Cellular Biophysics and Modeling course](https://gregconradismith.github.io/cellular-biophysics-and-modeling/)
 - [Computational Neuroscience](https://apsc450computationalneuroscience.wordpress.com/)
 - [Science & Authority](https://scienceauthority.wordpress.com/)
 - [Matroids one-page PDF](https://gregconradismith.wordpress.com/wp-content/uploads/2023/01/matroids_onepage.pdf)

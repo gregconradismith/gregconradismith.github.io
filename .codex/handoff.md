@@ -112,3 +112,10 @@ Pre-edit Git state after fetch:
 - For publication, talk, and CV changes, look for the source data or generator
   before manually editing generated output.
 - Avoid adding local build products or private/nonpublic materials.
+
+## 2026-10-10 Teaching Course Link
+
+- Updated the Cellular Biophysics and Modeling course link in `_pages/teaching.md` to `https://gregconradismith.github.io/cellular-biophysics-and-modeling/`.
+- Updated the same link in `scripts/import_wordpress_content.js` to preserve it during regeneration.
+- Verified the scoped diff and `git diff --check`; no local Jekyll build needed for this link-only edit.
+- Greg authorized committing and pushing this update to `origin/main`. No remaining implementation work or blockers.

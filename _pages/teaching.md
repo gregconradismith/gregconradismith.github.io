@@ -8,7 +8,7 @@ author_profile: true
 
 - [Cellular Biophysics and Modeling book](https://doi.org/10.1017/9780511793905): A graduate-level introduction to mathematical and computational modeling of excitable cells, emphasizing biophysical mechanisms, stochasticity, and numerical simulation.
 
-- [Cellular Biophysics and Modeling course](https://cellularbiophysicsandmodeling.wordpress.com/): Course materials that connect the textbook to model construction, analysis, and simulation.
+- [Cellular Biophysics and Modeling course](https://gregconradismith.github.io/cellular-biophysics-and-modeling/): Course materials that connect the textbook to model construction, analysis, and simulation.
 
 - [Computational Neuroscience](https://apsc450computationalneuroscience.wordpress.com/): Applied mathematical modeling of neurons and neural circuits, including conductance-based models, reduced models, and computational experiments.
 
