@@ -119,3 +119,9 @@ Pre-edit Git state after fetch:
 - Updated the same link in `scripts/import_wordpress_content.js` to preserve it during regeneration.
 - Verified the scoped diff and `git diff --check`; no local Jekyll build needed for this link-only edit.
 - Greg authorized committing and pushing this update to `origin/main`. No remaining implementation work or blockers.
+
+## 2026-10-15 Opioid publication citation
+
+- Updated `_pages/publications.md`: Kalajian et al. is published in The Journal of Physiology 604(17):7351-7374 (2026), DOI 10.1113/JP291442. Replaced the under-review status, matched the published title including "in mice", and added the DOI link.
+- This is a direct page-text correction; the Academic Pages generator writes collection entries and does not own this bibliography page.
+- Verification: inspected the scoped Markdown diff and ran `git diff --check`; no local Jekyll build for this text-only edit.

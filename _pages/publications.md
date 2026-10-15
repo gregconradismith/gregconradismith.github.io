@@ -35,7 +35,7 @@ An unrefereed deliverable supported by NSF DMS grant #1951646, *Cycle representa
 
 Sakly S, Conradi Smith GD. **Phase separation dynamics of SynGAP & PSD-95 in post-synaptic densities.** *In preparation.*
 
-Kalajian EJ, Stettler MK, Conradi Smith GD, Del Negro CA. **&mu;-opioid receptor signaling enhances Kir3 currents in glutamatergic preB<span class="kbd">ö</span>tzinger complex neurons.** Under review at *J. Physiol.*
+Kalajian EJ, Stettler MK, Conradi Smith GD, Del Negro CA. **&mu;-Opioid receptor signalling enhances Kir3 currents in glutamatergic preB<span class="kbd">ö</span>tzinger complex neurons in mice.** *The Journal of Physiology (London)* 604(17):7351-7374, 2026. [\[10.1113/JP291442\]](https://doi.org/10.1113/JP291442)
 
 Cooley AM, Schlutius C, Matthews M, Simmons E, Zheng X, Thomas D, Edger PP, Platts AE, LaFountain A, George L, Williams A, Hundley D, Conradi Smith GD, Yuan Y-W, Twyford A and Puzey JR. **Genetic architectures of floral pigment and patterning in hybrid monkeyflowers.** Under review at *Genetics*.
 
