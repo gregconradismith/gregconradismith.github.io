@@ -17,7 +17,7 @@ Our projects bring mathematical theory into conversation with experiments. Diffe
 
 - [Neural mechanisms of breathing](/research/eupnea-sigh/). With Christopher Del Negro, we study how the preBötzinger complex generates normal breaths and sighs, and how μ-opioid receptor signalling changes the excitability of respiratory neurons.
 
-- [Mathematical biology of plant diversity](/research/petal-patterns/). Work with Joshua Puzey, Arielle Cooley and colleagues combines models of floral patterning with studies of hybrid genomes, gene expression and transposable elements.
+- [Pattern formation and genome evolution](/research/petal-patterns/). Work with Joshua Puzey, Arielle Cooley and colleagues combines models of floral patterning with studies of hybrid genomes, gene expression and transposable elements.
 
 ### Students and collaborations
 

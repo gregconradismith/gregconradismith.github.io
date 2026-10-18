@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Mathematical Biology of Plant Diversity"
+title: "Pattern Formation and Genome Evolution"
 permalink: /research/petal-patterns/
 author_profile: true
 ---

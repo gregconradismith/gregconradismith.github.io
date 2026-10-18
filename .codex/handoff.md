@@ -141,3 +141,8 @@ Pre-edit Git state after fetch:
 
 - At Greg’s request, reordered the overview research areas: SynGAP, receptors, neural mechanisms of breathing, mathematical biology of plant diversity. Text and destinations are unchanged.
 - Verified the scoped diff and git diff --check; publish through GitHub Pages and confirm the live ordering.
+
+## 2026-10-17 Project title refinement
+
+- Greg chose “Pattern formation and genome evolution.” Updated the research overview label and corresponding project-page title, retaining /research/petal-patterns/ and the requested project order.
+- Checked the scoped diff and whitespace; verify GitHub Pages deployment and both live labels.
