@@ -33,7 +33,7 @@ An unrefereed deliverable supported by NSF DMS grant #1951646, *Cycle representa
 
 #### Research Articles
 
-Sakly S, Conradi Smith GD. **Phase separation dynamics of SynGAP & PSD-95 in post-synaptic densities.** *In preparation.*
+Sakly S, Conradi Smith G. **Modeling phase separation dynamics of SynGAP and PSD-95 in postsynaptic densities.** *bioRxiv*, 2026. [doi:10.64898/2026.07.23.740312](https://doi.org/10.64898/2026.07.23.740312). Preprint; under revision at *Physical Biology*.
 
 Kalajian EJ, Stettler MK, Conradi Smith GD, Del Negro CA. **&mu;-Opioid receptor signalling enhances Kir3 currents in glutamatergic preB<span class="kbd">ö</span>tzinger complex neurons in mice.** *The Journal of Physiology (London)* 604(17):7351-7374, 2026. [\[10.1113/JP291442\]](https://doi.org/10.1113/JP291442)
 
@@ -51,7 +51,7 @@ Kallurkar PS, Picardo MCD, Sugimura YK, Saha MS, Conradi Smith GD, Del Negro CA.
 
 Kinser TJ, Smith RD, Lawrence AH, Cooley AM, Vallejo-Marin M, Conradi Smith GD, and Puzey JR. **Endosperm-based incompatibilities in hybrid monkeyflowers.** *The Plant Cell*, koab117, 2021. \[[10.1093/plcell/koab117](https://doi.org/10.1093/plcell/koab117)\]
 
-Zheng X, Om K, Stanton KA, Thomas D, Schlutius C, Cheng PA, Eggert A, Simmons E, Yuan Y-W, Conradi Smith GD, Puzey JR\**,* Cooley AM\*. **The regulatory network for petal anthocyanin pigmentation is shaped by the MYB5a/NEGAN transcription factor in *Mimulus*.** *Genetics* 217(2), iyaa036, 2021. [\[10.1093/genetics/iyaa036\]](https://doi.org/10.1093/genetics/iyaa036)
+Zheng X, Om K, Stanton KA, Thomas D, Cheng PA, Eggert A, Simmons E, Yuan Y-W, Conradi Smith GD, Puzey JR\*, Cooley AM\*. **The regulatory network for petal anthocyanin pigmentation is shaped by the MYB5a/NEGAN transcription factor in *Mimulus*.** *Genetics* 217(2), iyaa036, 2021. [\[10.1093/genetics/iyaa036\]](https://doi.org/10.1093/genetics/iyaa036)
 
 Borrus D, Conradi Smith GD, Del Negro CA. **Role of synaptic inhibition in the coupling of the respiratory rhythms that underlie eupnea and sigh behaviors.** *eNeuro*, 7(3):1-20, 2020. [\[10.1523/ENEURO.0302-19.2020\]](https://doi.org/10.1523/ENEURO.0302-19.2020) [\[PMID:32393585\]](https://www.ncbi.nlm.nih.gov/pubmed/32393585)
 
@@ -59,7 +59,7 @@ Conradi Smith GD. **Allostery in oligomeric receptor models.** *Mathematical Med
 
 Smith RD, Kinser TJ, Conradi Smith GD and Puzey JR. **A likelihood ratio test for changes in homeolog expression bias.** *BMC Bioinformatics*. 20:149, 2019. [\[doi:10.1186/s12859-019-2709-5\]](https://doi.org/10.1186/s12859-019-2709-5) [\[PMID:30894122\]](https://www.ncbi.nlm.nih.gov/pubmed/30894122) [\[BioRxiv preprint\]](https://doi.org/10.1101/119438)
 
-Edger PP, Smith RD, McKain MR, Cooley AM, Vallejo-Marin M, Yuan Y, Bewick AJ, Ji L, Platts AE, Bowman MJ, Childs KL, Schmitz RJ, Smith GD, Pires JC, Puzey JR. **Subgenome dominance in an interspecific hybrid, synthetic allopolyploid, and a 140 year old naturally established neo-allopolyploid monkeyflower.** *The Plant Cell.* 29(9):2150-2167, 2017. [\[doi:10.1105/tpc.17.00010\]](http://dx.doi.org/10.1105/tpc.17.00010) [\[PMID:28814644\]](https://www.ncbi.nlm.nih.gov/pubmed/28814644)
+Edger PP, Smith RD, McKain MR, Cooley AM, Vallejo-Marin M, Yuan Y, Bewick AJ, Ji L, Platts AE, Bowman MJ, Childs KL, Washburn JD, Schmitz RJ, Smith GD, Pires JC, Puzey JR. **Subgenome dominance in an interspecific hybrid, synthetic allopolyploid, and a 140 year old naturally established neo-allopolyploid monkeyflower.** *The Plant Cell.* 29(9):2150-2167, 2017. [\[doi:10.1105/tpc.17.00010\]](http://dx.doi.org/10.1105/tpc.17.00010) [\[PMID:28814644\]](https://www.ncbi.nlm.nih.gov/pubmed/28814644)
 
 Hayes JA, Kottick A, Picardo MCD, Halleran AD, Smith RD, Smith GD, Saha MS, Del Negro CA. **Transcriptome of neonatal preB<span class="kbd">ö</span>tzinger complex neurons in Dbx1 reporter mice.** *Scientific Reports* 7(1):8669, 2017. [\[doi:10.1038/s41598-017-09418-4\]](http://dx.doi.org/10.1038/s41598-017-09418-4) [\[PMID:28819234\]](https://www.ncbi.nlm.nih.gov/pubmed/28819234)
 

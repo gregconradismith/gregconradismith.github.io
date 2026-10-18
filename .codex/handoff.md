@@ -125,3 +125,12 @@ Pre-edit Git state after fetch:
 - Updated `_pages/publications.md`: Kalajian et al. is published in The Journal of Physiology 604(17):7351-7374 (2026), DOI 10.1113/JP291442. Replaced the under-review status, matched the published title including "in mice", and added the DOI link.
 - This is a direct page-text correction; the Academic Pages generator writes collection entries and does not own this bibliography page.
 - Verification: inspected the scoped Markdown diff and ran `git diff --check`; no local Jekyll build for this text-only edit.
+
+## 2026-10-18 Approved research website publication
+
+- Applied Greg's approved research review packet to the overview, breathing, receptors, plant diversity, and new SynGAP page. Retained all established research permalinks, earlier-project destinations, and breathing news link.
+- Corrected Sakly preprint citation, Zheng author list/equal-contribution formatting, and Edger missing author in the main bibliography. Kalajian final citation was already current; Cooley status remains unchanged.
+- Greg confirmed immediately before publication that SynGAP is still under revision at Physical Biology. The bioRxiv API lists the public preprint with no journal publication. The NSF award-data and receptor Jupyter Book links opened successfully.
+- Isolated clean clone based on f32a904; preserved the concurrent CV update and all unrelated content. No simulation or CV workspace touched.
+- Source checks: reviewed approved text, YAML front matter, permalinks, DOI links, and git diff --check. No local Jekyll build per existing handoff instruction. Publication validation uses GitHub Pages build and live-page checks.
+- These are curated page sources. The historical WordPress importer contains older text and must not be rerun over these reviewed pages.

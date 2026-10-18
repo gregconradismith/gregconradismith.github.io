@@ -5,28 +5,26 @@ permalink: /research/
 author_profile: true
 ---
 
-The Computational Biology Laboratory is a studio for mathematical aspects of life science. The lab applies mathematics, computation, and data science to biological questions in computational neuroscience, cell physiology, calcium signaling, quantitative pharmacology, pattern formation, and genomics.
+The Computational Biology Laboratory is a studio for mathematical aspects of life science. We use mathematical modelling, computation and data analysis to investigate biological mechanisms, working across computational neuroscience, cellular biophysics, quantitative pharmacology, pattern formation and evolutionary genomics.
 
-We are life scientists and neuroscientists, and also interdisciplinary applied mathematicians. Our work uses differential equations, probability, high-performance computing, and practical data science methods to connect mechanistic models with biological function. Students in the lab work at the intersection of applied mathematics, biology, data science, and bioengineering.
+Our projects bring mathematical theory into conversation with experiments. Differential equations, probability, graph theory and statistical methods help us formulate mechanisms, work out their consequences and ask what biological measurements can distinguish. Students contribute to collaborations spanning applied mathematics, biology, neuroscience, data science and bioengineering.
 
-Graduate students in the Computational Biology Lab are members of William & Mary's [Department of Applied Science](https://cdsp.wm.edu/applied-science/) in the [School of Computing, Data Sciences & Physics](https://cdsp.wm.edu). 
+### Research areas
 
-Undergraduate researchers affiliated with the lab often major in [Mathematics](https://www.wm.edu/as/mathematics/), [Neuroscience](https://www.wm.edu/as/neuroscience/), or [CAMS Mathematical Biology](https://www.wm.edu/as/cams/mathematical-biology/). If you are an undergraduate interested in the lab, take a look at the [CBL repository](https://github.com/gregconradismith/computational-biology-lab-at-william-and-mary-examples).
+- [Neural mechanisms of breathing](/research/eupnea-sigh/). With Christopher Del Negro, we study how the preBötzinger complex generates normal breaths and sighs, and how μ-opioid receptor signalling changes the excitability of respiratory neurons.
 
-The lab is closely connected with William & Mary's [biomathematics](https://wmbiomath.wordpress.com) and [data science](https://cdsp.wm.edu/data-science/) communities.
+- [Receptor allostery and cycle kinetics](/research/receptor-oligomers/). We develop mathematical theory for multi-subunit receptors, connecting molecular interactions and thermodynamic constraints with binding, activation and nonequilibrium signalling.
 
-### Current Projects
+- [SynGAP and PSD-95 phase separation](/research/syngap-psd95/). With Sarah Sakly and Jennifer Bestman, we investigate the molecular organization of synaptic condensates through phase-separation models and an NSF-supported programme linking protein interactions to neuronal development.
 
-- [Receptor Oligomers](/research/receptor-oligomers/): Mathematical and biophysical theory for multi-subunit receptors, with emphasis on symmetry, thermodynamic constraints, allostery, and quantitative pharmacology.
+- [Mathematical biology of plant diversity](/research/petal-patterns/). Work with Joshua Puzey, Arielle Cooley and colleagues combines models of floral patterning with studies of hybrid genomes, gene expression and transposable elements.
 
-- [Eupnea & Sigh](/research/eupnea-sigh/): Joint modeling and experimental work on the neural mechanisms that generate and couple normal breathing and sigh rhythms in the preBötzinger complex.
+### Students and collaborations
 
-- Membraneless organelles and phase separation: Phase-field and statistical-mechanical models of liquid-liquid phase separation in cellular organization, including post-synaptic density proteins.
+Graduate researchers in the lab are members of William & Mary’s [Department of Applied Science](https://cdsp.wm.edu/applied-science/) in the [School of Computing, Data Sciences & Physics](https://cdsp.wm.edu). Undergraduate researchers often study [Mathematics](https://www.wm.edu/as/mathematics/), [Neuroscience](https://www.wm.edu/as/neuroscience/) or [CAMS Mathematical Biology](https://www.wm.edu/as/cams/mathematical-biology/). The [CBL repository](https://github.com/gregconradismith/computational-biology-lab-at-william-and-mary-examples) offers examples and resources for students interested in the lab. We also participate in William & Mary’s [biomathematics](https://wmbiomath.wordpress.com) and [data science](https://cdsp.wm.edu/data-science/) communities.
 
-- [Petal Patterns](/research/petal-patterns/): Reaction-diffusion and spatial-statistical models of floral pigment patterns in hybrid monkeyflowers, developed in collaboration with experimental plant biologists.
+### Earlier projects
 
-### Past Projects
+- [Calcium dynamics](/research/calcium-dynamics/): intracellular calcium diffusion, buffering and stochastic release, from local signals to cell-wide waves.
 
-- [Calcium Dynamics](/research/calcium-dynamics/): Diffusion, buffering, stochastic release, sparks, puffs, waves, and local/global models of intracellular Ca<sup>2+</sup> signaling.
-
-- [Visual Thalamus](/research/visual-thalamus/): Conductance-based, firing-rate, and population-density models of thalamocortical relay and visual processing.
+- [Visual thalamus](/research/visual-thalamus/): models of thalamocortical relay neurons, neuronal populations and visual processing.
