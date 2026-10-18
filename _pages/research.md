@@ -11,11 +11,11 @@ Our projects bring mathematical theory into conversation with experiments. Diffe
 
 ### Research areas
 
-- [Neural mechanisms of breathing](/research/eupnea-sigh/). With Christopher Del Negro, we study how the preBötzinger complex generates normal breaths and sighs, and how μ-opioid receptor signalling changes the excitability of respiratory neurons.
+- [SynGAP and PSD-95 phase separation](/research/syngap-psd95/). With Sarah Sakly and Jennifer Bestman, we investigate the molecular organization of synaptic condensates through phase-separation models and an NSF-supported programme linking protein interactions to neuronal development.
 
 - [Receptor allostery and cycle kinetics](/research/receptor-oligomers/). We develop mathematical theory for multi-subunit receptors, connecting molecular interactions and thermodynamic constraints with binding, activation and nonequilibrium signalling.
 
-- [SynGAP and PSD-95 phase separation](/research/syngap-psd95/). With Sarah Sakly and Jennifer Bestman, we investigate the molecular organization of synaptic condensates through phase-separation models and an NSF-supported programme linking protein interactions to neuronal development.
+- [Neural mechanisms of breathing](/research/eupnea-sigh/). With Christopher Del Negro, we study how the preBötzinger complex generates normal breaths and sighs, and how μ-opioid receptor signalling changes the excitability of respiratory neurons.
 
 - [Mathematical biology of plant diversity](/research/petal-patterns/). Work with Joshua Puzey, Arielle Cooley and colleagues combines models of floral patterning with studies of hybrid genomes, gene expression and transposable elements.
 

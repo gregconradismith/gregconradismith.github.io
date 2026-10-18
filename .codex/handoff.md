@@ -136,3 +136,8 @@ Pre-edit Git state after fetch:
 - These are curated page sources. The historical WordPress importer contains older text and must not be rerun over these reviewed pages.
 - Publication commit b4cd70a deployed successfully in Pages run 39082609534. All six updated pages and both earlier-project pages returned HTTP 200; browser inspection confirmed the reviewed text and rendered DOI links.
 - Follow-up live link checks found the old breathing news URL returned 404. Replaced it with the verified official W&M News archive URL for the same article. DOI redirects resolve correctly; some publisher endpoints deny automated access (403), and bioRxiv rate limits (429); the bioRxiv API verified its record.
+
+## 2026-10-17 Research area ordering
+
+- At Greg’s request, reordered the overview research areas: SynGAP, receptors, neural mechanisms of breathing, mathematical biology of plant diversity. Text and destinations are unchanged.
+- Verified the scoped diff and git diff --check; publish through GitHub Pages and confirm the live ordering.
