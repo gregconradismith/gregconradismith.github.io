@@ -134,3 +134,5 @@ Pre-edit Git state after fetch:
 - Isolated clean clone based on f32a904; preserved the concurrent CV update and all unrelated content. No simulation or CV workspace touched.
 - Source checks: reviewed approved text, YAML front matter, permalinks, DOI links, and git diff --check. No local Jekyll build per existing handoff instruction. Publication validation uses GitHub Pages build and live-page checks.
 - These are curated page sources. The historical WordPress importer contains older text and must not be rerun over these reviewed pages.
+- Publication commit b4cd70a deployed successfully in Pages run 39082609534. All six updated pages and both earlier-project pages returned HTTP 200; browser inspection confirmed the reviewed text and rendered DOI links.
+- Follow-up live link checks found the old breathing news URL returned 404. Replaced it with the verified official W&M News archive URL for the same article. DOI redirects resolve correctly; some publisher endpoints deny automated access (403), and bioRxiv rate limits (429); the bioRxiv API verified its record.

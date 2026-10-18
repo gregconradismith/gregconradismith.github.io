@@ -43,4 +43,4 @@ The eupnea and sigh project received support from the National Center for Comple
 
 ### News
 
-- ["That was terrifying:" Ph.D. student begins research career by unsettling "settled science"](https://www.wm.edu/as/appliedscience/news/that-was-terrifying-ph.d.-student-begins-research-career-by-unsettling-settled-science.php), by Joseph McClain.
+- ["That was terrifying:" Ph.D. student begins research career by unsettling "settled science"](https://www.wm.edu/news/stories/2020/that-was-terrifying-ph.d.-student-begins-research-career-by-unsettling-settled-science.php), by Joseph McClain.
