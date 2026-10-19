@@ -1,6 +1,6 @@
 # Codex Handoff
 
-Date: 2026-06-22
+Date: 2026-10-19
 
 Repo: `gregconradismith.github.io`
 
@@ -146,3 +146,13 @@ Pre-edit Git state after fetch:
 
 - Greg chose “Pattern formation and genome evolution.” Updated the research overview label and corresponding project-page title, retaining /research/petal-patterns/ and the requested project order.
 - Checked the scoped diff and whitespace; verify GitHub Pages deployment and both live labels.
+
+## 2026-10-19 One-page research summaries
+
+- Reviewed the four supplied research summaries against primary publications and the latest curated research pages. Fast-forwarded the clean checkout from 1559699 to d0354ce before editing, preserving Greg's latest research-area order and page content.
+- Published four one-page PDFs in `files/research-summaries/`, with the corresponding revised DOCX files retained there as editable sources. Added one PDF link beside each matching area in `_pages/research.md`; preserved the existing project links and ordering.
+- Important corrections: restored Grover CJ to the 2020 eNeuro citation and supplied its article number; qualified the 2024 calcium-uptake result as partial inhibition, and calcium-release inhibition as slowing or stopping sighs; specified neonatal mouse slices for the 2026 result. Also clarified homeolog terminology and qualified the Turing model's mechanistic interpretation. Receptor and SynGAP scientific text did not require substantive correction.
+- Applied the corresponding citation and calcium wording corrections to `_pages/eupnea-sigh.md` and the missing-author correction to `_pages/publications.md`. Retained the previously user-confirmed Physical Biology revision status. Historical WordPress import sources remain untouched, per the curated-page ownership decision above.
+- Verification: rendered and visually inspected all four final DOCX/PDF pairs; confirmed exactly one page each and working PDF reference links; checked document metadata and absence of tracked changes/comments; ran `git diff --check`. No local Jekyll build for these text/link additions, per the existing handoff instruction.
+- Publication commit: `515298a7a6508a2b763550f7412176653a69954b`. GitHub Pages run `39261982185` completed successfully. All four public PDFs returned HTTP 200 and matched the local SHA-256 values byte for byte. Live HTML and browser inspection confirmed all four topic-matched links and both public text corrections.
+- No remaining work or blockers. Future revisions should edit the DOCX sources and regenerate/inspect the PDFs before publication.
