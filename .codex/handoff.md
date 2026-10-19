@@ -180,3 +180,14 @@ Pre-edit Git state after fetch:
 - Verification: rendered and visually inspected the final document; exactly one page with six reference hyperlinks. Independent comparison verified that only the byline and author metadata changed. `git diff --check` passed.
 - Published in commit `2bfe6e6101c1b111a32faaea553338245785360b`; Pages run `39264486889` succeeded. The live PDF returned HTTP 200, contained all five authors, remained one page and matched the reviewed local file byte for byte (SHA-256 `a9bd062404d4261ba4b6539c443006646712011744701a6f4f16cba1bb7d7c73`).
 - No remaining work or blockers.
+
+## 2026-10-19 Research summary funding acknowledgments
+
+- At Greg's request, added concise, linked funding acknowledgments to each of the four DOCX/PDF summaries. Verified support through primary publication acknowledgments, official NSF award API records and the public CV. Grant lists describe support for the summarized work, including past awards.
+- SynGAP: NSF DMS-2619756 (Conradi Smith and Bestman) and DMS-1951646 (Conradi Smith). Official award 2619756 confirms September 2026-August 2029. Moved the existing award entry from the references to Funding and removed the obsolete body citation [3]; retained both scientific references.
+- Receptors: NSF DMS-1951646 and DMS-1121606, the latter explicitly supporting the foundational 2017 cycle-basis paper.
+- Breathing: NIH/NCCIH R01AT010816, NIH/NHLBI R01HL104127, NSF DMS-1951646; the opioid study acknowledges NIH/NINDS R21NS134005 and William & Mary's Office of Graduate Studies and Research. Attribution follows the 2020, 2024 and 2026 papers.
+- Plant collaboration: selected NSF DEB-2031275, DEB-1754080, DEB-1754075, DEB-1655311, DMS-1951646 and DMS-1121606 plus microMORPH training support; NIH/NCCIH R01AT010816; Murdock life-sciences awards 2015270 and 2013265; William & Mary research awards and the Biomathematics Initiative. This credits support to the named collaborators without listing unrelated collaborators' grants.
+- Kept all author lines and metadata, scientific text and removed website/bibliography footers. Slightly tightened paragraph/reference spacing in the plant summary to accommodate its funding list without reducing the body font.
+- Verification: independent source/paragraph QA; rendered and visually inspected every final page; confirmed exactly one page each, active reference/funding links and `git diff --check`.
+- Publication commit `f2ace2538c69b6f5268229378d1423f778cde51b`; Pages run `39267155180` succeeded. All four live PDFs returned HTTP 200, matched the reviewed local bytes and contained their verified funding lists. No remaining work or blockers.
