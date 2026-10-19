@@ -13,7 +13,7 @@ Normal breathing and sighing operate on markedly different timescales. Both rhyt
 
 Our 2020 study showed that sigh timing is more variable than commonly assumed: a sigh need not follow an ordinary inspiratory event. Blocking glycinergic and GABAergic inhibition did not abolish coupling between the rhythms or the pause after a sigh. The findings supported excitatory coupling and a refractory origin for the post-sigh pause. [1]
 
-In 2024, we combined modelling with experiments to explain how a shared neuronal population can generate both rhythms. In the model, recurrent excitation, synaptic depression and adaptation produce the faster inspiratory rhythm, while slower intracellular calcium dynamics generate sighs. Experiments in neonatal-mouse slices supported key predictions: reducing calcium uptake into the endoplasmic reticulum accelerated sighs, whereas reducing calcium release slowed them. The model provides a mechanistic account of how sigh frequency can change separately from ordinary inspiration without requiring separate dedicated neuronal populations. Del Negro and I contributed equally to this study. [2]
+In 2024, we combined modelling with experiments to explain how a shared neuronal population can generate both rhythms. In the model, recurrent excitation, synaptic depression and adaptation produce the faster inspiratory rhythm, while slower intracellular calcium dynamics generate sighs. Experiments in neonatal-mouse slices supported key predictions: partially reducing calcium uptake into the endoplasmic reticulum accelerated sighs, whereas reducing calcium release slowed or stopped them. The model provides a mechanistic account of how sigh frequency can change separately from ordinary inspiration without requiring separate dedicated neuronal populations. Del Negro and I contributed equally to this study. [2]
 
 ### Opioid signalling and respiratory neurons
 
@@ -27,7 +27,7 @@ Related transcriptomic collaborations characterize the molecular identities of p
 
 ### Selected joint publications
 
-\[1\] Borrus DS, Conradi Smith GD, Del Negro CA (2020). Role of synaptic inhibition in the coupling of the respiratory rhythms that underlie eupnea and sigh behaviors. eNeuro 7(3). [doi:10.1523/ENEURO.0302-19.2020](https://doi.org/10.1523/ENEURO.0302-19.2020).
+\[1\] Borrus DS, Grover CJ, Conradi Smith GD, Del Negro CA (2020). Role of synaptic inhibition in the coupling of the respiratory rhythms that underlie eupnea and sigh behaviors. eNeuro 7(3):ENEURO.0302-19.2020. [doi:10.1523/ENEURO.0302-19.2020](https://doi.org/10.1523/ENEURO.0302-19.2020).
 
 \[2\] Borrus DS, Stettler MK, Grover CJ, Kalajian EJ, Gu J, Conradi Smith GD, Del Negro CA (2024). Inspiratory and sigh breathing rhythms depend on distinct cellular signalling mechanisms in the preBötzinger complex. The Journal of Physiology 602:809–834. [doi:10.1113/JP285582](https://doi.org/10.1113/JP285582). Conradi Smith and Del Negro contributed equally.
 

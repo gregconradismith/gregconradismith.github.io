@@ -11,13 +11,13 @@ Our projects bring mathematical theory into conversation with experiments. Diffe
 
 ### Research areas
 
-- [SynGAP and PSD-95 phase separation](/research/syngap-psd95/). With Sarah Sakly and Jennifer Bestman, we investigate the molecular organization of synaptic condensates through phase-separation models and an NSF-supported programme linking protein interactions to neuronal development.
+- [SynGAP and PSD-95 phase separation](/research/syngap-psd95/). With Sarah Sakly and Jennifer Bestman, we investigate the molecular organization of synaptic condensates through phase-separation models and an NSF-supported programme linking protein interactions to neuronal development. [One-page summary (PDF)](/files/research-summaries/Smith-SynGAP-PSD95-Research-Summary.pdf).
 
-- [Receptor allostery and cycle kinetics](/research/receptor-oligomers/). We develop mathematical theory for multi-subunit receptors, connecting molecular interactions and thermodynamic constraints with binding, activation and nonequilibrium signalling.
+- [Receptor allostery and cycle kinetics](/research/receptor-oligomers/). We develop mathematical theory for multi-subunit receptors, connecting molecular interactions and thermodynamic constraints with binding, activation and nonequilibrium signalling. [One-page summary (PDF)](/files/research-summaries/Smith-Receptor-Allostery-Research-Summary.pdf).
 
-- [Neural mechanisms of breathing](/research/eupnea-sigh/). With Christopher Del Negro, we study how the preBötzinger complex generates normal breaths and sighs, and how μ-opioid receptor signalling changes the excitability of respiratory neurons.
+- [Neural mechanisms of breathing](/research/eupnea-sigh/). With Christopher Del Negro, we study how the preBötzinger complex generates normal breaths and sighs, and how μ-opioid receptor signalling changes the excitability of respiratory neurons. [One-page summary (PDF)](/files/research-summaries/Smith-Del-Negro-Research-Summary.pdf).
 
-- [Pattern formation and genome evolution](/research/petal-patterns/). Work with Joshua Puzey, Arielle Cooley and colleagues combines models of floral patterning with studies of hybrid genomes, gene expression and transposable elements.
+- [Pattern formation and genome evolution](/research/petal-patterns/). Work with Joshua Puzey, Arielle Cooley and colleagues combines models of floral patterning with studies of hybrid genomes, gene expression and transposable elements. [One-page summary (PDF)](/files/research-summaries/Smith-Puzey-Research-Summary.pdf).
 
 ### Students and collaborations
 

@@ -53,7 +53,7 @@ Kinser TJ, Smith RD, Lawrence AH, Cooley AM, Vallejo-Marin M, Conradi Smith GD, 
 
 Zheng X, Om K, Stanton KA, Thomas D, Cheng PA, Eggert A, Simmons E, Yuan Y-W, Conradi Smith GD, Puzey JR\*, Cooley AM\*. **The regulatory network for petal anthocyanin pigmentation is shaped by the MYB5a/NEGAN transcription factor in *Mimulus*.** *Genetics* 217(2), iyaa036, 2021. [\[10.1093/genetics/iyaa036\]](https://doi.org/10.1093/genetics/iyaa036)
 
-Borrus D, Conradi Smith GD, Del Negro CA. **Role of synaptic inhibition in the coupling of the respiratory rhythms that underlie eupnea and sigh behaviors.** *eNeuro*, 7(3):1-20, 2020. [\[10.1523/ENEURO.0302-19.2020\]](https://doi.org/10.1523/ENEURO.0302-19.2020) [\[PMID:32393585\]](https://www.ncbi.nlm.nih.gov/pubmed/32393585)
+Borrus DS, Grover CJ, Conradi Smith GD, Del Negro CA. **Role of synaptic inhibition in the coupling of the respiratory rhythms that underlie eupnea and sigh behaviors.** *eNeuro* 7(3):ENEURO.0302-19.2020, 2020. [\[10.1523/ENEURO.0302-19.2020\]](https://doi.org/10.1523/ENEURO.0302-19.2020) [\[PMID:32393585\]](https://www.ncbi.nlm.nih.gov/pubmed/32393585)
 
 Conradi Smith GD. **Allostery in oligomeric receptor models.** *Mathematical Medicine and Biology: A Journal of the IMA.* 37:313-333, 2020. [\[10.1093/imammb/dqz016\]](https://doi.org/10.1093/imammb/dqz016) [\[PMID:31822901\]](https://www.ncbi.nlm.nih.gov/pubmed/31822901) [\[BioRxiv preprint\]](https://doi.org/10.1101/330571)
 
