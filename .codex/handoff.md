@@ -191,3 +191,11 @@ Pre-edit Git state after fetch:
 - Kept all author lines and metadata, scientific text and removed website/bibliography footers. Slightly tightened paragraph/reference spacing in the plant summary to accommodate its funding list without reducing the body font.
 - Verification: independent source/paragraph QA; rendered and visually inspected every final page; confirmed exactly one page each, active reference/funding links and `git diff --check`.
 - Publication commit `f2ace2538c69b6f5268229378d1423f778cde51b`; Pages run `39267155180` succeeded. All four live PDFs returned HTTP 200, matched the reviewed local bytes and contained their verified funding lists. No remaining work or blockers.
+
+## 2026-10-19 Breathing summary author order and laboratory link
+
+- At Greg's request, the one-page breathing summary now lists Christopher A. Del Negro first and Greg Conradi Smith second beneath the title. Updated document author metadata to match.
+- Added the verified Del Negro Laboratory link, https://people.wm.edu/~cadeln/, directly beneath the byline. Removed the sentence "Del Negro and I contributed equally to this study." from the 2024 study paragraph. Other scientific text, references and funding are unchanged; the previously removed footer remains absent.
+- Updated the DOCX source and regenerated its PDF at the established public URL. Independent paragraph/link QA and rendered visual inspection passed; exactly one page with eight active links. `git diff --check` passed.
+- Published in commit `3a6589754cd6a0e6611d7e765bd5d183dfc2315b`; Pages run `39268107453` succeeded. Live PDF returned HTTP 200, matched the reviewed local bytes (SHA-256 `60cd07bb3b173fdeaa93e63deff10606df56ddf5c3eb3ab11c9dfa548a97ceab`) and verified all requested changes. The laboratory URL also returned HTTP 200.
+- No remaining work or blockers.
