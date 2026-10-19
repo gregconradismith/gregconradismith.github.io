@@ -206,3 +206,10 @@ Pre-edit Git state after fetch:
 - Updated all four DOCX sources and regenerated their PDFs at the established public URLs. All other paragraphs and author metadata match the prior versions; the previously removed website/bibliography footer remains absent. Reduced the plant summary title's following space from 15 to 7 points to keep its one-page layout without reducing fonts.
 - Verification: rendered and visually inspected all four documents; confirmed one page each and active homepage links (9, 16, 6 and 5 total PDF links for breathing, plant, receptors and SynGAP). Independent paragraph/link QA and git diff --check passed. Existing author credits, funding, references and breathing sentence removal were retained.
 - Publication commit 87ae5944d8f7c937986a38b4da5b16476e99a592; Pages run 39269183837 succeeded. All four live PDFs returned HTTP 200, matched the reviewed local files byte for byte, and placed the clickable homepage URL on the line directly after the authors. No remaining work or blockers.
+
+## 2026-10-19 Plant summary contribution sentence removal
+
+- At Greg's request, removed exactly the sentence "Puzey and I contributed equally to this study." from the plant research summary's mobile-DNA paragraph. Retained citation [6] immediately after the preceding sentence.
+- Updated the DOCX source and regenerated the PDF at the existing public URL. Independent XML comparison verified that only the requested sentence and its leading space changed; author metadata, run formatting, all other paragraphs and hyperlink relationships are identical.
+- Rendered and visually inspected the final document: clean one-page layout, with all authors, academic website URL, references and funding retained. All 16 PDF hyperlinks match the prior version. git diff --check passed.
+- Publication commit 15dcb1bbd7a072be625c353644b8766132a79e82; Pages run 39269810914 succeeded. Live PDF returned HTTP 200, omitted the sentence and matched the reviewed local bytes (SHA-256 437c2a53022a8aa971629037a8677bc778e8a313792b6fd652f2a7aa90716ed3). No remaining work or blockers.
