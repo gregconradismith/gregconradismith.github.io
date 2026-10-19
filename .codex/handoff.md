@@ -164,3 +164,11 @@ Pre-edit Git state after fetch:
 - Verification: rendered and visually inspected the result; still exactly one page, with five reference/footer hyperlinks retained. Independent paragraph comparison confirmed that only the byline/subtitle changed. `git diff --check` passed.
 - Published in commit `59592622235463700c35731c1ae70700c5ecb376`; Pages run `39263108830` succeeded. The live PDF returned HTTP 200, contained all three authors and matched the reviewed local PDF byte for byte (SHA-256 `1e708cc3f0b4d3ecf7c5b97a28b56f3155957ad0e7e8ec1c520a8157a7396715`).
 - No remaining work or blockers.
+
+## 2026-10-19 Research summary footer removal
+
+- At Greg's request, removed the entire Academic webpage / Bibliography footer paragraph and its two hyperlinks from all four one-page research summaries. Keep these footers absent in future exports.
+- Updated all four DOCX sources and regenerated the four PDFs at the existing public URLs. Independent comparison verified that all other paragraphs and author metadata are identical, including the three-author SynGAP byline. Publication/reference links remain active.
+- Verification: rendered and visually inspected all four final documents, confirmed exactly one page each and absence of the footer, and ran `git diff --check`.
+- Published in commit `15ad111b561c7c97ba843db58a31078709df6421`. Pages run `39263634225` succeeded. All four public PDFs returned HTTP 200, lacked the footer, remained one page and matched the reviewed local files byte for byte.
+- No remaining work or blockers.
