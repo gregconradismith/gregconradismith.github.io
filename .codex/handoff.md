@@ -172,3 +172,11 @@ Pre-edit Git state after fetch:
 - Verification: rendered and visually inspected all four final documents, confirmed exactly one page each and absence of the footer, and ran `git diff --check`.
 - Published in commit `15ad111b561c7c97ba843db58a31078709df6421`. Pages run `39263634225` succeeded. All four public PDFs returned HTTP 200, lacked the footer, remained one page and matched the reviewed local files byte for byte.
 - No remaining work or blockers.
+
+## 2026-10-19 Plant research summary author credit
+
+- At Greg's request, added Arielle Cooley, Emily Simmons and Ron Smith as authors of the Puzey summary. The top byline now reads Greg Conradi Smith, Joshua R. Puzey, Arielle Cooley, Emily Simmons and Ron Smith; document author metadata includes all five.
+- Updated the editable DOCX and regenerated the PDF at the existing public URL. All body text and references are unchanged; the removed website/bibliography footer remains absent.
+- Verification: rendered and visually inspected the final document; exactly one page with six reference hyperlinks. Independent comparison verified that only the byline and author metadata changed. `git diff --check` passed.
+- Published in commit `2bfe6e6101c1b111a32faaea553338245785360b`; Pages run `39264486889` succeeded. The live PDF returned HTTP 200, contained all five authors, remained one page and matched the reviewed local file byte for byte (SHA-256 `a9bd062404d4261ba4b6539c443006646712011744701a6f4f16cba1bb7d7c73`).
+- No remaining work or blockers.
