@@ -199,3 +199,10 @@ Pre-edit Git state after fetch:
 - Updated the DOCX source and regenerated its PDF at the established public URL. Independent paragraph/link QA and rendered visual inspection passed; exactly one page with eight active links. `git diff --check` passed.
 - Published in commit `3a6589754cd6a0e6611d7e765bd5d183dfc2315b`; Pages run `39268107453` succeeded. Live PDF returned HTTP 200, matched the reviewed local bytes (SHA-256 `60cd07bb3b173fdeaa93e63deff10606df56ddf5c3eb3ab11c9dfa548a97ceab`) and verified all requested changes. The laboratory URL also returned HTTP 200.
 - No remaining work or blockers.
+
+## 2026-10-19 Academic website URL under summary authors
+
+- At Greg's request, added the clickable full URL https://gregconradismith.github.io/ immediately beneath the author list in all four one-page research summaries. Retained the Del Negro laboratory link and SynGAP project descriptor on subsequent lines.
+- Updated all four DOCX sources and regenerated their PDFs at the established public URLs. All other paragraphs and author metadata match the prior versions; the previously removed website/bibliography footer remains absent. Reduced the plant summary title's following space from 15 to 7 points to keep its one-page layout without reducing fonts.
+- Verification: rendered and visually inspected all four documents; confirmed one page each and active homepage links (9, 16, 6 and 5 total PDF links for breathing, plant, receptors and SynGAP). Independent paragraph/link QA and git diff --check passed. Existing author credits, funding, references and breathing sentence removal were retained.
+- Publication commit 87ae5944d8f7c937986a38b4da5b16476e99a592; Pages run 39269183837 succeeded. All four live PDFs returned HTTP 200, matched the reviewed local files byte for byte, and placed the clickable homepage URL on the line directly after the authors. No remaining work or blockers.
