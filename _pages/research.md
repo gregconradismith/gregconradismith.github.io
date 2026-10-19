@@ -11,7 +11,7 @@ Our projects bring mathematical theory into conversation with experiments. Diffe
 
 ### Research areas
 
-- [SynGAP and PSD-95 phase separation](/research/syngap-psd95/). With Sarah Sakly and Jennifer Bestman, we investigate the molecular organization of synaptic condensates through phase-separation models and an NSF-supported programme linking protein interactions to neuronal development. [One-page summary (PDF)](/files/research-summaries/Smith-SynGAP-PSD95-Research-Summary.pdf).
+- [SynGAP and PSD-95 phase separation](/research/syngap-psd95/). With Sarah Sakly and Jennifer Bestman, we investigate the molecular organization of synaptic condensates through phase-separation models and an NSF-supported programme linking protein interactions to neuronal development.
 
 - [Receptor allostery and cycle kinetics](/research/receptor-oligomers/). We develop mathematical theory for multi-subunit receptors, connecting molecular interactions and thermodynamic constraints with binding, activation and nonequilibrium signalling. [One-page summary (PDF)](/files/research-summaries/Smith-Receptor-Allostery-Research-Summary.pdf).
 
