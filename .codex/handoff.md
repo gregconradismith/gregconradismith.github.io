@@ -156,3 +156,11 @@ Pre-edit Git state after fetch:
 - Verification: rendered and visually inspected all four final DOCX/PDF pairs; confirmed exactly one page each and working PDF reference links; checked document metadata and absence of tracked changes/comments; ran `git diff --check`. No local Jekyll build for these text/link additions, per the existing handoff instruction.
 - Publication commit: `515298a7a6508a2b763550f7412176653a69954b`. GitHub Pages run `39261982185` completed successfully. All four public PDFs returned HTTP 200 and matched the local SHA-256 values byte for byte. Live HTML and browser inspection confirmed all four topic-matched links and both public text corrections.
 - No remaining work or blockers. Future revisions should edit the DOCX sources and regenerate/inspect the PDFs before publication.
+
+## 2026-10-19 SynGAP summary author credit
+
+- At Greg's request, the summary now names Greg Conradi Smith, Jen Bestman and Sarah Sakly together beneath the title. Moved the NSF project descriptor to the next line and updated document author metadata to include all three.
+- Updated the editable DOCX and regenerated the PDF in `files/research-summaries/`, retaining the existing research-page link. All body text and references are unchanged.
+- Verification: rendered and visually inspected the result; still exactly one page, with five reference/footer hyperlinks retained. Independent paragraph comparison confirmed that only the byline/subtitle changed. `git diff --check` passed.
+- Published in commit `59592622235463700c35731c1ae70700c5ecb376`; Pages run `39263108830` succeeded. The live PDF returned HTTP 200, contained all three authors and matched the reviewed local PDF byte for byte (SHA-256 `1e708cc3f0b4d3ecf7c5b97a28b56f3155957ad0e7e8ec1c520a8157a7396715`).
+- No remaining work or blockers.
