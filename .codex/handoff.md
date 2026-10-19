@@ -220,3 +220,10 @@ Pre-edit Git state after fetch:
 - Updated all four DOCX sources and regenerated their PDFs at the established public URLs. Independent per-character/XML QA verified that prose, authors, paragraph/run formatting outside citations, metadata, funding and hyperlink relationships are unchanged. All prior requested removals and the header homepage links remain intact.
 - Rendered and visually inspected all four final pages: each remains one page with clean raised citations and matching reference labels. PDF font/baseline checks confirmed true reduced-size superscripts; all 9, 16, 6 and 5 existing links (breathing, plant, receptors, SynGAP) are retained. git diff --check passed.
 - Publication commit 99860bfb56279fada4dacde2fa4d2cffe5403cea; Pages run 39270483584 succeeded. All four public PDFs returned HTTP 200, matched the reviewed local files byte for byte and passed the superscript/reference/link checks. No remaining work or blockers.
+
+## 2026-10-19 Richard Hammack affiliation in receptor summary
+
+- At Greg's request, the receptor summary now reads "In collaboration with Richard Hammack (Virginia Commonwealth University), I developed..." in its equilibrium-allostery paragraph.
+- Updated the DOCX source and regenerated the PDF at the existing public URL. Independent ZIP/XML QA confirmed that the affiliation insertion is the sole source change; metadata, formatting, native superscript citations, hyperlinks and funding are unchanged.
+- Rendered and visually inspected the result; it remains one page, with all three superscript citations and six links retained. git diff --check passed.
+- Publication commit 8486d5d7291ae0d1678a476ebb2dabe139ad301d; Pages run 39270959942 succeeded. The live PDF returned HTTP 200, contained the exact affiliation and matched the reviewed local file byte for byte (SHA-256 72978ce14f96504982f6f75ef389de54d0648b14e28b50059937fec18a5ba17b). No remaining work or blockers.
