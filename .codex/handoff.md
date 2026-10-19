@@ -213,3 +213,10 @@ Pre-edit Git state after fetch:
 - Updated the DOCX source and regenerated the PDF at the existing public URL. Independent XML comparison verified that only the requested sentence and its leading space changed; author metadata, run formatting, all other paragraphs and hyperlink relationships are identical.
 - Rendered and visually inspected the final document: clean one-page layout, with all authors, academic website URL, references and funding retained. All 16 PDF hyperlinks match the prior version. git diff --check passed.
 - Publication commit 15dcb1bbd7a072be625c353644b8766132a79e82; Pages run 39269810914 succeeded. Live PDF returned HTTP 200, omitted the sentence and matched the reviewed local bytes (SHA-256 437c2a53022a8aa971629037a8677bc778e8a313792b6fd652f2a7aa90716ed3). No remaining work or blockers.
+
+## 2026-10-19 Superscript citation format in all summaries
+
+- At Greg's request, converted every inline numeric citation in the four research summaries from bracketed text to native Word superscript numbers immediately after punctuation. Combined citations use a superscript comma-separated group (1,2). Reference-list labels now use baseline numbers followed by a period; reference entries retain their normal font size.
+- Updated all four DOCX sources and regenerated their PDFs at the established public URLs. Independent per-character/XML QA verified that prose, authors, paragraph/run formatting outside citations, metadata, funding and hyperlink relationships are unchanged. All prior requested removals and the header homepage links remain intact.
+- Rendered and visually inspected all four final pages: each remains one page with clean raised citations and matching reference labels. PDF font/baseline checks confirmed true reduced-size superscripts; all 9, 16, 6 and 5 existing links (breathing, plant, receptors, SynGAP) are retained. git diff --check passed.
+- Publication commit 99860bfb56279fada4dacde2fa4d2cffe5403cea; Pages run 39270483584 succeeded. All four public PDFs returned HTTP 200, matched the reviewed local files byte for byte and passed the superscript/reference/link checks. No remaining work or blockers.
