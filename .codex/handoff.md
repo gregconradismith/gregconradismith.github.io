@@ -243,3 +243,11 @@ Pre-edit Git state after fetch:
 - To retain one page without reducing body fonts or cutting text, changed breathing summary margins to 0.6 inch on all sides; changed plant summary margins to 0.5 inch and Normal line spacing from 1.02917 to single. All paragraph spacing is otherwise unchanged. Receptor and SynGAP required no layout changes.
 - Verification: rendered and visually inspected all four final pages; confirmed exactly one Letter page each, PDF reference glyphs at 11 points throughout, native superscripts and every link destination retained, and git diff --check passed. Content bottoms are within their page margins.
 - Publication commit da28f672053421e99a9124ed32bcf4f3b7c860d4; Pages run 39275886993 succeeded. All eight public DOCX/PDF files returned HTTP 200 and matched local bytes. Live research overview retains the three published-summary links; SynGAP remains delinked as requested. No remaining work or blockers.
+
+
+## 2026-10-24 Academic simulation integration
+
+- Consolidated six public standalone apps under `simulations/`, with native `/simulations/` index and main-navigation/Teaching links. Original repositories and old published URLs are preserved. See `.codex/simulation-integration.md` and `simulations/provenance.json` for inventory, source commits, license status, integration patches and verification.
+- Fixed integrated PWA cache isolation; retained model behavior, references, assets and original source links. No private contents imported or excluded repositories changed.
+- Pre-publication Jekyll build, numerical suites, asset/path audit, generated-runtime byte comparison, and six desktop/mobile Chrome checks passed; three caches coexist and offline PolyQual works. Local Ruby 4 build compatibility support is ignored and does not change published dependencies.
+- Ready for authorized commit/push to existing main deployment branch; live Pages verification follows.

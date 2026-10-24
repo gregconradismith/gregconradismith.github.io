@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7f3">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Retaliation">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=no">
+  <title>The Retaliation Simulation</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/retaliation-icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/retaliation-icon-180.png">
+  <link rel="stylesheet" href="styles.css?v=2026-06-21-angles">
+  <script data-goatcounter="https://gregconradismith.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<nav aria-label="Academic website" style="padding: .65rem 1rem; font: 16px system-ui"><a href="../../simulations/">All simulations</a> · <a href="../../">Greg Conradi Smith</a> · <a href="https://github.com/gregconradismith/retaliation-simulation">Original source</a></nav>
+
+  <main class="app-shell">
+    <aside class="faction-panel left-panel" aria-label="Blue controls">
+      <header class="faction-header">
+        <p class="eyebrow">Blue</p>
+        <h2>Blue Battery</h2>
+      </header>
+
+      <section class="control-card parameter-card" aria-labelledby="leftRateLabel">
+        <label id="leftRateLabel">Launch frequency</label>
+        <div class="stepper-row">
+          <button type="button" data-side="left" data-field="rate" data-delta="-1" aria-label="Decrease blue launch frequency">-</button>
+          <output id="leftRateValue" for="leftRateLabel">10 / min</output>
+          <button type="button" data-side="left" data-field="rate" data-delta="1" aria-label="Increase blue launch frequency">+</button>
+        </div>
+      </section>
+
+      <section class="control-card parameter-card" aria-labelledby="leftMeanLabel">
+        <label id="leftMeanLabel">Explosion mean</label>
+        <div class="stepper-row">
+          <button type="button" data-side="left" data-field="mean" data-delta="-1" aria-label="Decrease blue explosion mean">-</button>
+          <output id="leftMeanValue" for="leftMeanLabel">42</output>
+          <button type="button" data-side="left" data-field="mean" data-delta="1" aria-label="Increase blue explosion mean">+</button>
+        </div>
+      </section>
+
+      <section class="control-card parameter-card" aria-labelledby="leftVarianceLabel">
+        <label id="leftVarianceLabel">Explosion variance</label>
+        <div class="stepper-row">
+          <button type="button" data-side="left" data-field="variance" data-delta="-1" aria-label="Decrease blue explosion variance">-</button>
+          <output id="leftVarianceValue" for="leftVarianceLabel">64</output>
+          <button type="button" data-side="left" data-field="variance" data-delta="1" aria-label="Increase blue explosion variance">+</button>
+        </div>
+      </section>
+
+      <section class="control-card parameter-card" aria-labelledby="leftTimingLabel">
+        <label id="leftTimingLabel">Launch timing</label>
+        <div class="timing-stepper">
+          <button type="button" data-side="left" data-field="timing" data-delta="-1" aria-label="Previous blue launch timing">-</button>
+          <output id="leftTimingValue" for="leftTimingLabel">Random</output>
+          <button type="button" data-side="left" data-field="timing" data-delta="1" aria-label="Next blue launch timing">+</button>
+        </div>
+      </section>
+
+      <section class="side-stats" aria-label="Blue statistics">
+        <p><span>Launches</span><strong id="leftLaunchesValue">0</strong></p>
+        <p><span>Impacts</span><strong id="leftImpactsValue">0</strong></p>
+        <p><span>Last size</span><strong id="leftLastSizeValue">-</strong></p>
+        <p><span>Mean size</span><strong id="leftMeanSizeValue">-</strong></p>
+      </section>
+    </aside>
+
+    <section class="play-area" aria-labelledby="simulation-title">
+      <div class="top-bar">
+        <div>
+          <p class="eyebrow">A game to assess perception of conflict dynamics</p>
+          <h1 id="simulation-title">The Retaliation Simulation</h1>
+        </div>
+        <div class="status-strip" aria-label="Simulation status">
+          <span id="timeLabel">00:00.0</span>
+          <span id="inFlightLabel">In flight 0</span>
+          <span id="impactLabel">Impacts 0</span>
+        </div>
+      </div>
+
+      <section class="mode-panel" aria-label="Mode and round settings">
+        <div class="mode-buttons" role="group" aria-label="Simulation mode">
+          <button class="mode-button is-active" id="exploreModeButton" type="button">Explore</button>
+          <button class="mode-button" id="challengeModeButton" type="button">Challenge</button>
+        </div>
+        <div class="duration-control" aria-label="Round duration">
+          <span>Round duration</span>
+          <div class="duration-stepper">
+            <button id="durationDownButton" type="button" aria-label="Decrease round duration">-</button>
+            <output id="durationValue">30 s</output>
+            <button id="durationUpButton" type="button" aria-label="Increase round duration">+</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="canvas-wrap">
+        <canvas id="simulationCanvas" width="1200" height="720" aria-label="Artillery shells and explosions between blue and red batteries"></canvas>
+      </div>
+
+      <div class="command-row" aria-label="Simulation controls">
+        <div class="button-cluster">
+          <button class="primary-button" id="playButton" type="button">Run</button>
+          <button id="resetButton" type="button">Reset</button>
+        </div>
+        <p id="eventText" aria-live="polite">Ready</p>
+      </div>
+
+      <section class="decision-panel" id="decisionPanel" aria-labelledby="decisionTitle" hidden>
+        <h2 id="decisionTitle">Who is being more aggressive?</h2>
+        <div class="answer-buttons">
+          <button type="button" data-answer="left">Blue</button>
+          <button type="button" data-answer="equal">About Equal</button>
+          <button type="button" data-answer="right">Red</button>
+        </div>
+      </section>
+
+      <section class="reveal-panel" id="revealPanel" aria-live="polite" hidden>
+        <div>
+          <p class="result-label" id="resultLabel">Result</p>
+          <p class="result-text" id="resultText"></p>
+          <p class="result-detail" id="resultDetail"></p>
+        </div>
+        <div class="reveal-grid" id="revealGrid"></div>
+      </section>
+
+      <section class="history-panel" id="historyPanel" aria-labelledby="historyTitle" hidden>
+        <div class="history-header">
+          <h2 id="historyTitle">Challenge History</h2>
+          <div class="history-score" aria-label="Challenge score">
+            <p><span>Trials</span><strong id="trialCountValue">0</strong></p>
+            <p><span>Correct</span><strong id="correctCountValue">0</strong></p>
+            <p><span>Accuracy</span><strong id="accuracyValue">-</strong></p>
+          </div>
+        </div>
+        <ol id="historyList"></ol>
+      </section>
+
+      <section class="event-panel" aria-label="Launch and impact log">
+        <h2>Launch and Impact Log</h2>
+        <ol id="eventList"></ol>
+      </section>
+
+      <nav class="reading-nav" aria-label="Further reading">
+        <a href="further-reading.html">Model Notes</a>
+      </nav>
+    </section>
+
+    <aside class="faction-panel right-panel" aria-label="Red controls">
+      <header class="faction-header">
+        <p class="eyebrow">Red</p>
+        <h2>Red Battery</h2>
+      </header>
+
+      <section class="control-card parameter-card" aria-labelledby="rightRateLabel">
+        <label id="rightRateLabel">Launch frequency</label>
+        <div class="stepper-row">
+          <button type="button" data-side="right" data-field="rate" data-delta="-1" aria-label="Decrease red launch frequency">-</button>
+          <output id="rightRateValue" for="rightRateLabel">8 / min</output>
+          <button type="button" data-side="right" data-field="rate" data-delta="1" aria-label="Increase red launch frequency">+</button>
+        </div>
+      </section>
+
+      <section class="control-card parameter-card" aria-labelledby="rightMeanLabel">
+        <label id="rightMeanLabel">Explosion mean</label>
+        <div class="stepper-row">
+          <button type="button" data-side="right" data-field="mean" data-delta="-1" aria-label="Decrease red explosion mean">-</button>
+          <output id="rightMeanValue" for="rightMeanLabel">50</output>
+          <button type="button" data-side="right" data-field="mean" data-delta="1" aria-label="Increase red explosion mean">+</button>
+        </div>
+      </section>
+
+      <section class="control-card parameter-card" aria-labelledby="rightVarianceLabel">
+        <label id="rightVarianceLabel">Explosion variance</label>
+        <div class="stepper-row">
+          <button type="button" data-side="right" data-field="variance" data-delta="-1" aria-label="Decrease red explosion variance">-</button>
+          <output id="rightVarianceValue" for="rightVarianceLabel">100</output>
+          <button type="button" data-side="right" data-field="variance" data-delta="1" aria-label="Increase red explosion variance">+</button>
+        </div>
+      </section>
+
+      <section class="control-card parameter-card" aria-labelledby="rightTimingLabel">
+        <label id="rightTimingLabel">Launch timing</label>
+        <div class="timing-stepper">
+          <button type="button" data-side="right" data-field="timing" data-delta="-1" aria-label="Previous red launch timing">-</button>
+          <output id="rightTimingValue" for="rightTimingLabel">Random</output>
+          <button type="button" data-side="right" data-field="timing" data-delta="1" aria-label="Next red launch timing">+</button>
+        </div>
+      </section>
+
+      <section class="side-stats" aria-label="Red statistics">
+        <p><span>Launches</span><strong id="rightLaunchesValue">0</strong></p>
+        <p><span>Impacts</span><strong id="rightImpactsValue">0</strong></p>
+        <p><span>Last size</span><strong id="rightLastSizeValue">-</strong></p>
+        <p><span>Mean size</span><strong id="rightMeanSizeValue">-</strong></p>
+      </section>
+    </aside>
+  </main>
+
+  <script src="app.js?v=2026-06-21-better-buildings"></script>
+</body>
+</html>

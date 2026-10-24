@@ -14,6 +14,10 @@ author_profile: true
 
 - [Science & Authority](https://scienceauthority.wordpress.com/): A seminar on scientific knowledge, trust, expertise, uncertainty, and the social authority of science.
 
+### Interactive Models
+
+[Browser simulations and games]({{ '/simulations/' | relative_url }}) for exploring dynamical systems, cellular biophysics, and qualitative reasoning.
+
 ### Summer School
 
 **Cold Spring Harbor Laboratory International Summer School on Computational Cell Biology (2008-2013)**

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eef6fb">
+  <title>Further Reading: Qualitative Polynomial Graphs</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/polyqual-icon-180.png">
+  <link rel="stylesheet" href="styles.css?v=2026-06-20-reading">
+  <script data-goatcounter="https://gregconradismith.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
+<body>
+<nav aria-label="Academic website" style="padding: .65rem 1rem; font: 16px system-ui"><a href="../../simulations/">All simulations</a> · <a href="../../">Greg Conradi Smith</a> · <a href="https://github.com/gregconradismith/polyqual-game">Original source</a></nav>
+
+  <main class="reading-shell">
+    <article class="reading-page">
+      <p class="eyebrow">Further reading</p>
+      <h1>Qualitative Polynomial Graphs</h1>
+      <p class="lede">
+        PolyQual is about qualitative shape, not pointwise agreement. Two curves
+        may be far apart vertically and still have the same increasing,
+        decreasing, concavity, and optional sign structure.
+      </p>
+
+      <section>
+        <h2>The sign pattern idea</h2>
+        <p>
+          The game compares signs of f', f'', and optionally f itself as x moves
+          from left to right. The sign of f' records increasing versus
+          decreasing intervals. The sign of f'' records concavity. Including
+          the sign of f asks whether the curves also lie above or below the
+          horizontal axis in the same qualitative order.
+        </p>
+      </section>
+
+      <section>
+        <h2>Why zeros matter</h2>
+        <p>
+          A sign pattern changes only when one of the tracked quantities crosses
+          zero. For a polynomial, these crossings are isolated unless the
+          polynomial has repeated factors or an identically zero derivative.
+          Numerically, near-zero values are delicate: a tiny perturbation can
+          create, remove, or split sign changes.
+        </p>
+      </section>
+
+      <section>
+        <h2>What the game simplifies</h2>
+        <p>
+          The game samples curves on a grid and collapses repeated sign states.
+          That is useful for practice, but it is not a substitute for exact root
+          finding or a proof that two functions have the same qualitative
+          structure. In a rigorous treatment, one would locate roots of f, f',
+          and f'' and compare the induced interval decomposition.
+        </p>
+      </section>
+
+      <section>
+        <h2>On-topic resources</h2>
+        <ul class="resource-list">
+          <li><a href="https://tutorial.math.lamar.edu/classes/calci/shapeofgraphpti.aspx">The Shape of a Graph, Part I</a>: increasing, decreasing, and first-derivative tests.</li>
+          <li><a href="https://tutorial.math.lamar.edu/classes/calci/shapeofgraphptii.aspx">The Shape of a Graph, Part II</a>: concavity and inflection points.</li>
+          <li><a href="https://math.libretexts.org/Bookshelves/Calculus/Calculus_%28OpenStax%29/04%3A_Applications_of_Derivatives/4.05%3A_Derivatives_and_the_Shape_of_a_Graph">Derivatives and the Shape of a Graph</a>: OpenStax/LibreTexts treatment of derivative sign information.</li>
+          <li><a href="https://en.wikipedia.org/wiki/Derivative_test">Derivative test</a>: a compact reference for first- and second-derivative tests.</li>
+          <li><a href="https://en.wikipedia.org/wiki/Inflection_point">Inflection point</a>: useful cautions about concavity changes and the limits of the condition f'' = 0.</li>
+        </ul>
+      </section>
+
+      <p class="back-link"><a href="index.html">Back to the game</a></p>
+    </article>
+  </main>
+
+  <script>
+    if ('serviceWorker' in navigator && window.location.protocol !== 'file:') {
+      navigator.serviceWorker.register('service-worker.js').catch(() => {});
+    }
+  </script>
+</body>
+</html>
