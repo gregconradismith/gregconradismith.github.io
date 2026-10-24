@@ -1,6 +1,6 @@
 'use strict';
 
-const cacheName = 'academic-polyqual-game-v1';
+const cacheName = 'academic-polyqual-game-v2';
 const appShell = [
   './',
   './index.html',

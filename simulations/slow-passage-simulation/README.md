@@ -1,6 +1,6 @@
 # Slow Passage Through Hopf
 
-Live simulator: https://gregconradismith.github.io/slow-passage-simulation/
+Live simulator: https://gregconradismith.github.io/simulations/slow-passage-simulation/
 
 Open `index.html` in a modern browser. This is one self-contained HTML file: no installation, server, libraries, fonts, or internet connection are required. References link out to the web.
 
@@ -44,3 +44,7 @@ Baer, S. M., Erneux, T., & Rinzel, J. (1989). The slow passage through a Hopf bi
 - https://www.scholarpedia.org/article/Bautin_bifurcation
 
 The normal forms are classroom illustrations, not quantitative fits to a particular membrane model.
+
+## Academic-site integration
+
+The live URL above now points to this academic-site copy. Original repository identifier: `gregconradismith/slow-passage-simulation`; immutable source commit: `08cd33730b8a4eb1809d8b239a35a4e0fcc46288`. Original project-specific instructions and references above are retained as historical source documentation. See `../provenance.json` for the integration record.

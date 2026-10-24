@@ -2,43 +2,43 @@
   {
     "repository": "current-voltage-relation-game",
     "commit": "79d4557cfec918b81eb76b6475707209490a4cbe",
-    "source": "https://github.com/gregconradismith/current-voltage-relation-game",
-    "original_url": "https://gregconradismith.github.io/current-voltage-relation-game/",
-    "license": "No license file present at source commit; no new license granted."
+    "license": "No license file present at source commit; no new license granted.",
+    "source_repository": "gregconradismith/current-voltage-relation-game",
+    "previous_pages_path": "/current-voltage-relation-game/"
   },
   {
     "repository": "morris-lecar-simulator",
     "commit": "eea0175ccea0322eb775d388e1f50ad2160a7b1b",
-    "source": "https://github.com/gregconradismith/morris-lecar-simulator",
-    "original_url": "https://gregconradismith.github.io/morris-lecar-simulator/",
-    "license": "No license file present at source commit; no new license granted."
+    "license": "No license file present at source commit; no new license granted.",
+    "source_repository": "gregconradismith/morris-lecar-simulator",
+    "previous_pages_path": "/morris-lecar-simulator/"
   },
   {
     "repository": "polyqual-game",
     "commit": "72af531188c5d13612412a7d5e6a3be4fc91a1a2",
-    "source": "https://github.com/gregconradismith/polyqual-game",
-    "original_url": "https://gregconradismith.github.io/polyqual-game/",
-    "license": "No license file present at source commit; no new license granted."
+    "license": "No license file present at source commit; no new license granted.",
+    "source_repository": "gregconradismith/polyqual-game",
+    "previous_pages_path": "/polyqual-game/"
   },
   {
     "repository": "retaliation-simulation",
     "commit": "beb4b78806eba580e6525974416ffb09c55ce19d",
-    "source": "https://github.com/gregconradismith/retaliation-simulation",
-    "original_url": "https://gregconradismith.github.io/retaliation-simulation/",
-    "license": "No license file present at source commit; no new license granted."
+    "license": "No license file present at source commit; no new license granted.",
+    "source_repository": "gregconradismith/retaliation-simulation",
+    "previous_pages_path": "/retaliation-simulation/"
   },
   {
     "repository": "slow-passage-simulation",
     "commit": "08cd33730b8a4eb1809d8b239a35a4e0fcc46288",
-    "source": "https://github.com/gregconradismith/slow-passage-simulation",
-    "original_url": "https://gregconradismith.github.io/slow-passage-simulation/",
-    "license": "No license file present at source commit; no new license granted."
+    "license": "No license file present at source commit; no new license granted.",
+    "source_repository": "gregconradismith/slow-passage-simulation",
+    "previous_pages_path": "/slow-passage-simulation/"
   },
   {
     "repository": "voltage-clamp-game",
     "commit": "b423d2a7ad3014dcfaf1b1968a7ecc36526b5def",
-    "source": "https://github.com/gregconradismith/voltage-clamp-game",
-    "original_url": "https://gregconradismith.github.io/voltage-clamp-game/",
-    "license": "No license file present at source commit; no new license granted."
+    "license": "No license file present at source commit; no new license granted.",
+    "source_repository": "gregconradismith/voltage-clamp-game",
+    "previous_pages_path": "/voltage-clamp-game/"
   }
 ]

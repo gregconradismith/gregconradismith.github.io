@@ -251,3 +251,10 @@ Pre-edit Git state after fetch:
 - Fixed integrated PWA cache isolation; retained model behavior, references, assets and original source links. No private contents imported or excluded repositories changed.
 - Pre-publication Jekyll build, numerical suites, asset/path audit, generated-runtime byte comparison, and six desktop/mobile Chrome checks passed; three caches coexist and offline PolyQual works. Local Ruby 4 build compatibility support is ignored and does not change published dependencies.
 - Published integration commit `b339eaa5d14e75ceaa50dfd389490155791ed42d` to `main`; GitHub Pages run `40117186854` succeeded. `/simulations/` and Teaching entry verified in Chrome. All six published nested apps passed the same desktop/mobile/interaction checks with no JS errors or missing app resources; three PWA caches coexist and offline PolyQual reload passed. All 38 runtime/provenance assets returned HTTP 200 and matched reviewed local bytes. All six original standalone URLs still return HTTP 200. No remaining blockers.
+
+
+## 2026-10-24 Follow-up link audit and archival gate
+
+- Greg authorized updating links across accessible repositories and archiving originals only when no other owned current default branch retains links to them. This supersedes the earlier no-archival request; no deletion is authorized. Exam repositories remain read-only unless separately approved.
+- Academic app source navigation now uses local provenance instead of original-repository hyperlinks. `simulations/provenance.json` retains owner/name and immutable source commits as non-hyperlinked data; README live links point to the academic copies. Source credits and scientific references remain intact. PWA shell caches bumped to v2.
+- Full audit and archive-state results follow separately; do not infer archival eligibility from the earlier migration completion.

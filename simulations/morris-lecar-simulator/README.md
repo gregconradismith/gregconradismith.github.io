@@ -6,7 +6,7 @@ A standalone classroom browser simulator, styled like the PolyQual game. No MATL
 python3 -m http.server 8766 --bind 127.0.0.1
 ```
 
-Open <http://127.0.0.1:8766/>. On localhost or HTTPS, a service worker caches the app for subsequent offline use. Public app: [Morris–Lecar Simulator](https://gregconradismith.github.io/morris-lecar-simulator/). The standalone public repository serves its main branch at the root with GitHub Pages.
+Open <http://127.0.0.1:8766/>. On localhost or HTTPS, a service worker caches the app for subsequent offline use. Public app: [Morris–Lecar Simulator](https://gregconradismith.github.io/simulations/morris-lecar-simulator/). The standalone public repository serves its main branch at the root with GitHub Pages.
 
 Use Run/Pause, restart, or depolarize the current state by 15 mV. Click inside the phase plane to restart from that voltage and potassium activation. Adjust applied current, conductances, or potassium rate; applied-current changes preserve state, time, and history; other model parameter changes restart the trajectory. Presets reset all model parameters. CSV exports the selected visible trace window (including transients and any voltage kicks), with time, voltage, activation, and applied current. Playback speed changes wall-clock playback only.
 
@@ -57,3 +57,7 @@ Applied current is recorded per sample and plotted as a step trace below w, with
 Run `node verify-interaction.cjs` for a browser-independent interaction regression check covering paused/running current changes, state/history continuity, the subsequent response under the new current, historical-current CSV data, and explicit restart.
 
 **Download PNG**, beside Export CSV, downloads a single PNG containing the phase plane, voltage, w, and applied-current traces at the instant clicked. It includes model time, trace/tail windows, model parameters with units, and visible curve legends. The snapshot captures the current views and does not reset or pause the simulation.
+
+## Academic-site integration
+
+The live URL above now points to this academic-site copy. Original repository identifier: `gregconradismith/morris-lecar-simulator`; immutable source commit: `eea0175ccea0322eb775d388e1f50ad2160a7b1b`. Original project-specific instructions and references above are retained as historical source documentation. See `../provenance.json` for the integration record.

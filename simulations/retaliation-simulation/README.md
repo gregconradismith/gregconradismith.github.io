@@ -7,7 +7,7 @@ directly with GitHub Pages.
 Live app:
 
 ```text
-https://gregconradismith.github.io/retaliation-simulation/
+https://gregconradismith.github.io/simulations/retaliation-simulation/
 ```
 
 The current browser model has two sides. Each side launches artillery across
@@ -51,3 +51,7 @@ http://127.0.0.1:8765/
 
 Codex session state is tracked in `.codex/handoff.md`; durable decisions and
 task history may also appear in `.codex/` when useful.
+
+## Academic-site integration
+
+The live URL above now points to this academic-site copy. Original repository identifier: `gregconradismith/retaliation-simulation`; immutable source commit: `beb4b78806eba580e6525974416ffb09c55ce19d`. Original project-specific instructions and references above are retained as historical source documentation. See `../provenance.json` for the integration record.

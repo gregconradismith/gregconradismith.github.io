@@ -21,4 +21,4 @@ Interactive simulations and games for exploring mathematical models and practici
 
 - [Retaliation simulation]({{ '/simulations/retaliation-simulation/' | relative_url }}): Explore stochastic event frequency and size, then compare expected and observed activity. This stylized perception game is a toy model, not a validated model of conflict escalation.
 
-The simulations retain their scientific references and links to the original public source repositories. Existing standalone app links remain available. [Source commits and provenance]({{ '/simulations/provenance.json' | relative_url }}).
+The simulations retain their scientific references and source repository identifiers and exact source commits. Existing standalone app links remain available. [Source commits and provenance]({{ '/simulations/provenance.json' | relative_url }}).

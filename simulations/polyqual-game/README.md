@@ -10,7 +10,7 @@ the browser.
 
 ## GitHub Pages
 
-Live app: [The PolyQual Game](https://gregconradismith.github.io/polyqual-game/)
+Live app: [The PolyQual Game](https://gregconradismith.github.io/simulations/polyqual-game/)
 
 Publish this folder as the root of a GitHub Pages repository, then open the
 Pages URL on an iPhone in Safari and use Share -> Add to Home Screen.
@@ -40,3 +40,7 @@ http://127.0.0.1:8765/
 ## Codex Coordination
 
 Codex session state is tracked in `.codex/handoff.md`; durable decisions and task history may also appear in `.codex/` when useful.
+
+## Academic-site integration
+
+The live URL above now points to this academic-site copy. Original repository identifier: `gregconradismith/polyqual-game`; immutable source commit: `72af531188c5d13612412a7d5e6a3be4fc91a1a2`. Original project-specific instructions and references above are retained as historical source documentation. See `../provenance.json` for the integration record.

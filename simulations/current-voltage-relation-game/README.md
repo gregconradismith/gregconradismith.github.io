@@ -40,7 +40,7 @@ Preview desktop and mobile layouts and exercise all five topics.
 
 ## GitHub Pages
 
-Live app: [The Current-Voltage Relation Game](https://gregconradismith.github.io/current-voltage-relation-game/)
+Live app: [The Current-Voltage Relation Game](https://gregconradismith.github.io/simulations/current-voltage-relation-game/)
 
 Publish this folder as the root of a GitHub Pages repository. The app uses
 relative paths, so it can also run from a project Pages URL.
@@ -62,3 +62,7 @@ http://127.0.0.1:8765/
 ## Codex Coordination
 
 Codex session state is tracked in `.codex/handoff.md`; durable decisions and task history may also appear in `.codex/` when useful.
+
+## Academic-site integration
+
+The live URL above now points to this academic-site copy. Original repository identifier: `gregconradismith/current-voltage-relation-game`; immutable source commit: `79d4557cfec918b81eb76b6475707209490a4cbe`. Original project-specific instructions and references above are retained as historical source documentation. See `../provenance.json` for the integration record.
