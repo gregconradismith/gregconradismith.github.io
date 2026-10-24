@@ -258,3 +258,6 @@ Pre-edit Git state after fetch:
 - Greg authorized updating links across accessible repositories and archiving originals only when no other owned current default branch retains links to them. This supersedes the earlier no-archival request; no deletion is authorized. Exam repositories remain read-only unless separately approved.
 - Academic app source navigation now uses local provenance instead of original-repository hyperlinks. `simulations/provenance.json` retains owner/name and immutable source commits as non-hyperlinked data; README live links point to the academic copies. Source credits and scientific references remain intact. PWA shell caches bumped to v2.
 - Full audit and archive-state results follow separately; do not infer archival eligibility from the earlier migration completion.
+
+- Follow-up publication commit `ec4b3b9`; Pages run `40118009689` succeeded. All six public replacement apps passed desktop/mobile controls and resource checks again; three v2 PWA caches coexist and offline PolyQual reload works.
+- No original repositories were archived: the broader current-source audit still has external repository references and binary-document coverage limits. Detailed audit evidence remains private to the task workspace; do not claim zero links or archival completion. Old public app URLs remain enabled.
