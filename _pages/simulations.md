@@ -8,6 +8,7 @@ Interactive simulations and games for exploring mathematical models and practici
 
 ### Dynamical systems and excitable cells
 
+- [From neurons to brain waves]({{ '/simulations/neurons-to-brain-waves/' | relative_url }}): Explore how phase alignment, alternating groups, and current-dipole orientation shape an EEG-like population signal and its frequency spectrum.
 - [FitzHugh–Nagumo network simulator]({{ '/simulations/fitzhugh-nagumo-network/' | relative_url }}): Explore synchronization, alternation, and clustering in networks of excitatory or inhibitory oscillators, with moving nullclines, voltage traces, and a spike raster.
 - [Morris–Lecar simulator]({{ '/simulations/morris-lecar-simulator/' | relative_url }}): Explore membrane voltage, phase planes, excitability, oscillations, and saddle manifolds in a reduced conductance-based model.
 - [Slow passage through Hopf]({{ '/simulations/slow-passage-simulation/' | relative_url }}): Compare supercritical and subcritical Hopf normal forms under parameter ramps, including delay, memory, and noise.

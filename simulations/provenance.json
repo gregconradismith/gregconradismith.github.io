@@ -48,5 +48,13 @@
     "source_repository": "gregconradismith/gregconradismith.github.io",
     "source_path": "simulations/fitzhugh-nagumo-network",
     "first_published": "2026-11-05"
+  },
+  {
+    "repository": "neurons-to-brain-waves",
+    "commit": "b7b06324bc7fa1e5d41cb4614e79d8981f64d463",
+    "license": "No simulator license declared; the website theme license does not grant additional rights.",
+    "source_repository": "gregconradismith/gregconradismith.github.io",
+    "source_path": "simulations/neurons-to-brain-waves",
+    "first_published": "2026-11-05"
   }
 ]
