@@ -6,6 +6,7 @@ for(const id of ['shape','orientation','dipole-diagram','dipole-b','alternating'
 assert(!/group [AB]|dipole|two.cluster|R₂|alternating/i.test(html),'No former group/dipole description remains in the interface.');
 assert.deepEqual(Array.from(html.matchAll(/data-preset="([^"]+)"/g),m=>m[1]),['independent','together']);
 assert(/\bstep="1"/.test(html.match(/<input[^>]*id="count"[^>]*>/)[0]),'Every integer neuron count is available.');
+assert(/\bmax="100"/.test(html.match(/<input[^>]*id="spread"[^>]*>/)[0]),'Frequency spread reaches 100 percent.');
 assert(/<h2>Power spectral density<\/h2>/.test(html));
 const scaleOptions=html.match(/<select[^>]*id="psd-scale"[^>]*>([\s\S]*?)<\/select>/)[1];
 assert(/value="log"/.test(scaleOptions)&&/value="linear"/.test(scaleOptions));
@@ -13,13 +14,13 @@ const elements=new Map(),contexts=new Map(),calls=[];
 const initial={count:'200',frequency:'10',coupling:'0',spread:'12',noise:'.02',speed:'.25',window:'2','psd-scale':'log'};
 function canvas(id){
   if(!contexts.has(id)){
-    const log={texts:[],strokes:[],fills:[],arcs:0};let points=[];
+    const log={texts:[],strokes:[],fills:[],arcs:0};let points=[],commands=[];
     const ctx=new Proxy({log,
       clearRect(){log.texts=[];log.strokes=[];log.fills=[];log.arcs=0;},
-      beginPath(){points=[];},
-      moveTo(x,y){assert(Number.isFinite(x)&&Number.isFinite(y),`${id} has finite plotting coordinates`);points.push([x,y]);},
-      lineTo(x,y){assert(Number.isFinite(x)&&Number.isFinite(y),`${id} has finite plotting coordinates`);points.push([x,y]);},
-      stroke(){log.strokes.push({color:ctx.strokeStyle,width:ctx.lineWidth,points:points.slice()});},
+      beginPath(){points=[];commands=[];},
+      moveTo(x,y){assert(Number.isFinite(x)&&Number.isFinite(y),`${id} has finite plotting coordinates`);points.push([x,y]);commands.push('M');},
+      lineTo(x,y){assert(Number.isFinite(x)&&Number.isFinite(y),`${id} has finite plotting coordinates`);points.push([x,y]);commands.push('L');},
+      stroke(){log.strokes.push({color:ctx.strokeStyle,width:ctx.lineWidth,points:points.slice(),commands:commands.slice()});},
       fill(){log.fills.push(ctx.fillStyle);},
       arc(){log.arcs++;},fillText(text,x,y){log.texts.push({text:String(text),x,y,align:ctx.textAlign});},
       measureText(text){return {width:String(text).length*6};}
@@ -59,10 +60,33 @@ const paused=()=>assert.equal(element('play').getAttribute('aria-label'),'Run si
 const near=(a,b,tol=1e-9)=>assert(Math.abs(a-b)<tol,`${a} differs from ${b}`);
 const powerY=(power,scale=element('psd-scale').value)=>scale==='log'?230-(Math.log10(Math.max(1e-6,power))+6)/(Math.log10(2)+6)*212:230-power/2*212;
 const powerStroke=()=>canvas('spectrum').log.strokes.find(x=>x.color==='#287c72'&&x.width===1.7);
+function checkVectorChain(){
+  const strokes=canvas('population').log.strokes,n=currentModel.p.n;
+  const chains=strokes.filter(stroke=>stroke.color==='#c27532'&&stroke.width===1.5);
+  assert.equal(chains.length,1,'A single continuous path adds all phase vectors.');
+  const chain=chains[0],gridW=720*.57,cx=gridW+(720-gridW)/2,cy=260*.48;
+  const R=Math.max(28,Math.min((720-gridW)/2-13,260*.31));
+  assert.equal(chain.points.length,n+1);assert.equal(chain.commands[0],'M');
+  assert(chain.commands.slice(1).every(command=>command==='L'),'No vector restarts the head-to-tail chain.');
+  near(chain.points[0][0],cx);near(chain.points[0][1],cy);
+  for(let i=0;i<n;i++){
+    const dx=chain.points[i+1][0]-chain.points[i][0],dy=chain.points[i+1][1]-chain.points[i][1];
+    near(Math.hypot(dx,dy),R/n,1e-8);
+    near(dx,R/n*Math.cos(currentModel.phase[i]),1e-8);
+    near(dy,-R/n*Math.sin(currentModel.phase[i]),1e-8);
+  }
+  const arrow=strokes.find(stroke=>stroke.color==='#203649'&&stroke.width===2);
+  assert(arrow&&arrow.points.length===2,'The original mean alignment arrow remains.');
+  near(arrow.points[0][0],cx);near(arrow.points[0][1],cy);
+  near(chain.points.at(-1)[0],arrow.points[1][0],1e-8);
+  near(chain.points.at(-1)[1],arrow.points[1][1],1e-8);
+  assert(strokes.indexOf(chain)<strokes.indexOf(arrow),'The mean arrow is drawn above the chain.');
+}
 function checkPlots(){
   for(const id of ['population','raster','signal','spectrum'])assert(canvas(id).log.texts.length>0,`${id} renders labels`);
   assert(canvas('population').log.arcs>=2*currentModel.p.n,'Population view renders all neurons and phase markers.');
   assert.equal(canvas('population').log.fills.filter(color=>color.startsWith('rgba(50,111,160,')).length,currentModel.p.n,'Every neuron uses one population color.');
+  checkVectorChain();
   assert.equal(canvas('raster').log.strokes.filter(x=>x.color==='#326fa0').length,1,'One population supplies the raster.');
   assert(!canvas('raster').log.texts.some(x=>['A','B'].includes(x.text)));
   const signal=canvas('signal').log,spectrum=canvas('spectrum').log;
@@ -198,4 +222,12 @@ for(const scale of ['linear','log']){
 }
 assert.deepEqual(fixture.power,[0,1e-12,1e-6,1e-4,1e-3,0]);
 spectrumFixture=null;set('window',2,'change');checkPlots();
-console.log('PASS: one-population controls/views, odd counts including 499, playback and perturbations, fixed field scale, log/linear physical PSD mappings, cached display-only switching, finite floor/zero bins without power mutation, and scale persistence/equal-power comparisons across presets and resets.');
+
+// The vector construction must work at the population limits and odd counts.
+for(const n of [20,21,200,499,500]){set('count',n,'change');assert.equal(currentModel.p.n,n);checkPlots();}
+const beforeFullSpread=snapshot(),fullSpreadModel=currentModel;
+set('spread',100);assert.equal(currentModel,fullSpreadModel);samePast(beforeFullSpread,snapshot());
+assert.equal(currentModel.p.spread,1);near(Math.min(...currentModel.frequencies),0);
+near(Math.max(...currentModel.frequencies),2*currentModel.p.frequency);
+assert.equal(element('spread-value').textContent,'±100%');paused();checkPlots();
+console.log('PASS: one-population controls/views; contiguous equal-length phase-vector chain ending at the mean arrow for N=20/21/200/499/500; live 100% spread with unchanged activity/history and 0–2f endpoints; playback/perturbations; fixed field and log/linear PSD display/caching/persistence.');

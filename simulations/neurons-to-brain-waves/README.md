@@ -14,14 +14,14 @@ Each displayed neuron is an idealized rhythmic current source with phase `theta_
 
 `d theta_i = [2*pi*f_i + K*R*sin(psi - theta_i)] dt + sqrt(2*D) dW_i`,
 
-where `R*exp(i*psi) = mean(exp(i*theta_i))`. Natural frequencies are evenly distributed around the selected mean, across the entire population. The alignment meter shows `100*R` percent. Frequency, frequency variation, coupling, and independent phase noise remain separate controls.
+where `R*exp(i*psi) = mean(exp(i*theta_i))`. Natural frequencies are evenly distributed around the selected mean, across the entire population. The alignment meter shows `100*R` percent. On the phase wheel, an orange head-to-tail chain includes every neuron's phase vector in neuron order, each scaled to `1/N` of the wheel radius. Starting at the center, the chain ends exactly at the dark mean arrow's tip. The arrow length is alignment, and its horizontal component is the population-average current. Individual chain segments become very small at large population sizes. Frequency, frequency variation, coupling, and independent phase noise remain separate controls.
 
 This current-source model illustrates how coordinated currents can generate a population signal. It is an educational approximation to EEG in arbitrary units, with source geometry held fixed. Real EEG depends on transmembrane currents, their spatial arrangement, and conduction through the head. Raster marks are successive upward phase crossings; there is no membrane-voltage/action-potential or calibrated scalp-voltage model.
 
 ## Controls and experiments
 
 - Choose any integer population size from 20 to 500. Use Apply or Enter to commit an edited count.
-- Natural rhythm: 2–30 Hz; spread: 0–40%; coupling: 0–30 per second; phase noise: 0–0.3 radians squared per second.
+- Natural rhythm: 2–30 Hz; spread: 0–100%; coupling: 0–30 per second; phase noise: 0–0.3 radians squared per second. At ±100% spread, natural frequencies range from zero to twice the selected mean (up to 60 Hz at the UI maximum).
 - Independent neurons starts with scattered phases, zero coupling, and noise 0.02. Lock together uses coupling 24 and noise 0.02. Both use a 10 Hz mean and 12% spread, retain the selected neuron count, and include six seconds of starting history.
 - Presets, Restart, and count changes restart the observation. Frequency, coupling, spread, and noise act live while preserving current phases, time, and previous observations.
 - Common input is an idealized phase reset: use it with independent neurons and watch temporary alignment disperse. Scatter phases randomizes timing without changing natural frequencies. Both preserve time and history.

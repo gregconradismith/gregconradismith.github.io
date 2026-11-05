@@ -175,12 +175,22 @@
       ctx.fillStyle='#326fa085';
       ctx.beginPath();ctx.arc(cx+radius2*Math.cos(theta),cy-radius2*Math.sin(theta),2.1,0,B.TAU);ctx.fill();
     }
+    // Each phase contributes exp(i theta_i)/N. Keep the original neuron order
+    // so this head-to-tail chain visibly sums to the same mean phase vector.
+    let sx=cx,sy=cy;
+    ctx.strokeStyle='#c27532';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(sx,sy);
+    for (let i=0;i<model.p.n;i++) {
+      sx+=R/model.p.n*Math.cos(model.phase[i]);
+      sy-=R/model.p.n*Math.sin(model.phase[i]);
+      ctx.lineTo(sx,sy);
+    }
+    ctx.stroke();
     const ex=cx+R*r.r1*Math.cos(r.psi1),ey=cy-R*r.r1*Math.sin(r.psi1);
     line(ctx,cx,cy,ex,ey,C.ink,2);
     if(r.r1>.05) {const ang=-r.psi1;line(ctx,ex,ey,ex-6*Math.cos(ang-.45),ey-6*Math.sin(ang-.45),C.ink,2);line(ctx,ex,ey,ex-6*Math.cos(ang+.45),ey-6*Math.sin(ang+.45),C.ink,2);}
     text(ctx,'0',cx+R+5,cy,'left');text(ctx,'π',cx-R-5,cy,'right');
     text(ctx,'Phase wheel',cx,cy+R+24,'center');
-    text(ctx,'Arrow: alignment',cx,cy+R+39,'center');
+    text(ctx,'Chain → mean arrow',cx,cy+R+39,'center');
   }
   function drawRaster() {
     const t0=model.t-windowSeconds;

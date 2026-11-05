@@ -25,7 +25,7 @@
     }
     p.n = Math.round(clamp(p.n, 20, 500));
     p.frequency = clamp(p.frequency, 1, 40);
-    p.spread = clamp(p.spread, 0, 0.4);
+    p.spread = clamp(p.spread, 0, 1);
     p.coupling = clamp(p.coupling, 0, 40);
     p.noise = clamp(p.noise, 0, 3);
     p.seed = p.seed >>> 0;
