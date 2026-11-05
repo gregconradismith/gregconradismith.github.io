@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f7f4ed">
+<meta name="description" content="Explore synchronization, alternation, and clustering in a network of FitzHugh-Nagumo oscillators. A self-contained offline simulator.">
+<title>FitzHugh–Nagumo Network Simulator</title>
+<style>
+:root{--paper:#f7f4ed;--card:#fffdf8;--ink:#203649;--muted:#65727c;--line:#deded4;--blue:#2166ac;--teal:#267b70;--orange:#c65d31;--violet:#8a65a2;--shadow:0 8px 30px #23354807;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}
+*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button,select,input[type=number]{border:1px solid #bfc8c7;background:#fffdf8;color:var(--ink);border-radius:8px}button,select{cursor:pointer}button{padding:.58rem .85rem;font-weight:600;transition:background .15s}button:hover{background:#eaf0ec}button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #328bbaa0;outline-offset:3px}button:disabled{cursor:default;opacity:.5}a{color:var(--blue)}h1,h2,h3,p{margin:0}h2{font-size:1rem;letter-spacing:-.02em}h3{font-size:.96rem}small,.hint{font-size:.79rem;line-height:1.5;color:var(--muted)}.shell{max-width:1490px;margin:auto;padding:26px 30px 30px}.header{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:22px}.eyebrow{text-transform:uppercase;font-size:.69rem;font-weight:750;letter-spacing:.13em;color:var(--teal);margin-bottom:7px}h1{font-size:clamp(1.55rem,2.6vw,2.2rem);letter-spacing:-.055em;line-height:1.15}.subtitle{color:var(--muted);margin-top:8px;font-size:.93rem}.offline{white-space:nowrap;color:var(--teal);font-size:.75rem;font-weight:600;display:flex;align-items:center;gap:7px}.offline:before{content:"";height:7px;width:7px;background:var(--teal);border-radius:50%}.layout{display:grid;grid-template-columns:258px minmax(0,1fr);gap:20px;align-items:start}.card{border:1px solid var(--line);border-radius:14px;background:var(--card);box-shadow:var(--shadow)}.controls{padding:21px 19px;position:sticky;top:18px}.controls h2{margin-bottom:20px}.field{margin-bottom:22px}.field:last-child{margin-bottom:0}.field>label,.field>span:first-child{display:block;font-size:.8rem;font-weight:650;margin-bottom:9px}.segmented{display:grid;grid-template-columns:1fr 1fr;gap:5px;border-radius:10px;padding:4px;background:#eeeee7}.segmented label{cursor:pointer;text-align:center;font-size:.82rem;padding:.65rem .15rem;border-radius:7px;font-weight:650;position:relative}.segmented input{position:absolute;opacity:0;width:1px;height:1px}.segmented label:has(input:checked){color:white;background:var(--teal);box-shadow:0 2px 5px #123b2110}.segmented label:has(#inhibitory:checked){background:var(--orange)}.segmented label:has(input:focus-visible){outline:3px solid #328bbaa0;outline-offset:2px}.count-row{display:grid;grid-template-columns:42px 1fr 42px;gap:7px}.count-row button{padding:4px;font-size:1.25rem}.count-row input{width:100%;text-align:center;font-weight:700;font-size:1.1rem;padding:.45rem;appearance:textfield;-moz-appearance:textfield}.count-row input::-webkit-inner-spin-button{display:none}.range-label{display:flex!important;align-items:center;justify-content:space-between}.range-label output{font-variant-numeric:tabular-nums;font-weight:700;color:var(--teal)}input[type=range]{width:100%;accent-color:var(--teal);cursor:pointer}select{width:100%;padding:.55rem .6rem;font-size:.84rem}.check{display:flex!important;gap:8px;align-items:center;font-weight:550!important;font-size:.84rem!important;cursor:pointer}.check input{accent-color:var(--teal);width:16px;height:16px}.field .hint{display:block;margin-top:7px}.control-divider{border:0;border-top:1px solid var(--line);margin:19px 0}.workspace{min-width:0}.toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px;flex-wrap:wrap}.transport{display:flex;gap:7px;flex-wrap:wrap}.transport button{font-size:.81rem}.primary{color:white;background:var(--ink);border-color:var(--ink);min-width:89px}.primary:hover{background:#35566f}.clock{font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:8px}.clock strong{font-size:1.14rem;font-weight:650}.clock span{color:var(--muted);font-size:.76rem}.upper-plots{display:grid;grid-template-columns:minmax(0,1fr) 255px;gap:16px;margin-bottom:16px}.plot-card{min-width:0;padding:17px 17px 12px}.plot-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.plot-header p{font-size:.76rem;color:var(--muted);margin-top:4px;line-height:1.4}.plot-header select{width:auto;max-width:155px;font-size:.75rem;padding:.37rem .5rem}.canvas-wrap{position:relative;min-width:0}canvas{display:block;width:100%;height:100%}#phase{height:330px}#network{height:188px}.legend{display:flex;gap:10px 17px;flex-wrap:wrap;font-size:.7rem;color:var(--muted);padding:7px 4px 0;line-height:1.6}.legend span{display:flex;align-items:center;gap:6px}.swatch{width:20px;border-top:2px solid currentColor;display:inline-block}.swatch.dashed{border-top-style:dashed}.legend .selected{color:var(--orange)}.legend .recovery{color:var(--violet)}.phase-readout{padding:10px 4px 0;font-size:.76rem;color:var(--muted);min-height:30px;font-variant-numeric:tabular-nums}.phase-readout strong{color:var(--ink);font-weight:650}.network-card{padding:17px 14px 13px;min-width:0}.network-card .hint{margin-top:4px}.neuron-buttons{display:flex;justify-content:center;gap:5px;flex-wrap:wrap;padding:3px 2px 11px;max-width:230px;margin:auto}.neuron-buttons button{padding:0;width:27px;height:27px;border:1px solid var(--neuron);border-radius:50%;font-size:.72rem;color:var(--neuron);background:white}.neuron-buttons button[aria-pressed=true]{background:var(--neuron);color:white;box-shadow:0 0 0 2px var(--card),0 0 0 3px var(--neuron)}.network-stat{padding:10px 4px 0;border-top:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;font-size:.74rem;color:var(--muted)}.network-stat strong{color:var(--ink);font-size:1rem;font-variant-numeric:tabular-nums}.mechanism{padding:13px 15px;border-radius:10px;background:#edf3ee;margin:13px 0 16px;border-left:3px solid var(--teal)}.mechanism.inhibitory{background:#f8eee7;border-left-color:var(--orange)}.mechanism h2{font-size:.9rem;margin-bottom:5px}.mechanism p{font-size:.82rem;color:#4d5e65;line-height:1.55}.traces-card{margin-bottom:16px}.trace-controls{display:flex;gap:7px}.trace-controls label{font-size:.7rem;color:var(--muted)}.trace-controls select{display:block;margin-top:4px;max-width:143px}.raster-card{padding-bottom:16px}#traces{height:205px}#raster{height:105px}.timing-readout{font-size:.77rem;color:var(--muted);line-height:1.5;margin:11px 2px 0;min-height:24px}.timing-readout strong{color:var(--ink);font-weight:650}.status{font-size:.77rem;line-height:1.5;color:var(--muted);padding:13px 2px 0;min-height:32px}.notes{margin-top:21px;padding:17px 20px}.notes summary{font-size:.88rem;font-weight:650;cursor:pointer}.notes-content{max-width:1020px;padding-top:16px;color:#4d5e65;font-size:.86rem;line-height:1.65}.notes-content p{margin:9px 0}.equations{background:#f5f4ed;border-radius:8px;padding:14px;overflow-x:auto;text-align:center;margin:12px 0}math{font-size:1.13rem}.notes-content ul{padding-left:21px;margin:10px 0}.notes-content li{margin:4px 0}.tiny-footer{font-size:.71rem;color:var(--muted);padding:15px 2px 0;line-height:1.5}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:var(--teal)}.noscript{padding:20px;border:1px solid var(--orange);background:#fff3e8;margin-bottom:20px}
+@media(min-width:1450px){#phase{height:360px}#network{height:218px}}
+@media(max-width:1100px){.shell{padding:23px 20px}.layout{grid-template-columns:228px minmax(0,1fr);gap:16px}.controls{padding:19px 15px}.upper-plots{grid-template-columns:minmax(0,1fr) 205px;gap:12px}.network-card{padding:17px 10px}#phase{height:310px}#network{height:170px}.plot-card{padding:15px 12px 10px}.plot-header h2{font-size:.94rem}.neuron-buttons{gap:4px}}
+@media(max-width:880px){.layout{grid-template-columns:1fr}.controls{position:static;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding:18px}.controls h2{grid-column:1/-1;margin-bottom:0}.field{margin-bottom:0}.controls .control-divider{display:none}.controls>.hint{grid-column:1/-1}.upper-plots{grid-template-columns:minmax(0,1fr) 230px}#phase{height:330px}#network{height:192px}.offline{display:none}.header{margin-bottom:18px}}
+@media(max-width:590px){.shell{padding:19px 12px}.subtitle{font-size:.83rem;line-height:1.5}.controls{grid-template-columns:1fr 1fr;padding:16px;gap:17px 13px}.controls h2{font-size:.94rem}.field>label,.field>span:first-child{font-size:.76rem}.segmented label{font-size:.75rem}.upper-plots{grid-template-columns:1fr;gap:14px}#phase{height:300px}.network-card{display:grid;grid-template-columns:1fr 1fr;column-gap:12px;padding:15px}.network-card>h2,.network-card>.hint{grid-column:1/-1}#network{grid-column:1;grid-row:3/6;height:165px}.neuron-buttons{grid-column:2;align-content:center;padding:15px 0}.network-stat{grid-column:2;gap:5px}.toolbar{gap:12px}.transport{gap:5px}.transport button{padding:.56rem .7rem;font-size:.75rem}.clock strong{font-size:1.03rem}.plot-header{align-items:start}.trace-controls select{max-width:110px}#traces{height:215px}.legend{font-size:.66rem;gap:7px 13px}.phase-readout{font-size:.73rem}.mechanism p{font-size:.78rem}.mechanism h2{font-size:.87rem}.notes{padding:15px}.notes-content{font-size:.81rem}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+.neuron-buttons button.all-neurons{width:auto;min-width:39px;padding:0 8px;border-radius:14px}
+</style>
+</head>
+<body>
+<main class="shell">
+<header class="header"><div><p class="eyebrow">Cellular biophysics · NSCI 351</p><h1>FitzHugh–Nagumo network</h1><p class="subtitle">Explore how excitation brings spikes together and inhibition lets neurons take turns.</p></div><span class="offline">One file · works offline</span></header>
+<noscript><p class="noscript">JavaScript is needed to run this simulator. All code is included in this HTML file; no internet connection is required.</p></noscript>
+<div class="layout">
+<aside class="controls card" aria-labelledby="setup-title">
+<h2 id="setup-title">Set up the network</h2>
+<div class="field"><span id="coupling-label">Connection type</span><div class="segmented" role="radiogroup" aria-labelledby="coupling-label"><label><input id="excitatory" name="mode" type="radio" value="exc" checked>Excitatory</label><label><input id="inhibitory" name="mode" type="radio" value="inh">Inhibitory</label></div></div>
+<div class="field"><label for="count">Number of neurons</label><div class="count-row"><button id="fewer" aria-label="Fewer neurons">−</button><input id="count" type="number" min="1" max="12" step="1" value="2" inputmode="numeric"><button id="more" aria-label="More neurons">+</button></div><span class="hint">1–12 neurons · all-to-all connections</span></div>
+<div class="field"><label class="check"><input id="coupling" type="checkbox" checked>Coupling on</label><span class="hint">Switch off to compare independent oscillators.</span></div>
+<div class="field"><label for="strength" class="range-label">Coupling strength <output id="strength-value" for="strength">1.00</output></label><input id="strength" type="range" min="0" max="3" step="0.05" value="1"><span class="hint">Shared across the other neurons; no self-connections.</span></div>
+<hr class="control-divider">
+<div class="field"><label for="initial">Starting phases</label><select id="initial"><option value="0.3" selected>Nearby phases</option><option value="1">Around the cycle</option></select></div>
+<div class="field"><label for="speed">Playback speed</label><select id="speed"><option value="3">Slow · 3 units/s</option><option value="12" selected>Normal · 12 units/s</option><option value="40">Fast · 40 units/s</option><option value="100">Very fast · 100 units/s</option></select></div>
+<p class="hint">Type, count, and starting-phase changes restart. Strength and the coupling switch act immediately.</p>
+</aside>
+<section class="workspace" aria-label="Simulation">
+<div class="toolbar"><div class="transport"><button id="play" class="primary" aria-label="Pause simulation">Pause</button><button id="restart">Restart</button><button id="step" title="Pause and advance one model time unit">Step +1</button><button id="advance" title="Pause and advance 100 model time units">Advance +100</button></div><div class="clock"><strong id="clock">t = 0.0</strong><span>model time</span></div></div>
+<div class="upper-plots">
+<section class="plot-card card" aria-labelledby="phase-title"><div class="plot-header"><div><h2 id="phase-title">The moving nullclines</h2><p>All nullclines stay visible. Follow all neurons or choose one.</p></div><select id="selected" aria-label="Neuron to follow"><option value="-2">None</option><option value="-1" selected>All neurons</option></select></div><div class="canvas-wrap"><canvas id="phase" role="img" aria-label="Phase plane with all possible voltage nullclines, labeled free and excited or inhibited extremes, and active and inactive regions divided by the voltage threshold at v equals zero"></canvas></div><div class="legend"><span><i class="swatch"></i>All voltage nullclines</span><span class="selected"><i class="swatch"></i><span id="current-legend">Current neuron nullclines</span></span><span class="recovery"><i class="swatch dashed"></i>Recovery nullcline</span></div><p id="phase-readout" class="phase-readout"></p></section>
+<section class="network-card card" aria-labelledby="network-title"><h2 id="network-title">Who is firing?</h2><p class="hint">Filled circles: v &gt; 0</p><canvas id="network" role="img" aria-label="All-to-all neuron network; filled circles mark active neurons"></canvas><div id="neuron-buttons" class="neuron-buttons" aria-label="Choose a neuron to follow"></div><div class="network-stat"><span>Active now</span><strong id="active-count">0 / 2</strong></div><div class="network-stat"><span id="input-label">Input to neuron 2</span><strong id="input-value">+0.00</strong></div></section>
+</div>
+<section id="mechanism" class="mechanism" aria-labelledby="mechanism-title"><h2 id="mechanism-title">Excitation advances a partner's spike</h2><p id="mechanism-text"></p></section>
+<section class="plot-card card traces-card" aria-labelledby="traces-title"><div class="plot-header"><div><h2 id="traces-title">Voltage traces</h2><p id="trace-note">All neurons use the same voltage scale.</p></div><div class="trace-controls"><label for="trace-view">View<select id="trace-view"><option value="overlay">Overlay</option><option value="stacked">Separate rows</option></select></label><label for="window">Time window<select id="window"><option value="80">80 units</option><option value="160" selected>160 units</option><option value="320">320 units</option></select></label></div></div><canvas id="traces" role="img" aria-label="Membrane voltage versus dimensionless model time for every neuron"></canvas></section>
+<section class="plot-card card raster-card" aria-labelledby="raster-title"><div class="plot-header"><div><h2 id="raster-title">Spike times</h2><p>One mark each time a neuron crosses v = 0 upward.</p></div></div><canvas id="raster" role="img" aria-label="Raster of spike times by neuron"></canvas><p id="timing" class="timing-readout"></p></section>
+<p id="status" class="status" role="status" aria-live="polite">Running. Choose excitation or inhibition, then watch the nullclines and spike times.</p>
+</section>
+</div>
+<details class="notes card"><summary>Model &amp; how to read the plots</summary><div class="notes-content">
+<p>Every neuron is an identical FitzHugh–Nagumo oscillator with fast voltage <i>v</i> and slow recovery <i>w</i>. A neuron sends input whenever its voltage is above zero. The vertical <strong>Voltage threshold</strong> line at <i>v</i> = 0 separates the shaded inactive (<i>v</i> ≤ 0) and active (<i>v</i> &gt; 0) regions. It is the threshold for sending synaptic input, separate from the cubic nullclines. All quantities, including time, are dimensionless.</p>
+<div class="equations"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mfrac><mrow><mi>d</mi><msub><mi>v</mi><mi>i</mi></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><msub><mi>v</mi><mi>i</mi></msub><mo>−</mo><mfrac><msubsup><mi>v</mi><mi>i</mi><mn>3</mn></msubsup><mn>3</mn></mfrac><mo>−</mo><msub><mi>w</mi><mi>i</mi></msub><mo>+</mo><mi>I</mi><mo>+</mo><msub><mi>I</mi><mrow><mtext>syn,</mtext><mi>i</mi></mrow></msub><mo>,</mo><mspace width="1em"/><mfrac><mrow><mi>d</mi><msub><mi>w</mi><mi>i</mi></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mn>0.08</mn><mo>(</mo><msub><mi>v</mi><mi>i</mi></msub><mo>+</mo><mn>0.4</mn><mo>−</mo><mn>0.5</mn><msub><mi>w</mi><mi>i</mi></msub><mo>)</mo></math></div>
+<p>For <i>N</i> &gt; 1, <i>I</i><sub>syn,i</sub> = ±<i>g</i> Σ<sub>j ≠ i</sub> H(<i>v</i><sub>j</sub>)/(<i>N</i> − 1), where H(<i>v</i>) = 1 if <i>v</i> &gt; 0, and 0 otherwise. The plus sign is excitation; the minus sign is inhibition. For one neuron the synaptic input is zero. Dividing by <i>N</i> − 1 keeps the maximum total input at ±<i>g</i> as the network grows.</p>
+<ul><li><strong>Excitatory example:</strong> <i>I</i> = 0 and default <i>g</i> = 1. The cubic rises when partners fire. Recovered neurons can fire sooner, closing a firing gap.</li><li><strong>Inhibitory example:</strong> <i>I</i> = 1 and default <i>g</i> = 2. Inhibition lowers the cubic and can hold a neuron silent while it recovers. When the active partner stops, the cubic rises and the silent partner can fire. With two neurons this gives alternation.</li><li><strong>All nullclines:</strong> the voltage-nullcline family includes every possible count of active partners, from zero to <i>N</i> − 1, at the configured coupling strength. The free cubic has no input. The excited or inhibited cubic has every partner active. Intermediate curves remain visible even when no neuron currently occupies them. With one neuron or zero strength, they coincide with the free cubic. With coupling switched off, the family remains a reference and every neuron's actual input is zero.</li><li><strong>Following neurons:</strong> “None” turns off colored nullcline highlighting while keeping every reference nullcline and neuron trajectory visible. “All neurons,” the default, shows every trajectory and highlights all currently occupied cubics in neuron colors. Overlapping current cubics share colored segments. Choosing one neuron highlights its trajectory and current cubic while keeping the entire family visible.</li><li><strong>Nullcline equations:</strong> a neuron's instantaneous voltage nullcline is <i>w</i> = <i>v</i> − <i>v</i>³/3 + <i>I</i> + <i>I</i><sub>syn,i</sub>. Its recovery nullcline is <i>w</i> = 2(<i>v</i> + 0.4). A nullcline is a zero-derivative curve, not a trajectory or a fixed threshold.</li><li><strong>More neurons:</strong> inhibition can produce staggered firing, clusters, or more irregular rhythms. More than two neurons cannot all be exactly half a cycle apart from one another. Changing strength or timing can change the outcome.</li><li><strong>Starting phases:</strong> neurons start at different points on their isolated limit cycle. “Nearby phases” uses a band of 0.30 cycles; “Around the cycle” distributes them around one cycle. The initial states are reproducible, with a small phase offset for larger networks to avoid exact symmetries.</li><li><strong>Reading the traces:</strong> the phase plane retains a six-unit trajectory tail. The trace and raster show the chosen time window, with up to 640 units of history retained. Colored cubics show current inputs; older trajectory segments may have evolved under earlier inputs.</li><li><strong>Timing measurement:</strong> for two neurons, separation uses the last completed cycle of neuron 1 containing one spike from neuron 2. Zero degrees means coincident firing; 180° means alternation. A result is withheld until there is enough suitable spike history. The readout is a finite observation, not a stability proof.</li></ul>
+<p>The equations use threshold-gated additive currents. They illustrate timing mechanisms rather than a conductance-based synapse or a fit to experimental data. Integration uses fourth-order Runge–Kutta with a fixed step of 0.005, independently of playback speed. “Step +1” and “Advance +100” pause playback and integrate by the indicated amount.</p>
+<p>Model background: FitzHugh (1961), <a href="https://doi.org/10.1016/S0006-3495(61)86902-6">Impulses and physiological states in theoretical models of nerve membrane</a>. For inhibitory switching mechanisms, see <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC5866471/">Ausborn et al. (2018), State-dependent rhythmogenesis and frequency control in a half-center locomotor CPG</a>.</p>
+</div></details>
+<footer class="tiny-footer">A standalone teaching simulator. No libraries, accounts, or internet connection are required.</footer>
+</main>
+<script id="fhn-model">
+"use strict";
+// The numerical model is kept independent of the UI for reproducible checks.
+globalThis.FHN = (() => {
+  const DT = 0.005, SAMPLE_DT = 0.05;
+  const defaults = (mode = "exc", n = 2) => ({mode, n, I: mode === "exc" ? 0 : 1, g: mode === "exc" ? 1 : 2});
+  function inputs(state, p) {
+    const n = state.length / 2, out = new Float64Array(n);
+    if (n === 1) return out;
+    let active = 0;
+    for (let i = 0; i < n; i++) active += state[2 * i] > 0 ? 1 : 0;
+    const factor = (p.mode === "exc" ? 1 : -1) * p.g / (n - 1);
+    for (let i = 0; i < n; i++) out[i] = factor * (active - (state[2 * i] > 0 ? 1 : 0));
+    return out;
+  }
+  function derivatives(state, p) {
+    const out = new Float64Array(state.length), syn = inputs(state, p);
+    for (let i = 0; i < syn.length; i++) {
+      const v = state[2*i], w = state[2*i+1];
+      out[2*i] = v - v*v*v / 3 - w + p.I + syn[i];
+      out[2*i+1] = .08 * (v + .4 - .5*w);
+    }
+    return out;
+  }
+  function step(state, p, dt = DT) {
+    const n = state.length, tmp = new Float64Array(n), out = new Float64Array(n);
+    const a = derivatives(state,p);
+    for (let j=0;j<n;j++) tmp[j]=state[j]+dt*a[j]/2;
+    const b = derivatives(tmp,p);
+    for (let j=0;j<n;j++) tmp[j]=state[j]+dt*b[j]/2;
+    const c = derivatives(tmp,p);
+    for (let j=0;j<n;j++) tmp[j]=state[j]+dt*c[j];
+    const d = derivatives(tmp,p);
+    for (let j=0;j<n;j++) out[j]=state[j]+dt*(a[j]+2*b[j]+2*c[j]+d[j])/6;
+    return out;
+  }
+  const cycles = new Map();
+  function buildCycle(mode) {
+    if (cycles.has(mode)) return cycles.get(mode);
+    const dt = .01, p = {...defaults(mode,1), g:0};
+    let state = new Float64Array([-1.02, p.I-.665]);
+    const states = [state], crossing = [];
+    for (let k=1;k<=24000;k++) {
+      const previous = state;
+      state = step(previous,p,dt); states.push(state);
+      if (previous[0]<0 && state[0]>=0) crossing.push((k-1+(-previous[0])/(state[0]-previous[0]))*dt);
+    }
+    const end = crossing.at(-1), start = crossing.at(-2), period = end-start;
+    const count = Math.round(period/dt), samples=[];
+    for (let k=0;k<count;k++) {
+      const position=(start+k/count*period)/dt, j=Math.floor(position), f=position-j;
+      samples.push(new Float64Array([states[j][0]*(1-f)+states[j+1][0]*f, states[j][1]*(1-f)+states[j+1][1]*f]));
+    }
+    samples[0][0]=1e-9;
+    const result={period,dt:period/count,samples}; cycles.set(mode,result); return result;
+  }
+  function initialStates(n,mode,spread=.30,seed=1) {
+    const cycle=buildCycle(mode), out=new Float64Array(n*2), length=cycle.samples.length;
+    for (let i=0;i<n;i++) {
+      const jitter=n>2 && i>0 ? .004*Math.sin((i+1)*2.399963+seed) : 0;
+      const lag = spread*i/n+jitter;
+      const position=((1-lag)%1+1)%1*length, k=Math.floor(position), f=position-k;
+      const a=cycle.samples[k%length], b=cycle.samples[(k+1)%length];
+      out[2*i]=a[0]*(1-f)+b[0]*f; out[2*i+1]=a[1]*(1-f)+b[1]*f;
+    }
+    out[0]=1e-9; return out;
+  }
+  const nullcline=(v,input,p)=>v-v*v*v/3+p.I+input;
+  function nullclineFamily(p) {
+    if(p.n===1||p.g===0)return [{input:0,label:"free"}];
+    const sign=p.mode==="exc"?1:-1;
+    return Array.from({length:p.n},(_,q)=>({input:sign*p.g*q/(p.n-1),label:q===0?"free":q===p.n-1?(p.mode==="exc"?"excited":"inhibited"):""})).sort((a,b)=>a.input-b.input);
+  }
+  return {DT,SAMPLE_DT,defaults,inputs,derivatives,step,buildCycle,initialStates,nullcline,nullclineFamily};
+})();
+</script>
+<script id="fhn-app">
+"use strict";
+(() => {
+  const $=id=>document.getElementById(id);
+  const colors=["#2166ac","#d45c2d","#5a8a52","#925aa1","#159a9c","#ba7c22","#c14e83","#6e7cba","#8c6555","#508a7f","#a58c25","#697680"];
+  let p=FHN.defaults(), state, time=0, ticks=0, selected=-1, running=true, lastFrame=null, accumulator=0;
+  let sampleTicks=0, spikes=[], events=[], lastStatus="", dirty=true;
+  const history={data:[],start:0,add(t,s){this.data.push({t,s:s.slice()});if(this.data.length-this.start>12801)this.start++;if(this.start>4096){this.data=this.data.slice(this.start);this.start=0;}},clear(){this.data=[];this.start=0;},since(t,max=Infinity){const out=[];for(let k=this.data.length-1;k>=this.start;k--){if(this.data[k].t<t)break;out.push(this.data[k]);}out.reverse();const skip=Math.max(1,Math.floor(out.length/max));return skip>1?out.filter((_,k)=>k%skip===0||k===out.length-1):out;}};
+  function announce(text){if(text!==lastStatus){$("status").textContent=text;lastStatus=text;}}
+  function effective(){return {...p,g:$("coupling").checked?p.g:0};}
+  function rebuildNeuronControls(){
+    $("selected").replaceChildren(); $("neuron-buttons").replaceChildren();
+    const noneOption=document.createElement("option");noneOption.value="-2";noneOption.textContent="None";$("selected").append(noneOption);
+    const allOption=document.createElement("option");allOption.value="-1";allOption.textContent="All neurons";$("selected").append(allOption);
+    const allButton=document.createElement("button");allButton.type="button";allButton.textContent="All";allButton.className="all-neurons";allButton.setAttribute("aria-label","Follow all neurons");allButton.style.setProperty("--neuron","#203649");allButton.addEventListener("click",()=>selectNeuron(-1));$("neuron-buttons").append(allButton);
+    for(let i=0;i<p.n;i++){
+      const option=document.createElement("option");option.value=String(i);option.textContent=`Neuron ${i+1}`;$("selected").append(option);
+      const button=document.createElement("button");button.type="button";button.textContent=String(i+1);button.setAttribute("aria-label",`Follow neuron ${i+1}`);button.style.setProperty("--neuron",colors[i]);button.addEventListener("click",()=>selectNeuron(i));$("neuron-buttons").append(button);
+    }
+    selectNeuron(selected);
+    $("fewer").disabled=p.n===1;$("more").disabled=p.n===12;
+    $("raster").style.height=`${Math.max(105,64+p.n*13)}px`;
+    $("traces").style.height=`${$("trace-view").value==="stacked"?Math.max(205,60+p.n*24):205}px`;
+  }
+  function selectNeuron(i){
+    selected=Math.min(p.n-1,Math.max(-2,i));$("selected").value=String(selected);
+    for(let j=0;j<$("neuron-buttons").children.length;j++)$("neuron-buttons").children[j].setAttribute("aria-pressed",String(j===selected+1));
+    $("input-label").textContent=selected<0?"Input range":`Input to neuron ${selected+1}`;
+    const legend=document.querySelector(".legend .selected");legend.style.color=selected<0?"#203649":colors[selected];legend.style.display=selected===-2?"none":"flex";
+    $("current-legend").textContent=selected===-2?"Nullcline highlighting off":selected<0?"Current neuron nullclines":`Neuron ${selected+1}'s current cubic`;dirty=true;
+  }
+  function describe(){
+    const inh=p.mode==="inh";$("mechanism").classList.toggle("inhibitory",inh);
+    $("mechanism-title").textContent=inh?"Inhibition lets partners take turns":"Excitation advances a partner's spike";
+    let text=inh?"An active neuron lowers its partners' cubics, holding them at low voltage while they recover. When it stops, the cubic rises and a partner can fire.":"An active neuron lifts its partners' cubics. A recovered partner can jump up sooner, reducing the gap between their spikes.";
+    if(p.n===1)text+=" With one neuron there are no synapses: this is an isolated oscillator.";
+    else if(p.n===2)text+=inh?" With the default strength, the pair settles into alternation.":" With the default strength, the pair converges toward firing together.";
+    else text+=inh?" In larger networks, look for groups and staggered firing; every pair cannot be half a cycle apart.":" Watch whether the colored trajectories and spike marks draw together.";
+    if(!$("coupling").checked||p.g===0)text+=" Coupling is currently off, so the neurons evolve independently.";
+    $("mechanism-text").textContent=text;
+  }
+  function reset({mode=p.mode,n=p.n,preset=false}={}){
+    p=preset?FHN.defaults(mode,n):{...p,mode,n};
+    if(preset){$("strength").value=String(p.g);$("coupling").checked=true;}
+    $("excitatory").checked=p.mode==="exc";$("inhibitory").checked=p.mode==="inh";$("count").value=String(p.n);$("strength-value").textContent=p.g.toFixed(2);
+    state=FHN.initialStates(p.n,p.mode,Number($("initial").value));time=0;ticks=0;sampleTicks=0;accumulator=0;lastFrame=null;
+    spikes=Array.from({length:p.n},()=>[]);spikes[0].push(0);events=[];history.clear();history.add(time,state);selected=Math.min(selected,p.n-1);
+    rebuildNeuronControls();describe();dirty=true;announce(`${running?"Running":"Paused"}. ${p.n} neuron${p.n===1?"":"s"}, ${p.mode==="exc"?"excitatory":"inhibitory"} connections. New starting phases.`);
+  }
+  function advance(duration){
+    const count=Math.round(duration/FHN.DT), ep=effective();
+    for(let k=0;k<count;k++){
+      const previous=state, next=FHN.step(previous,ep);
+      for(let i=0;i<p.n;i++){
+        if(!Number.isFinite(next[2*i])||!Number.isFinite(next[2*i+1])){running=false;updatePlay();announce("Simulation paused because the state is not finite. Restart to restore the starting example.");return;}
+        if(previous[2*i]<0&&next[2*i]>=0){const at=time+FHN.DT*(-previous[2*i])/(next[2*i]-previous[2*i]);spikes[i].push(at);while(spikes[i].length&&spikes[i][0]<time-700)spikes[i].shift();}
+      }
+      state=next;ticks++;time=ticks*FHN.DT;sampleTicks++;
+      if(sampleTicks===10){history.add(time,state);sampleTicks=0;}
+    }
+    dirty=true;
+  }
+  function updatePlay(){$("play").textContent=running?"Pause":"Run";$("play").setAttribute("aria-label",running?"Pause simulation":"Run simulation");}
+  function pause(){running=false;accumulator=0;lastFrame=null;updatePlay();}
+  function timing(){
+    if(p.n===1)return "<strong>One oscillator.</strong> There are no connections and no relative phase to measure.";
+    if(p.n>2)return "<strong>Read the raster:</strong> vertically aligned marks mean coincident spikes; separated rows of marks reveal staggered firing or groups.";
+    const a=spikes[0].at(-2),b=spikes[0].at(-1);
+    if(a===undefined||b===undefined||b-a<5)return "<strong>Measuring the firing separation…</strong> Let neuron 1 complete a cycle, or choose Advance +100.";
+    const eps=.001,inner=spikes[1].filter(t=>t>=a-eps&&t<b-eps);
+    if(inner.length!==1)return "<strong>No single separation for the last cycle.</strong> The spike raster shows the current timing pattern.";
+    const fraction=Math.max(0,Math.min(1,(inner[0]-a)/(b-a))), degrees=360*Math.min(fraction,1-fraction);
+    return `<strong>Last-cycle separation: ${degrees<.1?"0.0":degrees.toFixed(1)}°.</strong> 0° means firing together; 180° means alternation.`;
+  }
+  function canvasContext(id){
+    const canvas=$(id),rect=canvas.getBoundingClientRect(),ratio=Math.min(window.devicePixelRatio||1,2),width=Math.max(1,rect.width),height=Math.max(1,rect.height);
+    if(canvas.width!==Math.round(width*ratio)||canvas.height!==Math.round(height*ratio)){canvas.width=Math.round(width*ratio);canvas.height=Math.round(height*ratio);}
+    const c=canvas.getContext("2d");c.setTransform(ratio,0,0,ratio,0,0);c.clearRect(0,0,width,height);c.font="11px system-ui, sans-serif";c.lineJoin="round";return {c,width,height};
+  }
+  const map=(x,lo,hi,a,b)=>a+(x-lo)/(hi-lo)*(b-a);
+  function axes(c,width,height,xlim,ylim,{xlabel="",ylabel="",xticks=[],yticks=[]}={}){
+    const box={l:44,r:width-13,t:13,b:height-37};
+    const X=x=>map(x,xlim[0],xlim[1],box.l,box.r),Y=y=>map(y,ylim[0],ylim[1],box.b,box.t);
+    c.strokeStyle="#e9ebe4";c.lineWidth=1;c.fillStyle="#748089";c.textAlign="center";c.textBaseline="top";
+    for(const x of xticks){c.beginPath();c.moveTo(X(x),box.t);c.lineTo(X(x),box.b);c.stroke();c.fillText(Math.abs(x)<1e-8?"0":String(Math.round(x*10)/10),X(x),box.b+7);}
+    c.textAlign="right";c.textBaseline="middle";
+    for(const y of yticks){c.beginPath();c.moveTo(box.l,Y(y));c.lineTo(box.r,Y(y));c.stroke();c.fillText(String(y),box.l-8,Y(y));}
+    c.strokeStyle="#bbc5c8";c.beginPath();c.moveTo(box.l,box.t);c.lineTo(box.l,box.b);c.lineTo(box.r,box.b);c.stroke();
+    c.fillStyle="#65727c";c.textAlign="center";c.textBaseline="bottom";c.fillText(xlabel,(box.l+box.r)/2,height-1);
+    if(ylabel){c.save();c.translate(11,(box.t+box.b)/2);c.rotate(-Math.PI/2);c.fillText(ylabel,0,0);c.restore();}
+    return {box,X,Y};
+  }
+  function clip(c,box){c.save();c.beginPath();c.rect(box.l,box.t,box.r-box.l,box.b-box.t);c.clip();}
+  function curve(c,X,Y,fn,color,dash=[],width=1.7,offset=0){c.strokeStyle=color;c.lineWidth=width;c.setLineDash(dash);c.lineDashOffset=offset;c.beginPath();for(let k=0;k<=250;k++){const v=-3+k*6/250,y=fn(v);if(k===0)c.moveTo(X(v),Y(y));else c.lineTo(X(v),Y(y));}c.stroke();c.setLineDash([]);c.lineDashOffset=0;}
+  function drawPhase(syn){
+    const {c,width,height}=canvasContext("phase"),signed=(p.mode==="exc"?1:-1)*p.g;
+    const ymin=Math.min(-1.35,p.I+Math.min(0,signed)-1.12),ymax=Math.max(1.35,p.I+Math.max(0,signed)+1.12);
+    const yt=[];for(let y=Math.ceil(ymin);y<=ymax;y++)yt.push(y);
+    const {box,X,Y}=axes(c,width,height,[-3,3],[ymin,ymax],{xlabel:"Voltage, v",ylabel:"Recovery, w",xticks:[-2,-1,0,1,2],yticks:yt});
+    clip(c,box);
+    c.fillStyle="#e8eef666";c.fillRect(box.l,box.t,X(0)-box.l,box.b-box.t);
+    c.fillStyle="#fae9dc77";c.fillRect(X(0),box.t,box.r-X(0),box.b-box.t);
+    c.strokeStyle="#748493";c.lineWidth=1.2;c.setLineDash([4,4]);c.beginPath();c.moveTo(X(0),box.t);c.lineTo(X(0),box.b);c.stroke();c.setLineDash([]);
+    const family=FHN.nullclineFamily(p);
+    for(const entry of family)curve(c,X,Y,v=>FHN.nullcline(v,entry.input,p),entry.label?"#87959e":"#b0b9be",[],entry.label?1.9:1.1);
+    curve(c,X,Y,v=>2*(v+.4),"#8a65a2",[6,4],1.7);
+    // Keep overlapping occupied cubics at their true positions, sharing the
+    // stroke between the colors of the neurons currently following each one.
+    const occupied=new Map();
+    for(let i=0;i<p.n;i++){if(selected===-2||(selected>=0&&i!==selected))continue;const key=syn[i].toFixed(9);if(!occupied.has(key))occupied.set(key,{input:syn[i],neurons:[]});occupied.get(key).neurons.push(i);}
+    for(const group of occupied.values()){
+      const count=group.neurons.length;
+      group.neurons.forEach((i,j)=>curve(c,X,Y,v=>FHN.nullcline(v,group.input,p),colors[i],count>1?[9,9*(count-1)]:[],2.6,-j*9));
+    }
+    const tail=history.since(Math.max(0,time-6));
+    for(let i=0;i<p.n;i++){const followed=selected<0||i===selected;c.strokeStyle=colors[i];c.globalAlpha=followed?.95:.50;c.lineWidth=followed?2:1.1;c.beginPath();tail.forEach((s,k)=>{if(k===0)c.moveTo(X(s.s[2*i]),Y(s.s[2*i+1]));else c.lineTo(X(s.s[2*i]),Y(s.s[2*i+1]));});c.lineTo(X(state[2*i]),Y(state[2*i+1]));c.stroke();}
+    c.globalAlpha=1;
+    for(let i=0;i<p.n;i++){const x=X(state[2*i]),y=Y(state[2*i+1]);if(i===selected){c.beginPath();c.arc(x,y,9,0,2*Math.PI);c.fillStyle="#fffdf8";c.fill();c.lineWidth=1.6;c.strokeStyle=colors[i];c.stroke();}c.beginPath();c.arc(x,y,i===selected?5.6:4.2,0,2*Math.PI);c.fillStyle=colors[i];c.fill();c.strokeStyle="white";c.lineWidth=1.2;c.stroke();}
+    // Name the endpoint cubics directly so their order is clear in both modes.
+    c.font="600 11px system-ui, sans-serif";c.textAlign="left";c.textBaseline="middle";
+    for(const entry of family){
+      if(!entry.label)continue;
+      const belowLeft=p.mode==="exc"?entry.label==="free":entry.label==="inhibited";
+      const x=belowLeft?X(-1)-12:X(1.25)+6;
+      const y=belowLeft?Math.min(box.b-11,Y(FHN.nullcline(-1,entry.input,p))+18):Y(FHN.nullcline(1.25,entry.input,p))-11;
+      const w=c.measureText(entry.label).width;c.textAlign=belowLeft?"right":"left";
+      c.fillStyle="#fffdf8ee";c.fillRect(belowLeft?x-w-3:x-3,y-9,w+6,18);c.fillStyle="#4e626f";c.fillText(entry.label,x,y);
+    }
+    c.fillStyle="#fffdf8dd";c.fillRect(X(0)-52,box.t+3,104,18);c.fillStyle="#536775";c.textAlign="center";c.font="10px system-ui, sans-serif";c.fillText("Voltage threshold",X(0),box.t+12);
+    c.fillStyle="#f1f4f8ee";c.fillRect(box.l+3,box.t+3,46,18);c.textAlign="left";c.fillStyle="#687d91";c.fillText("Inactive",box.l+7,box.t+12);
+    c.fillStyle="#fcf1e9ee";c.fillRect(box.r-43,box.t+3,40,18);c.textAlign="right";c.fillStyle="#9c704f";c.fillText("Active",box.r-7,box.t+12);
+    c.restore();
+  }
+  function drawNetwork(){
+    const {c,width,height}=canvasContext("network"),radius=Math.min(width*.34,height*.35),cx=width/2,cy=height/2;
+    const nodes=Array.from({length:p.n},(_,i)=>({x:p.n===1?cx:cx+radius*Math.cos(-Math.PI/2+2*Math.PI*i/p.n),y:p.n===1?cy:cy+radius*Math.sin(-Math.PI/2+2*Math.PI*i/p.n)}));
+    const on=$("coupling").checked&&p.g>0;
+    c.strokeStyle=on?"#ccd8d4":"#e4e5df";c.lineWidth=1;
+    for(let i=0;i<p.n;i++)for(let j=i+1;j<p.n;j++){c.beginPath();c.moveTo(nodes[i].x,nodes[i].y);c.lineTo(nodes[j].x,nodes[j].y);c.stroke();}
+    for(let i=0;i<p.n;i++){
+      const {x,y}=nodes[i],active=state[2*i]>0,r=p.n>8?12:15;
+      if(active){c.beginPath();c.arc(x,y,r+5,0,2*Math.PI);c.fillStyle=colors[i]+"18";c.fill();}
+      c.beginPath();c.arc(x,y,r,0,2*Math.PI);c.fillStyle=active?colors[i]:"#fffdf8";c.fill();c.strokeStyle=colors[i];c.lineWidth=i===selected?2.8:1.4;c.stroke();
+      c.fillStyle=active?"white":colors[i];c.font="600 11px system-ui, sans-serif";c.textAlign="center";c.textBaseline="middle";c.fillText(String(i+1),x,y);
+    }
+  }
+  function timeDomain(){const windowSize=Number($("window").value);return [Math.max(0,time-windowSize),Math.max(windowSize,time)];}
+  function timeTicks(limits){const span=limits[1]-limits[0],unit=span<=80?20:span<=160?40:80, out=[];for(let x=Math.ceil(limits[0]/unit)*unit;x<=limits[1]+1e-9;x+=unit)out.push(x);return out;}
+  function drawTraces(){
+    const {c,width,height}=canvasContext("traces"),stacked=$("trace-view").value==="stacked",limits=timeDomain(),samples=history.since(limits[0],Math.max(400,width*1.4));
+    const ticks=stacked?Array.from({length:p.n},(_,i)=>i+1):[-2,0,2];
+    const {box,X,Y}=axes(c,width,height,limits,stacked?[p.n+.5,.5]:[-2.9,2.9],{xlabel:"Time (dimensionless)",ylabel:stacked?"Neuron":"Voltage, v",xticks:timeTicks(limits),yticks:ticks});
+    clip(c,box);
+    for(let i=0;i<p.n;i++){
+      c.beginPath();c.strokeStyle=colors[i];c.lineWidth=selected<0||i===selected?1.9:1.45;c.globalAlpha=selected<0||i===selected?1:.84;
+      if(p.n===2&&i===1)c.setLineDash([6,3]);
+      samples.forEach((s,k)=>{const y=stacked?Y(i+1)-s.s[2*i]*(box.b-box.t)/p.n/7:Y(s.s[2*i]);if(k===0)c.moveTo(X(s.t),y);else c.lineTo(X(s.t),y);});c.stroke();c.setLineDash([]);
+    }
+    c.globalAlpha=1;
+    for(const ev of events){if(ev.t<limits[0])continue;c.strokeStyle="#b6bfb6";c.setLineDash([3,4]);c.lineWidth=1;c.beginPath();c.moveTo(X(ev.t),box.t);c.lineTo(X(ev.t),box.b);c.stroke();c.setLineDash([]);}
+    c.restore();
+  }
+  function drawRaster(){
+    const {c,width,height}=canvasContext("raster"),limits=timeDomain(),yt=Array.from({length:p.n},(_,i)=>i+1);
+    const {box,X,Y}=axes(c,width,height,limits,[p.n+.5,.5],{xlabel:"Time (dimensionless)",ylabel:"Neuron",xticks:timeTicks(limits),yticks:yt});clip(c,box);
+    const half=Math.min(7,(box.b-box.t)/p.n*.33);
+    for(let i=0;i<p.n;i++){c.strokeStyle=colors[i];c.lineWidth=selected<0||i===selected?2.3:1.7;c.beginPath();for(const t of spikes[i]){if(t<limits[0])continue;c.moveTo(X(t),Y(i+1)-half);c.lineTo(X(t),Y(i+1)+half);}c.stroke();}c.restore();
+  }
+  function draw(){
+    if(!state)return;
+    const syn=FHN.inputs(state,effective());let active=0,partners=0;
+    for(let i=0;i<p.n;i++){if(state[2*i]>0){active++;if(i!==selected)partners++;}}
+    $("clock").textContent=`t = ${time.toFixed(1)}`;$("active-count").textContent=`${active} / ${p.n}`;
+    const formatInput=x=>`${x>=-1e-10?"+":"−"}${Math.abs(x).toFixed(2)}`;
+    const minimum=Math.min(...syn),maximum=Math.max(...syn),inputRange=Math.abs(maximum-minimum)<1e-10?formatInput(minimum):`${formatInput(minimum)}…${formatInput(maximum)}`;
+    $("input-value").textContent=selected<0?inputRange:formatInput(syn[selected]);
+    const familyCount=FHN.nullclineFamily(p).length;
+    if(selected===-2)$("phase-readout").innerHTML=`<strong>Nullcline highlighting off.</strong> ${familyCount} possible voltage nullcline${familyCount===1?"":"s"} shown.`;
+    else if(selected<0)$("phase-readout").innerHTML=`<strong>All neurons:</strong> ${familyCount} possible voltage nullcline${familyCount===1?"":"s"} · actual input ${inputRange}`;
+    else{const shift=Math.abs(syn[selected])<1e-10?"no shift":`${syn[selected]>0?"up":"down"} ${Math.abs(syn[selected]).toFixed(2)}`;$("phase-readout").innerHTML=`<strong>Neuron ${selected+1}:</strong> ${partners} of ${Math.max(0,p.n-1)} partners active · cubic ${shift}`;}
+    if(!$("coupling").checked)$("phase-readout").innerHTML+=" · coupling off; family shows configured reference";
+    $("timing").innerHTML=timing();drawPhase(syn);drawNetwork();drawTraces();drawRaster();dirty=false;
+  }
+  $("play").addEventListener("click",()=>{running=!running;lastFrame=null;accumulator=0;updatePlay();announce(running?"Running.":"Paused. Use Step +1 to inspect the motion.");});
+  $("restart").addEventListener("click",()=>reset());
+  for(const id of ["excitatory","inhibitory"])$(id).addEventListener("change",()=>{if($(id).checked)reset({mode:$(id).value,preset:true});});
+  function setCount(raw){const parsed=Number(raw),n=Number.isFinite(parsed)?Math.min(12,Math.max(1,Math.round(parsed))):p.n;if(n===p.n){$("count").value=String(p.n);return;}p.n=n;selected=selected===-2?-2:-1;$("trace-view").value=n>2?"stacked":"overlay";reset();}
+  $("count").addEventListener("input",()=>{const raw=$("count").value;if(/^\d+$/.test(raw)&&Number(raw)>=1&&Number(raw)<=12)setCount(raw);});
+  $("count").addEventListener("change",()=>setCount($("count").value));$("fewer").addEventListener("click",()=>setCount(p.n-1));$("more").addEventListener("click",()=>setCount(p.n+1));
+  $("initial").addEventListener("change",()=>reset());
+  $("selected").addEventListener("change",()=>selectNeuron(Number($("selected").value)));
+  function changedInput(label){events.push({t:time,label});events=events.filter(e=>e.t>time-640);describe();dirty=true;announce(`${running?"Running":"Paused"}. ${label} at t = ${time.toFixed(1)}; state and history preserved.`);}
+  $("strength").addEventListener("input",()=>{p.g=Number($("strength").value);$("strength-value").textContent=p.g.toFixed(2);changedInput(`Coupling strength ${p.g.toFixed(2)}`);});
+  $("coupling").addEventListener("change",()=>changedInput($("coupling").checked?"Coupling switched on":"Coupling switched off"));
+  $("speed").addEventListener("change",()=>{lastFrame=null;accumulator=0;announce(`Playback: ${$("speed").value} model units per second. The integration step is unchanged.`);});
+  $("window").addEventListener("change",()=>{dirty=true;});
+  $("trace-view").addEventListener("change",()=>{$("traces").style.height=`${$("trace-view").value==="stacked"?Math.max(205,60+p.n*24):205}px`;$("trace-note").textContent=$("trace-view").value==="stacked"?"Each row uses the same voltage scale; colored rows identify neurons.":"All neurons use the same voltage scale.";dirty=true;});
+  for(const [id,duration] of [["step",1],["advance",100]])$(id).addEventListener("click",()=>{pause();advance(duration);announce(`Paused at t = ${time.toFixed(1)} after advancing ${duration} model time unit${duration===1?"":"s"}.`);draw();});
+  window.addEventListener("resize",()=>{dirty=true;});
+  if(typeof ResizeObserver!=="undefined")new ResizeObserver(()=>{dirty=true;}).observe(document.querySelector(".workspace"));
+  document.addEventListener("visibilitychange",()=>{lastFrame=null;accumulator=0;});
+  function frame(timestamp){
+    if(running&&lastFrame!==null&&!document.hidden){accumulator+=Math.min(.06,Math.max(0,(timestamp-lastFrame)/1000))*Number($("speed").value);const steps=Math.floor(accumulator/FHN.DT);if(steps){advance(steps*FHN.DT);accumulator-=steps*FHN.DT;}}
+    lastFrame=timestamp;if(dirty)draw();requestAnimationFrame(frame);
+  }
+  reset();updatePlay();draw();requestAnimationFrame(frame);
+  // Read-only state access is useful for local verification without a browser library.
+  globalThis.FHNSimulator={getState:()=>({p:{...p},state:Array.from(state),time,running,selected,spikes:spikes.map(s=>s.slice()),historyLength:history.data.length-history.start}),advance,pause,draw,reset};
+})();
+</script>
+</body>
+</html>
