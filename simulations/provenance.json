@@ -51,12 +51,12 @@
   },
   {
     "repository": "neurons-to-brain-waves",
-    "commit": "70c3a5bd6b54c4a467bc083d9da8cf770bc093a2",
+    "commit": "9cf6f76b0308d00a4573c4a91246ccdd86aac05e",
     "license": "No simulator license declared; the website theme license does not grant additional rights.",
     "source_repository": "gregconradismith/gregconradismith.github.io",
     "source_path": "simulations/neurons-to-brain-waves",
     "first_published": "2026-11-05",
-    "previous_source_commit": "fc3cd1c7d3138ebb563d4aff1f77473d142ba722",
+    "previous_source_commit": "70c3a5bd6b54c4a467bc083d9da8cf770bc093a2",
     "updated": "2026-11-05"
   }
 ]
