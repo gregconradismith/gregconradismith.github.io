@@ -6,8 +6,11 @@ for(const id of ['shape','orientation','dipole-diagram','dipole-b','alternating'
 assert(!/group [AB]|dipole|two.cluster|R₂|alternating/i.test(html),'No former group/dipole description remains in the interface.');
 assert.deepEqual(Array.from(html.matchAll(/data-preset="([^"]+)"/g),m=>m[1]),['independent','together']);
 assert(/\bstep="1"/.test(html.match(/<input[^>]*id="count"[^>]*>/)[0]),'Every integer neuron count is available.');
+assert(/<h2>Power spectral density<\/h2>/.test(html));
+const scaleOptions=html.match(/<select[^>]*id="psd-scale"[^>]*>([\s\S]*?)<\/select>/)[1];
+assert(/value="log"/.test(scaleOptions)&&/value="linear"/.test(scaleOptions));
 const elements=new Map(),contexts=new Map(),calls=[];
-const initial={count:'200',frequency:'10',coupling:'0',spread:'12',noise:'.02',speed:'.25',window:'2'};
+const initial={count:'200',frequency:'10',coupling:'0',spread:'12',noise:'.02',speed:'.25',window:'2','psd-scale':'log'};
 function canvas(id){
   if(!contexts.has(id)){
     const log={texts:[],strokes:[],fills:[],arcs:0};let points=[];
@@ -39,6 +42,8 @@ const sandbox={console,document:{hidden:false,getElementById:element,querySelect
 sandbox.window=sandbox;vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(__dirname+'/model.js','utf8'),sandbox);
 const original=sandbox.BrainWaves,B={...original};
+let spectrumCalls=0,lastReturnedSpectrum,spectrumFixture=null;
+B.spectrum=(...args)=>{spectrumCalls++;lastReturnedSpectrum=spectrumFixture||original.spectrum(...args);return lastReturnedSpectrum;};
 for(const name of ['create','configure','advance','pulse','scramble'])B[name]=(...args)=>{
   const result=original[name](...args);calls.push({name,args});if(name==='create')currentModel=result;return result;
 };
@@ -52,6 +57,8 @@ const sameActivity=(a,b)=>{for(const key of ['t','phase','spikes'])assert.deepEq
 const samePast=(a,b)=>{sameActivity(a,b);assert.deepEqual(a.history,b.history,'recorded history');};
 const paused=()=>assert.equal(element('play').getAttribute('aria-label'),'Run simulation');
 const near=(a,b,tol=1e-9)=>assert(Math.abs(a-b)<tol,`${a} differs from ${b}`);
+const powerY=(power,scale=element('psd-scale').value)=>scale==='log'?230-(Math.log10(Math.max(1e-6,power))+6)/(Math.log10(2)+6)*212:230-power/2*212;
+const powerStroke=()=>canvas('spectrum').log.strokes.find(x=>x.color==='#287c72'&&x.width===1.7);
 function checkPlots(){
   for(const id of ['population','raster','signal','spectrum'])assert(canvas(id).log.texts.length>0,`${id} renders labels`);
   assert(canvas('population').log.arcs>=2*currentModel.p.n,'Population view renders all neurons and phase markers.');
@@ -60,7 +67,8 @@ function checkPlots(){
   assert(!canvas('raster').log.texts.some(x=>['A','B'].includes(x.text)));
   const signal=canvas('signal').log,spectrum=canvas('spectrum').log;
   for(const label of ['-1','0','1','Field (a.u.)'])assert(signal.texts.some(x=>x.text===label));
-  for(const label of ['0','0.5','1','1.5','2','100','PSD (a.u.²/Hz)'])assert(spectrum.texts.some(x=>x.text===label),`Spectrum label ${label}`);
+  const powerTicks=element('psd-scale').value==='log'?['10⁻⁶','10⁻⁴','10⁻²','1']:['0','0.5','1','1.5','2'];
+  for(const label of [...powerTicks,'100','PSD (a.u.²/Hz)'])assert(spectrum.texts.some(x=>x.text===label),`Spectrum label ${label}`);
   // Check physical power and signal coordinates directly, so equal-height
   // normalization of independent and coherent conditions cannot pass.
   const fieldStroke=signal.strokes.find(x=>x.color==='#203649'&&x.width===2);
@@ -73,8 +81,8 @@ function checkPlots(){
   const signalY=value=>230-(value+1.5)/3*212;
   near(fieldStroke.points.at(-1)[1],signalY(currentModel.history.at(-1).signal));
   const psd=original.spectrum(currentModel.history),k=psd.power.indexOf(Math.max(...psd.power));
-  near(powerStroke.points[k][1],230-psd.power[k]/2*212);
-  near(powerStroke.points[k][0],43+psd.frequency[k]/100*667);
+  near(powerStroke.points[k][1],powerY(psd.power[k]));
+  near(powerStroke.points[k][0],54+psd.frequency[k]/100*656);
 }
 
 assert.equal(currentModel.p.n,200);near(currentModel.t,6);
@@ -82,6 +90,7 @@ assert.equal(currentModel.p.coupling,0);assert.equal(currentModel.p.noise,.02);
 assert(currentModel.history.every(row=>row.examples.length===6&&row.examples.every(Number.isFinite)));
 assert.equal(element('independent').getAttribute('aria-pressed'),'true');checkPlots();
 assert.equal(element('window').value,'2');
+assert.equal(element('psd-scale').value,'log');assert(element('spectrum-note').textContent.includes('log scale · display floor 10⁻⁶'));
 const start=snapshot();fire('play');paused();samePast(start,snapshot());
 nextFrame(0);nextFrame(100);samePast(start,snapshot());
 fire('step');paused();near(currentModel.t,start.t+1);assert(currentModel.history.length>start.history.length);
@@ -92,6 +101,19 @@ for(const [id,value,key,expected] of [['frequency',17.5,'frequency',17.5],['coup
   assert(calls.at(-1).name==='configure');
 }
 paused();checkPlots();
+
+// The display selector redraws only the PSD from its existing cache. It must
+// not configure the model, recompute powers, or alter any recorded sample.
+const beforeScale=snapshot(),cachedSpectrum=lastReturnedSpectrum,cachedValues=plain(lastReturnedSpectrum);
+const callsBeforeScale=calls.length,spectrumCallsBeforeScale=spectrumCalls;
+const otherViewStrokes=['population','raster','signal'].map(id=>canvas(id).log.strokes);
+set('psd-scale','linear','change');assert.deepEqual(snapshot(),beforeScale);
+assert.equal(calls.length,callsBeforeScale);assert.equal(spectrumCalls,spectrumCallsBeforeScale);assert.equal(lastReturnedSpectrum,cachedSpectrum);
+assert.deepEqual(plain(lastReturnedSpectrum),cachedValues);checkPlots();
+for(const [i,id]of ['population','raster','signal'].entries())assert.equal(canvas(id).log.strokes,otherViewStrokes[i]);
+assert(element('spectrum-note').textContent.includes('linear scale · range 0–2'));
+set('psd-scale','log','change');assert.deepEqual(snapshot(),beforeScale);assert.equal(spectrumCalls,spectrumCallsBeforeScale);
+assert.deepEqual(plain(lastReturnedSpectrum),cachedValues);checkPlots();
 
 // View choices change only plotting, including the visible time window.
 const beforeView=snapshot();set('window',6,'change');samePast(beforeView,snapshot());checkPlots();
@@ -152,4 +174,28 @@ fire('count','keydown',{key:'Enter',preventDefault(){}});assert.equal(currentMod
 element('count').value='140';fire('count','keydown',{key:'ArrowRight',preventDefault(){assert.fail('Only Enter is intercepted.');}});
 assert.equal(currentModel,afterEnter);samePast(unchangedEnter,snapshot());
 checkPlots();
-console.log('PASS: one-population interface/views, presets, warm start, pause/step, live-control continuity, window view, integer/odd counts including 499, buffered Apply/Enter and restart preservation, pulse/scatter timing, fixed field/PSD scales, and all playback speeds.');
+
+// A frozen physical PSD fixture makes a weak peak comparable across presets,
+// while exact-zero/below-floor bins exercise the log baseline without allowing
+// the renderer to replace or mutate the underlying powers.
+const fixture=Object.freeze({frequency:Object.freeze([0,5,10,20,40,60]),power:Object.freeze([0,1e-12,1e-6,1e-4,1e-3,0]),df:.244140625,duration:4.096,peak:40,peakPower:1e-3});
+spectrumFixture=fixture;
+function checkFixture(scale){
+  assert.equal(element('psd-scale').value,scale);assert.equal(lastReturnedSpectrum,fixture);
+  const points=powerStroke().points;assert.equal(points.length,fixture.power.length);
+  for(let i=0;i<points.length;i++){near(points[i][0],54+fixture.frequency[i]/100*656);near(points[i][1],powerY(fixture.power[i],scale));}
+  if(scale==='log'){
+    near(points[0][1],230);near(points[1][1],230);near(points[2][1],230);
+    assert(points[4][1]>80&&points[4][1]<180,'A weak 10⁻³ peak is visible near the middle of the log panel.');
+  }else assert(points[4][1]>229,'The same weak peak stays small on the physical linear scale.');
+}
+for(const scale of ['linear','log']){
+  set('psd-scale',scale,'change');set('window',6,'change');checkFixture(scale);
+  const peakHeight=powerStroke().points[4][1];
+  for(const preset of ['independent','together']){fire(preset);checkFixture(scale);near(powerStroke().points[4][1],peakHeight);}
+  set('count',321,'change');checkFixture(scale);fire('restart');checkFixture(scale);
+  set('window',2,'change');checkFixture(scale);
+}
+assert.deepEqual(fixture.power,[0,1e-12,1e-6,1e-4,1e-3,0]);
+spectrumFixture=null;set('window',2,'change');checkPlots();
+console.log('PASS: one-population controls/views, odd counts including 499, playback and perturbations, fixed field scale, log/linear physical PSD mappings, cached display-only switching, finite floor/zero bins without power mutation, and scale persistence/equal-power comparisons across presets and resets.');

@@ -26,6 +26,7 @@ This current-source model illustrates how coordinated currents can generate a po
 - Presets, Restart, and count changes restart the observation. Frequency, coupling, spread, and noise act live while preserving current phases, time, and previous observations.
 - Common input is an idealized phase reset: use it with independent neurons and watch temporary alignment disperse. Scatter phases randomizes timing without changing natural frequencies. Both preserve time and history.
 - Pause/run, advance one model second, choose a two- or six-second time window, and set playback speed independently of model frequency. Reduced-motion preferences start the app paused.
+- The Power spectral density panel defaults to a logarithmic vertical scale; choose Linear for an alternative view. This display choice is preserved across presets, Restart, and count changes, and changes neither the neuronal model nor the signal or its PSD calculation.
 
 Suggested comparison: at the same natural frequency, compare Independent neurons with Lock together. The mean crossing rate can remain similar while population signal amplitude differs greatly. Alternatively increase coupling live, then scatter phases to watch synchronization develop.
 
@@ -33,7 +34,9 @@ Suggested comparison: at the same natural frequency, compare Independent neurons
 
 Integration uses stochastic Heun with a fixed 0.002-second step, independent of playback speed. Signal sampling is at 250 Hz, and up to 12 seconds of history are retained. The signal uses a fixed ±1.5 vertical scale. Field RMS (including DC) and mean phase-crossing rate use the last two seconds.
 
-The spectrum is a mean-subtracted, Hann-windowed one-sided power spectral density from up to 1,024 samples (4.096 seconds, approximately 0.244 Hz bin spacing). It displays 0–100 Hz on a fixed 0–2 a.u.²/Hz scale. The spectrum window is independent of the time-plot view and can include observations from before and after a live parameter change. A spectral peak is an estimate, not a separate oscillator parameter.
+The Power spectral density panel shows the mean-subtracted, Hann-windowed one-sided PSD from up to 1,024 samples (4.096 seconds, approximately 0.244 Hz bin spacing). Its normalization is unchanged: power is expressed in a.u.²/Hz, and integrating the PSD across frequency estimates the mean-subtracted signal power. It displays 0–100 Hz with shared fixed vertical bounds across experiments: the default logarithmic view spans 10⁻⁶–2 a.u.²/Hz, and the optional linear view spans 0–2 a.u.²/Hz. The logarithmic view makes weak asynchronous power visible without normalizing each spectrum to its own peak. Values below 10⁻⁶ are drawn at that display floor; this does not change the calculated PSD or mean that their power is zero. The floor is a plotting limit, not a physiological noise threshold.
+
+The spectrum window is independent of the time-plot view and can include observations from before and after a live parameter change. A spectral peak is an estimate, not a separate oscillator parameter. Changing the vertical scale only redraws the same PSD; it does not restart the observation or alter retained signal history.
 
 ## Verification
 

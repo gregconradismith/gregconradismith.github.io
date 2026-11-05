@@ -9,7 +9,7 @@
     together:{coupling:24,noise:.02}
   };
   let preset = 'independent', running = !matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let model, spectrum, lastSpectrum = -Infinity, speed = .25, lastFrame = null, accumulator = 0, windowSeconds = 2;
+  let model, spectrum, lastSpectrum = -Infinity, speed = .25, lastFrame = null, accumulator = 0, windowSeconds = 2, psdScale = 'log';
   const views = {};
   for (const id of ['population','raster','signal','spectrum']) views[id] = {canvas:$(id),ctx:$(id).getContext('2d'),w:0,h:0};
 
@@ -92,6 +92,11 @@
     announce('Playback is '+speed+'× real time. Model integration step is unchanged.');
   });
   $('window').addEventListener('change',()=>{windowSeconds=Number($('window').value);draw(true);announce('Time plots show the last '+windowSeconds+' seconds; spectrum window is unchanged.');});
+  $('psd-scale').addEventListener('change',()=>{
+    psdScale=$('psd-scale').value==='linear'?'linear':'log';
+    drawSpectrum(false);
+    announce(psdScale==='log'?'PSD uses a fixed logarithmic scale from 10⁻⁶ to 2 a.u.²/Hz. Values below the display floor sit on the baseline.':'PSD uses a fixed linear scale from 0 to 2 a.u.²/Hz.');
+  });
   $('pulse').addEventListener('click',()=>{
     B.pulse(model); draw(true);
     announce('Common input at '+model.t.toFixed(2)+' s: an idealized phase reset. Time and prior observations are retained.');
@@ -114,10 +119,11 @@
   }
   function text(ctx,s,x,y,align='left',color=C.muted) {ctx.fillStyle=color;ctx.textAlign=align;ctx.fillText(s,x,y);}
   function line(ctx,x1,y1,x2,y2,color,width=1) {ctx.strokeStyle=color;ctx.lineWidth=width;ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
-  function axes(view,xmin,xmax,ymin,ymax,xticks,yticks,xlabel,ylabel) {
-    const {ctx,w,h}=setup(view),box={l:43,r:w-10,t:18,b:h-30};
+  function axes(view,xmin,xmax,ymin,ymax,xticks,yticks,xlabel,ylabel,options={}) {
+    const {ctx,w,h}=setup(view),box={l:options.left??43,r:w-10,t:18,b:h-30};
     const X=x=>box.l+(x-xmin)/(xmax-xmin)*(box.r-box.l);
-    const Y=y=>box.b-(y-ymin)/(ymax-ymin)*(box.b-box.t);
+    const transform=options.logY?value=>Math.log10(Math.max(ymin,value)):value=>value;
+    const Y=y=>box.b-(transform(y)-transform(ymin))/(transform(ymax)-transform(ymin))*(box.b-box.t);
     ctx.font='11px system-ui, sans-serif';
     for (const x of xticks) {
       line(ctx,X(x),box.t,X(x),box.b,C.grid);
@@ -125,7 +131,7 @@
     }
     for (const y of yticks) {
       line(ctx,box.l,Y(y),box.r,Y(y),y===0?'#d7ddd6':C.grid);
-      text(ctx,Number(y.toFixed(2)).toString(),box.l-7,Y(y),'right');
+      text(ctx,options.formatY?options.formatY(y):Number(y.toFixed(2)).toString(),box.l-7,Y(y),'right');
     }
     line(ctx,box.l,box.t,box.l,box.b,'#cbd2cd');line(ctx,box.l,box.b,box.r,box.b,'#cbd2cd');
     text(ctx,xlabel,(box.l+box.r)/2,h-4,'center');
@@ -204,15 +210,22 @@
   }
   function drawSpectrum(force) {
     if (force||model.t-lastSpectrum>=.2||!spectrum) {spectrum=B.spectrum(model.history);lastSpectrum=model.t;}
-    const a=axes(views.spectrum,0,100,0,2,[0,20,40,60,80,100],[0,.5,1,1.5,2],'Frequency (Hz)','PSD (a.u.²/Hz)');
+    const logarithmic=psdScale==='log',floor=1e-6,baseline=logarithmic?floor:0;
+    const ticks=logarithmic?[1e-6,1e-4,1e-2,1]:[0,.5,1,1.5,2];
+    const logLabels=new Map([[1e-6,'10⁻⁶'],[1e-4,'10⁻⁴'],[1e-2,'10⁻²'],[1,'1']]);
+    const a=axes(views.spectrum,0,100,baseline,2,[0,20,40,60,80,100],ticks,'Frequency (Hz)','PSD (a.u.²/Hz)',{
+      left:54,logY:logarithmic,formatY:logarithmic?value=>logLabels.get(value):null
+    });
+    // The floor is applied only by the display transform. The original PSD,
+    // including exact zeros, is kept intact for measurements and comparisons.
     clipped(a,()=>{
-      a.ctx.fillStyle='#287c7213';a.ctx.beginPath();a.ctx.moveTo(a.X(0),a.Y(0));
+      a.ctx.fillStyle='#287c7213';a.ctx.beginPath();a.ctx.moveTo(a.X(0),a.Y(baseline));
       for(let k=0;k<spectrum.frequency.length;k++)a.ctx.lineTo(a.X(spectrum.frequency[k]),a.Y(spectrum.power[k]));
-      a.ctx.lineTo(a.X(100),a.Y(0));a.ctx.closePath();a.ctx.fill();
+      a.ctx.lineTo(a.X(100),a.Y(baseline));a.ctx.closePath();a.ctx.fill();
       a.ctx.strokeStyle=C.teal;a.ctx.lineWidth=1.7;a.ctx.beginPath();
       for(let k=0;k<spectrum.frequency.length;k++){const x=a.X(spectrum.frequency[k]),y=a.Y(spectrum.power[k]);if(k===0)a.ctx.moveTo(x,y);else a.ctx.lineTo(x,y);}a.ctx.stroke();
     });
-    $('spectrum-note').textContent=spectrum.duration.toFixed(2)+' s window';
+    $('spectrum-note').textContent=spectrum.duration.toFixed(2)+' s window · '+(logarithmic?'log scale · display floor 10⁻⁶ a.u.²/Hz':'linear scale · range 0–2 a.u.²/Hz');
     $('peak-note').textContent=spectrum.peak===null?'No resolved rhythmic field in this window.':('Peak '+spectrum.peak.toFixed(1)+' Hz · bin spacing '+spectrum.df.toFixed(3)+' Hz');
   }
   function draw(force=false) {
