@@ -1,6 +1,6 @@
 # Codex Handoff
 
-Date: 2026-10-19
+Date: 2026-11-05
 
 Repo: `gregconradismith.github.io`
 
@@ -261,3 +261,17 @@ Pre-edit Git state after fetch:
 
 - Follow-up publication commit `ec4b3b9`; Pages run `40118009689` succeeded. All six public replacement apps passed desktop/mobile controls and resource checks again; three v2 PWA caches coexist and offline PolyQual reload works.
 - No original repositories were archived: the broader current-source audit still has external repository references and binary-document coverage limits. Detailed audit evidence remains private to the task workspace; do not claim zero links or archival completion. Old public app URLs remain enabled.
+
+
+## 2026-11-05 Author byline
+
+- Updated `author.bio` in `_config.yml` to "biology as a mathematical science, science among the liberal arts" at Greg's request. The shared author-profile include renders this value across the site; no duplicate source byline required changes.
+- Verification: parsed the YAML and asserted the exact requested byline; inspected the one-line config diff; `git diff --check` passed. No local Jekyll build for this text-only change, consistent with the existing handoff instruction.
+- Greg authorized committing and pushing all pending website edits on 2026-11-05. Included this change with the simulator publication; live deployment verification follows.
+
+## 2026-11-05 FitzHugh–Nagumo network simulator
+
+- Added the standalone classroom simulator at `simulations/fitzhugh-nagumo-network/` and a catalogue entry under Dynamical systems and excitable cells. It offers excitatory/inhibitory coupling, one to twelve neurons, phase-plane nullclines, voltage traces, and spike times. The latest None/All follow controls and lower-left nullcline labels are retained.
+- The initial app commit provides an immutable public source record in this website repository. `simulations/provenance.json` records its exact commit and path; the integration adds only academic-site return/provenance navigation. No separate upstream repository is required and no other course content is included.
+- Verification: numerical and interaction suites passed, including 72 bounded parameter runs, paired synchronization/alternation examples and half-step agreement, the entire nullcline family, label placement, None/All controls, live coupling, and playback. Reviewed the public files for paths and runtime dependencies; all app code/styles remain inline. No local Jekyll build per the existing instruction. Publication will be verified through GitHub Pages and live browser/content checks.
+- Included all pending website changes from the original checkout: `_config.yml` author byline and the corresponding handoff notes. The original checkout is being synchronized after the isolated publication preserves and commits these changes.

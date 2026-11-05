@@ -40,5 +40,13 @@
     "license": "No license file present at source commit; no new license granted.",
     "source_repository": "gregconradismith/voltage-clamp-game",
     "previous_pages_path": "/voltage-clamp-game/"
+  },
+  {
+    "repository": "fitzhugh-nagumo-network",
+    "commit": "803b3752ead69524ec27b986d06cf497e4c23be4",
+    "license": "No simulator license declared; the website theme license does not grant additional rights.",
+    "source_repository": "gregconradismith/gregconradismith.github.io",
+    "source_path": "simulations/fitzhugh-nagumo-network",
+    "first_published": "2026-11-05"
   }
 ]
