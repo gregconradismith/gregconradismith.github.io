@@ -1,14 +1,23 @@
 // Run with Node.js; no browser packages or external dependencies are needed.
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const html=fs.readFileSync(__dirname+'/index.html','utf8');
+const ids=new Set(Array.from(html.matchAll(/\bid="([^"]+)"/g),m=>m[1]));
+for(const id of ['shape','orientation','dipole-diagram','dipole-b','alternating','clusters','clusters-bar'])assert(!ids.has(id),`${id} was removed from the single-population interface.`);
+assert(!/group [AB]|dipole|two.cluster|R₂|alternating/i.test(html),'No former group/dipole description remains in the interface.');
+assert.deepEqual(Array.from(html.matchAll(/data-preset="([^"]+)"/g),m=>m[1]),['independent','together']);
+assert(/\bstep="1"/.test(html.match(/<input[^>]*id="count"[^>]*>/)[0]),'Every integer neuron count is available.');
 const elements=new Map(),contexts=new Map(),calls=[];
-const initial={count:'200',frequency:'10',coupling:'0',spread:'12',noise:'.02',shape:'0',speed:'.25',window:'2'};
+const initial={count:'200',frequency:'10',coupling:'0',spread:'12',noise:'.02',speed:'.25',window:'2'};
 function canvas(id){
   if(!contexts.has(id)){
-    const log={texts:[],strokes:[],arcs:0};let points=[];
+    const log={texts:[],strokes:[],fills:[],arcs:0};let points=[];
     const ctx=new Proxy({log,
-      clearRect(){log.texts=[];log.strokes=[];log.arcs=0;},
-      beginPath(){points=[];},moveTo(x,y){points.push([x,y]);},lineTo(x,y){points.push([x,y]);},
+      clearRect(){log.texts=[];log.strokes=[];log.fills=[];log.arcs=0;},
+      beginPath(){points=[];},
+      moveTo(x,y){assert(Number.isFinite(x)&&Number.isFinite(y),`${id} has finite plotting coordinates`);points.push([x,y]);},
+      lineTo(x,y){assert(Number.isFinite(x)&&Number.isFinite(y),`${id} has finite plotting coordinates`);points.push([x,y]);},
       stroke(){log.strokes.push({color:ctx.strokeStyle,width:ctx.lineWidth,points:points.slice()});},
+      fill(){log.fills.push(ctx.fillStyle);},
       arc(){log.arcs++;},fillText(text,x,y){log.texts.push({text:String(text),x,y,align:ctx.textAlign});},
       measureText(text){return {width:String(text).length*6};}
     },{get:(o,k)=>o[k]??(()=>{}),set:(o,k,v)=>(o[k]=v,true)});
@@ -17,12 +26,13 @@ function canvas(id){
   return contexts.get(id);
 }
 function element(id){
+  assert(ids.has(id),`App references a real interface element: ${id}`);
   if(!elements.has(id))elements.set(id,{id,value:initial[id]??'',checked:false,textContent:'',innerHTML:'',handlers:{},attributes:{},dataset:{},style:{setProperty(){}},classList:{toggle(){}},
     addEventListener(name,fn){this.handlers[name]=fn;},setAttribute(name,value){this.attributes[name]=value;},getAttribute(name){return this.attributes[name];},
     getBoundingClientRect(){return {width:720,height:260,left:0,top:0};},getContext(){return canvas(id);}});
   return elements.get(id);
 }
-const presetButtons=['independent','together','alternating'].map(id=>{const e=element(id);e.dataset.preset=id;return e;});
+const presetButtons=['independent','together'].map(id=>{const e=element(id);e.dataset.preset=id;return e;});
 let nextFrame,currentModel;
 const sandbox={console,document:{hidden:false,getElementById:element,querySelectorAll:selector=>selector==='[data-preset]'?presetButtons:[],addEventListener(){}},
   devicePixelRatio:1,matchMedia:()=>({matches:false}),requestAnimationFrame:fn=>{nextFrame=fn;},addEventListener(){},performance:{now:()=>0}};
@@ -45,6 +55,9 @@ const near=(a,b,tol=1e-9)=>assert(Math.abs(a-b)<tol,`${a} differs from ${b}`);
 function checkPlots(){
   for(const id of ['population','raster','signal','spectrum'])assert(canvas(id).log.texts.length>0,`${id} renders labels`);
   assert(canvas('population').log.arcs>=2*currentModel.p.n,'Population view renders all neurons and phase markers.');
+  assert.equal(canvas('population').log.fills.filter(color=>color.startsWith('rgba(50,111,160,')).length,currentModel.p.n,'Every neuron uses one population color.');
+  assert.equal(canvas('raster').log.strokes.filter(x=>x.color==='#326fa0').length,1,'One population supplies the raster.');
+  assert(!canvas('raster').log.texts.some(x=>['A','B'].includes(x.text)));
   const signal=canvas('signal').log,spectrum=canvas('spectrum').log;
   for(const label of ['-1','0','1','Field (a.u.)'])assert(signal.texts.some(x=>x.text===label));
   for(const label of ['0','0.5','1','1.5','2','100','PSD (a.u.²/Hz)'])assert(spectrum.texts.some(x=>x.text===label),`Spectrum label ${label}`);
@@ -53,6 +66,10 @@ function checkPlots(){
   const fieldStroke=signal.strokes.find(x=>x.color==='#203649'&&x.width===2);
   const powerStroke=spectrum.strokes.find(x=>x.color==='#287c72'&&x.width===1.7);
   assert(fieldStroke&&fieldStroke.points.length>100);assert(powerStroke&&powerStroke.points.length>100);
+  assert.equal(signal.strokes.filter(x=>x.color==='#326fa02a').length,6,'Six individual currents are drawn.');
+  const seconds=Number(element('window').value),rows=currentModel.history.filter(row=>row.t>=currentModel.t-seconds-1e-6);
+  assert.equal(fieldStroke.points.length,rows.length,'The trace follows the selected time window.');
+  near(fieldStroke.points[0][0],43+(rows[0].t-currentModel.t+seconds)/seconds*667);
   const signalY=value=>230-(value+1.5)/3*212;
   near(fieldStroke.points.at(-1)[1],signalY(currentModel.history.at(-1).signal));
   const psd=original.spectrum(currentModel.history),k=psd.power.indexOf(Math.max(...psd.power));
@@ -61,7 +78,8 @@ function checkPlots(){
 }
 
 assert.equal(currentModel.p.n,200);near(currentModel.t,6);
-assert.equal(currentModel.p.coupling,0);assert.equal(currentModel.p.harmonic,1);assert.equal(currentModel.p.noise,.02);
+assert.equal(currentModel.p.coupling,0);assert.equal(currentModel.p.noise,.02);
+assert(currentModel.history.every(row=>row.examples.length===6&&row.examples.every(Number.isFinite)));
 assert.equal(element('independent').getAttribute('aria-pressed'),'true');checkPlots();
 assert.equal(element('window').value,'2');
 const start=snapshot();fire('play');paused();samePast(start,snapshot());
@@ -73,40 +91,30 @@ for(const [id,value,key,expected] of [['frequency',17.5,'frequency',17.5],['coup
   const before=snapshot(),model=currentModel;set(id,value);assert.equal(currentModel,model);samePast(before,snapshot());paused();near(currentModel.p[key],expected);
   assert(calls.at(-1).name==='configure');
 }
-const beforeGeometry=snapshot(),r1=original.orders(currentModel.phase).r1;
-set('shape','.35','change');sameActivity(beforeGeometry,snapshot());
-assert.deepEqual(beforeGeometry.history.map(x=>x.t),Array.from(currentModel.history,x=>x.t));
-assert(currentModel.history.some((x,i)=>Math.abs(x.signal-beforeGeometry.history[i].signal)>1e-6));
-const beforeOrientation=snapshot();element('orientation').checked=true;fire('orientation','change');sameActivity(beforeOrientation,snapshot());
-assert.deepEqual(beforeOrientation.history.map(x=>x.t),Array.from(currentModel.history,x=>x.t));
-for(let i=0;i<currentModel.history.length;i++){
-  const before=beforeOrientation.history[i],after=currentModel.history[i];near(after.a,before.a);near(after.b,-before.b);near(after.signal,after.a+after.b);
-  near(after.r1,before.r1);near(after.r2,before.r2);
-}
-near(original.orders(currentModel.phase).r1,r1);paused();checkPlots();
+paused();checkPlots();
 
 // View choices change only plotting, including the visible time window.
 const beforeView=snapshot();set('window',6,'change');samePast(beforeView,snapshot());checkPlots();
-assert(canvas('signal').log.texts.some(x=>x.text==='1'),'Six-second window begins at t=1 after the explicit step.');
 set('window',2,'change');samePast(beforeView,snapshot());
 
 // Count changes create a new warmed simulation with every other choice intact.
-const beforeCount={...currentModel.p},oldModel=currentModel;set('count',120,'change');
-assert.notEqual(currentModel,oldModel);assert.equal(currentModel.p.n,120);near(currentModel.t,6);paused();
+const beforeCount={...currentModel.p},oldModel=currentModel;set('count',119,'change');
+assert.notEqual(currentModel,oldModel);assert.equal(currentModel.p.n,119);near(currentModel.t,6);paused();
 for(const key of Object.keys(beforeCount).filter(k=>k!=='n'))assert.equal(currentModel.p[key],beforeCount[key],key);
-assert.equal(currentModel.phase.length,120);assert.equal(element('count-value').textContent,'120');
-fire('restart');assert.equal(currentModel.p.n,120);near(currentModel.t,6);paused();
+assert.equal(currentModel.phase.length,119);assert.equal(element('count-value').textContent,'119');
+fire('restart');assert.equal(currentModel.p.n,119);near(currentModel.t,6);paused();
 for(const key of Object.keys(beforeCount).filter(k=>k!=='n'))assert.equal(currentModel.p[key],beforeCount[key],key);
 
-// Presets choose phase interaction and noise deliberately, and keep N.
-for(const [id,harmonic,coupling,noise]of[['independent',1,0,.02],['together',1,24,.02],['alternating',2,24,0]]){
-  fire(id);assert.equal(currentModel.p.n,120);assert.equal(currentModel.p.harmonic,harmonic);assert.equal(currentModel.p.coupling,coupling);assert.equal(currentModel.p.noise,noise);
+// Presets choose coupling and noise deliberately, and keep odd N.
+let independentRms;
+for(const [id,coupling,noise]of[['independent',0,.02],['together',24,.02]]){
+  fire(id);assert.equal(currentModel.p.n,119);assert.equal(currentModel.p.coupling,coupling);assert.equal(currentModel.p.noise,noise);
   near(currentModel.t,6);paused();assert.equal(element(id).getAttribute('aria-pressed'),'true');checkPlots();
+  if(id==='independent')independentRms=Number(element('rms').textContent);
 }
-assert(original.orders(currentModel.phase).r2>.9);assert(original.orders(currentModel.phase).r1<.01);
-assert(Number(element('rms').textContent)<.001,'Opposite same-orientation groups cancel the smooth measured field.');
-const beforeFlip=snapshot();element('orientation').checked=true;fire('orientation','change');sameActivity(beforeFlip,snapshot());
-assert(Number(element('rms').textContent)>.3,'Changing dipole orientation exposes coordinated activity without changing timing.');
+assert(original.orders(currentModel.phase).r1>.9);
+assert(Number(element('rms').textContent)>.4);
+assert(Number(element('rms').textContent)>3*independentRms,'Aligned activity increases the equally added field on the same scale.');
 
 // Perturbations change phases immediately, preserving time, history, and rate.
 fire('independent');const beforePulse=snapshot(),events=currentModel.pulses.length;fire('pulse');
@@ -137,11 +145,11 @@ fire('apply-count');assert.equal(currentModel,sameCountModel);samePast(sameCount
 set('count',10000,'change');assert.equal(currentModel.p.n,500);assert.equal(currentModel,sameCountModel);samePast(sameCount,snapshot());
 set('count',0,'change');assert.equal(currentModel.p.n,20);
 const beforeEnter=currentModel;let prevented=false;
-element('count').value='120';fire('count','keydown',{key:'Enter',preventDefault(){prevented=true;}});
-assert(prevented);assert.equal(currentModel.p.n,120);assert.notEqual(currentModel,beforeEnter);near(currentModel.t,6);paused();
+element('count').value='499';fire('count','keydown',{key:'Enter',preventDefault(){prevented=true;}});
+assert(prevented);assert.equal(currentModel.p.n,499);assert.equal(currentModel.phase.length,499);assert.notEqual(currentModel,beforeEnter);near(currentModel.t,6);paused();
 const afterEnter=currentModel,unchangedEnter=snapshot();
 fire('count','keydown',{key:'Enter',preventDefault(){}});assert.equal(currentModel,afterEnter);samePast(unchangedEnter,snapshot());
 element('count').value='140';fire('count','keydown',{key:'ArrowRight',preventDefault(){assert.fail('Only Enter is intercepted.');}});
 assert.equal(currentModel,afterEnter);samePast(unchangedEnter,snapshot());
 checkPlots();
-console.log('PASS: presets, warm start, pause/step, live-control continuity, geometry/history reprojection, window view, buffered count Apply/Enter and restart preservation, pulse/scatter timing, fixed field/PSD scales, all canvas views, and all playback speeds.');
+console.log('PASS: one-population interface/views, presets, warm start, pause/step, live-control continuity, window view, integer/odd counts including 499, buffered Apply/Enter and restart preservation, pulse/scatter timing, fixed field/PSD scales, and all playback speeds.');

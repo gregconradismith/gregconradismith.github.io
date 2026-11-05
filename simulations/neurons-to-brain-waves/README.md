@@ -2,59 +2,55 @@
 
 [Open the simulator](https://gregconradismith.github.io/simulations/neurons-to-brain-waves/).
 
-A standalone teaching simulator linking population timing to an EEG-like signal. Open `index.html` in a modern browser; no installation, server, or external runtime libraries are required.
+A standalone teaching simulator linking synchrony in one population of neurons to an EEG-like population signal. Open `index.html` in a modern browser; all runtime files are local and require no installation or external libraries.
 
-## What the model represents
+## One population, equal contributions
 
-Each displayed neuron has an oscillatory phase. Kuramoto-style coupling acts on either the first phase harmonic (favoring common phase) or the second (allowing two groups separated by half a cycle). Frequency variation and independent phase noise oppose alignment. This is a conceptual population model: second-harmonic coupling is **not a literal model of inhibitory synapses**. Inhibition can produce several timing patterns depending on cellular and network dynamics.
+Every neuron contributes the same centered current waveform, `p_i = cos(theta_i)`. The signal is `y = mean(p_i)`: add every source with the same positive weight, then divide by population size. The division keeps changes in neuron count from automatically changing the plot scale. Individual currents oscillate above and below their mean. Aligned phases reinforce a population wave; scattered phases give partial cancellation of current deviations and a smaller population rhythm.
 
-The assigned rhythmic current dipole of neuron *i* is
+There is one population, with no group assignments, orientation reversals, selectable current waveforms, or second-harmonic interaction. Six faint traces show individual currents sampled across the population. The dark trace is the mean of **all** neurons, rather than just those six examples. The population view and crossing raster use one color for all neurons.
 
-`p_i = cos(theta_i) + shape * cos(2 * theta_i)`.
+Each displayed neuron is an idealized rhythmic current source with phase `theta_i`. The dynamics are ordinary stochastic Kuramoto coupling:
 
-The smooth waveform uses `shape = 0`; the two-harmonic waveform uses `shape = 0.35`. The electrode signal is the arithmetic mean `mean(w_i * p_i)`, in arbitrary units. Dividing by population size supports comparisons of timing and geometry; this signal does not represent the total field growing with the number of sources. Group A is the first half of the population and has weight +1. Group B is the second half and can have weight +1 or −1, illustrating how current-dipole orientation changes summation. These weights simplify source geometry; this is not a calibrated head or scalp-conduction model.
+`d theta_i = [2*pi*f_i + K*R*sin(psi - theta_i)] dt + sqrt(2*D) dW_i`,
 
-EEG is associated with the combined fields of neuronal currents, particularly suitably arranged and coordinated dendritic currents. It is not an arithmetic average of action potentials. Here, raster marks indicate oscillator phase crossings; there is no membrane-voltage or action-potential model. The waveform, geometry, and phase-crossing display are deliberately simple teaching approximations.
+where `R*exp(i*psi) = mean(exp(i*theta_i))`. Natural frequencies are evenly distributed around the selected mean, across the entire population. The alignment meter shows `100*R` percent. Frequency, frequency variation, coupling, and independent phase noise remain separate controls.
 
-`R1 = |mean(exp(i * theta))|` measures one-cluster phase coherence. `R2 = |mean(exp(2i * theta))|` also detects two opposite clusters. Thus low R1 can describe either dispersed phases or two organized alternating groups. The signal and spectrum additionally depend on waveform and signed geometry: cancellation at an electrode does not establish that the network is disordered. Rhythm frequency and phase alignment are independent controls.
+This current-source model illustrates how coordinated currents can generate a population signal. It is an educational approximation to EEG in arbitrary units, with source geometry held fixed. Real EEG depends on transmembrane currents, their spatial arrangement, and conduction through the head. Raster marks are successive upward phase crossings; there is no membrane-voltage/action-potential or calibrated scalp-voltage model.
 
-## Controls and examples
+## Controls and experiments
 
-- Population: 20–500 neurons, in increments of 20; central frequency: 2–30 Hz; frequency spread: 0–40%.
-- Coupling: 0–30 per second; independent phase-noise intensity: 0–0.3 radians squared per second.
-- Waveform: smooth or two harmonics. Flip Group B's orientation to compare addition and cancellation.
-- Play/pause, reset, scatter phases, apply an ideal common phase-reset pulse, advance one second, and choose playback speed. The time plots show the last two seconds by default, with an optional six-second view.
-- Live parameter controls retain history. Changing population size or selecting a preset restarts the demonstration. Each preset begins with six seconds of simulated settling.
+- Choose any integer population size from 20 to 500. Use Apply or Enter to commit an edited count.
+- Natural rhythm: 2–30 Hz; spread: 0–40%; coupling: 0–30 per second; phase noise: 0–0.3 radians squared per second.
+- Independent neurons starts with scattered phases, zero coupling, and noise 0.02. Lock together uses coupling 24 and noise 0.02. Both use a 10 Hz mean and 12% spread, retain the selected neuron count, and include six seconds of starting history.
+- Presets, Restart, and count changes restart the observation. Frequency, coupling, spread, and noise act live while preserving current phases, time, and previous observations.
+- Common input is an idealized phase reset: use it with independent neurons and watch temporary alignment disperse. Scatter phases randomizes timing without changing natural frequencies. Both preserve time and history.
+- Pause/run, advance one model second, choose a two- or six-second time window, and set playback speed independently of model frequency. Reduced-motion preferences start the app paused.
 
-Changing waveform or orientation recalculates the entire retained signal history from saved group Fourier components while leaving phases, time, and raster crossings unchanged. This is a counterfactual display of the same phase history under the selected waveform and measurement geometry. In particular, pause and flip Group B to compare two electrode signals from identical activity; the recalculated past does not imply that the physical past changed.
+Suggested comparison: at the same natural frequency, compare Independent neurons with Lock together. The mean crossing rate can remain similar while population signal amplitude differs greatly. Alternatively increase coupling live, then scatter phases to watch synchronization develop.
 
-Integration uses a fixed 0.002-second step, independent of playback speed. Signal sampling is at 250 Hz, and up to 12 seconds of history are retained. The signal uses a fixed ±1.5 vertical scale. Its RMS and observed mean phase-crossing rate use the last two seconds. The spectrum is a one-sided power spectral density from a mean-subtracted, Hann-windowed segment of up to 1,024 samples spanning 4.096 seconds, with approximately 0.244 Hz bin spacing. It displays 0–100 Hz on a fixed 0–2 arbitrary-units-squared/Hz scale; its window is independent of the time-plot view. A short-window spectral peak is an estimate, not a separately controlled oscillator frequency. The observed crossing rate is not a measured biological firing rate.
+## Numerical and signal conventions
 
-The presets use the following starting conditions:
+Integration uses stochastic Heun with a fixed 0.002-second step, independent of playback speed. Signal sampling is at 250 Hz, and up to 12 seconds of history are retained. The signal uses a fixed ±1.5 vertical scale. Field RMS (including DC) and mean phase-crossing rate use the last two seconds.
 
-| Preset | Coupling harmonic | Coupling | Noise | Frequency spread |
-| --- | --- | --- | --- | --- |
-| Independent | First | 0 /s | 0.02 rad²/s | 12% |
-| Together | First | 24 /s | 0.02 rad²/s | 12% |
-| Alternating | Second | 24 /s | 0 | 12% |
-
-Alternating starts with paired frequencies and phases differing by π between groups. It supplies a controlled two-cluster example, rather than claiming that arbitrary networks or inhibitory connections must reach this state. A common pulse is an idealized deterministic phase reset, not a modeled physiological stimulus. Animation speed changes playback, not the assigned biological frequencies.
-
-Suggested comparisons: switch between Independent and Together at the same frequency; compare low R1 in Independent versus Alternating; then flip Group B's orientation in Alternating. With the two-harmonic waveform, opposite groups can retain a component at twice the base frequency even when the fundamental cancels.
+The spectrum is a mean-subtracted, Hann-windowed one-sided power spectral density from up to 1,024 samples (4.096 seconds, approximately 0.244 Hz bin spacing). It displays 0–100 Hz on a fixed 0–2 a.u.²/Hz scale. The spectrum window is independent of the time-plot view and can include observations from before and after a live parameter change. A spectral peak is an estimate, not a separate oscillator parameter.
 
 ## Verification
 
-Run `node verify.cjs` and `node verify-interaction.cjs` from this directory. Both suites are dependency-free. The numerical suite checks finite phases and bounded assigned signals across parameter extremes, seeded noise, one- versus two-cluster coherence, cancellation/addition under reversed weights, waveform and orientation reprojection, transient phase reset, live parameter changes, raster timing, fixed signal sampling, numerical-step convergence, and spectral frequency/variance normalization. A high-frequency regression checks that a 60 Hz waveform component is retained rather than aliased to 40 Hz.
+Run from this directory:
 
-The interaction suite checks presets, live-control continuity, geometry/history reprojection, phase perturbations, count resets, explicit advancement, fixed plotting scales, and playback speeds with a DOM/canvas harness. Also inspect the rendered app for live controls, restarts, pause/step behavior, phase reset, group orientation, playback speeds, and responsive rendering before publication. A passing model check is not experimental validation or EEG calibration.
+```sh
+node verify.cjs
+node verify-interaction.cjs
+```
+
+The numerical suite checks equal additive contributions, a single frequency distribution, arbitrary integer population sizes, seeded dynamics, collective locking, transient alignment/dephasing, live-control continuity, event timing, timestep refinement, true RMS, PSD normalization, and parameter extremes. The interaction harness checks the one-population interface, presets, buffered count Apply/Enter, live controls, playback, perturbations, plotting windows, and fixed scales. Inspect real browser rendering and controls before publication.
 
 ## Scientific context and provenance
 
-This simulator's phase dynamics and assigned dipoles are an educational abstraction, not a reproduction of the detailed models in these primary sources:
+This is an educational abstraction rather than a reproduction of the detailed models in these primary sources:
 
 - [Hansel, Mato, and Meunier (1993), *Clustering and slow switching in globally coupled phase oscillators*](https://doi.org/10.1103/PhysRevE.48.3470).
 - [Hagen and colleagues (2018), *Multimodal Modeling of Neural Network Activity: Computing LFP, ECoG, EEG, and MEG Signals With LFPy 2.0*](https://doi.org/10.3389/fninf.2018.00092).
 
-The standalone source is maintained in this website repository under `simulations/neurons-to-brain-waves/`. The catalogue and `simulations/provenance.json` record the public integration. No EEG recordings or fitted experimental parameters are included.
-
-The app was first published here on 2026-11-05. No separate simulator license is declared; the website theme license does not grant additional rights to this app.
+Source is maintained in this website repository under `simulations/neurons-to-brain-waves/`, with the exact reviewed source commit in `../provenance.json`. First published on 2026-11-05 and simplified at Greg’s request to one population with equal contributions later that day. No EEG recordings or fitted experimental parameters are included. No separate simulator license is declared; the website theme license does not grant additional rights to this app.

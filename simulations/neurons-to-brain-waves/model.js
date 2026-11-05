@@ -10,27 +10,24 @@
   'use strict';
   const TAU = 2 * Math.PI;
   const DT = 0.002;
-  // 250 Hz sampling resolves the second harmonic across the UI's 2–30 Hz
-  // rhythm and 0–40% frequency spread without folding it below Nyquist.
+  // 250 Hz sampling resolves the UI's rhythm and frequency spread well below
+  // Nyquist, independently of browser playback speed.
   const SAMPLE_DT = 0.004;
   const WINDOW = 12;
   const defaults = Object.freeze({ n: 200, frequency: 10, spread: 0.12,
-    coupling: 0, noise: 0.02, harmonic: 1, shape: 0, orientation: 1, seed: 351 });
+    coupling: 0, noise: 0.02, seed: 351 });
   const clamp = (x, low, high) => Math.max(low, Math.min(high, x));
   function parameters(input) {
-    const p = Object.assign({}, defaults, input);
+    const p = {};
     for (const key of Object.keys(defaults)) {
-      p[key] = Number(p[key]);
+      p[key] = Number(input && input[key] !== undefined ? input[key] : defaults[key]);
       if (!Number.isFinite(p[key])) p[key] = defaults[key];
     }
-    p.n = 2 * Math.round(clamp(p.n, 20, 500) / 2);
+    p.n = Math.round(clamp(p.n, 20, 500));
     p.frequency = clamp(p.frequency, 1, 40);
     p.spread = clamp(p.spread, 0, 0.4);
     p.coupling = clamp(p.coupling, 0, 40);
     p.noise = clamp(p.noise, 0, 3);
-    p.harmonic = p.harmonic === 2 ? 2 : 1;
-    p.shape = clamp(p.shape, 0, 1);
-    p.orientation = p.orientation < 0 ? -1 : 1;
     p.seed = p.seed >>> 0;
     return p;
   }
@@ -51,46 +48,36 @@
     return radius * Math.cos(angle);
   }
   function setFrequencies(m) {
-    const half = m.p.n / 2;
-    for (let j = 0; j < half; j++) {
-      // The two groups contain the SAME frequencies. Each group has zero-mean
-      // evenly spaced detuning, so group comparisons do not change mean rate.
-      const detuning = half > 1 ? 2 * j / (half - 1) - 1 : 0;
-      const f = m.p.frequency * (1 + m.p.spread * detuning);
-      m.frequencies[j] = m.frequencies[j + half] = f;
+    for (let j = 0; j < m.p.n; j++) {
+      // Evenly spaced quantiles have exactly zero-mean detuning across the
+      // single population, including when its neuron count is odd.
+      const detuning = 2 * j / (m.p.n - 1) - 1;
+      m.frequencies[j] = m.p.frequency * (1 + m.p.spread * detuning);
     }
   }
   function orders(phase) {
-    let c1 = 0, s1 = 0, c2 = 0, s2 = 0;
+    let c1 = 0, s1 = 0;
     for (let i = 0; i < phase.length; i++) {
       const x = phase[i];
       c1 += Math.cos(x); s1 += Math.sin(x);
-      c2 += Math.cos(2 * x); s2 += Math.sin(2 * x);
     }
     const n = phase.length || 1;
-    return { r1: Math.hypot(c1, s1) / n, r2: Math.hypot(c2, s2) / n,
-      psi1: Math.atan2(s1, c1), psi2: Math.atan2(s2, c2) };
+    return { r1: Math.hypot(c1, s1) / n, psi1: Math.atan2(s1, c1) };
   }
   function readout(m) {
-    let c1a = 0, c1b = 0, c2a = 0, c2b = 0;
-    const half = m.p.n / 2;
+    let signal = 0;
     for (let i = 0; i < m.p.n; i++) {
-      const x = m.phase[i];
-      if (i < half) { c1a += Math.cos(x); c2a += Math.cos(2 * x); }
-      else { c1b += Math.cos(x); c2b += Math.cos(2 * x); }
+      signal += Math.cos(m.phase[i]);
     }
-    c1a /= m.p.n; c1b /= m.p.n; c2a /= m.p.n; c2b /= m.p.n;
-    const a = c1a + m.p.shape * c2a;
-    const b = m.p.orientation * (c1b + m.p.shape * c2b);
-    const examples = m.exampleIndices.map(i => ({ c1: Math.cos(m.phase[i]), c2: Math.cos(2 * m.phase[i]) }));
-    return Object.assign({ t: m.t, signal: a + b, a, b, c1a, c1b, c2a, c2b,
+    signal /= m.p.n;
+    const examples = m.exampleIndices.map(i => Math.cos(m.phase[i]));
+    return Object.assign({ t: m.t, signal,
       examples, rate: m.p.frequency },
       orders(m.phase));
   }
   function record(m) {
     const r = readout(m);
-    m.history.push({ t: m.t, signal: r.signal, a: r.a, b: r.b, r1: r.r1, r2: r.r2,
-      c1a: r.c1a, c1b: r.c1b, c2a: r.c2a, c2b: r.c2b, examples: r.examples });
+    m.history.push({ t: m.t, signal: r.signal, r1: r.r1, examples: r.examples });
     const oldest = m.t - WINDOW - 1e-8;
     while (m.history.length && m.history[0].t < oldest) m.history.shift();
     for (const crossings of m.spikes) {
@@ -102,17 +89,14 @@
     const p = parameters(input);
     const m = { p, phase: new Float64Array(p.n), frequencies: new Float64Array(p.n),
       t: 0, history: [], spikes: Array.from({ length: p.n }, () => []), pulses: [],
-      exampleIndices: [0, 1, 2, p.n / 2, p.n / 2 + 1, p.n / 2 + 2],
+      exampleIndices: Array.from({ length: 6 }, (_, i) => Math.round(i * (p.n - 1) / 5)),
       _seed: p.seed, _normal: null, _nextSample: SAMPLE_DT,
       _nextCrossing: new Float64Array(p.n), _drift: new Float64Array(p.n),
       _predictor: new Float64Array(p.n), _noise: new Float64Array(p.n),
       _drift2: new Float64Array(p.n) };
     setFrequencies(m);
-    const half = p.n / 2;
     for (let i = 0; i < p.n; i++) {
-      if (initial === 'alternating') {
-        m.phase[i] = i < half ? 0.3 + 0.15 * (random(m) - 0.5) : m.phase[i - half] + Math.PI;
-      } else if (initial === 'aligned') {
+      if (initial === 'aligned') {
         m.phase[i] = 0.3 + 0.15 * (random(m) - 0.5);
       } else m.phase[i] = TAU * random(m);
       m._nextCrossing[i] = TAU * (Math.floor(m.phase[i] / TAU) + 1);
@@ -123,32 +107,24 @@
   function configure(m, partial) {
     // A count change creates a new model in the UI; this function intentionally
     // preserves count, phase, random stream, simulation time, and recorded past.
-    const previous = m.p;
     m.p = parameters(Object.assign({}, m.p, partial, { n: m.p.n, seed: m.p.seed }));
     setFrequencies(m);
-    if (previous.shape !== m.p.shape || previous.orientation !== m.p.orientation) {
-      for (const r of m.history) {
-        r.a = r.c1a + m.p.shape * r.c2a;
-        r.b = m.p.orientation * (r.c1b + m.p.shape * r.c2b);
-        r.signal = r.a + r.b;
-      }
-    }
     return m;
   }
   function drift(m, phase, out) {
-    const n = m.p.n, h = m.p.harmonic;
+    const n = m.p.n;
     let re = 0, im = 0;
     if (m.p.coupling) {
       for (let i = 0; i < n; i++) {
-        re += Math.cos(h * phase[i]); im += Math.sin(h * phase[i]);
+        re += Math.cos(phase[i]); im += Math.sin(phase[i]);
       }
       re /= n; im /= n;
     }
     for (let i = 0; i < n; i++) {
-      // Equivalent to K r_h sin(psi_h - h theta_i). The neuron's
+      // Equivalent to K r sin(psi - theta_i). The neuron's
       // self-term is exactly sin(0) and contributes no phase force.
       out[i] = TAU * m.frequencies[i] + m.p.coupling *
-        (im * Math.cos(h * phase[i]) - re * Math.sin(h * phase[i]));
+        (im * Math.cos(phase[i]) - re * Math.sin(phase[i]));
     }
   }
   function integrate(m, dt) {

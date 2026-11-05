@@ -8,40 +8,65 @@ function finite(m) {
   for (const x of m.phase) assert.ok(Number.isFinite(x));
   for (const x of m.frequencies) assert.ok(Number.isFinite(x) && x > 0);
   for (const r of m.history) {
-    for (const key of ['t', 'signal', 'a', 'b', 'r1', 'r2']) assert.ok(Number.isFinite(r[key]));
+    for (const key of ['t', 'signal', 'r1']) assert.ok(Number.isFinite(r[key]));
     assert.ok(r.r1 >= 0 && r.r1 <= 1 + 1e-12);
-    assert.ok(r.r2 >= 0 && r.r2 <= 1 + 1e-12);
-    assert.ok(Math.abs(r.signal) <= 1 + m.p.shape + 1e-12);
-    near(r.signal, r.a + r.b);
+    assert.ok(Math.abs(r.signal) <= 1 + 1e-12);
+    assert.equal(r.examples.length, 6);
+    for (const x of r.examples) assert.ok(Number.isFinite(x) && Math.abs(x) <= 1);
   }
 }
-// Phase order parameters distinguish a common phase, two opposed clusters, and
-// a uniform circle. A low first-order parameter alone is not disorder.
-const uniform = Array.from({ length: 100 }, (_, i) => B.TAU * i / 100);
-const oneCluster = B.orders(Array(100).fill(0.75));
-near(oneCluster.r1, 1); near(oneCluster.r2, 1);
-const opposed = B.orders(Array(50).fill(0).concat(Array(50).fill(Math.PI)));
-near(opposed.r1, 0); near(opposed.r2, 1);
-near(B.orders(uniform).r1, 0); near(B.orders(uniform).r2, 0);
 
-// Seeded stochastic trajectories are reproducible; both groups have matched,
-// symmetric natural-frequency distributions with the requested mean.
-const a = B.create({ n: 80, noise: 0.4, seed: 351 });
-const b = B.create({ n: 80, noise: 0.4, seed: 351 });
-const c = B.create({ n: 80, noise: 0.4, seed: 352 });
+// Every neuron has exactly the same positive electrode weight. The field is
+// the arithmetic mean of centered current waveforms, not a phase count or an
+// absolute current. A half-cycle shift changes current sign without changing
+// coherence; a uniform phase circle has a small summed current.
+const known = B.create({ n: 21, noise: 0 });
+known.phase.set(Array.from({ length: 21 }, (_, i) => 0.13 * i * i));
+const exactMean = Array.from(known.phase).reduce((sum, x) => sum + Math.cos(x), 0) / 21;
+near(B.readout(known).signal, exactMean);
+const beforeShift = B.readout(known);
+for (let i = 0; i < known.p.n; i++) known.phase[i] += Math.PI;
+near(B.readout(known).signal, -exactMean);
+near(B.readout(known).r1, beforeShift.r1);
+const uniform = Array.from({ length: 21 }, (_, i) => B.TAU * i / 21);
+known.phase.set(uniform); near(B.readout(known).signal, 0); near(B.orders(uniform).r1, 0);
+near(B.orders(Array(21).fill(0.75)).r1, 1);
+for (const n of [20, 21, 200, 499, 500]) {
+  const m = B.create({ n, spread: 0, noise: 0 });
+  assert.equal(m.p.n, n); assert.equal(m.phase.length, n);
+  m.phase.fill(0); near(B.readout(m).signal, 1);
+  m.phase.fill(Math.PI); near(B.readout(m).signal, -1);
+}
+
+// Any integer population size has one evenly spaced, symmetric frequency
+// distribution, including odd counts. No artificial frequency pairs are used.
+for (const n of [21, 200, 499]) {
+  const m = B.create({ n, frequency: 13, spread: 0.3 });
+  near(m.frequencies[0], 13 * 0.7);
+  near(m.frequencies[n - 1], 13 * 1.3);
+  near(Array.from(m.frequencies).reduce((sum, x) => sum + x) / n, 13);
+  const increment = m.frequencies[1] - m.frequencies[0];
+  for (let i = 1; i < n; i++) near(m.frequencies[i] - m.frequencies[i - 1], increment);
+  assert.equal(new Set(m.exampleIndices).size, 6);
+  assert.equal(m.exampleIndices[0], 0); assert.equal(m.exampleIndices[5], n - 1);
+}
+assert.deepEqual(Object.keys(B.defaults).sort(), ['coupling', 'frequency', 'n', 'noise', 'seed', 'spread']);
+const whitelisted = B.create({ n: 21, unsupported: 17 });
+assert.equal(whitelisted.p.unsupported, undefined);
+assert.deepEqual(Object.keys(B.readout(whitelisted)).sort(), ['examples', 'psi1', 'r1', 'rate', 'signal', 't']);
+assert.deepEqual(Object.keys(whitelisted.history[0]).sort(), ['examples', 'r1', 'signal', 't']);
+
+// The seeded stochastic model is reproducible, including for an odd population
+// where the Box-Muller spare normal spans successive integration steps.
+const a = B.create({ n: 81, noise: 0.4, seed: 351 });
+const b = B.create({ n: 81, noise: 0.4, seed: 351 });
+const c = B.create({ n: 81, noise: 0.4, seed: 352 });
 B.advance(a, 0.5); B.advance(b, 0.5); B.advance(c, 0.5);
 assert.deepEqual(a.phase, b.phase); assert.deepEqual(a.spikes, b.spikes);
 assert.notDeepEqual(a.phase, c.phase);
-for (let i = 0; i < a.p.n / 2; i++) near(a.frequencies[i], a.frequencies[i + a.p.n / 2]);
-near(Array.from(a.frequencies).reduce((x, y) => x + y) / a.p.n, 10);
 
-// Adding neurons does not increase a fully coherent normalized dipole signal.
-for (const n of [20, 100, 500]) {
-  const m = B.create({ n, spread: 0, noise: 0 });
-  m.phase.fill(0); near(B.readout(m).signal, 1);
-  B.configure(m, { orientation: -1 }); near(B.readout(m).signal, 0);
-}
-
+// Positive first-harmonic Kuramoto coupling creates a coherent population
+// rhythm without changing the distribution's requested mean natural rate.
 const independent = B.create({ n: 200, noise: 0.02 }, 'scattered');
 const together = B.create({ n: 200, coupling: 24, noise: 0.02 }, 'scattered');
 B.advance(independent, 6); B.advance(together, 6);
@@ -49,84 +74,55 @@ assert.ok(B.readout(independent).r1 < 0.2);
 assert.ok(B.readout(together).r1 > 0.95);
 assert.ok(B.rms(together.history) > 0.6);
 assert.ok(B.rms(together.history) > 6 * B.rms(independent.history));
+near(B.readout(independent).rate, B.readout(together).rate);
 near(B.spectrum(together.history).peak, 10, 0.05);
-
-// Paired frequencies and second-harmonic coupling preserve balanced antipodal
-// clusters: the pure fundamental cancels despite high within-pair alignment.
-const alternating = B.create({ n: 200, coupling: 24, harmonic: 2, noise: 0 }, 'alternating');
-B.advance(alternating, 6);
-assert.ok(B.readout(alternating).r1 < 1e-10);
-assert.ok(B.readout(alternating).r2 > 0.95);
-assert.ok(B.rms(alternating.history) < 1e-10);
-assert.equal(B.spectrum(alternating.history).peak, null);
-for (let i = 0; i < 100; i++) near(alternating.phase[i + 100] - alternating.phase[i], Math.PI, 1e-9);
-
-// Geometry and dipole waveform reproject the SAME retained activity, including
-// paused history. The raster, phase state, sample times, and order parameters
-// stay identical. Reversed B orientation changes cancellation into addition.
-const phasesBefore = Array.from(alternating.phase);
-const spikesBefore = JSON.stringify(alternating.spikes);
-const timeBefore = alternating.t;
-const historyBefore = alternating.history.map(r => ({ t: r.t, r1: r.r1, r2: r.r2 }));
-const historyReference = alternating.history;
-const rowReference = alternating.history[0];
-B.configure(alternating, { orientation: -1 });
-assert.equal(alternating.history, historyReference);
-assert.equal(alternating.history[0], rowReference);
-assert.ok(B.rms(alternating.history) > 0.6);
-for (const row of alternating.history) near(row.signal, 2 * row.a, 1e-10);
-assert.deepEqual(Array.from(alternating.phase), phasesBefore);
-assert.equal(JSON.stringify(alternating.spikes), spikesBefore);
-near(alternating.t, timeBefore);
-assert.deepEqual(alternating.history.map(r => ({ t: r.t, r1: r.r1, r2: r.r2 })), historyBefore);
-B.configure(alternating, { orientation: 1, shape: 0.35 });
-assert.ok(B.rms(alternating.history) > 0.2);
-near(B.spectrum(alternating.history).peak, 20, 0.05);
-assert.equal(alternating.exampleIndices.length, 6);
-for (const row of alternating.history) {
-  near(row.a, row.c1a + 0.35 * row.c2a);
-  near(row.b, row.c1b + 0.35 * row.c2b);
-  assert.equal(row.examples.length, 6);
-  for (const e of row.examples) { assert.ok(Math.abs(e.c1) <= 1); assert.ok(Math.abs(e.c2) <= 1); }
+for (const m of [independent, together]) {
+  const row = m.history.at(-1), r = B.readout(m);
+  near(row.signal, r.signal);
+  for (let i = 0; i < 6; i++) near(row.examples[i], Math.cos(m.phase[m.exampleIndices[i]]));
 }
 
 // A shared idealized phase reset produces transient coherence without changing
-// natural frequencies or recording a fictitious phase-crossing event.
-const transient = B.create({ n: 200, spread: 0.2, noise: 0 }, 'scattered');
+// natural frequencies or recording fictitious phase-crossing events.
+const transient = B.create({ n: 201, spread: 0.2, noise: 0 }, 'scattered');
 B.advance(transient, 1);
-const pulseTime = transient.t, pulseHistory = transient.history.length;
+const pulseTime = transient.t, pulseHistory = JSON.stringify(transient.history);
 const pulseSpikes = JSON.stringify(transient.spikes);
 const pulseFrequencies = Array.from(transient.frequencies);
 B.pulse(transient);
-near(transient.t, pulseTime); assert.equal(transient.history.length, pulseHistory);
+near(transient.t, pulseTime); assert.equal(JSON.stringify(transient.history), pulseHistory);
 assert.equal(JSON.stringify(transient.spikes), pulseSpikes);
 assert.deepEqual(Array.from(transient.frequencies), pulseFrequencies);
 assert.ok(B.readout(transient).r1 > 0.99);
 assert.deepEqual(transient.pulses.at(-1), { t: pulseTime, type: 'pulse' });
 B.advance(transient, 2);
 assert.ok(B.readout(transient).r1 < 0.1);
-const scrambleTime = transient.t, scrambleHistory = transient.history.length;
+const scrambleTime = transient.t, scrambleHistory = JSON.stringify(transient.history);
+const scrambleSpikes = JSON.stringify(transient.spikes);
 B.scramble(transient);
-near(transient.t, scrambleTime); assert.equal(transient.history.length, scrambleHistory);
+near(transient.t, scrambleTime); assert.equal(JSON.stringify(transient.history), scrambleHistory);
+assert.equal(JSON.stringify(transient.spikes), scrambleSpikes);
 assert.ok(B.readout(transient).r1 < 0.15);
 assert.deepEqual(transient.pulses.at(-1), { t: scrambleTime, type: 'scramble' });
 
-// Live frequency/coupling/noise changes preserve activity and past recordings.
+// Live frequency/coupling/noise changes preserve time, phase, past samples and
+// raster. Counts deliberately require constructing a new model in the UI.
 const configuredPhase = Array.from(transient.phase), configuredHistory = JSON.stringify(transient.history);
-B.configure(transient, { frequency: 18, coupling: 12, noise: 0.3, spread: 0.3 });
-near(transient.t, scrambleTime);
+B.configure(transient, { frequency: 18, coupling: 12, noise: 0.3, spread: 0.3, n: 300, unsupported: 4 });
+near(transient.t, scrambleTime); assert.equal(transient.p.n, 201);
 assert.deepEqual(Array.from(transient.phase), configuredPhase);
 assert.equal(JSON.stringify(transient.history), configuredHistory);
-near(Array.from(transient.frequencies).reduce((x, y) => x + y) / 200, 18);
-for (let i = 0; i < 100; i++) near(transient.frequencies[i], transient.frequencies[i + 100]);
+assert.equal(JSON.stringify(transient.spikes), scrambleSpikes);
+assert.equal(transient.p.unsupported, undefined);
+near(Array.from(transient.frequencies).reduce((sum, x) => sum + x) / 201, 18);
 
 // Analytic uncoupled rotation checks integration, exact duration, and upward
-// cycle-crossing raster timing. Each event has the expected period.
-const rotating = B.create({ n: 20, frequency: 10, spread: 0, noise: 0 }, 'aligned');
+// cycle-crossing raster timing. Recorded event intervals equal the period.
+const rotating = B.create({ n: 21, frequency: 10, spread: 0, noise: 0 }, 'aligned');
 const initialPhase = Array.from(rotating.phase);
 B.advance(rotating, 0.123);
 near(rotating.t, 0.123, 1e-12);
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < rotating.p.n; i++) {
   near(rotating.phase[i], initialPhase[i] + B.TAU * 10 * 0.123, 1e-10);
   near(rotating.spikes[i][0], (B.TAU - initialPhase[i]) / (B.TAU * 10), 1e-10);
 }
@@ -140,18 +136,19 @@ for (const crossings of rotating.spikes) {
 for (let i = 1; i < rotating.history.length; i++) near(rotating.history[i].t - rotating.history[i - 1].t, B.SAMPLE_DT, 1e-12);
 
 // A halved deterministic time step converges toward a quarter-step reference.
-const coarse = B.create({ n: 20, coupling: 24, noise: 0 });
-const fine = B.create({ n: 20, coupling: 24, noise: 0 });
-const reference = B.create({ n: 20, coupling: 24, noise: 0 });
+const coarse = B.create({ n: 21, coupling: 24, noise: 0 });
+const fine = B.create({ n: 21, coupling: 24, noise: 0 });
+const reference = B.create({ n: 21, coupling: 24, noise: 0 });
 for (let i = 0; i < 500; i++) B.step(coarse, 0.002);
 for (let i = 0; i < 1000; i++) B.step(fine, 0.001);
 for (let i = 0; i < 2000; i++) B.step(reference, 0.0005);
 const error = m => Math.sqrt(m.phase.reduce((sum, x, i) => sum + (x - reference.phase[i]) ** 2, 0) / m.p.n);
 assert.ok(error(fine) < error(coarse) / 2.5);
 
-// Hann periodogram normalization: integrating the one-sided PSD of an
-// amplitude-one sinusoid gives variance1/2, and halving amplitude quarters power.
-const samples = Array.from({ length: 1500 }, (_, i) => ({ t: i * B.SAMPLE_DT, signal: Math.cos(B.TAU * 10 * i * B.SAMPLE_DT) }));
+// The one-sided Hann PSD has physical normalization: integrating an amplitude-
+// one sinusoid gives variance1/2, and halving amplitude quarters spectral power.
+const samples = Array.from({ length: 1500 }, (_, i) => ({ t: i * B.SAMPLE_DT,
+  signal: Math.cos(B.TAU * 10 * i * B.SAMPLE_DT) }));
 const psd = B.spectrum(samples);
 near(psd.peak, 10, 0.05); near(psd.duration, 4.096); near(psd.df, 250 / 1024);
 near(psd.power.reduce((x, y) => x + y, 0) * psd.df, 0.5, 0.001);
@@ -160,27 +157,24 @@ near(halfPSD.peakPower / psd.peakPower, 0.25);
 assert.equal(B.spectrum(samples.slice(0, 127)).peak, null);
 assert.equal(B.spectrum(samples.map(r => ({ t: r.t, signal: 3 }))).peak, null);
 
-// The displayed RMS includes the mean component; it is not standard deviation.
+// The fast edge of the UI's30Hz ±40% distribution is42Hz, which remains below
+// Nyquist and appears at42Hz in the sampled individual current contribution.
+const fast = B.create({ n: 21, frequency: 30, spread: 0.4, noise: 0 }, 'aligned');
+B.advance(fast, 6);
+near(fast.frequencies[20], 42);
+const edgePSD = B.spectrum(fast.history.map(r => ({ t: r.t, signal: r.examples[5] })));
+near(edgePSD.peak, 42, 0.05);
+
+// Displayed RMS includes the mean component and respects its requested window.
 near(B.rms(Array.from({ length: 100 }, (_, i) => ({ t: i * 0.01, signal: 2 }))), 2);
 near(B.rms(Array.from({ length: 1000 }, (_, i) => ({ t: i * 0.001,
   signal: Math.sin(B.TAU * 10 * i * 0.001) }))), Math.SQRT1_2, 1e-12);
 near(B.rms([{ t: 0, signal: -1 }, { t: 1, signal: 2 }, { t: 2, signal: 3 }]), Math.sqrt(14 / 3));
 near(B.rms([{ t: 0, signal: 100 }, { t: 1, signal: 2 }, { t: 2, signal: 3 }], 1), Math.sqrt(13 / 2));
 
-// At the highest UI rhythm, the waveform's second harmonic is genuinely60Hz.
-// The250Hz signal sampler must retain it rather than aliasing it to40Hz.
-const fast = B.create({ n: 20, frequency: 30, spread: 0, noise: 0, shape: 0.35 }, 'aligned');
-B.advance(fast, 6);
-const fastPSD = B.spectrum(fast.history);
-const bin60 = Math.round(60 / fastPSD.df), bin40 = Math.round(40 / fastPSD.df);
-assert.ok(fastPSD.power[bin60] > 1e5 * fastPSD.power[bin40]);
-
-// Maximum population, bandwidth, coupling, noise and both coupling harmonics
-// remain finite and in the mathematically possible dipole/order bounds.
-for (const harmonic of [1, 2]) {
-  const extreme = B.create({ n: 500, frequency: 40, spread: 0.4,
-    coupling: 40, noise: 3, shape: 1, harmonic });
-  B.advance(extreme, 0.5); finite(extreme);
-}
-finite(together); finite(alternating); finite(transient);
-console.log('PASS: phase order, seeded noise, paired frequencies, population normalization, collective locking, antipodal cancellation, orientation/waveform reprojection, transient phase reset, live controls, raster timing, fixed sampling/window, timestep convergence, PSD frequency/variance normalization, and 500-neuron parameter extremes.');
+// Maximum population, frequency bandwidth, coupling and noise remain finite and
+// within the mathematically possible equal-weight field and coherence bounds.
+const extreme = B.create({ n: 500, frequency: 40, spread: 0.4, coupling: 40, noise: 3 });
+B.advance(extreme, 0.5);
+for (const m of [extreme, together, transient, fast]) finite(m);
+console.log('PASS: single-population equal-weight current mean, integer counts, frequency quantiles, seeded noise, collective locking, transient phase reset, live controls, raster timing, fixed sampling/window, timestep convergence, PSD normalization/high-frequency resolution, true RMS, and500-neuron extremes.');
