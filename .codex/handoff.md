@@ -334,3 +334,9 @@ Pre-edit Git state after fetch:
 
 - Replaced the initial 2021 talk summary with Greg's supplied abstract. Used the existing collapsed-by-default `Abstract` disclosure markup and kept the slides link below it. Source wording and whitespace checks passed. Publication commit `b554a9ff1ff24d7ef91af2652c761b119cd2b46f`.
 - [GitHub Pages run 42841359250](https://github.com/gregconradismith/gregconradismith.github.io/actions/runs/42841359250) succeeded. The live 2021 entry has the supplied abstract inside the closed disclosure, and its slides link is outside the disclosure. No remaining publication work or blockers.
+
+### Talks layout follow-up
+
+- Italicized *Mimulus*, *Alice in Wonderland*, and *Through the Looking Glass* in the 2021 abstract. Grouped all 11 titles, disclosures, and optional links in `.talk` wrappers. Scoped the Sass spacing rules to those wrappers, with 0.25 em from title to disclosure and 1.5 em between talks in the same year. The year headings retain their existing spacing.
+- Source comparison confirmed the only content changes were the three emphasis spans. Kramdown rendered all 11 groups, six year headings, and the separate slides link. Chrome previews at 1280 and 390 px confirmed the title gap shrank from 23.4 to 4.5 px on desktop and 20.8 to 4 px on mobile, with 27 and 24 px respectively between consecutive talks in a year. Both previews verified the disclosure and separate slides link. No horizontal overflow at 390 px. `git diff --check` passed. GitHub Pages builds the complete site per the local Jekyll instruction above. Publication commit `60c7c20ebf24de57f94608b379a1b51b46f6ac48`.
+- [GitHub Pages run 42843255747](https://github.com/gregconradismith/gregconradismith.github.io/actions/runs/42843255747) succeeded. The live canonical Talks HTML and `main.css` match the build artifact byte for byte. No remaining work or blockers.
