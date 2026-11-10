@@ -129,6 +129,11 @@ This expository talk explores the non-associative algebraic structure that is na
 
 **A rabbit hole of determinantal identities.** Biomath Seminar, William & Mary, February 19, 2021.
 
-The talk connects Dodgson condensation and related determinantal identities to a model of petal spot formation in hybrid monkeyflowers, developed with Emily Simmons, Josh Puzey, and Arielle Cooley.
+<details markdown="1">
+<summary>Abstract</summary>
+
+Determinants of block matrices may be the key to understanding a multigenerational reaction-diffusion model of pattern formation in Mimulus petals that I am developing in collaboration with Emily Simmons, Arielle Cooley, and Josh Puzey.  A survey of the mathematical literature on this topic recently led me down a "rabbit hole" of determinantal identities to a largely forgotten method for evaluating determinants called "Dodgson condensation."  Charles Lutwidge Dodgson (1832-1898) was none other than Lewis Carroll, author of Alice in Wonderland and Through the Looking Glass.
+
+</details>
 
 [Slides (PDF)](/files/talks/2021-02-19-dodgson-condensation.pdf)
