@@ -37,6 +37,8 @@ At the crossroads of many deep ideas in combinatorics is the concept of a *parki
 
 </details>
 
+[Slides (PDF)](/files/talks/2025-09-12-parking-functions.pdf)
+
 </div>
 
 <div class="talk" markdown="1">
@@ -68,6 +70,8 @@ Membraneless organelles (MLOs) exhibit remarkable liquid-like features. As with 
 My talk on Friday will include a brief overview of membraneless organelles followed by a more detailed presentation of the Cahn-Hilliard equation. This partial differential equation describes the process of liquid-liquid phase separation. Along the way, I will disclose recent developments in my love-hate relationship with generative AI.
 
 </details>
+
+[Slides (PDF)](/files/talks/2024-09-27-membraneless-organelles.pdf)
 
 </div>
 
@@ -150,6 +154,8 @@ As preparation for Friday's talk, read the equation-free book chapter: Singer, D
 
 </details>
 
+[Slides (PDF)](/files/talks/2022-09-16-epistemic-networks.pdf)
+
 </div>
 
 <div class="talk" markdown="1">
@@ -162,6 +168,8 @@ As preparation for Friday's talk, read the equation-free book chapter: Singer, D
 This expository talk explores the non-associative algebraic structure that is naturally associated with Mendelian genetics. The notion of a "genetic algebra" was formalized in the 1940s by Ivor M. H. Etherington (1908-1994) and pursued by Bernstein, Gonshor, Guzzo, Hetzel, Holgate, Perezi, Schafer, Walcher, Wörz-Busekros, and many others, including J. B. S. Haldane (one of the three major figures to develop the mathematical theory of population genetics, along with Ronald Fisher and Sewall Wright). In Friday's Biomath Seminar, we will begin with the standard multiplication tables used by geneticists to represent gametic and zygotic inheritance, and show how these tables define the structure constants of a finite-dimensional algebra. We will discuss known properties of a genetic algebra such as the rank equation, the transformation matrix, weight functions, change of basis, and commutative duplication. Along the way, we will illustrate the use of genetic algebra in the mathematical analysis of self-fertilization and polyploidy.
 
 </details>
+
+[Slides (PDF)](/files/talks/2022-02-11-genetic-algebras.pdf)
 
 </div>
 
