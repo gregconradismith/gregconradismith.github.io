@@ -7,6 +7,8 @@ author_profile: true
 
 ### 2026
 
+<div class="talk" markdown="1">
+
 **Phase-field modeling of the biological physics of membraneless organelles.** Joint Mathematics Meetings session on Stochastic Processes in Biology, Washington, DC, April 2026.
 
 <details markdown="1">
@@ -20,7 +22,11 @@ By integrating statistical thermodynamics with continuum PDE models, this work h
 
 </details>
 
+</div>
+
 ### 2025
+
+<div class="talk" markdown="1">
 
 **Parking functions.** Biomath Seminar, William & Mary, September 2025.
 
@@ -31,6 +37,10 @@ At the crossroads of many deep ideas in combinatorics is the concept of a *parki
 
 </details>
 
+</div>
+
+<div class="talk" markdown="1">
+
 **Quantifying and maximizing diversity.** Biomath Seminar, William & Mary, February 2025.
 
 <details markdown="1">
@@ -40,7 +50,11 @@ How can we quantify diversity in a meaningful and logical way? The most common m
 
 </details>
 
+</div>
+
 ### 2024
+
+<div class="talk" markdown="1">
 
 **Membraneless organelles and the Cahn-Hilliard equation for liquid-liquid phase separation.** Biomath Seminar, William & Mary, September 2024.
 
@@ -55,6 +69,10 @@ My talk on Friday will include a brief overview of membraneless organelles follo
 
 </details>
 
+</div>
+
+<div class="talk" markdown="1">
+
 **High-ventilation breathwork and respiratory gas exchange.** Mind/Brain/Wellness Seminar, William & Mary, April 2024.
 
 <details markdown="1">
@@ -66,7 +84,11 @@ Presumably, the pathway from increased ventilation rate/depth to neurophysiology
 
 </details>
 
+</div>
+
 ### 2023
+
+<div class="talk" markdown="1">
 
 **Burnside's lemma and the alpha7 nicotinic acetylcholine receptor.** Biomath Seminar, William & Mary, September 2023.
 
@@ -83,6 +105,10 @@ My talk on Friday will focus on a result from group theory known as Burnside's l
 
 </details>
 
+</div>
+
+<div class="talk" markdown="1">
+
 **Conformational coupling of receptor dimers.** Society for Mathematical Biology, Minisymposium: Stochastic Cellular Dynamics, Columbus, OH, July 2023.
 
 <details markdown="1">
@@ -91,6 +117,10 @@ My talk on Friday will focus on a result from group theory known as Burnside's l
 Quantitative pharmacologists construct Markov chain models to give insight into the relationship between ligand concentration and the fraction of cell surface receptors in each of several molecular conformations. Pharmacologists use these stochastic models to understand the action of natural ligands and drugs on receptor-mediated cell responses. When receptors function as two or more similar protein subunits working in concert (i.e., homodimers or oligomers), receptor models must (i) account for symmetry, (ii) satisfy thermodynamic constraints, and (iii) properly account for subunit interactions (allostery) mediated by conformational coupling. The modeling framework that satisfies these three requirements will be explicated in the context of models of G protein-coupled receptors (GPCRs), such as metabotropic glutamate receptors, that function as multi-molecule signaling complexes. For equilibrium models of receptor dimers, this approach facilitates the inference of a parsimonious subset of allosteric interactions leading to conformational coupling and dependence of receptor subunits.
 
 </details>
+
+</div>
+
+<div class="talk" markdown="1">
 
 **Bursting in excitatory neural networks -- do spikes matter?** Biomath Seminar, William & Mary, February 2023.
 
@@ -103,7 +133,11 @@ We will discuss these questions in the context of the preBötzinger Complex (pre
 
 </details>
 
+</div>
+
 ### 2022
+
+<div class="talk" markdown="1">
 
 **Epistemic networks for the misinformation age.** Biomath Seminar, William & Mary, September 2022.
 
@@ -116,6 +150,10 @@ As preparation for Friday's talk, read the equation-free book chapter: Singer, D
 
 </details>
 
+</div>
+
+<div class="talk" markdown="1">
+
 **Genetic algebras.** Biomath Seminar, William & Mary, February 2022.
 
 <details markdown="1">
@@ -125,15 +163,21 @@ This expository talk explores the non-associative algebraic structure that is na
 
 </details>
 
+</div>
+
 ### 2021
+
+<div class="talk" markdown="1">
 
 **A rabbit hole of determinantal identities.** Biomath Seminar, William & Mary, February 19, 2021.
 
 <details markdown="1">
 <summary>Abstract</summary>
 
-Determinants of block matrices may be the key to understanding a multigenerational reaction-diffusion model of pattern formation in Mimulus petals that I am developing in collaboration with Emily Simmons, Arielle Cooley, and Josh Puzey.  A survey of the mathematical literature on this topic recently led me down a "rabbit hole" of determinantal identities to a largely forgotten method for evaluating determinants called "Dodgson condensation."  Charles Lutwidge Dodgson (1832-1898) was none other than Lewis Carroll, author of Alice in Wonderland and Through the Looking Glass.
+Determinants of block matrices may be the key to understanding a multigenerational reaction-diffusion model of pattern formation in *Mimulus* petals that I am developing in collaboration with Emily Simmons, Arielle Cooley, and Josh Puzey.  A survey of the mathematical literature on this topic recently led me down a "rabbit hole" of determinantal identities to a largely forgotten method for evaluating determinants called "Dodgson condensation."  Charles Lutwidge Dodgson (1832-1898) was none other than Lewis Carroll, author of *Alice in Wonderland* and *Through the Looking Glass*.
 
 </details>
 
 [Slides (PDF)](/files/talks/2021-02-19-dodgson-condensation.pdf)
+
+</div>
