@@ -124,3 +124,11 @@ As preparation for Friday's talk, read the equation-free book chapter: Singer, D
 This expository talk explores the non-associative algebraic structure that is naturally associated with Mendelian genetics. The notion of a "genetic algebra" was formalized in the 1940s by Ivor M. H. Etherington (1908-1994) and pursued by Bernstein, Gonshor, Guzzo, Hetzel, Holgate, Perezi, Schafer, Walcher, Wörz-Busekros, and many others, including J. B. S. Haldane (one of the three major figures to develop the mathematical theory of population genetics, along with Ronald Fisher and Sewall Wright). In Friday's Biomath Seminar, we will begin with the standard multiplication tables used by geneticists to represent gametic and zygotic inheritance, and show how these tables define the structure constants of a finite-dimensional algebra. We will discuss known properties of a genetic algebra such as the rank equation, the transformation matrix, weight functions, change of basis, and commutative duplication. Along the way, we will illustrate the use of genetic algebra in the mathematical analysis of self-fertilization and polyploidy.
 
 </details>
+
+### 2021
+
+**A rabbit hole of determinantal identities.** Biomath Seminar, William & Mary, February 19, 2021.
+
+The talk connects Dodgson condensation and related determinantal identities to a model of petal spot formation in hybrid monkeyflowers, developed with Emily Simmons, Josh Puzey, and Arielle Cooley.
+
+[Slides (PDF)](/files/talks/2021-02-19-dodgson-condensation.pdf)
