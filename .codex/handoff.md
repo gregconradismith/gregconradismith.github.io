@@ -329,3 +329,8 @@ Pre-edit Git state after fetch:
 - Published the original 47-page PDF at `/files/talks/2021-02-19-dodgson-condensation.pdf` in `d64e1f2550d44b72fdb76512cdff6854500e1003`. The Academic Pages talk generator creates unused collection entries and does not own this page.
 - Verified front matter, descending year headings, `git diff --check`, slide rendering, and byte equality between the upload and the PDF in the GitHub Pages build artifact. The built Talks HTML contains the expected title and slides link. PDF SHA-256 `ccbd9690af7a59d54191ecf90e94e02829d09be54bd6227389d9a77917204a81`.
 - [GitHub Pages run 42839866650](https://github.com/gregconradismith/gregconradismith.github.io/actions/runs/42839866650) succeeded. The canonical `/talks/` page displays the entry under 2021, and its PDF link returned HTTP 200 with bytes identical to the source. No remaining publication work or blockers.
+
+### Abstract follow-up
+
+- Replaced the initial 2021 talk summary with Greg's supplied abstract. Used the existing collapsed-by-default `Abstract` disclosure markup and kept the slides link below it. Source wording and whitespace checks passed. Publication commit `b554a9ff1ff24d7ef91af2652c761b119cd2b46f`.
+- [GitHub Pages run 42841359250](https://github.com/gregconradismith/gregconradismith.github.io/actions/runs/42841359250) succeeded. The live 2021 entry has the supplied abstract inside the closed disclosure, and its slides link is outside the disclosure. No remaining publication work or blockers.
