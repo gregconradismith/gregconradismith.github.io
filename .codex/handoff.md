@@ -322,3 +322,10 @@ Pre-edit Git state after fetch:
 
 - Published integration commit `580ee467a3da932f0cebef587be706028282a0c3`; [Pages run 42080223770](https://github.com/gregconradismith/gregconradismith.github.io/actions/runs/42080223770) succeeded. All four live runtime files and provenance returned HTTP 200 and matched reviewed local bytes. Index SHA-256: `f32bf5060f7928352e01369ec06224c68ee1739fd1835a449af86a2cb3b353c6`.
 - Reloaded the public app and confirmed the new chain legend/accessibility description and ±100% slider endpoint. Applied 20 neurons and advanced to t = 7 s at full spread; the chain and broad signal/PSD rendered correctly. No browser console warnings/errors. Saved and inspected a full-page screenshot. The canonical website checkout is synchronized; this verification note changes no runtime content. No remaining implementation work or blockers.
+
+## 2026-11-10 Determinantal identities talk
+
+- Added the February 19, 2021 William & Mary Biomath Seminar entry to the curated `_pages/talks.md` page. Corrected the title-slide spelling to “determinantal” in the listing and credited Emily Simmons, Josh Puzey, and Arielle Cooley for the model discussed in the slides.
+- Published the original 47-page PDF at `/files/talks/2021-02-19-dodgson-condensation.pdf` in `d64e1f2550d44b72fdb76512cdff6854500e1003`. The Academic Pages talk generator creates unused collection entries and does not own this page.
+- Verified front matter, descending year headings, `git diff --check`, slide rendering, and byte equality between the upload and the PDF in the GitHub Pages build artifact. The built Talks HTML contains the expected title and slides link. PDF SHA-256 `ccbd9690af7a59d54191ecf90e94e02829d09be54bd6227389d9a77917204a81`.
+- [GitHub Pages run 42839866650](https://github.com/gregconradismith/gregconradismith.github.io/actions/runs/42839866650) succeeded. The canonical `/talks/` page displays the entry under 2021, and its PDF link returned HTTP 200 with bytes identical to the source. No remaining publication work or blockers.
