@@ -9,7 +9,7 @@ author_profile: true
 
 <div class="talk" markdown="1">
 
-**Phase-field modeling of the biological physics of membraneless organelles.** Joint Mathematics Meetings session on Stochastic Processes in Biology, Washington, DC, April 2026.
+**Phase-field modeling of the biological physics of membraneless organelles.** Joint Mathematics Meetings session on Stochastic Processes in Biology, Washington, DC, January 4, 2026.
 
 <details markdown="1">
 <summary>Abstract</summary>
