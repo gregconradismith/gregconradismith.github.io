@@ -32,16 +32,22 @@
   h1 { font-size: clamp(1.65rem, 4vw, 2.35rem); line-height: 1.14; margin: .23rem 0 .4rem; letter-spacing: -.027em; }
   .subtitle { color: var(--muted); line-height: 1.45; }
   .panel { background: var(--paper); border: 1px solid var(--border); border-radius: 12px; }
-  .controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; padding: .85rem 1rem .7rem; }
+  .controls { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem 1.25rem; padding: .85rem 1rem .7rem; }
   .setting { min-width: 0; display: grid; gap: .2rem; }
-  .setting-label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .25rem .5rem; font-size: .9rem; }
+  .setting-label { display: flex; align-items: center; flex-wrap: wrap; justify-content: space-between; gap: .25rem .5rem; min-height: 1.95rem; font-size: .9rem; }
   .setting-value { color: var(--primary); font-weight: 660; white-space: nowrap; }
+  .length-entry { display: inline-flex; align-items: center; gap: .35rem; }
+  .length-entry input { width: 3.75rem; padding: .28rem; border: 1px solid #aab9cb; border-radius: 5px; color: var(--ink); }
+  .boundary-setting { grid-column: 1 / -1; display: flex; align-items: center; gap: .5rem .85rem; flex-wrap: wrap; }
+  .boundary-setting span { color: var(--muted); font-size: .85rem; }
   button, input, select { font: inherit; }
   input[type=range] { width: 100%; min-width: 0; margin: 0; height: 1.8rem; accent-color: var(--primary); }
   button, select { min-height: 2.5rem; padding: .35rem .65rem; border: 1px solid var(--border); border-radius: 7px; }
-  button { min-width: 5.75rem; color: white; background: var(--primary); border-color: var(--primary); font-weight: 650; }
-  button:hover:not(:disabled) { background: #174888; }
-  button:disabled { background: #78899f; border-color: #78899f; }
+  button { color: var(--primary); background: var(--paper); border-color: #aab9cb; font-weight: 650; }
+  button:hover { background: var(--soft); }
+  button.primary, button[aria-pressed="true"] { color: white; background: var(--primary); border-color: var(--primary); }
+  button.primary:hover, button[aria-pressed="true"]:hover { background: #174888; }
+  button[aria-disabled="true"] { background: #64768d; border-color: #64768d; }
   select { background: white; color: var(--ink); }
   :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
   .plots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; margin: .85rem 0; }
@@ -53,7 +59,10 @@
   .swatch { width: 1.1rem; border-top: 2px solid var(--proximal); }
   .swatch.b { border-top: 2px dashed var(--distal); }
   .swatch.stimulus { border: 1px solid #afc1d7; height: .65rem; background: #eaf0f8; }
-  .transport { display: grid; grid-template-columns: auto minmax(5rem, 1fr) auto; align-items: end; gap: .85rem; padding: .75rem 1rem; }
+  .swatch.pulse-onset { border-top: 2px dotted #62748b; }
+  .transport { display: grid; grid-template-columns: auto minmax(5rem, 1fr) auto; align-items: center; gap: .5rem .85rem; margin-top: .85rem; padding: .65rem 1rem; }
+  .actions { display: flex; gap: .4rem; flex-wrap: wrap; }
+  #play { min-width: 4.9rem; }
   .transport .setting-label { flex-wrap: nowrap; }
   .transport button { align-self: center; }
   .transport select { min-width: 6rem; }
@@ -62,7 +71,7 @@
   .measurement .label { grid-column: 1 / -1; font-size: .85rem; color: var(--muted); }
   .measurement .value { font-size: 1.35rem; font-weight: 660; }
   .measure-note { grid-column: 1 / -1; font-size: .83rem; color: var(--muted); }
-  .status { color: var(--muted); font-size: .88rem; min-height: 1.35em; margin: 0 0 .7rem; }
+  .status { grid-column: 1 / -1; color: var(--muted); font-size: .88rem; }
   .status.error { color: #992b22; }
   .tabular { font-variant-numeric: tabular-nums; }
   details { padding: .6rem .85rem; line-height: 1.55; font-size: .89rem; overflow-wrap: anywhere; }
@@ -77,12 +86,13 @@
     main { width: calc(100% - 1.2rem); padding-top: 1rem; }
     .controls { grid-template-columns: 1fr; gap: .65rem; }
     .transport { grid-template-columns: 1fr auto; }
-    .transport .time-setting { grid-column: 1 / -1; grid-row: 2; }
+    .transport .time-setting { grid-column: 1 / -1; }
+    .transport .actions { grid-column: 1 / -1; }
     .plot { padding-inline: .45rem; }
     .measurement .value { font-size: 1.16rem; }
   }
   @media (pointer: coarse) {
-    input[type=range], button, select { min-height: 44px; }
+    input, button, select { min-height: 44px; }
   }
 </style>
 </head>
@@ -100,10 +110,13 @@
   </header>
 
   <section class="controls panel tabular" aria-label="Axon and recording settings">
-    <label class="setting" for="length">
-      <span class="setting-label"><span>Axon length</span><span class="setting-value" id="length-value">24 cm</span></span>
+    <div class="setting">
+      <div class="setting-label">
+        <label for="length">Axon length</label>
+        <label class="length-entry"><input id="length-entry" type="number" min="10" max="40" step="1" value="24" aria-label="Axon length in centimeters"> cm</label>
+      </div>
       <input id="length" type="range" min="10" max="40" step="1" value="24" aria-label="Axon length">
-    </label>
+    </div>
     <label class="setting" for="diameter">
       <span class="setting-label"><span>Axon diameter</span><span class="setting-value" id="diameter-value">476 µm</span></span>
       <input id="diameter" type="range" min="150" max="800" step="1" value="476" aria-label="Axon diameter">
@@ -112,6 +125,32 @@
       <span class="setting-label"><span>Distal recording site B</span><span class="setting-value" id="distal-value">18 cm</span></span>
       <input id="distal" type="range" min="6" max="22" step="0.5" value="18" aria-label="Distal recording site B">
     </label>
+    <div class="boundary-setting">
+      <button type="button" id="periodic" aria-pressed="false" aria-describedby="boundary-mode">Periodic boundary conditions</button>
+      <span id="boundary-mode">Sealed ends</span>
+    </div>
+  </section>
+
+  <section class="transport panel tabular" aria-label="Stimulation and playback">
+    <div class="actions">
+      <button type="button" id="stimulate" class="primary">Stimulate</button>
+      <button type="button" id="play">Play</button>
+      <button type="button" id="reset">Reset</button>
+    </div>
+    <label class="setting time-setting" for="time">
+      <span class="setting-label"><span>Time</span><span class="setting-value" id="time-value">0.00 ms</span></span>
+      <input id="time" type="range" min="0" max="0" step="0.025" value="0" aria-label="Time" disabled>
+    </label>
+    <label class="setting" for="rate">
+      <span class="setting-label">Playback rate</span>
+      <select id="rate">
+        <option value="1.5">1.5 ms/s</option>
+        <option value="3" selected>3 ms/s</option>
+        <option value="6">6 ms/s</option>
+        <option value="12">12 ms/s</option>
+      </select>
+    </label>
+    <p id="status" class="status" role="status" aria-live="polite">Press Stimulate to deliver a 0.5 ms pulse.</p>
   </section>
 
   <div class="plots">
@@ -134,51 +173,41 @@
       <figcaption class="legend tabular">
         <span class="key"><span class="swatch" aria-hidden="true"></span><span id="trace-a">Site A</span></span>
         <span class="key"><span class="swatch b" aria-hidden="true"></span><span id="trace-b">Site B</span></span>
+        <span class="key"><span class="swatch pulse-onset" aria-hidden="true"></span>Pulse onset</span>
       </figcaption>
     </figure>
   </div>
 
-  <section class="transport panel tabular" aria-label="Simulation playback">
-    <button type="button" id="play" disabled>Play</button>
-    <label class="setting time-setting" for="time">
-      <span class="setting-label"><span>Time</span><span class="setting-value" id="time-value">0.00 ms</span></span>
-      <input id="time" type="range" min="0" max="29" step="0.025" value="0" aria-label="Time" disabled>
-    </label>
-    <label class="setting" for="rate">
-      <span class="setting-label">Playback rate</span>
-      <select id="rate">
-        <option value="1.5">1.5 ms/s</option>
-        <option value="3" selected>3 ms/s</option>
-        <option value="6">6 ms/s</option>
-        <option value="12">12 ms/s</option>
-      </select>
-    </label>
-  </section>
-
-  <section class="measurements panel tabular" aria-label="Conduction measurements">
+  <section class="measurements panel tabular" aria-label="First spike measurements">
     <div class="measurement">
-      <span class="label">Conduction speed</span>
+      <span class="label">First spike speed</span>
       <strong class="value" id="speed">—</strong>
     </div>
     <div class="measurement">
-      <span class="label">Delay from A to B</span>
+      <span class="label">First spike delay from A to B</span>
       <strong class="value" id="delay">—</strong>
     </div>
-    <p class="measure-note">Arrival is the first upward crossing of 0 mV. Speed is the distance between the sites divided by the arrival delay.</p>
+    <p id="measurement-note" class="measure-note">Arrival is the first upward crossing of 0 mV. Speed is the distance between the sites divided by the arrival delay.</p>
   </section>
 
-  <p id="status" class="status" role="status" aria-live="polite">Calculating the action potential…</p>
   <details class="panel">
     <summary>Model and parameters</summary>
-    <p>The axon is a uniform cylinder with sealed ends. A 0.5 ms inward current pulse (100 µA/cm²) begins at 1 ms over the first 0.6 cm. Site A stays at 4 cm. Moving B uses the same simulated voltage at a different location.</p>
+    <p>Each stimulus applies a 0.5 ms inward current pulse (100 µA/cm²) over the first 0.6 cm. Later pulses start from the current voltages and channel states. A pulse delivered during the refractory period can produce a smaller response or fail to launch a spike.</p>
+    <p>With sealed ends, no axial current leaves the cable. Periodic boundaries join the two ends into a ring. A pulse on a rested ring launches two waves in opposite directions that usually extinguish when they meet. Site A stays at 4 cm. Use B on the same side of the ring as A to measure the speed of one wave.</p>
+    <p>Changing the length, diameter, or boundary condition starts a new run. The time slider reviews the most recent <span id="window">—</span> of recorded voltage. Stimulate always applies a pulse at the latest simulated time. First-spike measurements use crossings before the second stimulus.</p>
     <p>The cable equation balances membrane capacitance, axial current, applied current, and the Hodgkin–Huxley sodium, potassium, and leak currents. With consistent units, the axial term is (d / 4R<sub>i</sub>) ∂²V/∂x², where d is the diameter. Each compartment has voltage-dependent gates m, h, and n, with conductances g<sub>Na</sub> = 120m³h, g<sub>K</sub> = 36n⁴, and g<sub>L</sub> = 0.3 mS/cm². The reversal potentials are +50, −77, and −54.387 mV, respectively.</p>
-    <p>Membrane capacitance is 1 µF/cm² and axial resistivity is 35.4 Ω·cm. Gate rates use Q<sub>10</sub> = 3 relative to 6.3 °C, evaluated here at 18.5 °C. The solver uses a spatial finite volume grid and a second-order midpoint time step. The current grid spacing is <span id="dx">—</span> and the integration step is <span id="dt">—</span>. Playback replays sampled voltages and does not change those steps.</p>
+    <p>Membrane capacitance is 1 µF/cm² and axial resistivity is 35.4 Ω·cm. Gate rates use Q<sub>10</sub> = 3 relative to 6.3 °C, evaluated here at 18.5 °C. The solver uses a spatial finite volume grid and a second-order midpoint time step. The current grid spacing is <span id="dx">—</span> and the integration step is <span id="dt">—</span>. Playback rate changes how quickly model time advances on screen.</p>
     <p><a href="https://doi.org/10.1113/jphysiol.1952.sp004764" target="_blank" rel="noreferrer">Hodgkin and Huxley (1952), especially Eq. 30 and Fig. 15</a></p>
   </details>
 </main>
 <script id="cable-model">
 'use strict';
-function simulateCable(lengthCm, diameterUm, refinement = 1, stimulus = 100) {
+const sampleMs = 0.025;
+const pulseMs = 0.5;
+const pulseLength = 0.6;
+const pulseFrames = Math.round(pulseMs / sampleMs);
+
+function createCable(lengthCm, diameterUm, periodic, refinement = 1) {
   const capacitance = 1;          // µF/cm²
   const axialResistivity = 35.4;  // Ω cm
   const temperature = 18.5;       // °C
@@ -195,15 +224,10 @@ function simulateCable(lengthCm, diameterUm, refinement = 1, stimulus = 100) {
   const diameterScale = Math.sqrt(diameterUm / 476);
   const count = Math.ceil(lengthCm * refinement / (0.065 * diameterScale));
   const dx = lengthCm / count;
-  const sampleMs = 0.025;
   const substeps = Math.ceil(sampleMs / Math.min(0.004 / refinement, 0.28 * dx * dx / diffusion));
   const dt = sampleMs / substeps;
-  const duration = Math.ceil(1 + lengthCm / (1.3 * diameterScale) + 9);
-  const frames = Math.round(duration / sampleMs) + 1;
+  const windowMs = Math.ceil(10 + lengthCm / (1.3 * diameterScale));
   const diffusionPerCell = diffusion / (dx * dx);
-  const pulseStart = 1;
-  const pulseEnd = 1.5;
-  const pulseLength = 0.6;
 
   function vtrap(x) {
     return Math.abs(x) < 1e-7 ? 1 + x / 2 : -x / Math.expm1(-x);
@@ -237,8 +261,6 @@ function simulateCable(lengthCm, diameterUm, refinement = 1, stimulus = 100) {
   const initial = new Float64Array([rest, am / sm, ah / sh, an / sn]);
   const state = Array.from(initial, (value) => new Float64Array(count).fill(value));
   const midpoint = Array.from(initial, () => new Float64Array(count));
-  const history = new Float32Array(count * frames);
-  history.fill(rest, 0, count);
 
   // Linear interpolation of the exact HH rates on a 0.05 mV grid.
   const tableMin = -110;
@@ -251,7 +273,7 @@ function simulateCable(lengthCm, diameterUm, refinement = 1, stimulus = 100) {
   const injection = new Float64Array(count);
   for (let i = 0; i < count && i * dx < pulseLength; i++) {
     // Average the stimulus over the last partially driven cell.
-    injection[i] = stimulus * Math.min(1, (pulseLength - i * dx) / dx);
+    injection[i] = 100 * Math.min(1, (pulseLength - i * dx) / dx);
   }
 
   function advance(from, out, step, pulseOn) {
@@ -260,9 +282,9 @@ function simulateCable(lengthCm, diameterUm, refinement = 1, stimulus = 100) {
     const [baseV, baseM, baseH, baseN] = state;
     for (let i = 0; i < count; i++) {
       const voltage = v[i];
-      // Cell-centered finite volumes; sealed ends have no flux through the end faces.
-      const left = i === 0 ? voltage : v[i - 1];
-      const right = i === count - 1 ? voltage : v[i + 1];
+      // Sealed ends have no flux at the end faces. A ring couples the first and last cells.
+      const left = i > 0 ? v[i - 1] : v[periodic ? count - 1 : 0];
+      const right = i < count - 1 ? v[i + 1] : v[periodic ? 0 : count - 1];
       const cable = diffusionPerCell * (left - 2 * voltage + right);
       const drive = pulseOn ? injection[i] : 0;
       nextV[i] = baseV[i] + step * (cable + (drive - ionicCurrent(voltage, m[i], h[i], n[i])) / capacitance);
@@ -284,45 +306,84 @@ function simulateCable(lengthCm, diameterUm, refinement = 1, stimulus = 100) {
     }
   }
 
-  for (let frame = 0; frame < frames - 1; frame++) {
-    // Pulse transitions align with sample boundaries and therefore with integration steps.
-    const pulseOn = frame >= Math.round(pulseStart / sampleMs) &&
-      frame < Math.round(pulseEnd / sampleMs);
+  function stepSample(pulseOn) {
     for (let step = 0; step < substeps; step++) {
       advance(state, midpoint, dt / 2, pulseOn);
       advance(midpoint, state, dt, pulseOn);
     }
-    history.set(state[0], (frame + 1) * count);
   }
-  return { lengthCm, diameterUm, count, dx, dt, frames, duration, sampleMs, rest, history, pulseLength };
+  return { lengthCm, periodic, count, dx, dt, windowMs, voltage: state[0], stepSample };
 }
 
-function recordProbe(run, xCm) {
-  const position = Math.min(run.count - 1, Math.max(0, xCm / run.dx - 0.5));
+function probeSampler(model, xCm) {
+  const position = Math.min(model.count - 1, Math.max(0, xCm / model.dx - 0.5));
   const left = Math.floor(position);
-  const right = Math.min(left + 1, run.count - 1);
+  const right = Math.min(left + 1, model.count - 1);
   const weight = position - left;
-  const voltage = new Float32Array(run.frames);
-  let arrivalMs = null;
-  for (let frame = 0; frame < run.frames; frame++) {
-    const offset = frame * run.count;
-    const value = run.history[offset + left];
-    voltage[frame] = value + weight * (run.history[offset + right] - value);
-    if (arrivalMs === null && frame > 0 && voltage[frame - 1] < 0 && voltage[frame] >= 0) {
-      const fraction = -voltage[frame - 1] / (voltage[frame] - voltage[frame - 1]);
-      arrivalMs = (frame - 1 + fraction) * run.sampleMs;
-    }
+  if (weight === 0) return (values) => values[left];
+  return (values) => values[left] * (1 - weight) + values[right] * weight;
+}
+
+function createExperiment(model) {
+  const capacity = Math.round(model.windowMs / sampleMs) + 1;
+  const samples = Array.from({ length: capacity }, () => new Float32Array(model.count));
+  const firstArrivals = new Float64Array(model.count).fill(NaN);
+  const pulseStarts = [];
+  let frame = 0;
+  let stimulusCount = 0;
+  let pulseEnd = 0;
+  samples[0].set(model.voltage);
+
+  const oldestFrame = () => Math.max(0, frame - capacity + 1);
+
+  function stimulate() {
+    if (frame < pulseEnd) return false;
+    stimulusCount++;
+    pulseStarts.push(frame);
+    pulseEnd = frame + pulseFrames;
+    return true;
   }
-  return { xCm, voltage, arrivalMs };
+
+  function step() {
+    const previous = samples[frame % capacity];
+    model.stepSample(frame < pulseEnd);
+    if (stimulusCount === 1) {
+      for (let i = 0; i < model.count; i++) {
+        if (previous[i] < 0 && model.voltage[i] >= 0 && Number.isNaN(firstArrivals[i])) {
+          const fraction = -previous[i] / (model.voltage[i] - previous[i]);
+          firstArrivals[i] = (frame + fraction) * sampleMs;
+        }
+      }
+    }
+    frame++;
+    samples[frame % capacity].set(model.voltage);
+    while (pulseStarts.length && pulseStarts[0] < oldestFrame()) pulseStarts.shift();
+  }
+
+  return {
+    model,
+    get frame() { return frame; },
+    get stimulusCount() { return stimulusCount; },
+    get pulseActive() { return frame < pulseEnd; },
+    oldestFrame,
+    stimulate,
+    step,
+    pulseStarts,
+    firstArrivals,
+    voltageAt: (sample) => samples[sample % capacity],
+  };
 }
 </script>
 <script>
 'use strict';
 const byId = (id) => document.getElementById(id);
 const settings = { length: byId('length'), diameter: byId('diameter'), distal: byId('distal') };
+const lengthEntry = byId('length-entry');
+const boundary = byId('periodic');
 const timeControl = byId('time');
 const rateControl = byId('rate');
 const playButton = byId('play');
+const stimulateButton = byId('stimulate');
 const status = byId('status');
 const canvases = { space: byId('space-plot'), time: byId('time-plot') };
 const colors = getComputedStyle(document.documentElement);
@@ -331,27 +392,12 @@ const siteA = 4;
 const plotVoltageMin = -85;
 const plotVoltageMax = 55;
 const voltageTicks = [-80, -60, -40, -20, 0, 20, 40];
-let model = null;
-let probes = null;
-let time = 0;
-let frame = 0;
-let lastTick = null;
-let generation = 0;
-let worker = null;
-let calculationTimer = null;
-let requestedGeometry = '';
 
-const modelSource = byId('cable-model').textContent;
-const workerSource = modelSource + `
-self.onmessage = ({ data }) => {
-  try {
-    const run = simulateCable(data.length, data.diameter);
-    self.postMessage({ run }, [run.history.buffer]);
-  } catch (error) {
-    self.postMessage({ error: error.message });
-  }
-};
-`;
+let experiment, probes, geometry;
+let cursor = 0;
+let animation = null;
+let lastTick = null;
+let sampleBudget = 0;
 
 function report(message, isError = false) {
   status.textContent = message;
@@ -359,131 +405,85 @@ function report(message, isError = false) {
 }
 
 function updateSettings() {
-  settings.distal.max = Number(settings.length.value) - 2;
-  for (const [name, input] of Object.entries(settings)) {
-    const units = name === 'diameter' ? ['µm', 'micrometers'] : ['cm', 'centimeters'];
-    byId(name + '-value').textContent = input.value + ' ' + units[0];
-    input.setAttribute('aria-valuetext', input.value + ' ' + units[1]);
+  settings.distal.max = settings.length.valueAsNumber - 2;
+  lengthEntry.value = settings.length.value;
+  settings.length.setAttribute('aria-valuetext', settings.length.value + ' centimeters');
+  for (const [input, unit, spoken] of [
+    [settings.diameter, 'µm', 'micrometers'],
+    [settings.distal, 'cm', 'centimeters'],
+  ]) {
+    byId(input.id + '-value').textContent = input.value + ' ' + unit;
+    input.setAttribute('aria-valuetext', input.value + ' ' + spoken);
   }
   byId('space-b').textContent = 'Site B · ' + settings.distal.value + ' cm';
+  const periodic = boundary.getAttribute('aria-pressed') === 'true';
+  byId('boundary-mode').textContent = periodic ? 'Ring · x = 0 and x = L are joined' : 'Sealed ends';
+  return {
+    length: settings.length.valueAsNumber,
+    diameter: settings.diameter.valueAsNumber,
+    periodic,
+  };
 }
 
-function updateMeasurements(announce) {
-  const a = recordProbe(model, siteA);
-  const b = recordProbe(model, settings.distal.valueAsNumber);
-  probes = [a, b];
-  for (const [index, site] of ['a', 'b'].entries()) {
-    const arrival = probes[index].arrivalMs;
-    byId('trace-' + site).textContent = 'Site ' + site.toUpperCase() + ' · ' +
-      (arrival === null ? 'no crossing' : arrival.toFixed(2) + ' ms');
-  }
-  const delay = b.arrivalMs - a.arrivalMs;
-  if (a.arrivalMs === null || b.arrivalMs === null || delay <= 0) {
-    byId('delay').textContent = '—';
-    byId('speed').textContent = '—';
-    report('No propagated spike crossed 0 mV at both sites.');
-    return;
-  }
-  const speed = 10 * (b.xCm - a.xCm) / delay;
-  byId('delay').textContent = delay.toFixed(2) + ' ms';
-  byId('speed').textContent = speed.toFixed(1) + ' m/s';
-  if (announce) {
-    report('The sites are ' + (b.xCm - a.xCm) + ' cm apart. The spike reaches B ' +
-      delay.toFixed(2) + ' ms after A.');
-  }
+function updateProbes() {
+  const model = experiment.model;
+  probes = [
+    { id: 'a', x: siteA, color: color('proximal'), dash: [] },
+    { id: 'b', x: settings.distal.valueAsNumber, color: color('distal'), dash: [5, 3] },
+  ];
+  for (const probe of probes) probe.read = probeSampler(model, probe.x);
 }
 
-function receiveRun(token, result) {
-  if (token !== generation) return;
-  if (result.error) {
-    requestedGeometry = '';
-    report(result.error, true);
-    repaint();
-    return;
+function updateMeasurements() {
+  const { model, firstArrivals } = experiment;
+  const [a, b] = probes.map((probe) => {
+    const t = probe.read(firstArrivals);
+    byId('trace-' + probe.id).textContent =
+      'Site ' + probe.id.toUpperCase() + (Number.isFinite(t) ? ' · ' + t.toFixed(2) + ' ms' : '');
+    return t;
+  });
+  const delayMs = b - a;
+  const farthestSameFront = Math.floor((model.lengthCm / 2 - 1) * 2) / 2;
+  // Avoid the collision zone, where first arrivals may come from the other front.
+  const differentFronts = model.periodic && probes[1].x > farthestSameFront;
+  const comparable = !differentFronts && Number.isFinite(delayMs) && delayMs > 0;
+  byId('speed').textContent = comparable ? (10 * (probes[1].x - siteA) / delayMs).toFixed(1) + ' m/s' : '—';
+  byId('delay').textContent = comparable ? delayMs.toFixed(2) + ' ms' : '—';
+  let note = 'Arrival is the first upward crossing of 0 mV. Speed is the site separation divided by the first spike delay.';
+  if (differentFronts) {
+    note = farthestSameFront >= Number(settings.distal.min)
+      ? 'A ring can send different wave fronts to A and B. Place B at or before ' + farthestSameFront + ' cm to measure one front.'
+      : 'This ring is too short to place both probes clear of the collision zone on the same side.';
+  } else if (!comparable && experiment.stimulusCount > 1) {
+    note = 'First-spike measurements require an upward 0 mV crossing at both sites before the second stimulus.';
   }
-  model = result.run;
-  time = 0;
+  byId('measurement-note').textContent = note;
+}
+
+function resetRun(message, force = false) {
+  const next = updateSettings();
+  const key = [next.length, next.diameter, next.periodic].join('/');
+  if (key === geometry && !force) return;
+  stop();
+  geometry = key;
+  cursor = 0;
+  experiment = createExperiment(createCable(next.length, next.diameter, next.periodic));
+  const model = experiment.model;
   byId('dx').textContent = model.dx.toFixed(3) + ' cm';
   byId('dt').textContent = model.dt.toFixed(5) + ' ms';
-  timeControl.max = String(model.duration);
-  timeControl.step = String(model.sampleMs);
-  timeControl.disabled = false;
-  playButton.disabled = false;
-  updateMeasurements(true);
+  byId('window').textContent = model.windowMs + ' ms';
+  updateProbes();
+  report(message);
   showTime();
 }
 
-function calculate(token, input) {
-  if (token !== generation) return;
-
-  // The local calculation also works in browsers that disallow Blob workers from a file.
-  function calculateLocally() {
-    setTimeout(() => {
-      if (token !== generation) return;
-      try {
-        receiveRun(token, { run: simulateCable(input.length, input.diameter) });
-      } catch (error) {
-        receiveRun(token, { error: error.message });
-      }
-    }, 30);
-  }
-  let url;
-  try {
-    url = URL.createObjectURL(new Blob([workerSource], { type: 'text/javascript' }));
-    const job = new Worker(url);
-    worker = job;
-    job.onmessage = ({ data }) => {
-      job.terminate();
-      if (worker === job) worker = null;
-      receiveRun(token, data);
-    };
-    job.onerror = (event) => {
-      event.preventDefault();
-      job.terminate();
-      if (worker === job) worker = null;
-      calculateLocally();
-    };
-    job.postMessage(input);
-  } catch {
-    calculateLocally();
-  } finally {
-    if (url) URL.revokeObjectURL(url);
-  }
-}
-
-function scheduleRun(wait = 0) {
-  const input = { length: settings.length.valueAsNumber, diameter: settings.diameter.valueAsNumber };
-  const geometry = input.length + '/' + input.diameter;
-  if (geometry === requestedGeometry && calculationTimer === null) return;
-  requestedGeometry = geometry;
-  const token = ++generation;
-  stopPlayback();
-  if (worker) worker.terminate();
-  worker = null;
-  clearTimeout(calculationTimer);
-  model = null;
-  probes = null;
-  time = 0;
-  timeControl.disabled = true;
-  playButton.disabled = true;
-  for (const id of ['speed', 'delay', 'dx', 'dt']) byId(id).textContent = '—';
-  byId('trace-a').textContent = 'Site A';
-  byId('trace-b').textContent = 'Site B';
-  report('Calculating the action potential…');
-  showTime();
-  calculationTimer = setTimeout(() => {
-    calculationTimer = null;
-    calculate(token, input);
-  }, wait);
-}
-
-function ticksThrough(max, wanted) {
-  const minStep = max / wanted;
-  const step = [1, 2, 5, 10, 15, 20, 25, 50].find((candidate) => candidate >= minStep) || 50;
+function ticksBetween(min, max, wanted) {
+  const step = [1, 2, 5, 10, 15, 20, 25, 50].find((candidate) => candidate >= (max - min) / wanted) || 50;
   const ticks = [];
-  for (let tick = 0; tick <= max; tick += step) ticks.push(tick);
+  for (let tick = Math.ceil(min / step) * step; tick <= max; tick += step) ticks.push(tick);
   return ticks;
 }
+
 function path(ctx, points, stroke, width = 1, dash = []) {
   ctx.beginPath();
   for (const [index, point] of points.entries()) {
@@ -506,7 +506,7 @@ function dot(ctx, x, y, fill) {
   ctx.stroke();
 }
 
-function axes(canvas, maxX, xLabel) {
+function axes(canvas, minX, maxX, xLabel) {
   const { width, height } = canvas.getBoundingClientRect();
   const scale = Math.min(3, window.devicePixelRatio || 1);
   const pixelWidth = Math.round(width * scale);
@@ -522,7 +522,7 @@ function axes(canvas, maxX, xLabel) {
   const right = width - 15;
   const top = 27;
   const bottom = height - 41;
-  const x = (value) => left + (right - left) * value / maxX;
+  const x = (value) => left + (right - left) * (value - minX) / (maxX - minX);
   const y = (value) => bottom - (bottom - top) * (value - plotVoltageMin) / (plotVoltageMax - plotVoltageMin);
 
   ctx.font = '12px Inter, system-ui, sans-serif';
@@ -535,7 +535,7 @@ function axes(canvas, maxX, xLabel) {
     ctx.fillText(String(tick).replace('-', '−'), left - 8, pixelY);
   }
   ctx.textAlign = 'center';
-  for (const tick of ticksThrough(maxX, width < 380 ? 4 : 6)) {
+  for (const tick of ticksBetween(minX, maxX, width < 380 ? 4 : 6)) {
     const pixelX = x(tick);
     path(ctx, [[pixelX, top], [pixelX, bottom]], color('grid'));
     ctx.fillStyle = color('muted');
@@ -559,128 +559,174 @@ function clipped(plot, draw) {
   ctx.restore();
 }
 
-function spacePlot(frameNumber, mix) {
-  const length = settings.length.valueAsNumber;
-  const plot = axes(canvases.space, length, 'Distance along axon (cm)');
+function spacePlot() {
+  const { model } = experiment;
+  const plot = axes(canvases.space, 0, model.lengthCm, 'Distance along axon (cm)');
   const { ctx, top, bottom, x, y } = plot;
+  const values = experiment.voltageAt(cursor);
+  const first = values[0];
+  const last = values[model.count - 1];
+  const seam = (first + last) / 2;
+
   clipped(plot, () => {
     ctx.fillStyle = '#eaf0f8';
-    ctx.fillRect(x(0), top, x(model ? model.pulseLength : 0.6) - x(0), bottom - top);
-    path(ctx, [[x(siteA), top], [x(siteA), bottom]], color('proximal'), 1.15);
-    const currentB = settings.distal.valueAsNumber;
-    path(ctx, [[x(currentB), top], [x(currentB), bottom]], color('distal'), 1.15, [5, 4]);
-    if (!model) return;
-    const base = frameNumber * model.count;
-    const next = Math.min(frameNumber + 1, model.frames - 1) * model.count;
-    const value = (i) => model.history[base + i] + mix * (model.history[next + i] - model.history[base + i]);
-    const points = [[x(0), y(value(0))]];
-    for (let i = 0; i < model.count; i++) points.push([x((i + 0.5) * model.dx), y(value(i))]);
-    points.push([x(length), y(value(model.count - 1))]);
-    path(ctx, points, color('ap'), 2.4);
-    for (const [i, probe] of probes.entries()) {
-      const current = probe.voltage[frameNumber];
-      const upcoming = probe.voltage[Math.min(frameNumber + 1, model.frames - 1)];
-      dot(ctx, x(probe.xCm), y(current + mix * (upcoming - current)), color(i === 0 ? 'proximal' : 'distal'));
+    ctx.fillRect(x(0), top, x(pulseLength) - x(0), bottom - top);
+    for (const probe of probes) {
+      path(ctx, [[x(probe.x), top], [x(probe.x), bottom]], probe.color, 1.15, probe.dash);
     }
+    ctx.beginPath();
+    ctx.moveTo(x(0), y(model.periodic ? seam : first));
+    for (let i = 0; i < model.count; i++) ctx.lineTo(x((i + 0.5) * model.dx), y(values[i]));
+    ctx.lineTo(x(model.lengthCm), y(model.periodic ? seam : last));
+    ctx.strokeStyle = color('ap');
+    ctx.lineWidth = 2.4;
+    ctx.stroke();
+    for (const probe of probes) dot(ctx, x(probe.x), y(probe.read(values)), probe.color);
   });
 }
 
-function timePlot(frameNumber, mix) {
-  const plot = axes(canvases.time, model?.duration ?? 30, 'Time (ms)');
+function timePlot() {
+  const first = experiment.oldestFrame();
+  const t0 = first * sampleMs;
+  const plot = axes(canvases.time, t0, t0 + experiment.model.windowMs, 'Time (ms)');
   const { ctx, top, bottom, x, y } = plot;
-  if (!model) return;
   clipped(plot, () => {
-    for (const [i, probe] of probes.entries()) {
-      const points = Array.from(probe.voltage, (value, j) => [x(j * model.sampleMs), y(value)]);
-      path(ctx, points, color(i === 0 ? 'proximal' : 'distal'), 2, i === 0 ? [] : [5, 3]);
+    for (const start of experiment.pulseStarts) {
+      const pulseX = x(start * sampleMs);
+      path(ctx, [[pulseX, top], [pulseX, bottom]], '#62748b', 1, [2, 3]);
     }
-    path(ctx, [[x(time), top], [x(time), bottom]], '#3d4b5e', 1.2);
-    for (const [i, probe] of probes.entries()) {
-      const current = probe.voltage[frameNumber];
-      const upcoming = probe.voltage[Math.min(frameNumber + 1, model.frames - 1)];
-      dot(ctx, x(time), y(current + mix * (upcoming - current)), color(i === 0 ? 'proximal' : 'distal'));
+    for (const probe of probes) {
+      ctx.beginPath();
+      ctx.moveTo(x(t0), y(probe.read(experiment.voltageAt(first))));
+      for (let sample = first + 1; sample <= experiment.frame; sample++) {
+        ctx.lineTo(x(sample * sampleMs), y(probe.read(experiment.voltageAt(sample))));
+      }
+      ctx.setLineDash(probe.dash);
+      ctx.strokeStyle = probe.color;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.setLineDash([]);
     }
+    const cursorX = x(cursor * sampleMs);
+    path(ctx, [[cursorX, top], [cursorX, bottom]], '#3d4b5e', 1.2);
+    for (const probe of probes) dot(ctx, cursorX, y(probe.read(experiment.voltageAt(cursor))), probe.color);
   });
 }
 
 function repaint() {
-  const selected = model ? Math.min(model.frames - 1, time / model.sampleMs) : 0;
-  const frameNumber = Math.floor(selected);
-  const mix = selected - frameNumber;
-  spacePlot(frameNumber, mix);
-  timePlot(frameNumber, mix);
+  spacePlot();
+  timePlot();
 }
 
 function showTime() {
+  const time = cursor * sampleMs;
   byId('time-value').textContent = time.toFixed(2) + ' ms';
+  timeControl.min = String(experiment.oldestFrame() * sampleMs);
+  timeControl.max = String(experiment.frame * sampleMs);
+  timeControl.disabled = experiment.oldestFrame() === experiment.frame;
   timeControl.value = String(time);
   timeControl.setAttribute('aria-valuetext', time.toFixed(2) + ' milliseconds');
-  playButton.textContent = frame ? 'Pause' : model && time >= model.duration ? 'Replay' : 'Play';
+  playButton.textContent = animation === null ? 'Play' : 'Pause';
+  stimulateButton.setAttribute('aria-disabled', String(experiment.pulseActive));
+  updateMeasurements();
   repaint();
-}
-function stopPlayback() {
-  cancelAnimationFrame(frame);
-  frame = 0;
-  lastTick = null;
-}
-function animate(now) {
-  if (!model) return;
-  if (lastTick !== null) {
-    time = Math.min(model.duration, time + (now - lastTick) * Number(rateControl.value) / 1000);
-  }
-  lastTick = now;
-  if (time >= model.duration) {
-    stopPlayback();
-    report('Playback complete.');
-  } else {
-    frame = requestAnimationFrame(animate);
-  }
-  showTime();
 }
 
+function stop() {
+  if (animation !== null) cancelAnimationFrame(animation);
+  animation = null;
+  lastTick = null;
+  sampleBudget = 0;
+}
+
+function start() {
+  if (animation === null) animation = requestAnimationFrame(animate);
+}
+
+function animate(now) {
+  if (lastTick !== null) {
+    const elapsedMs = Math.min(100, now - lastTick);
+    sampleBudget = Math.min(150, sampleBudget + elapsedMs * rateControl.value / (1000 * sampleMs));
+  }
+  lastTick = now;
+  let advanced = false;
+  try {
+    const deadline = performance.now() + 6;
+    // Leave time for plotting and input even with a long, thin axon at the fastest playback rate.
+    while (sampleBudget >= 1 && performance.now() < deadline) {
+      if (cursor === experiment.frame) experiment.step();
+      cursor++;
+      sampleBudget--;
+      advanced = true;
+    }
+  } catch (error) {
+    stop();
+    report(error.message + ' Press Reset to start a new run.', true);
+    showTime();
+    return;
+  }
+  animation = requestAnimationFrame(animate);
+  if (advanced) showTime();
+}
+
+stimulateButton.addEventListener('click', () => {
+  if (!experiment.stimulate()) return;
+  cursor = experiment.frame;
+  sampleBudget = 0;
+  lastTick = null;
+  report('Stimulus ' + experiment.stimulusCount + ' at ' + (cursor * sampleMs).toFixed(2) + ' ms.');
+  start();
+  showTime();
+});
 playButton.addEventListener('click', () => {
-  if (!model) return;
-  if (frame) {
-    stopPlayback();
-    report('Paused at ' + time.toFixed(2) + ' ms.');
+  if (animation === null) {
+    start();
+    report(cursor < experiment.frame ? 'Reviewing the recorded voltage before returning to live time.' : 'Running at the current time.');
   } else {
-    if (time >= model.duration) time = 0;
-    frame = requestAnimationFrame(animate);
-    report('Playing the simulated action potential.');
+    stop();
+    report('Paused at ' + (cursor * sampleMs).toFixed(2) + ' ms.');
   }
   showTime();
 });
+byId('reset').addEventListener('click', () => resetRun('Reset to rest. Press Stimulate to start.', true));
+boundary.addEventListener('click', () => {
+  const periodic = boundary.getAttribute('aria-pressed') === 'false';
+  boundary.setAttribute('aria-pressed', String(periodic));
+  resetRun(periodic
+    ? 'Ring at rest. A stimulus launches waves in both directions.'
+    : 'Sealed cable at rest. Press Stimulate to start.');
+});
 timeControl.addEventListener('input', () => {
-  if (!model) return;
-  stopPlayback();
-  time = timeControl.valueAsNumber;
+  stop();
+  cursor = Math.round(timeControl.valueAsNumber / sampleMs);
   showTime();
 });
-timeControl.addEventListener('change', () => report('Showing ' + time.toFixed(2) + ' ms.'));
+timeControl.addEventListener('change', () => {
+  const when = (cursor * sampleMs).toFixed(2) + ' ms.';
+  report(cursor < experiment.frame ? 'Viewing ' + when + ' Stimulate returns to live time.' : 'Showing ' + when);
+});
 for (const input of [settings.length, settings.diameter]) {
-  input.addEventListener('input', () => {
-    updateSettings();
-    scheduleRun(250);
-  });
-  input.addEventListener('change', () => {
-    updateSettings();
-    scheduleRun();
-  });
+  input.addEventListener('input', () => resetRun('Axon geometry changed. Press Stimulate to start.'));
 }
+lengthEntry.addEventListener('change', () => {
+  const length = lengthEntry.valueAsNumber;
+  if (Number.isFinite(length)) {
+    settings.length.value = String(Math.round(length));
+  }
+  resetRun('Axon length changed. Press Stimulate to start.');
+});
+lengthEntry.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') lengthEntry.blur();
+});
 settings.distal.addEventListener('input', () => {
   updateSettings();
-  if (!model) { repaint(); return; }
-  updateMeasurements(false);
-  repaint();
-});
-settings.distal.addEventListener('change', () => {
-  if (model) updateMeasurements(true);
+  updateProbes();
+  showTime();
 });
 const resize = new ResizeObserver(repaint);
+resetRun('Press Stimulate to deliver a 0.5 ms pulse.');
 resize.observe(canvases.space);
 resize.observe(canvases.time);
-updateSettings();
-scheduleRun();
 </script>
 </body>
 </html>
