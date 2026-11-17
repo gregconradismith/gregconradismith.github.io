@@ -24,10 +24,10 @@
   * { box-sizing: border-box; }
   body { margin: 0; }
   main { width: min(100% - 2rem, 1160px); margin: 0 auto; padding: 1.7rem 0 1.6rem; }
+  .site-nav { display: flex; flex-wrap: wrap; gap: .35rem .8rem; margin-bottom: 1.15rem; font-size: .88rem; }
   h1, h2, p, figure { margin: 0; }
   header { margin-bottom: 1.05rem; }
   .course { color: var(--accent); font-size: .83rem; font-weight: 650; }
-  .site-nav { display: flex; flex-wrap: wrap; gap: .35rem .8rem; margin-bottom: 1.15rem; font-size: .88rem; }
   h1 { margin: .2rem 0 .42rem; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.13; letter-spacing: -.025em; }
   .subtitle { color: var(--muted); line-height: 1.45; }
   .panel { background: var(--paper); border: 1px solid var(--border); border-radius: 12px; }
@@ -64,11 +64,11 @@
   .key { display: inline-flex; align-items: center; gap: .38rem; }
   .swatch { width: 1.15rem; border-top: 2px solid var(--center); }
   .swatch.probe { border-top: 2px dashed var(--probe); }
+  .swatch.injection { border-top-style: dotted; }
   .swatch.model { border-top-color: var(--accent); }
   .swatch.reference { border-top: 2px dashed #657790; }
   .caption-note { margin-top: .28rem; }
-  .visual-group { margin-bottom: .85rem; }
-  .snapshot canvas { height: 191px; }
+  .cable-views canvas { height: 260px; }
   .transport { display: flex; align-items: center; gap: .55rem 1rem; flex-wrap: wrap; padding: .7rem 1rem; margin: .85rem 0; }
   .transport .setting { flex: 1 1 160px; }
   .transport small { color: var(--muted); font-size: .85rem; }
@@ -197,16 +197,31 @@
     </label>
     <small>Slow playback</small>
   </section>
-  <figure class="plot panel snapshot visual-group">
-    <h2>Voltage along the cable at the selected time</h2>
-    <canvas id="profile-plot" role="img" aria-label="Voltage profile on both sides of the central stimulus at the selected time">
-      A spatial snapshot of voltage change along the cable.
-    </canvas>
-    <figcaption class="legend">
-      <span class="key"><span class="swatch" aria-hidden="true"></span>Center stimulus</span>
-      <span class="key"><span class="swatch probe" aria-hidden="true"></span>Probe</span>
-    </figcaption>
-  </figure>
+  <div class="plots cable-views">
+    <figure class="plot panel">
+      <h2>Space–time plot</h2>
+      <canvas id="space-time-plot" role="img" aria-label="Voltage change over time on both sides of the center. Warm colors show depolarization and cool colors show hyperpolarization. A vertical line marks the selected time.">
+        Voltage change over time and distance from the central stimulus on both sides of the cable.
+      </canvas>
+      <figcaption>
+        <div class="legend">
+          <span class="key"><span class="swatch injection" aria-hidden="true"></span>Center stimulus</span>
+          <span class="key"><span class="swatch probe" aria-hidden="true"></span>Probe</span>
+        </div>
+        <p class="caption-note">Warm colors show depolarization and cool colors show hyperpolarization. Watch the color fade away from the center.</p>
+      </figcaption>
+    </figure>
+    <figure class="plot panel">
+      <h2>Voltage along the cable at the selected time</h2>
+      <canvas id="profile-plot" role="img" aria-label="Voltage profile on both sides of the central stimulus at the selected time">
+        A spatial snapshot of voltage change along the cable.
+      </canvas>
+      <figcaption class="legend">
+        <span class="key"><span class="swatch" aria-hidden="true"></span>Center stimulus</span>
+        <span class="key"><span class="swatch probe" aria-hidden="true"></span>Probe</span>
+      </figcaption>
+    </figure>
+  </div>
 
   <details class="panel model-notes">
     <summary>Model and classroom comparisons</summary>
@@ -336,7 +351,7 @@ function simulatePassive({ lengthUm = 2000, diameterUm = 2, resistanceK = 10,
 const byId = (id) => document.getElementById(id);
 const controls = Object.fromEntries(['mode', 'strength', 'duration', 'distance', 'length', 'diameter', 'resistance', 'time', 'play']
   .map((id) => [id, byId(id)]));
-const plot = Object.fromEntries(['attenuation', 'trace', 'profile'].map((name) => [name, byId(name + '-plot')]));
+const plot = Object.fromEntries(['attenuation', 'trace', 'space-time', 'profile'].map((name) => [name, byId(name + '-plot')]));
 const css = getComputedStyle(document.documentElement);
 const color = (name) => css.getPropertyValue('--' + name).trim();
 const modes = {
@@ -601,6 +616,158 @@ function profileChart() {
       marker(ctx, x(selected), y(atProbe(low * run.n) * (1 - mix) + atProbe(high * run.n) * mix), color('probe'));
     });
 }
+const passiveSpaceTimeCache = new WeakMap();
+const passiveHeatStops = [
+  [0, 32, 80, 149],
+  [0.25, 126, 172, 218],
+  [0.5, 247, 247, 243],
+  [0.75, 232, 152, 75],
+  [1, 156, 52, 18],
+];
+const passiveHeatPalette = (() => {
+  const table = new Uint8Array(257 * 3);
+  for (let level = 0; level <= 256; level++) {
+    const at = level / 256;
+    const segment = Math.min(3, Math.floor(at * 4));
+    const left = passiveHeatStops[segment];
+    const right = passiveHeatStops[segment + 1];
+    const fraction = (at - left[0]) / (right[0] - left[0]);
+    for (let channel = 1; channel <= 3; channel++) {
+      table[level * 3 + channel - 1] = Math.round(left[channel] + fraction * (right[channel] - left[channel]));
+    }
+  }
+  return table;
+})();
+
+function passiveSpaceTimeBitmap(run) {
+  let cached = passiveSpaceTimeCache.get(run);
+  if (cached) return cached;
+
+  let peak = 0;
+  for (const value of run.history) peak = Math.max(peak, Math.abs(value));
+  const limit = Math.max(10, Math.ceil(peak / 5) * 5);
+  const columns = Math.min(560, run.frames);
+  const rows = Math.min(181, run.n);
+  const bitmap = document.createElement('canvas');
+  bitmap.width = columns;
+  bitmap.height = rows;
+  const ctx = bitmap.getContext('2d');
+  const pixels = ctx.createImageData(columns, rows);
+  const compartments = new Int32Array(rows);
+  for (let row = 0; row < rows; row++) {
+    compartments[row] = Math.round((rows - 1 - row) * (run.n - 1) / (rows - 1));
+  }
+  for (let column = 0; column < columns; column++) {
+    const frame = Math.round(column * (run.frames - 1) / (columns - 1));
+    const base = frame * run.n;
+    for (let row = 0; row < rows; row++) {
+      const value = run.history[base + compartments[row]];
+      const level = Math.max(0, Math.min(256, Math.round(128 * (1 + value / limit))));
+      const rgb = 3 * level;
+      const pixel = 4 * (row * columns + column);
+      pixels.data[pixel] = passiveHeatPalette[rgb];
+      pixels.data[pixel + 1] = passiveHeatPalette[rgb + 1];
+      pixels.data[pixel + 2] = passiveHeatPalette[rgb + 2];
+      pixels.data[pixel + 3] = 255;
+    }
+  }
+  ctx.putImageData(pixels, 0, 0);
+  cached = { bitmap, limit };
+  passiveSpaceTimeCache.set(run, cached);
+  return cached;
+}
+
+function drawPassiveSpaceTime(canvas, run, time, selected) {
+  const { width, height } = canvas.getBoundingClientRect();
+  if (width < 140 || height < 157) return;
+  const ratio = Math.min(3, window.devicePixelRatio || 1);
+  const pixelWidth = Math.round(width * ratio);
+  const pixelHeight = Math.round(height * ratio);
+  if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+    canvas.width = pixelWidth;
+    canvas.height = pixelHeight;
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+
+  const half = run.lengthUm / 2;
+  const left = 57;
+  const right = width - 19;
+  const top = 26;
+  const bottom = height - 77;
+  const areaWidth = right - left;
+  const areaHeight = bottom - top;
+  const x = (ms) => left + ms / run.duration * areaWidth;
+  const y = (um) => top + (half - um) / run.lengthUm * areaHeight;
+
+  const { bitmap, limit } = passiveSpaceTimeBitmap(run);
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(bitmap, left, top, areaWidth, areaHeight);
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(left, top, areaWidth, areaHeight);
+  ctx.clip();
+  const guideY = y(0);
+  line(ctx, [[left, guideY], [right, guideY]], '#fff', 2.6, [1, 4]);
+  line(ctx, [[left, guideY], [right, guideY]], color('center'), 1.25, [1, 4]);
+  if (selected > 0) {
+    const probeY = Math.max(top + 1, y(selected));
+    line(ctx, [[left, probeY], [right, probeY]], '#fff', 2.6, [6, 3]);
+    line(ctx, [[left, probeY], [right, probeY]], color('probe'), 1.25, [6, 3]);
+  }
+  const cursorX = Math.max(left + 1, Math.min(right - 1, x(time)));
+  line(ctx, [[cursorX, top], [cursorX, bottom]], '#fff', 2.7);
+  line(ctx, [[cursorX, top], [cursorX, bottom]], color('ink'), 1.2);
+  ctx.restore();
+
+  const axis = '#8191a6';
+  ctx.strokeStyle = axis;
+  ctx.lineWidth = 1;
+  ctx.strokeRect(left, top, areaWidth, areaHeight);
+  ctx.font = '12px Inter, system-ui, sans-serif';
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'right';
+  ctx.fillStyle = color('muted');
+  const positions = areaHeight < 100 ? [-half, 0, half] : [-half, -half / 2, 0, half / 2, half];
+  for (const position of positions) {
+    const py = y(position);
+    line(ctx, [[left - 4, py], [left, py]], axis);
+    ctx.fillText(labelNumber(position), left - 7, py);
+  }
+
+  ctx.textAlign = 'center';
+  for (const ms of ticks(0, run.duration, width < 365 ? 4 : 7)) {
+    const px = x(ms);
+    line(ctx, [[px, bottom], [px, bottom + 4]], axis);
+    ctx.fillText(labelNumber(ms), px, bottom + 13);
+  }
+  ctx.fillStyle = color('ink');
+  ctx.fillText('Time (ms)', (left + right) / 2, bottom + 28);
+  ctx.textAlign = 'left';
+  ctx.fillText('Position from center (µm)', left, 11);
+  ctx.fillText('Voltage change ΔV (mV)', left, bottom + 43);
+
+  const scaleY = bottom + 51;
+  const gradient = ctx.createLinearGradient(left, 0, right, 0);
+  for (const [at, red, green, blue] of passiveHeatStops) {
+    gradient.addColorStop(at, 'rgb(' + red + ', ' + green + ', ' + blue + ')');
+  }
+  ctx.fillStyle = gradient;
+  ctx.fillRect(left, scaleY, areaWidth, 8);
+  ctx.strokeStyle = axis;
+  ctx.strokeRect(left, scaleY, areaWidth, 8);
+  ctx.fillStyle = color('muted');
+  ctx.textAlign = 'center';
+  for (let fraction = -1; fraction <= 1; fraction += 0.5) {
+    const px = left + (fraction + 1) / 2 * areaWidth;
+    line(ctx, [[px, scaleY + 8], [px, scaleY + 11]], axis);
+    const sign = fraction > 0 ? '+' : '';
+    ctx.fillText(sign + labelNumber(fraction * limit), px, scaleY + 18);
+  }
+}
+
 function updateView(rebuildAttenuation = true) {
   controls.time.value = String(time);
   byId('time-value').textContent = time.toFixed(1) + ' ms';
@@ -608,6 +775,7 @@ function updateView(rebuildAttenuation = true) {
   controls.play.textContent = frame !== null ? 'Pause' : time >= run.duration ? 'Replay' : time > 0 ? 'Resume' : 'Stimulate';
   if (rebuildAttenuation) attenuationChart();
   traceChart();
+  drawPassiveSpaceTime(plot['space-time'], run, time, selected);
   profileChart();
 }
 function stop() {
