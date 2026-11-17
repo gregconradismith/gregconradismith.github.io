@@ -351,3 +351,8 @@ Pre-edit Git state after fetch:
 
 - Added the standalone Hodgkin–Huxley cable simulator at `/simulations/action-potential-propagation/` and listed it under Dynamical systems and excitable cells. The public source commit `8d16f086d71a7ddf6d6c85d5a0855f5c20b8e79b` contains the original HTML. The integrated copy adds academic-site navigation, and the catalogue and provenance record link to the new app and its source.
 - Source inspection confirmed identical model and UI scripts in the original and integrated copies. Offline Chrome verified the two plots, Play/Pause, keyboard scrubbing, geometry and probe controls, and the default conduction speed of 18.7 m/s. The site uses the existing GitHub Pages build and nested URL. No local Jekyll build was run.
+
+### Repeat stimulation and periodic boundaries
+
+- The simulator now accepts exact axon lengths from 10 to 40 cm and can deliver multiple 0.5 ms pulses on a continuous Hodgkin–Huxley state. Playback and scrubbing use bounded voltage history. Stimulate applies at the latest simulated time, while changes to geometry or boundary conditions start at rest. The periodic toggle joins the endpoint cells. First-spike speed is reported only when both probes can measure the same front before a second pulse.
+- Numerical checks preserved the sealed-cable benchmark and confirmed periodic propagation, collision of the fronts, refractory failure of an early repeat, propagation after recovery, and stable behavior at the geometry extremes. Offline Chrome checks covered the new controls, keyboard and touch interaction, replay history, and layout down to 320 px. The public source revision is `09145d12a293e0693f0bc3cc2f93a72e26be14f0`.
