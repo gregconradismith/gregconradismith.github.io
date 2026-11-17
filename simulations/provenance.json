@@ -68,5 +68,13 @@
     "first_published": "2026-11-17",
     "previous_source_commit": "09145d12a293e0693f0bc3cc2f93a72e26be14f0",
     "updated": "2026-11-17"
+  },
+  {
+    "repository": "passive-cable-equation",
+    "commit": "150f7b8cf8285506e4b30a4d25fa1e0a47734aa7",
+    "license": "No simulator license declared; the website theme license does not grant additional rights.",
+    "source_repository": "gregconradismith/gregconradismith.github.io",
+    "source_path": "simulations/passive-cable-equation/index.html",
+    "first_published": "2026-11-17"
   }
 ]

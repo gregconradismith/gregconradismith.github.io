@@ -367,3 +367,8 @@ Pre-edit Git state after fetch:
 
 - **Stimulate twice** schedules a second ordinary pulse on the model clock. The interval is entered in milliseconds between pulse onsets. Pause and historical playback leave the schedule intact, while reset discards it. At default sealed geometry, 1 ms gives one propagated spike in both axon types and 8 ms gives two.
 - The collapsible **Space–time plot** displays the voltage history with time along the horizontal axis, distance along the vertical axis, the pulse onsets, and the playback cursor. In a ring, a forward track reaching the top reappears at the bottom. The plot uses the same bounded voltage samples as the other views. The full public source is `265c4ae3060a42c9f4ae844b15d872c218bbc2de`.
+
+## 2026-11-17 Passive cable equation simulator
+
+- Added an offline-capable teaching simulator at `/simulations/passive-cable-equation/` under Biophysics and qualitative reasoning. The finite sealed cable supports a signed central current pulse and conductance-driven EPSP/IPSP inputs. The probe, geometry, attenuation curve, finite-cable steady reference, voltage traces, spatial snapshot, and peak readings expose passive spread. The public standalone source is `150f7b8cf8285506e4b30a4d25fa1e0a47734aa7`.
+- Numerical checks verified symmetry, linear scaling for injected current, polarity and driving-force scaling for the EPSP/IPSP, convergence, and agreement with the analytical steady solution. Offline Chrome passed all three modes, geometry and probe changes, keyboard playback and scrub, and 320–1280 px layout. The web copy adds only academic navigation and the existing favicon.
