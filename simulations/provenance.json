@@ -71,10 +71,12 @@
   },
   {
     "repository": "passive-cable-equation",
-    "commit": "150f7b8cf8285506e4b30a4d25fa1e0a47734aa7",
+    "commit": "bfacd57040d13e340890ec6efe4eeffb44975234",
     "license": "No simulator license declared; the website theme license does not grant additional rights.",
     "source_repository": "gregconradismith/gregconradismith.github.io",
     "source_path": "simulations/passive-cable-equation/index.html",
-    "first_published": "2026-11-17"
+    "first_published": "2026-11-17",
+    "previous_source_commit": "150f7b8cf8285506e4b30a4d25fa1e0a47734aa7",
+    "updated": "2026-11-17"
   }
 ]

@@ -372,3 +372,8 @@ Pre-edit Git state after fetch:
 
 - Added an offline-capable teaching simulator at `/simulations/passive-cable-equation/` under Biophysics and qualitative reasoning. The finite sealed cable supports a signed central current pulse and conductance-driven EPSP/IPSP inputs. The probe, geometry, attenuation curve, finite-cable steady reference, voltage traces, spatial snapshot, and peak readings expose passive spread. The public standalone source is `150f7b8cf8285506e4b30a4d25fa1e0a47734aa7`.
 - Numerical checks verified symmetry, linear scaling for injected current, polarity and driving-force scaling for the EPSP/IPSP, convergence, and agreement with the analytical steady solution. Offline Chrome passed all three modes, geometry and probe changes, keyboard playback and scrub, and 320–1280 px layout. The web copy adds only academic navigation and the existing favicon.
+
+### Passive cable space–time plot
+
+- Added a signed voltage heatmap with time on the horizontal axis and position on both sides of the injection site on the vertical axis. Warm colors show depolarization, cool colors show hyperpolarization, and the color scale starts at ±10 mV and expands symmetrically for larger responses. Guides follow the playback cursor and selected probe. The model code remains identical. The source revision is `bfacd57040d13e340890ec6efe4eeffb44975234`.
+- Checked signed color mapping, bilateral symmetry, cursor updates, probe placement, and narrow layout. The standalone and public copies use identical scripts.

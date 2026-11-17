@@ -16,7 +16,7 @@ Interactive simulations and games for exploring mathematical models and practici
 
 ### Biophysics and qualitative reasoning
 
-- [Passive cable equation simulator]({{ '/simulations/passive-cable-equation/' | relative_url }}): Inject current or activate an excitatory or inhibitory synapse at the center of a passive cable. Move a recording probe to compare peak attenuation and delay.
+- [Passive cable equation simulator]({{ '/simulations/passive-cable-equation/' | relative_url }}): Inject current or activate a synapse at the center of a passive cable. Follow EPSPs and IPSPs on both sides in a space–time plot and move the probe to compare peak attenuation and delay.
 - [Current–voltage relation game]({{ '/simulations/current-voltage-relation-game/' | relative_url }}): Practice interpreting reversal potentials, activation, conductance, and slope from current–voltage curves.
 - [Voltage-clamp game]({{ '/simulations/voltage-clamp-game/' | relative_url }}): Infer reversal potentials from voltage-clamp current traces, then reveal the underlying relationships.
 - [PolyQual game]({{ '/simulations/polyqual-game/' | relative_url }}): Compare polynomial curves using the signs of the function and its first two derivatives.
