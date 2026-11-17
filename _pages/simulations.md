@@ -11,7 +11,7 @@ Interactive simulations and games for exploring mathematical models and practici
 - [From neurons to brain waves]({{ '/simulations/neurons-to-brain-waves/' | relative_url }}): Explore how synchrony in one neuronal population shapes an EEG-like signal and its spectrum, with every neuron contributing equally.
 - [FitzHugh–Nagumo network simulator]({{ '/simulations/fitzhugh-nagumo-network/' | relative_url }}): Explore synchronization, alternation, and clustering in networks of excitatory or inhibitory oscillators, with moving nullclines, voltage traces, and a spike raster.
 - [Morris–Lecar simulator]({{ '/simulations/morris-lecar-simulator/' | relative_url }}): Explore membrane voltage, phase planes, excitability, oscillations, and saddle manifolds in a reduced conductance-based model.
-- [Action potential propagation simulator]({{ '/simulations/action-potential-propagation/' | relative_url }}): Stimulate a Hodgkin–Huxley axon repeatedly, vary its length and diameter, and compare spike propagation with sealed or periodic boundaries.
+- [Action potential propagation simulator]({{ '/simulations/action-potential-propagation/' | relative_url }}): Compare continuous and saltatory action potential propagation, and launch a wave that circulates around a periodic Hodgkin–Huxley axon.
 - [Slow passage through Hopf]({{ '/simulations/slow-passage-simulation/' | relative_url }}): Compare supercritical and subcritical Hopf normal forms under parameter ramps, including delay, memory, and noise.
 
 ### Biophysics and qualitative reasoning
