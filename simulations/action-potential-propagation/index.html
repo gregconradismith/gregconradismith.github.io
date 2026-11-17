@@ -40,6 +40,8 @@
   .length-entry input { width: 3.75rem; padding: .28rem; border: 1px solid #aab9cb; border-radius: 5px; color: var(--ink); }
   .boundary-setting { grid-column: 1 / -1; display: flex; align-items: center; gap: .5rem .85rem; flex-wrap: wrap; }
   .boundary-setting span { color: var(--muted); font-size: .85rem; }
+  .boundary-setting #lap-count { color: var(--primary); font-weight: 650; }
+  .axon-type { display: flex; align-items: center; gap: .45rem; font-size: .9rem; }
   button, input, select { font: inherit; }
   input[type=range] { width: 100%; min-width: 0; margin: 0; height: 1.8rem; accent-color: var(--primary); }
   button, select { min-height: 2.5rem; padding: .35rem .65rem; border: 1px solid var(--border); border-radius: 7px; }
@@ -56,9 +58,13 @@
   .plot canvas { display: block; width: 100%; height: 244px; }
   .legend { display: flex; flex-wrap: wrap; gap: .25rem 1rem; min-height: 1.4rem; margin-left: .25rem; color: var(--muted); font-size: .83rem; }
   .key { display: inline-flex; align-items: center; gap: .38rem; }
+  .key[hidden], button[hidden] { display: none; }
   .swatch { width: 1.1rem; border-top: 2px solid var(--proximal); }
   .swatch.b { border-top: 2px dashed var(--distal); }
   .swatch.stimulus { border: 1px solid #afc1d7; height: .65rem; background: #eaf0f8; }
+  .swatch.shunt { border: 1px solid #aa9cc6; height: .65rem; background: #e6e0f2; }
+  .swatch.node { border: 1px solid #689888; height: .65rem; background: #cde2d7; }
+  .swatch.myelin { border: 1px solid #a9bac9; height: .65rem; background: #eef3f8; }
   .swatch.pulse-onset { border-top: 2px dotted #62748b; }
   .transport { display: grid; grid-template-columns: auto minmax(5rem, 1fr) auto; align-items: center; gap: .5rem .85rem; margin-top: .85rem; padding: .65rem 1rem; }
   .actions { display: flex; gap: .4rem; flex-wrap: wrap; }
@@ -81,6 +87,10 @@
   @media (max-width: 840px) {
     .plots { grid-template-columns: 1fr; }
     .plot canvas { height: 225px; }
+  }
+  @media (max-width: 720px) {
+    .transport { grid-template-columns: minmax(5rem, 1fr) auto; }
+    .transport .actions { grid-column: 1 / -1; }
   }
   @media (max-width: 560px) {
     main { width: calc(100% - 1.2rem); padding-top: 1rem; }
@@ -122,18 +132,26 @@
       <input id="diameter" type="range" min="150" max="800" step="1" value="476" aria-label="Axon diameter">
     </label>
     <label class="setting" for="distal">
-      <span class="setting-label"><span>Distal recording site B</span><span class="setting-value" id="distal-value">18 cm</span></span>
+      <span class="setting-label"><span id="distal-label">Distal recording site B</span><span class="setting-value" id="distal-value">18 cm</span></span>
       <input id="distal" type="range" min="6" max="22" step="0.5" value="18" aria-label="Distal recording site B">
     </label>
     <div class="boundary-setting">
+      <label class="axon-type" for="axon-type">Axon type
+        <select id="axon-type">
+          <option value="unmyelinated">Unmyelinated</option>
+          <option value="myelinated">Myelinated (saltatory)</option>
+        </select>
+      </label>
       <button type="button" id="periodic" aria-pressed="false" aria-describedby="boundary-mode">Periodic boundary conditions</button>
       <span id="boundary-mode">Sealed ends</span>
+      <span id="lap-count" hidden></span>
     </div>
   </section>
 
   <section class="transport panel tabular" aria-label="Stimulation and playback">
     <div class="actions">
       <button type="button" id="stimulate" class="primary">Stimulate</button>
+      <button type="button" id="one-way" class="primary" hidden>Stimulate one way</button>
       <button type="button" id="play">Play</button>
       <button type="button" id="reset">Reset</button>
     </div>
@@ -161,6 +179,9 @@
       </canvas>
       <figcaption class="legend">
         <span class="key"><span class="swatch stimulus" aria-hidden="true"></span>Stimulus region</span>
+        <span class="key" id="shunt-key" hidden><span class="swatch shunt" aria-hidden="true"></span>Temporary shunt</span>
+        <span class="key" id="node-key" hidden><span class="swatch node" aria-hidden="true"></span><span id="node-label">Nodes of Ranvier</span></span>
+        <span class="key" id="myelin-key" hidden><span class="swatch myelin" aria-hidden="true"></span>Myelinated internodes</span>
         <span class="key"><span class="swatch" aria-hidden="true"></span><span id="space-a">Site A · 4 cm</span></span>
         <span class="key"><span class="swatch b" aria-hidden="true"></span><span id="space-b">Site B · 18 cm</span></span>
       </figcaption>
@@ -192,12 +213,13 @@
 
   <details class="panel">
     <summary>Model and parameters</summary>
-    <p>Each stimulus applies a 0.5 ms inward current pulse (100 µA/cm²) over the first 0.6 cm. Later pulses start from the current voltages and channel states. A pulse delivered during the refractory period can produce a smaller response or fail to launch a spike.</p>
-    <p>With sealed ends, no axial current leaves the cable. Periodic boundaries join the two ends into a ring. A pulse on a rested ring launches two waves in opposite directions that usually extinguish when they meet. Site A stays at 4 cm. Use B on the same side of the ring as A to measure the speed of one wave.</p>
-    <p>Changing the length, diameter, or boundary condition starts a new run. The time slider reviews the most recent <span id="window">—</span> of recorded voltage. Stimulate always applies a pulse at the latest simulated time. First-spike measurements use crossings before the second stimulus.</p>
+    <p>Each stimulus applies a 0.5 ms inward current pulse (100 µA/cm²) at the start of the cable. The pulse covers the first 0.6 cm for an unmyelinated axon and the first node for a myelinated axon. Later pulses start from the current voltages and channel states. A pulse delivered during the refractory period can produce a smaller response or fail to launch a spike.</p>
+    <p>With sealed ends, no axial current leaves the cable. Periodic boundaries join the two ends into a ring. An ordinary stimulus on a rested ring launches two waves that extinguish when they meet. <strong>Stimulate one way</strong> applies the same pulse and briefly shunts the upstream segment toward rest to suppress the backward wave. The shunt conductance is 30 mS/cm² for 2.5 ms in the unmyelinated axon and 2 ms in the myelinated axon. After the shunt turns off, the wave can pass through the join. The lap counter tracks forward crossings at the join after the most recent one-way launch.</p>
+    <p>In myelinated mode, Hodgkin–Huxley channels regenerate the spike only at the marked nodes of Ranvier. The internodes are passive, with capacitance 0.18 µF/cm² and leak conductance 0.01 mS/cm². The plots show the passive voltage between nodes. Probes record at nodes in this mode. Nodal widths and spacings are enlarged for this teaching model.</p>
+    <p>Changing the axon type, length, diameter, or boundary condition starts a new run. The time slider reviews the most recent <span id="window">—</span> of recorded voltage. Stimulate applies a pulse at the latest simulated time. First-spike measurements use crossings before the second stimulus.</p>
     <p>The cable equation balances membrane capacitance, axial current, applied current, and the Hodgkin–Huxley sodium, potassium, and leak currents. With consistent units, the axial term is (d / 4R<sub>i</sub>) ∂²V/∂x², where d is the diameter. Each compartment has voltage-dependent gates m, h, and n, with conductances g<sub>Na</sub> = 120m³h, g<sub>K</sub> = 36n⁴, and g<sub>L</sub> = 0.3 mS/cm². The reversal potentials are +50, −77, and −54.387 mV, respectively.</p>
-    <p>Membrane capacitance is 1 µF/cm² and axial resistivity is 35.4 Ω·cm. Gate rates use Q<sub>10</sub> = 3 relative to 6.3 °C, evaluated here at 18.5 °C. The solver uses a spatial finite volume grid and a second-order midpoint time step. The current grid spacing is <span id="dx">—</span> and the integration step is <span id="dt">—</span>. Playback rate changes how quickly model time advances on screen.</p>
-    <p><a href="https://doi.org/10.1113/jphysiol.1952.sp004764" target="_blank" rel="noreferrer">Hodgkin and Huxley (1952), especially Eq. 30 and Fig. 15</a></p>
+    <p>Active membrane capacitance is 1 µF/cm² and axial resistivity is 35.4 Ω·cm. Gate rates use Q<sub>10</sub> = 3 relative to 6.3 °C, evaluated here at 18.5 °C. The solver uses a spatial finite volume grid and a second-order midpoint time step. The current grid spacing is <span id="dx">—</span> and the integration step is <span id="dt">—</span>. Playback rate changes how quickly model time advances on screen.</p>
+    <p><a href="https://doi.org/10.1113/jphysiol.1952.sp004764" target="_blank" rel="noreferrer">Hodgkin and Huxley (1952), especially Eq. 30 and Fig. 15</a> · <a href="https://doi.org/10.1113/jphysiol.1949.sp004335" target="_blank" rel="noreferrer">Huxley and Stämpfli (1949), evidence for saltatory conduction</a></p>
   </details>
 </main>
 <script id="cable-model">
@@ -207,8 +229,10 @@ const pulseMs = 0.5;
 const pulseLength = 0.6;
 const pulseFrames = Math.round(pulseMs / sampleMs);
 
-function createCable(lengthCm, diameterUm, periodic, refinement = 1) {
-  const capacitance = 1;          // µF/cm²
+function createCable(lengthCm, diameterUm, periodic, myelinated = false, refinement = 1) {
+  const nodeCapacitance = 1;      // µF/cm²
+  const myelinCapacitance = 0.18; // Effective capacitance of a passive internode
+  const myelinLeak = 0.01;        // mS/cm²
   const axialResistivity = 35.4;  // Ω cm
   const temperature = 18.5;       // °C
   const q10 = 3 ** ((temperature - 6.3) / 10);
@@ -220,14 +244,41 @@ function createCable(lengthCm, diameterUm, periodic, refinement = 1) {
   const leak = 0.3;
   const diameterCm = diameterUm * 1e-4;
   // The factor 1000 converts Ω to kΩ for mV, ms, µA, µF and cm.
-  const diffusion = 1000 * diameterCm / (4 * axialResistivity * capacitance);
+  const axial = 1000 * diameterCm / (4 * axialResistivity);
   const diameterScale = Math.sqrt(diameterUm / 476);
   const count = Math.ceil(lengthCm * refinement / (0.065 * diameterScale));
   const dx = lengthCm / count;
-  const substeps = Math.ceil(sampleMs / Math.min(0.004 / refinement, 0.28 * dx * dx / diffusion));
+  const minimumCapacitance = myelinated ? myelinCapacitance : nodeCapacitance;
+  const substeps = Math.ceil(sampleMs / Math.min(0.004 / refinement, 0.28 * dx * dx * minimumCapacitance / axial));
   const dt = sampleMs / substeps;
   const windowMs = Math.ceil(10 + lengthCm / (1.3 * diameterScale));
-  const diffusionPerCell = diffusion / (dx * dx);
+  const axialPerCell = axial / (dx * dx);
+  const shuntLength = myelinated ? 0.6 * diameterScale : 0.6;
+  const shuntFrames = Math.round((myelinated ? 2 : 2.5) / sampleMs);
+
+  // Use whole node intervals around the ring, including across x=0.
+  const nodes = [];
+  const nodeWidth = 0.22 * diameterScale;
+  if (myelinated) {
+    const nodeCount = Math.round(lengthCm / (1.4 * diameterScale));
+    const pitch = lengthCm / nodeCount;
+    for (let i = 0; i < nodeCount; i++) nodes.push(0.30 * diameterScale + i * pitch);
+  }
+  const nodeFraction = new Float64Array(count).fill(myelinated ? 0 : 1);
+  function overlap(i, left, right) {
+    return Math.max(0, Math.min((i + 1) * dx, right) - Math.max(i * dx, left)) / dx;
+  }
+  for (const center of nodes) {
+    const left = center - nodeWidth / 2;
+    const right = center + nodeWidth / 2;
+    for (let i = Math.floor(left / dx); i * dx < right; i++) {
+      nodeFraction[i] = Math.min(1, overlap(i, left, right));
+    }
+  }
+  const inverseCapacitance = nodeFraction.map((f) => 1 / (f * nodeCapacitance + (1 - f) * myelinCapacitance));
+  const passiveLeak = nodeFraction.map((f) => (1 - f) * myelinLeak);
+  const stimulusLeft = myelinated ? nodes[0] - nodeWidth / 2 : 0;
+  const stimulusRight = myelinated ? nodes[0] + nodeWidth / 2 : pulseLength;
 
   function vtrap(x) {
     return Math.abs(x) < 1e-7 ? 1 + x / 2 : -x / Math.expm1(-x);
@@ -271,12 +322,16 @@ function createCable(lengthCm, diameterUm, periodic, refinement = 1) {
     table.set(rates(tableMin + i / valuesPerMv), 6 * i);
   }
   const injection = new Float64Array(count);
-  for (let i = 0; i < count && i * dx < pulseLength; i++) {
-    // Average the stimulus over the last partially driven cell.
-    injection[i] = 100 * Math.min(1, (pulseLength - i * dx) / dx);
+  for (let i = 0; i < count && i * dx < stimulusRight; i++) {
+    injection[i] = 100 * Math.min(1, overlap(i, stimulusLeft, stimulusRight));
+  }
+  const shunt = new Float64Array(count);
+  const shuntStart = lengthCm - shuntLength;
+  for (let i = count - 1; i >= 0 && (i + 1) * dx > shuntStart; i--) {
+    shunt[i] = 30 * Math.min(1, ((i + 1) * dx - shuntStart) / dx);
   }
 
-  function advance(from, out, step, pulseOn) {
+  function advance(from, out, step, pulseOn, shuntOn) {
     const [v, m, h, n] = from;
     const [nextV, nextM, nextH, nextN] = out;
     const [baseV, baseM, baseH, baseN] = state;
@@ -285,9 +340,14 @@ function createCable(lengthCm, diameterUm, periodic, refinement = 1) {
       // Sealed ends have no flux at the end faces. A ring couples the first and last cells.
       const left = i > 0 ? v[i - 1] : v[periodic ? count - 1 : 0];
       const right = i < count - 1 ? v[i + 1] : v[periodic ? 0 : count - 1];
-      const cable = diffusionPerCell * (left - 2 * voltage + right);
+      const cable = axialPerCell * (left - 2 * voltage + right);
       const drive = pulseOn ? injection[i] : 0;
-      nextV[i] = baseV[i] + step * (cable + (drive - ionicCurrent(voltage, m[i], h[i], n[i])) / capacitance);
+      const shuntCurrent = shuntOn ? shunt[i] * (voltage - rest) : 0;
+      const active = nodeFraction[i];
+      const ionic = active > 0 ? active * ionicCurrent(voltage, m[i], h[i], n[i]) : 0;
+      nextV[i] = baseV[i] + step * inverseCapacitance[i] *
+        (cable + drive - ionic - passiveLeak[i] * (voltage - rest) - shuntCurrent);
+      if (active === 0) continue;
 
       const position = (voltage - tableMin) * valuesPerMv;
       const index = Math.floor(position);
@@ -306,13 +366,16 @@ function createCable(lengthCm, diameterUm, periodic, refinement = 1) {
     }
   }
 
-  function stepSample(pulseOn) {
+  function stepSample(pulseOn, shuntOn) {
     for (let step = 0; step < substeps; step++) {
-      advance(state, midpoint, dt / 2, pulseOn);
-      advance(midpoint, state, dt, pulseOn);
+      advance(state, midpoint, dt / 2, pulseOn, shuntOn);
+      advance(midpoint, state, dt, pulseOn, shuntOn);
     }
   }
-  return { lengthCm, periodic, count, dx, dt, windowMs, voltage: state[0], stepSample };
+  return {
+    lengthCm, periodic, myelinated, count, dx, dt, windowMs, voltage: state[0], stepSample,
+    nodes, nodeWidth, stimulusLeft, stimulusRight, shuntLength, shuntFrames,
+  };
 }
 
 function probeSampler(model, xCm) {
@@ -329,24 +392,41 @@ function createExperiment(model) {
   const samples = Array.from({ length: capacity }, () => new Float32Array(model.count));
   const firstArrivals = new Float64Array(model.count).fill(NaN);
   const pulseStarts = [];
+  const oneWayStarts = [];
   let frame = 0;
   let stimulusCount = 0;
   let pulseEnd = 0;
+  let shuntEnd = 0;
+  let firstStimulusOneWay = false;
+  let lapCount = null;
   samples[0].set(model.voltage);
 
   const oldestFrame = () => Math.max(0, frame - capacity + 1);
 
-  function stimulate() {
-    if (frame < pulseEnd) return false;
+  function stimulate(oneWay = false) {
+    if (frame < pulseEnd || frame < shuntEnd || (oneWay && !model.periodic)) return false;
+    if (stimulusCount === 0) firstStimulusOneWay = oneWay;
     stimulusCount++;
     pulseStarts.push(frame);
     pulseEnd = frame + pulseFrames;
+    lapCount = oneWay ? 0 : null;
+    if (oneWay) {
+      oneWayStarts.push(frame);
+      shuntEnd = frame + model.shuntFrames;
+    }
     return true;
   }
 
   function step() {
     const previous = samples[frame % capacity];
-    model.stepSample(frame < pulseEnd);
+    model.stepSample(frame < pulseEnd, frame < shuntEnd);
+    if (lapCount !== null && frame >= shuntEnd) {
+      const last = model.count - 1;
+      const oldSeam = (previous[0] + previous[last]) / 2;
+      const newSeam = (model.voltage[0] + model.voltage[last]) / 2;
+      const threshold = model.myelinated ? -50 : 0;
+      if (oldSeam < threshold && newSeam >= threshold && model.voltage[last] > model.voltage[0]) lapCount++;
+    }
     if (stimulusCount === 1) {
       for (let i = 0; i < model.count; i++) {
         if (previous[i] < 0 && model.voltage[i] >= 0 && Number.isNaN(firstArrivals[i])) {
@@ -358,6 +438,7 @@ function createExperiment(model) {
     frame++;
     samples[frame % capacity].set(model.voltage);
     while (pulseStarts.length && pulseStarts[0] < oldestFrame()) pulseStarts.shift();
+    while (oneWayStarts.length && oneWayStarts[0] + model.shuntFrames <= oldestFrame()) oneWayStarts.shift();
   }
 
   return {
@@ -365,6 +446,10 @@ function createExperiment(model) {
     get frame() { return frame; },
     get stimulusCount() { return stimulusCount; },
     get pulseActive() { return frame < pulseEnd; },
+    get shuntActive() { return frame < shuntEnd; },
+    get firstStimulusOneWay() { return firstStimulusOneWay; },
+    get lapCount() { return lapCount; },
+    shuntAt: (sample) => oneWayStarts.some((start) => start <= sample && sample < start + model.shuntFrames),
     oldestFrame,
     stimulate,
     step,
@@ -379,11 +464,13 @@ function createExperiment(model) {
 const byId = (id) => document.getElementById(id);
 const settings = { length: byId('length'), diameter: byId('diameter'), distal: byId('distal') };
 const lengthEntry = byId('length-entry');
+const axonType = byId('axon-type');
 const boundary = byId('periodic');
 const timeControl = byId('time');
 const rateControl = byId('rate');
 const playButton = byId('play');
 const stimulateButton = byId('stimulate');
+const oneWayButton = byId('one-way');
 const status = byId('status');
 const canvases = { space: byId('space-plot'), time: byId('time-plot') };
 const colors = getComputedStyle(document.documentElement);
@@ -405,33 +492,63 @@ function report(message, isError = false) {
 }
 
 function updateSettings() {
-  settings.distal.max = settings.length.valueAsNumber - 2;
   lengthEntry.value = settings.length.value;
   settings.length.setAttribute('aria-valuetext', settings.length.value + ' centimeters');
-  for (const [input, unit, spoken] of [
-    [settings.diameter, 'µm', 'micrometers'],
-    [settings.distal, 'cm', 'centimeters'],
-  ]) {
-    byId(input.id + '-value').textContent = input.value + ' ' + unit;
-    input.setAttribute('aria-valuetext', input.value + ' ' + spoken);
-  }
-  byId('space-b').textContent = 'Site B · ' + settings.distal.value + ' cm';
+  byId('diameter-value').textContent = settings.diameter.value + ' µm';
+  settings.diameter.setAttribute('aria-valuetext', settings.diameter.value + ' micrometers');
   const periodic = boundary.getAttribute('aria-pressed') === 'true';
   byId('boundary-mode').textContent = periodic ? 'Ring · x = 0 and x = L are joined' : 'Sealed ends';
+  oneWayButton.hidden = !periodic;
+  stimulateButton.classList.toggle('primary', !periodic);
   return {
     length: settings.length.valueAsNumber,
     diameter: settings.diameter.valueAsNumber,
     periodic,
+    myelinated: axonType.value === 'myelinated',
   };
+}
+
+function nearestNode(nodes, x) {
+  return nodes.reduce((best, center, i) => Math.abs(center - x) < Math.abs(nodes[best] - x) ? i : best, 0);
+}
+
+function configureDistal(model, preferredX) {
+  const input = settings.distal;
+  const label = model.myelinated ? 'Distal recording node B' : 'Distal recording site B';
+  byId('distal-label').textContent = label;
+  input.setAttribute('aria-label', label);
+  if (model.myelinated) {
+    input.min = nearestNode(model.nodes, siteA) + 1;
+    input.max = model.nodes.length - 1;
+    input.step = 1;
+    input.value = nearestNode(model.nodes, preferredX);
+  } else {
+    input.min = 6;
+    input.max = model.lengthCm - 2;
+    input.step = 0.5;
+    input.value = Math.round(preferredX * 2) / 2;
+  }
 }
 
 function updateProbes() {
   const model = experiment.model;
+  const distal = settings.distal.valueAsNumber;
   probes = [
-    { id: 'a', x: siteA, color: color('proximal'), dash: [] },
-    { id: 'b', x: settings.distal.valueAsNumber, color: color('distal'), dash: [5, 3] },
+    { id: 'a', x: siteA, node: model.myelinated ? nearestNode(model.nodes, siteA) : null, color: color('proximal'), dash: [] },
+    { id: 'b', x: distal, node: distal, color: color('distal'), dash: [5, 3] },
   ];
-  for (const probe of probes) probe.read = probeSampler(model, probe.x);
+  for (const probe of probes) {
+    if (model.myelinated) probe.x = model.nodes[probe.node];
+    probe.read = probeSampler(model, probe.x);
+    const distance = Number(probe.x.toFixed(2));
+    const label = model.myelinated ? 'Node ' + (probe.node + 1) + ' · ' + distance : distance;
+    byId('space-' + probe.id).textContent = 'Site ' + probe.id.toUpperCase() + ' · ' + label + ' cm';
+    if (probe.id === 'b') {
+      byId('distal-value').textContent = label + ' cm';
+      const spoken = model.myelinated ? 'Node ' + (probe.node + 1) + ', ' + distance : distance;
+      settings.distal.setAttribute('aria-valuetext', spoken + ' centimeters');
+    }
+  }
 }
 
 function updateMeasurements() {
@@ -445,13 +562,14 @@ function updateMeasurements() {
   const delayMs = b - a;
   const farthestSameFront = Math.floor((model.lengthCm / 2 - 1) * 2) / 2;
   // Avoid the collision zone, where first arrivals may come from the other front.
-  const differentFronts = model.periodic && probes[1].x > farthestSameFront;
+  const differentFronts = model.periodic && !experiment.firstStimulusOneWay && probes[1].x > farthestSameFront;
   const comparable = !differentFronts && Number.isFinite(delayMs) && delayMs > 0;
-  byId('speed').textContent = comparable ? (10 * (probes[1].x - siteA) / delayMs).toFixed(1) + ' m/s' : '—';
+  byId('speed').textContent = comparable ? (10 * (probes[1].x - probes[0].x) / delayMs).toFixed(1) + ' m/s' : '—';
   byId('delay').textContent = comparable ? delayMs.toFixed(2) + ' ms' : '—';
   let note = 'Arrival is the first upward crossing of 0 mV. Speed is the site separation divided by the first spike delay.';
   if (differentFronts) {
-    note = farthestSameFront >= Number(settings.distal.min)
+    const minProbeX = model.myelinated ? model.nodes[Number(settings.distal.min)] : Number(settings.distal.min);
+    note = farthestSameFront >= minProbeX
       ? 'A ring can send different wave fronts to A and B. Place B at or before ' + farthestSameFront + ' cm to measure one front.'
       : 'This ring is too short to place both probes clear of the collision zone on the same side.';
   } else if (!comparable && experiment.stimulusCount > 1) {
@@ -462,13 +580,17 @@ function updateMeasurements() {
 
 function resetRun(message, force = false) {
   const next = updateSettings();
-  const key = [next.length, next.diameter, next.periodic].join('/');
+  const key = [next.length, next.diameter, next.periodic, next.myelinated].join('/');
   if (key === geometry && !force) return;
   stop();
   geometry = key;
   cursor = 0;
-  experiment = createExperiment(createCable(next.length, next.diameter, next.periodic));
+  experiment = createExperiment(createCable(next.length, next.diameter, next.periodic, next.myelinated));
   const model = experiment.model;
+  configureDistal(model, probes ? probes[1].x : 18);
+  byId('node-label').textContent = 'Nodes of Ranvier (' + model.nodes.length + ')';
+  byId('node-key').hidden = !model.myelinated;
+  byId('myelin-key').hidden = !model.myelinated;
   byId('dx').textContent = model.dx.toFixed(3) + ' cm';
   byId('dt').textContent = model.dt.toFixed(5) + ' ms';
   byId('window').textContent = model.windowMs + ' ms';
@@ -569,8 +691,21 @@ function spacePlot() {
   const seam = (first + last) / 2;
 
   clipped(plot, () => {
+    if (model.myelinated) {
+      ctx.fillStyle = 'rgba(209, 226, 241, .35)';
+      ctx.fillRect(x(0), top, x(model.lengthCm) - x(0), bottom - top);
+      for (const node of model.nodes) {
+        const active = values[Math.floor(node / model.dx)] > -20;
+        ctx.fillStyle = active ? 'rgba(72, 152, 111, .58)' : 'rgba(136, 185, 159, .38)';
+        ctx.fillRect(x(node - model.nodeWidth / 2), top, x(model.nodeWidth) - x(0), bottom - top);
+      }
+    }
     ctx.fillStyle = '#eaf0f8';
-    ctx.fillRect(x(0), top, x(pulseLength) - x(0), bottom - top);
+    ctx.fillRect(x(model.stimulusLeft), top, x(model.stimulusRight) - x(model.stimulusLeft), bottom - top);
+    if (experiment.shuntAt(cursor)) {
+      ctx.fillStyle = 'rgba(183, 163, 210, .4)';
+      ctx.fillRect(x(model.lengthCm - model.shuntLength), top, x(model.shuntLength) - x(0), bottom - top);
+    }
     for (const probe of probes) {
       path(ctx, [[x(probe.x), top], [x(probe.x), bottom]], probe.color, 1.15, probe.dash);
     }
@@ -627,7 +762,13 @@ function showTime() {
   timeControl.value = String(time);
   timeControl.setAttribute('aria-valuetext', time.toFixed(2) + ' milliseconds');
   playButton.textContent = animation === null ? 'Play' : 'Pause';
-  stimulateButton.setAttribute('aria-disabled', String(experiment.pulseActive));
+  const launchBusy = experiment.pulseActive || experiment.shuntActive;
+  stimulateButton.setAttribute('aria-disabled', String(launchBusy));
+  oneWayButton.setAttribute('aria-disabled', String(launchBusy));
+  const lapReadout = byId('lap-count');
+  lapReadout.hidden = experiment.lapCount === null;
+  lapReadout.textContent = 'Completed laps · ' + (experiment.lapCount ?? 0);
+  byId('shunt-key').hidden = !experiment.shuntAt(cursor);
   updateMeasurements();
   repaint();
 }
@@ -669,15 +810,17 @@ function animate(now) {
   if (advanced) showTime();
 }
 
-stimulateButton.addEventListener('click', () => {
-  if (!experiment.stimulate()) return;
+function triggerStimulus(oneWay) {
+  if (!experiment.stimulate(oneWay)) return;
   cursor = experiment.frame;
   sampleBudget = 0;
   lastTick = null;
-  report('Stimulus ' + experiment.stimulusCount + ' at ' + (cursor * sampleMs).toFixed(2) + ' ms.');
+  report((oneWay ? 'One-way stimulus ' : 'Stimulus ') + experiment.stimulusCount + ' at ' + (cursor * sampleMs).toFixed(2) + ' ms.');
   start();
   showTime();
-});
+}
+stimulateButton.addEventListener('click', () => triggerStimulus(false));
+oneWayButton.addEventListener('click', () => triggerStimulus(true));
 playButton.addEventListener('click', () => {
   if (animation === null) {
     start();
@@ -693,9 +836,12 @@ boundary.addEventListener('click', () => {
   const periodic = boundary.getAttribute('aria-pressed') === 'false';
   boundary.setAttribute('aria-pressed', String(periodic));
   resetRun(periodic
-    ? 'Ring at rest. A stimulus launches waves in both directions.'
+    ? 'Ring at rest. Use Stimulate one way for a circulating wave.'
     : 'Sealed cable at rest. Press Stimulate to start.');
 });
+axonType.addEventListener('change', () => resetRun(axonType.value === 'myelinated'
+  ? 'Probes now record at nodes of Ranvier. Press Stimulate to start.'
+  : 'Unmyelinated cable at rest. Press Stimulate to start.'));
 timeControl.addEventListener('input', () => {
   stop();
   cursor = Math.round(timeControl.valueAsNumber / sampleMs);
@@ -719,7 +865,6 @@ lengthEntry.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') lengthEntry.blur();
 });
 settings.distal.addEventListener('input', () => {
-  updateSettings();
   updateProbes();
   showTime();
 });
