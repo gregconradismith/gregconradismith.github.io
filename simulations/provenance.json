@@ -61,7 +61,7 @@
   },
   {
     "repository": "action-potential-propagation",
-    "commit": "4cf035b6ecd04a6254d45b36a06fdf6df4d865f9",
+    "commit": "265c4ae3060a42c9f4ae844b15d872c218bbc2de",
     "license": "No simulator license declared; the website theme license does not grant additional rights.",
     "source_repository": "gregconradismith/gregconradismith.github.io",
     "source_path": "simulations/action-potential-propagation/index.html",
