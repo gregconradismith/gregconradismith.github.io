@@ -68,6 +68,10 @@
   .swatch.pulse-onset { border-top: 2px dotted #62748b; }
   .transport { display: grid; grid-template-columns: auto minmax(5rem, 1fr) auto; align-items: center; gap: .5rem .85rem; margin-top: .85rem; padding: .65rem 1rem; }
   .actions { display: flex; gap: .4rem; flex-wrap: wrap; }
+  .pair-controls { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .8rem; }
+  .pair-controls label { font-size: .9rem; }
+  .pair-controls input { width: 4.4rem; padding: .28rem; border: 1px solid #aab9cb; border-radius: 5px; color: var(--ink); }
+  .pair-controls span { color: var(--muted); font-size: .85rem; }
   #play { min-width: 4.9rem; }
   .transport .setting-label { flex-wrap: nowrap; }
   .transport button { align-self: center; }
@@ -83,6 +87,9 @@
   details { padding: .6rem .85rem; line-height: 1.55; font-size: .89rem; overflow-wrap: anywhere; }
   summary { font-size: .9rem; font-weight: 650; }
   details p { margin-top: .55rem; }
+  .space-time { margin: .85rem 0; }
+  .space-time canvas { display: block; width: 100%; height: 262px; margin-top: .5rem; }
+  .space-time p { color: var(--muted); font-size: .83rem; }
   a { color: var(--primary); }
   @media (max-width: 840px) {
     .plots { grid-template-columns: 1fr; }
@@ -116,7 +123,7 @@
   <header>
     <p class="course">NSCI 351 · Cellular Biophysics</p>
     <h1>Action potential propagation</h1>
-    <p class="subtitle">One unmyelinated axon with Hodgkin–Huxley sodium and potassium channels.</p>
+    <p class="subtitle">Hodgkin–Huxley propagation in an unmyelinated or myelinated axon.</p>
   </header>
 
   <section class="controls panel tabular" aria-label="Axon and recording settings">
@@ -168,6 +175,13 @@
         <option value="12">12 ms/s</option>
       </select>
     </label>
+    <div class="pair-controls" role="group" aria-label="Paired stimulation">
+      <button type="button" id="paired-pulse">Stimulate twice</button>
+      <label for="pulse-interval">Pulse interval
+        <input id="pulse-interval" type="number" min="0.5" max="40" step="0.1" value="1" aria-label="Pulse interval in milliseconds"> ms
+      </label>
+      <span id="pair-status" hidden></span>
+    </div>
     <p id="status" class="status" role="status" aria-live="polite">Press Stimulate to deliver a 0.5 ms pulse.</p>
   </section>
 
@@ -211,9 +225,17 @@
     <p id="measurement-note" class="measure-note">Arrival is the first upward crossing of 0 mV. Speed is the distance between the sites divided by the arrival delay.</p>
   </section>
 
+  <details class="panel space-time" id="space-time">
+    <summary>Space–time plot</summary>
+    <canvas id="space-time-canvas" role="img" aria-label="Heatmap of recorded membrane voltage by time and distance, with a cursor at the selected time">
+      Recorded membrane voltage by time and distance.
+    </canvas>
+    <p>A diagonal band shows a traveling spike. On a ring, the band can reappear at the bottom after reaching the top. Dotted lines mark pulse onsets.</p>
+  </details>
   <details class="panel">
     <summary>Model and parameters</summary>
     <p>Each stimulus applies a 0.5 ms inward current pulse (100 µA/cm²) at the start of the cable. The pulse covers the first 0.6 cm for an unmyelinated axon and the first node for a myelinated axon. Later pulses start from the current voltages and channel states. A pulse delivered during the refractory period can produce a smaller response or fail to launch a spike.</p>
+    <p><strong>Stimulate twice</strong> delivers two ordinary pulses. The interval is measured between the two pulse onsets in model time. Pausing leaves a pending second pulse scheduled, and Reset cancels it. For a repeatable comparison, reset before trying a different interval.</p>
     <p>With sealed ends, no axial current leaves the cable. Periodic boundaries join the two ends into a ring. An ordinary stimulus on a rested ring launches two waves that extinguish when they meet. <strong>Stimulate one way</strong> applies the same pulse and briefly shunts the upstream segment toward rest to suppress the backward wave. The shunt conductance is 30 mS/cm² for 2.5 ms in the unmyelinated axon and 2 ms in the myelinated axon. After the shunt turns off, the wave can pass through the join. The lap counter tracks forward crossings at the join after the most recent one-way launch.</p>
     <p>In myelinated mode, Hodgkin–Huxley channels regenerate the spike only at the marked nodes of Ranvier. The internodes are passive, with capacitance 0.18 µF/cm² and leak conductance 0.01 mS/cm². The plots show the passive voltage between nodes. Probes record at nodes in this mode. Nodal widths and spacings are enlarged for this teaching model.</p>
     <p>Changing the axon type, length, diameter, or boundary condition starts a new run. The time slider reviews the most recent <span id="window">—</span> of recorded voltage. Stimulate applies a pulse at the latest simulated time. First-spike measurements use crossings before the second stimulus.</p>
@@ -396,6 +418,7 @@ function createExperiment(model) {
   let frame = 0;
   let stimulusCount = 0;
   let pulseEnd = 0;
+  let secondPulseFrame = null;
   let shuntEnd = 0;
   let firstStimulusOneWay = false;
   let lapCount = null;
@@ -404,7 +427,7 @@ function createExperiment(model) {
   const oldestFrame = () => Math.max(0, frame - capacity + 1);
 
   function stimulate(oneWay = false) {
-    if (frame < pulseEnd || frame < shuntEnd || (oneWay && !model.periodic)) return false;
+    if (secondPulseFrame !== null || frame < pulseEnd || frame < shuntEnd || (oneWay && !model.periodic)) return false;
     if (stimulusCount === 0) firstStimulusOneWay = oneWay;
     stimulusCount++;
     pulseStarts.push(frame);
@@ -417,7 +440,17 @@ function createExperiment(model) {
     return true;
   }
 
+  function stimulateTwice(intervalFrames) {
+    if (!Number.isInteger(intervalFrames) || intervalFrames < pulseFrames || !stimulate()) return false;
+    secondPulseFrame = frame + intervalFrames;
+    return true;
+  }
+
   function step() {
+    if (frame === secondPulseFrame) {
+      secondPulseFrame = null;
+      stimulate();
+    }
     const previous = samples[frame % capacity];
     model.stepSample(frame < pulseEnd, frame < shuntEnd);
     if (lapCount !== null && frame >= shuntEnd) {
@@ -446,12 +479,14 @@ function createExperiment(model) {
     get frame() { return frame; },
     get stimulusCount() { return stimulusCount; },
     get pulseActive() { return frame < pulseEnd; },
+    get secondPulseFrame() { return secondPulseFrame; },
     get shuntActive() { return frame < shuntEnd; },
     get firstStimulusOneWay() { return firstStimulusOneWay; },
     get lapCount() { return lapCount; },
     shuntAt: (sample) => oneWayStarts.some((start) => start <= sample && sample < start + model.shuntFrames),
     oldestFrame,
     stimulate,
+    stimulateTwice,
     step,
     pulseStarts,
     firstArrivals,
@@ -471,8 +506,11 @@ const rateControl = byId('rate');
 const playButton = byId('play');
 const stimulateButton = byId('stimulate');
 const oneWayButton = byId('one-way');
+const pairButton = byId('paired-pulse');
+const pulseInterval = byId('pulse-interval');
+const spaceTime = byId('space-time');
 const status = byId('status');
-const canvases = { space: byId('space-plot'), time: byId('time-plot') };
+const canvases = { space: byId('space-plot'), time: byId('time-plot'), history: byId('space-time-canvas') };
 const colors = getComputedStyle(document.documentElement);
 const color = (name) => colors.getPropertyValue('--' + name).trim();
 const siteA = 4;
@@ -485,6 +523,7 @@ let cursor = 0;
 let animation = null;
 let lastTick = null;
 let sampleBudget = 0;
+let lastHistoryDraw = -Infinity;
 
 function report(message, isError = false) {
   status.textContent = message;
@@ -748,9 +787,172 @@ function timePlot() {
   });
 }
 
-function repaint() {
+// Offscreen pixels are reused, and scrubbing a fixed recording only redraws the overlays.
+const spaceTimeCache = new WeakMap();
+const spaceTimeStops = [
+  [-75, 46, 93, 152],
+  [-65, 227, 235, 247],
+  [-30, 239, 178, 72],
+  [0, 201, 80, 36],
+  [30, 106, 30, 52],
+];
+const spaceTimeColors = (() => {
+  const low = spaceTimeStops[0][0];
+  const high = spaceTimeStops.at(-1)[0];
+  const table = new Uint8Array((high - low + 1) * 3);
+  let stop = 1;
+  for (let voltage = low; voltage <= high; voltage++) {
+    if (voltage > spaceTimeStops[stop][0]) stop++;
+    const left = spaceTimeStops[stop - 1];
+    const right = spaceTimeStops[stop];
+    const fraction = (voltage - left[0]) / (right[0] - left[0]);
+    const offset = (voltage - low) * 3;
+    for (let channel = 1; channel <= 3; channel++) {
+      table[offset + channel - 1] = Math.round(left[channel] + fraction * (right[channel] - left[channel]));
+    }
+  }
+  return table;
+})();
+
+function drawSpaceTime(canvas, experiment, cursor) {
+  const { width, height } = canvas.getBoundingClientRect();
+  if (width < 110 || height < 135) return;
+  const dpr = Math.min(3, window.devicePixelRatio || 1);
+  const widthPx = Math.round(width * dpr);
+  const heightPx = Math.round(height * dpr);
+  if (canvas.width !== widthPx || canvas.height !== heightPx) {
+    canvas.width = widthPx;
+    canvas.height = heightPx;
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+
+  const { model } = experiment;
+  const oldest = experiment.oldestFrame();
+  const latest = experiment.frame;
+  const windowFrames = Math.round(model.windowMs / sampleMs);
+  const left = 42;
+  const right = width - 15;
+  const top = 25;
+  const bottom = height - 76;
+  const areaWidth = right - left;
+  const areaHeight = bottom - top;
+  const x = (frame) => left + (frame - oldest) / windowFrames * areaWidth;
+  const y = (cm) => bottom - cm / model.lengthCm * areaHeight;
+
+  // A pixel shows one sampled time and compartment. Keep the time resolution high
+  // enough to show the narrow upstroke even when the CSS chart is on a phone.
+  const columns = Math.max(400, Math.min(560, Math.ceil(areaWidth * 1.2)));
+  const rows = Math.max(80, Math.min(400, model.count, Math.ceil(areaHeight * 2)));
+  let cache = spaceTimeCache.get(canvas);
+  if (!cache || cache.columns !== columns || cache.rows !== rows) {
+    const bitmap = document.createElement('canvas');
+    bitmap.width = columns;
+    bitmap.height = rows;
+    const bitmapContext = bitmap.getContext('2d');
+    cache = { bitmap, bitmapContext, pixels: bitmapContext.createImageData(columns, rows), columns, rows };
+    spaceTimeCache.set(canvas, cache);
+  }
+  if (cache.experiment !== experiment || cache.oldest !== oldest || cache.latest !== latest) {
+    const rgba = cache.pixels.data;
+    rgba.fill(0);
+    const compartments = new Int32Array(rows);
+    for (let row = 0; row < rows; row++) {
+      const cm = model.lengthCm * (rows - row - 0.5) / rows;
+      compartments[row] = Math.min(model.count - 1, Math.floor(cm / model.dx));
+    }
+    for (let column = 0; column < columns; column++) {
+      const frame = oldest + Math.round(column / (columns - 1) * windowFrames);
+      if (frame > latest) break;
+      const voltages = experiment.voltageAt(frame);
+      for (let row = 0; row < rows; row++) {
+        const value = Math.max(-75, Math.min(30, Math.round(voltages[compartments[row]])));
+        const rgb = (value + 75) * 3;
+        const pixel = (row * columns + column) * 4;
+        rgba[pixel] = spaceTimeColors[rgb];
+        rgba[pixel + 1] = spaceTimeColors[rgb + 1];
+        rgba[pixel + 2] = spaceTimeColors[rgb + 2];
+        rgba[pixel + 3] = 255;
+      }
+    }
+    cache.bitmapContext.putImageData(cache.pixels, 0, 0);
+    Object.assign(cache, { experiment, oldest, latest });
+  }
+
+  ctx.fillStyle = color('soft');
+  ctx.fillRect(left, top, areaWidth, areaHeight);
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(cache.bitmap, left, top, areaWidth, areaHeight);
+
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(left, top, areaWidth, areaHeight);
+  ctx.clip();
+  for (const start of experiment.pulseStarts) {
+    if (start < oldest || start > latest) continue;
+    const px = Math.max(left + 0.5, x(start));
+    path(ctx, [[px, top], [px, bottom]], '#fff', 2.5, [2, 3]);
+    path(ctx, [[px, top], [px, bottom]], '#516078', 1.2, [2, 3]);
+  }
+  const cursorX = Math.max(left + 0.5, Math.min(right - 0.5, x(cursor)));
+  path(ctx, [[cursorX, top], [cursorX, bottom]], '#fff', 2.8);
+  path(ctx, [[cursorX, top], [cursorX, bottom]], '#14263e', 1.1);
+  ctx.restore();
+
+  ctx.strokeStyle = '#8191a6';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(left, top, areaWidth, areaHeight);
+  ctx.font = '12px Inter, system-ui, sans-serif';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = color('muted');
+  ctx.textAlign = 'right';
+  for (const cm of ticksBetween(0, model.lengthCm, areaHeight < 140 ? 4 : 6)) {
+    const py = y(cm);
+    path(ctx, [[left - 4, py], [left, py]], '#8191a6');
+    ctx.fillText(String(cm), left - 7, py);
+  }
+  ctx.textAlign = 'center';
+  const minMs = oldest * sampleMs;
+  const maxMs = minMs + model.windowMs;
+  for (const ms of ticksBetween(minMs, maxMs, areaWidth < 360 ? 4 : 7)) {
+    const px = x(ms / sampleMs);
+    path(ctx, [[px, bottom], [px, bottom + 4]], '#8191a6');
+    ctx.fillText(String(ms), px, bottom + 13);
+  }
+  ctx.fillStyle = color('ink');
+  ctx.fillText('Time (ms)', (left + right) / 2, bottom + 29);
+  ctx.textAlign = 'left';
+  ctx.fillText('Distance along axon (cm)', left, 11);
+  ctx.fillText('Voltage (mV)', left, bottom + 44);
+
+  const legendY = bottom + 52;
+  const legend = ctx.createLinearGradient(left, 0, right, 0);
+  for (const [v, r, g, b] of spaceTimeStops) {
+    legend.addColorStop((v + 75) / 105, 'rgb(' + r + ', ' + g + ', ' + b + ')');
+  }
+  ctx.fillStyle = legend;
+  ctx.fillRect(left, legendY, areaWidth, 8);
+  ctx.strokeStyle = '#8191a6';
+  ctx.strokeRect(left, legendY, areaWidth, 8);
+  ctx.fillStyle = color('muted');
+  for (const [voltage] of spaceTimeStops) {
+    const px = left + (voltage + 75) / 105 * areaWidth;
+    path(ctx, [[px, legendY + 8], [px, legendY + 11]], '#8191a6');
+    ctx.textAlign = 'center';
+    const label = voltage < 0 ? '−' + (-voltage) : voltage > 0 ? '+' + voltage : '0';
+    const position = voltage === -75 && areaWidth < 245 ? px - 5 : px;
+    ctx.fillText(label, position, legendY + 18);
+  }
+}
+
+function repaint(forceHistory = false) {
   spacePlot();
   timePlot();
+  if (spaceTime.open && (forceHistory || animation === null || performance.now() - lastHistoryDraw >= 90)) {
+    drawSpaceTime(canvases.history, experiment, cursor);
+    lastHistoryDraw = performance.now();
+  }
 }
 
 function showTime() {
@@ -762,9 +964,14 @@ function showTime() {
   timeControl.value = String(time);
   timeControl.setAttribute('aria-valuetext', time.toFixed(2) + ' milliseconds');
   playButton.textContent = animation === null ? 'Play' : 'Pause';
-  const launchBusy = experiment.pulseActive || experiment.shuntActive;
+  const secondPulse = experiment.secondPulseFrame;
+  const launchBusy = experiment.pulseActive || experiment.shuntActive || secondPulse !== null;
   stimulateButton.setAttribute('aria-disabled', String(launchBusy));
   oneWayButton.setAttribute('aria-disabled', String(launchBusy));
+  pairButton.setAttribute('aria-disabled', String(launchBusy));
+  const pairStatus = byId('pair-status');
+  pairStatus.hidden = secondPulse === null;
+  if (secondPulse !== null) pairStatus.textContent = 'Second pulse scheduled for ' + (secondPulse * sampleMs).toFixed(2) + ' ms';
   const lapReadout = byId('lap-count');
   lapReadout.hidden = experiment.lapCount === null;
   lapReadout.textContent = 'Completed laps · ' + (experiment.lapCount ?? 0);
@@ -810,17 +1017,29 @@ function animate(now) {
   if (advanced) showTime();
 }
 
-function triggerStimulus(oneWay) {
-  if (!experiment.stimulate(oneWay)) return;
+function resumeAtStimulus(message) {
   cursor = experiment.frame;
   sampleBudget = 0;
   lastTick = null;
-  report((oneWay ? 'One-way stimulus ' : 'Stimulus ') + experiment.stimulusCount + ' at ' + (cursor * sampleMs).toFixed(2) + ' ms.');
+  report(message);
   start();
   showTime();
 }
+function triggerStimulus(oneWay) {
+  if (!experiment.stimulate(oneWay)) return;
+  const name = oneWay ? 'One-way stimulus ' : 'Stimulus ';
+  resumeAtStimulus(name + experiment.stimulusCount + ' at ' + (experiment.frame * sampleMs).toFixed(2) + ' ms.');
+}
 stimulateButton.addEventListener('click', () => triggerStimulus(false));
 oneWayButton.addEventListener('click', () => triggerStimulus(true));
+pairButton.addEventListener('click', () => {
+  const value = pulseInterval.valueAsNumber;
+  const interval = Number.isFinite(value) ? Math.min(40, Math.max(0.5, Math.round(value * 10) / 10)) : 1;
+  pulseInterval.value = interval;
+  if (!experiment.stimulateTwice(Math.round(interval / sampleMs))) return;
+  const onset = (experiment.frame * sampleMs).toFixed(2);
+  resumeAtStimulus('Pulse pair started at ' + onset + ' ms with a ' + interval.toFixed(1) + ' ms interval.');
+});
 playButton.addEventListener('click', () => {
   if (animation === null) {
     start();
@@ -868,10 +1087,12 @@ settings.distal.addEventListener('input', () => {
   updateProbes();
   showTime();
 });
-const resize = new ResizeObserver(repaint);
+spaceTime.addEventListener('toggle', () => { if (spaceTime.open) repaint(true); });
+const resize = new ResizeObserver(() => repaint(true));
 resetRun('Press Stimulate to deliver a 0.5 ms pulse.');
 resize.observe(canvases.space);
 resize.observe(canvases.time);
+resize.observe(canvases.history);
 </script>
 </body>
 </html>
