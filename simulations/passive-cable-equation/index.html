@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Passive cable equation · NSCI 351</title>
+<style>
+  :root {
+    color-scheme: light;
+    font-family: Inter, system-ui, sans-serif;
+    color: #14263e;
+    background: #eef2f6;
+    --paper: #fff;
+    --ink: #14263e;
+    --muted: #42536b;
+    --border: #d3dde8;
+    --grid: #e2e9f1;
+    --soft: #f4f8fb;
+    --accent: #135f62;
+    --center: #245d9b;
+    --probe: #9c4421;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  main { width: min(100% - 2rem, 1160px); margin: 0 auto; padding: 1.7rem 0 1.6rem; }
+  h1, h2, p, figure { margin: 0; }
+  header { margin-bottom: 1.05rem; }
+  .course { color: var(--accent); font-size: .83rem; font-weight: 650; }
+  h1 { margin: .2rem 0 .42rem; font-size: clamp(1.7rem, 4vw, 2.4rem); line-height: 1.13; letter-spacing: -.025em; }
+  .subtitle { color: var(--muted); line-height: 1.45; }
+  .panel { background: var(--paper); border: 1px solid var(--border); border-radius: 12px; }
+  .controls { padding: .85rem 1rem; }
+  .settings { display: grid; grid-template-columns: 1.15fr repeat(2, minmax(0, 1fr)); align-items: start; gap: .65rem 1rem; }
+  .settings.current { grid-template-columns: 1.15fr repeat(3, minmax(0, 1fr)); }
+  .setting { display: grid; align-content: start; gap: .25rem; min-width: 0; }
+  .setting-label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .2rem .5rem; font-size: .88rem; }
+  .setting-value { color: var(--accent); font-weight: 650; white-space: nowrap; }
+  .input-note { color: var(--muted); font-size: .88rem; line-height: 1.35; margin-top: .55rem; }
+  .geometry { border-top: 1px solid var(--grid); margin-top: .75rem; padding-top: .7rem; }
+  .geometry summary { color: var(--accent); font-size: .9rem; font-weight: 650; }
+  .geometry-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem 1rem; margin-top: .7rem; }
+  .constants { color: var(--muted); font-size: .84rem; margin-top: .5rem; }
+  button, input, select { font: inherit; }
+  select, button { min-height: 2.45rem; border: 1px solid #aab9cb; border-radius: 7px; padding: .34rem .6rem; }
+  select { color: var(--ink); background: var(--paper); width: 100%; }
+  button { background: var(--accent); color: white; border-color: var(--accent); font-weight: 650; min-width: 7rem; }
+  button:hover { background: #104e50; }
+  input[type=range] { width: 100%; min-width: 0; height: 1.8rem; margin: 0; accent-color: var(--accent); }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  [hidden] { display: none !important; }
+  .measurements { margin-top: .85rem; display: grid; grid-template-columns: 1.3fr repeat(3, 1fr); padding: .75rem 1rem; gap: .65rem 1rem; }
+  .measurement { display: grid; gap: .16rem; align-content: start; }
+  .measure-label { color: var(--muted); font-size: .83rem; }
+  .measure-value { font-weight: 680; font-size: 1.24rem; }
+  .measure-value.primary { color: var(--accent); }
+  .plots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .85rem; margin: .85rem 0; }
+  .plot { min-width: 0; padding: .8rem .72rem .7rem; }
+  .plot h2 { margin: 0 .28rem .38rem; font-size: 1.03rem; }
+  .plot canvas { width: 100%; height: 222px; display: block; }
+  .plot figcaption { color: var(--muted); font-size: .83rem; margin: .2rem .28rem 0; line-height: 1.35; }
+  .legend { display: flex; flex-wrap: wrap; align-items: center; gap: .26rem 1rem; }
+  .key { display: inline-flex; align-items: center; gap: .38rem; }
+  .swatch { width: 1.15rem; border-top: 2px solid var(--center); }
+  .swatch.probe { border-top: 2px dashed var(--probe); }
+  .swatch.model { border-top-color: var(--accent); }
+  .swatch.reference { border-top: 2px dashed #657790; }
+  .caption-note { margin-top: .28rem; }
+  .visual-group { margin-bottom: .85rem; }
+  .snapshot canvas { height: 191px; }
+  .transport { display: flex; align-items: center; gap: .55rem 1rem; flex-wrap: wrap; padding: .7rem 1rem; margin: .85rem 0; }
+  .transport .setting { flex: 1 1 160px; }
+  .transport small { color: var(--muted); font-size: .85rem; }
+  .model-notes { padding: .68rem .85rem; font-size: .88rem; line-height: 1.5; }
+  .model-notes summary { font-weight: 650; }
+  .model-notes p { margin-top: .6rem; }
+  a { color: var(--accent); }
+  .tabular { font-variant-numeric: tabular-nums; }
+  @media (max-width: 915px) {
+    .settings, .settings.current { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 760px) {
+    .plots { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 500px) {
+    main { width: calc(100% - 1.2rem); padding-top: 1rem; }
+    .measurements { grid-template-columns: 1fr 1fr; }
+    .geometry-grid { grid-template-columns: 1fr; }
+    .plot { padding-inline: .45rem; }
+  }
+  @media (max-width: 360px) {
+    .settings, .settings.current { grid-template-columns: 1fr; }
+  }
+  @media (pointer: coarse) {
+    input[type=range], button, select { min-height: 44px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="course">NSCI 351 · Cellular Biophysics</p>
+    <h1>Passive cable equation</h1>
+    <p class="subtitle">Stimulate the center of a passive cable. Move the recording probe to see how EPSPs, IPSPs, and responses to injected current spread and attenuate.</p>
+  </header>
+  <section class="controls panel tabular" aria-label="Stimulus and cable settings">
+    <div class="settings" id="stimulus-settings">
+      <label class="setting" for="mode">
+        <span class="setting-label">Center stimulus</span>
+        <select id="mode">
+          <option value="epsp">EPSP · excitatory synapse</option>
+          <option value="ipsp">IPSP · inhibitory synapse</option>
+          <option value="current">Current injection</option>
+        </select>
+      </label>
+      <label class="setting" for="strength">
+        <span class="setting-label"><span id="strength-label">Peak conductance</span><span class="setting-value" id="strength-value">2 nS</span></span>
+        <input id="strength" type="range" min="0" max="10" step="0.1" value="2" aria-label="Peak synaptic conductance">
+      </label>
+      <label class="setting" for="duration" id="duration-setting" hidden>
+        <span class="setting-label"><span>Pulse duration</span><span class="setting-value" id="duration-value">5 ms</span></span>
+        <input id="duration" type="range" min="1" max="100" step="1" value="5" aria-label="Pulse duration">
+      </label>
+      <label class="setting" for="distance">
+        <span class="setting-label"><span>Probe distance</span><span class="setting-value" id="distance-value">500 µm</span></span>
+        <input id="distance" type="range" min="0" max="1000" step="25" value="500" aria-label="Probe distance">
+      </label>
+    </div>
+    <p class="input-note" id="input-note">Rest is −65 mV. The excitatory conductance drives the center toward 0 mV and produces an EPSP.</p>
+    <details class="geometry">
+      <summary>Cable properties</summary>
+      <div class="geometry-grid">
+        <label class="setting" for="length">
+          <span class="setting-label"><span>Total cable length</span><span class="setting-value" id="length-value">2,000 µm</span></span>
+          <input id="length" type="range" min="500" max="4000" step="100" value="2000" aria-label="Total cable length">
+        </label>
+        <label class="setting" for="diameter">
+          <span class="setting-label"><span>Diameter</span><span class="setting-value" id="diameter-value">2 µm</span></span>
+          <input id="diameter" type="range" min="0.5" max="5" step="0.1" value="2" aria-label="Cable diameter">
+        </label>
+        <label class="setting" for="resistance">
+          <span class="setting-label"><span>Membrane resistance</span><span class="setting-value" id="resistance-value">10 kΩ·cm²</span></span>
+          <input id="resistance" type="range" min="5" max="40" step="1" value="10" aria-label="Specific membrane resistance">
+        </label>
+      </div>
+      <p class="constants" id="constants">Sealed ends · Length constant λ 707 µm · Membrane time constant τ 10 ms</p>
+    </details>
+  </section>
+
+  <section class="measurements panel tabular" aria-label="Peak attenuation measurements" role="status" aria-live="polite">
+    <div class="measurement"><span class="measure-label" id="percent-label">Peak remaining at 500 µm</span><span class="measure-value primary" id="percent">—</span></div>
+    <div class="measurement"><span class="measure-label">Center peak ΔV</span><span class="measure-value" id="center-peak">—</span></div>
+    <div class="measurement"><span class="measure-label">Probe peak ΔV</span><span class="measure-value" id="probe-peak">—</span></div>
+    <div class="measurement"><span class="measure-label">Peak delay at probe</span><span class="measure-value" id="peak-delay">—</span></div>
+  </section>
+
+  <div class="plots">
+    <figure class="plot panel">
+      <h2>Peak attenuation along the cable</h2>
+      <canvas id="attenuation-plot" role="img" aria-label="Percentage of the center peak remaining at each distance, with a marker at the probe and a steady current reference">
+        Peak voltage change at each distance, relative to the peak at the center.
+      </canvas>
+      <figcaption>
+        <div class="legend">
+          <span class="key"><span class="swatch model" aria-hidden="true"></span>Selected stimulus</span>
+          <span class="key"><span class="swatch reference" aria-hidden="true"></span>Steady current reference</span>
+        </div>
+        <p class="caption-note">Each position is measured at its own peak. The two sides of the cable give the same response.</p>
+      </figcaption>
+    </figure>
+    <figure class="plot panel">
+      <h2>Voltage at the center and probe</h2>
+      <canvas id="trace-plot" role="img" aria-label="Voltage change versus time at the center and the selected probe">
+        Time traces for the center and selected probe.
+      </canvas>
+      <figcaption class="tabular">
+        <div class="legend">
+          <span class="key"><span class="swatch" aria-hidden="true"></span>Center · 0 µm</span>
+          <span class="key"><span class="swatch probe" aria-hidden="true"></span><span id="probe-key">Probe · 500 µm</span></span>
+        </div>
+        <p class="caption-note">Hollow dots mark the peaks.</p>
+      </figcaption>
+    </figure>
+  </div>
+
+  <section class="transport panel tabular" aria-label="Simulation playback">
+    <button type="button" id="play">Stimulate</button>
+    <label class="setting" for="time">
+      <span class="setting-label"><span>Time</span><span class="setting-value" id="time-value">0.0 ms</span></span>
+      <input id="time" type="range" min="0" max="70" step="0.1" value="0" aria-label="Simulation time">
+    </label>
+    <small>Slow playback</small>
+  </section>
+  <figure class="plot panel snapshot visual-group">
+    <h2>Voltage along the cable at the selected time</h2>
+    <canvas id="profile-plot" role="img" aria-label="Voltage profile on both sides of the central stimulus at the selected time">
+      A spatial snapshot of voltage change along the cable.
+    </canvas>
+    <figcaption class="legend">
+      <span class="key"><span class="swatch" aria-hidden="true"></span>Center stimulus</span>
+      <span class="key"><span class="swatch probe" aria-hidden="true"></span>Probe</span>
+    </figcaption>
+  </figure>
+
+  <details class="panel model-notes">
+    <summary>Model and classroom comparisons</summary>
+    <p>Try moving the probe twice as far from the center. Compare the amount of peak voltage lost and the change in peak timing. With the probe fixed, switch between EPSP and IPSP at the same conductance, then compare a brief current pulse with a long one.</p>
+    <p>The uniform cable has sealed ends, so axial current cannot leave through either end. Voltage changes spread by axial current and decay through the membrane leak. There are no voltage-gated channels. The time shift between peaks describes passive filtering.</p>
+    <p>The resting potential is −65 mV. Synaptic conductance has the same time course in both modes (0.8 ms rise constant and 5 ms decay constant). The synaptic current is <i>g</i><sub>syn</sub>(<i>E</i><sub>syn</sub> − <i>V</i>). The reversal potentials are 0 mV for the EPSP and −80 mV for the hyperpolarizing IPSP in this example.</p>
+    <p><i>C</i><sub>m</sub> is 1 µF/cm² and axial resistivity is 100 Ω·cm. The finite-volume cable solver uses backward Euler. The dashed curve shows the theoretical steady-state voltage ratio for a maintained center current in this finite cable, cosh((<i>L</i>/2 − <i>x</i>)/λ) / cosh(<i>L</i>/(2λ)), where <i>x</i> is distance from the center.</p>
+    <p><a href="https://doi.org/10.1002/j.2040-4603.1977.tb00811.x" target="_blank" rel="noreferrer">Rall (1977), Core Conductor Theory and Cable Properties of Neurons</a></p>
+  </details>
+</main>
+<script id="passive-model">
+'use strict';
+function simulatePassive({ lengthUm = 2000, diameterUm = 2, resistanceK = 10,
+  mode = 'epsp', strength = mode === 'current' ? 100 : 5, durationMs = 5 } = {}, refinement = 1) {
+  const supportedModes = ['epsp', 'ipsp', 'current'];
+  if (!supportedModes.includes(mode)) throw new RangeError('Unknown stimulus mode.');
+  if (!Number.isFinite(lengthUm) || lengthUm < 500 || lengthUm > 4000 ||
+      !Number.isFinite(diameterUm) || diameterUm < 0.5 || diameterUm > 5 ||
+      !Number.isFinite(resistanceK) || resistanceK < 5 || resistanceK > 40 ||
+      !Number.isFinite(durationMs) || durationMs <= 0 || durationMs > 100 ||
+      !Number.isFinite(strength) || (mode !== 'current' && strength < 0) ||
+      !Number.isInteger(refinement) || refinement < 1 || refinement > 4) {
+    throw new RangeError('Invalid cable or stimulus parameters.');
+  }
+
+  const axialResistivity = 100; // Ω cm
+  const capacitance = 1;       // µF/cm²
+  const rest = -65;             // mV
+  const leak = 1 / resistanceK; // mS/cm²
+  const tauMs = capacitance / leak;
+  const diameterCm = diameterUm * 1e-4;
+  // Ω → kΩ and cm² → µm². With Cm in µF/cm², D is in µm²/ms.
+  const diffusion = (1000 * diameterCm / (4 * axialResistivity * capacitance)) * 1e8;
+  const lambdaUm = Math.sqrt(diffusion * tauMs);
+
+  const targetDx = 20 / refinement;
+  const n = 2 * Math.ceil((lengthUm / targetDx - 1) / 2) + 1;
+  const center = (n - 1) / 2;
+  const dx = lengthUm / n;
+  const area = Math.PI * diameterCm * dx * 1e-4; // central membrane area, cm²
+  const frameMs = 0.1;
+  const substeps = 4 * refinement;
+  const dt = frameMs / substeps;
+  const stimulusMs = 2;
+  const stimulusEndMs = mode === 'current' ? stimulusMs + durationMs : null;
+
+  const tauRise = 0.8;
+  const tauDecay = 5;
+  const synPeakMs = tauRise * tauDecay * Math.log(tauDecay / tauRise) / (tauDecay - tauRise);
+  const synPeak = Math.exp(-synPeakMs / tauDecay) - Math.exp(-synPeakMs / tauRise);
+  const reversal = mode === 'epsp' ? 0 : mode === 'ipsp' ? -80 : null;
+  const horizon = Math.max(70, (stimulusEndMs ?? stimulusMs + 5 * tauDecay) + 5 * tauMs);
+  const frames = Math.ceil(horizon / frameMs) + 1;
+  const duration = (frames - 1) * frameMs;
+
+  const history = new Float32Array(n * frames);
+  const stimulus = new Float32Array(frames);
+  const voltage = new Float64Array(n);
+  const upper = new Float64Array(n - 1);
+  const rhs = new Float64Array(n);
+  // Conductance in nS → mS, current in pA → µA, before dividing by cell area.
+  const stimulusDensity = strength * 1e-6 / area;
+  const axial = diffusion * dt / (dx * dx);
+  const membrane = leak * dt / capacitance;
+  const boundaryDiagonal = 1 + membrane + axial;
+  const interiorDiagonal = boundaryDiagonal + axial;
+  const dtOverCm = dt / capacitance;
+
+  function synapticFraction(timeMs) {
+    const elapsed = timeMs - stimulusMs;
+    if (elapsed <= 0) return 0;
+    return (Math.exp(-elapsed / tauDecay) - Math.exp(-elapsed / tauRise)) / synPeak;
+  }
+
+  function advance(step) {
+    const leftTime = step * dt;
+    const rightTime = leftTime + dt;
+    let source = 0;
+    let conductance = 0;
+    if (mode === 'current') {
+      // Weight a partially driven step to conserve pulse charge at an off-grid edge.
+      const onDuration = Math.max(0, Math.min(rightTime, stimulusEndMs) -
+        Math.max(leftTime, stimulusMs));
+      source = stimulusDensity * onDuration / capacitance;
+    } else {
+      conductance = synapticFraction(leftTime + dt / 2) * stimulusDensity * dtOverCm;
+      source = conductance * (reversal - rest);
+    }
+
+    // Backward Euler and a Thomas solve for the tridiagonal finite-volume system.
+    // Sealed end volumes each have one axial neighbor.
+    upper[0] = -axial / boundaryDiagonal;
+    rhs[0] = voltage[0] / boundaryDiagonal;
+    for (let i = 1; i < n; i++) {
+      let diagonal = i === n - 1 ? boundaryDiagonal : interiorDiagonal;
+      let value = voltage[i];
+      if (i === center) {
+        diagonal += conductance;
+        value += source;
+      }
+      const pivot = diagonal + axial * upper[i - 1];
+      rhs[i] = (value + axial * rhs[i - 1]) / pivot;
+      if (i < n - 1) upper[i] = -axial / pivot;
+    }
+    voltage[n - 1] = rhs[n - 1];
+    for (let i = n - 2; i >= 0; i--) voltage[i] = rhs[i] - upper[i] * voltage[i + 1];
+  }
+
+  for (let frame = 1; frame < frames; frame++) {
+    for (let step = (frame - 1) * substeps; step < frame * substeps; step++) advance(step);
+    history.set(voltage, frame * n);
+    const time = frame * frameMs;
+    stimulus[frame] = mode === 'current'
+      ? (time >= stimulusMs && time < stimulusEndMs ? strength : 0)
+      : strength * synapticFraction(time);
+  }
+
+  return {
+    n, dx, dt, frameMs, frames, duration, history, lambdaUm, tauMs, center, stimulusMs,
+    stimulusEndMs, stimulus, rest, lengthUm, diameterUm, resistanceK, mode, strength, durationMs,
+    reversal, tauRise, tauDecay, synapticPeakMs: stimulusMs + synPeakMs,
+  };
+}
+</script>
+<script>
+'use strict';
+const byId = (id) => document.getElementById(id);
+const controls = Object.fromEntries(['mode', 'strength', 'duration', 'distance', 'length', 'diameter', 'resistance', 'time', 'play']
+  .map((id) => [id, byId(id)]));
+const plot = Object.fromEntries(['attenuation', 'trace', 'profile'].map((name) => [name, byId(name + '-plot')]));
+const css = getComputedStyle(document.documentElement);
+const color = (name) => css.getPropertyValue('--' + name).trim();
+const modes = {
+  epsp: { note: 'Rest is −65 mV. The excitatory conductance drives the center toward 0 mV and produces an EPSP.' },
+  ipsp: { note: 'Rest is −65 mV. The inhibitory conductance drives the center toward −80 mV and produces a hyperpolarizing IPSP.' },
+  current: { note: 'The center receives a rectangular current pulse. Positive current depolarizes and negative current hyperpolarizes.' },
+};
+const format = new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 });
+const magnitude = (n) => format.format(n);
+function signed(n) {
+  const digits = Math.abs(n).toFixed(2);
+  return (Number(digits) === 0 ? '' : n > 0 ? '+' : '−') + digits;
+}
+const labelNumber = (n) => magnitude(n).replace('-', '−');
+let synapticStrength = 2;
+let currentStrength = 100;
+let run, peakPositions, centerTrace, probeTrace, selected, vertical;
+let time = 0;
+let frame = null;
+let previous = null;
+
+function atLocation(position) {
+  const index = run.center + position / run.dx;
+  const clamped = Math.min(run.n - 1, Math.max(0, index));
+  const left = Math.floor(clamped);
+  const right = Math.min(run.n - 1, left + 1);
+  const fraction = clamped - left;
+  return (base) => run.history[base + left] * (1 - fraction) + run.history[base + right] * fraction;
+}
+function traceAt(position) {
+  const sample = atLocation(position);
+  const values = new Float64Array(run.frames);
+  let peak = 0;
+  let index = 0;
+  for (let i = 0; i < run.frames; i++) {
+    values[i] = sample(i * run.n);
+    if (Math.abs(values[i]) > Math.abs(peak)) {
+      peak = values[i];
+      index = i;
+    }
+  }
+  return { values, peak, peakMs: index * run.frameMs };
+}
+function setRanges() {
+  const current = controls.mode.value === 'current';
+  controls.strength.min = current ? -250 : 0;
+  controls.strength.max = current ? 250 : 10;
+  controls.strength.step = current ? 5 : 0.1;
+  controls.strength.value = current ? currentStrength : synapticStrength;
+  controls.strength.setAttribute('aria-label', current ? 'Injected current amplitude' : 'Peak synaptic conductance');
+  byId('strength-label').textContent = current ? 'Current amplitude' : 'Peak conductance';
+  byId('stimulus-settings').classList.toggle('current', current);
+  byId('duration-setting').hidden = !current;
+  byId('input-note').textContent = modes[controls.mode.value].note;
+}
+
+function updateLabels() {
+  for (const [name, unit, spoken] of [
+    ['strength', run.mode === 'current' ? 'pA' : 'nS', run.mode === 'current' ? 'picoamperes' : 'nanosiemens'],
+    ['duration', 'ms', 'milliseconds'],
+    ['length', 'µm', 'micrometers'],
+    ['diameter', 'µm', 'micrometers'],
+    ['resistance', 'kΩ·cm²', 'kilohm square centimeters'],
+    ['distance', 'µm', 'micrometers'],
+  ]) {
+    const value = controls[name].valueAsNumber;
+    byId(name + '-value').textContent = labelNumber(value) + ' ' + unit;
+    controls[name].setAttribute('aria-valuetext', labelNumber(value) + ' ' + spoken);
+  }
+  byId('constants').textContent = 'Sealed ends · Length constant λ ' + magnitude(Math.round(run.lambdaUm)) +
+    ' µm · Membrane time constant τ ' + magnitude(run.tauMs) + ' ms';
+}
+function updateProbe() {
+  selected = controls.distance.valueAsNumber;
+  probeTrace = traceAt(selected);
+  byId('probe-key').textContent = 'Probe · ' + magnitude(selected) + ' µm';
+  byId('percent-label').textContent = 'Peak remaining at ' + magnitude(selected) + ' µm';
+  byId('center-peak').textContent = signed(centerTrace.peak) + ' mV';
+  byId('probe-peak').textContent = signed(probeTrace.peak) + ' mV';
+  const ratio = remaining(probeTrace.peak);
+  byId('percent').textContent = ratio === null ? '—' : labelNumber(ratio) + '%';
+  byId('peak-delay').textContent = ratio === null || Math.abs(probeTrace.peak) < 1e-8 ? '—' :
+    labelNumber(Math.max(0, probeTrace.peakMs - centerTrace.peakMs)) + ' ms';
+  controls.distance.setAttribute('aria-valuetext', magnitude(selected) + ' micrometers');
+  byId('distance-value').textContent = magnitude(selected) + ' µm';
+}
+function remaining(peak) {
+  return Math.abs(centerTrace.peak) < 1e-8 ? null : Math.min(100, 100 * Math.abs(peak / centerTrace.peak));
+}
+
+function calculate() {
+  stop();
+  time = 0;
+  const config = {
+    mode: controls.mode.value, strength: controls.strength.valueAsNumber,
+    durationMs: controls.duration.valueAsNumber, lengthUm: controls.length.valueAsNumber,
+    diameterUm: controls.diameter.valueAsNumber, resistanceK: controls.resistance.valueAsNumber,
+  };
+  run = simulatePassive(config);
+  controls.distance.max = run.lengthUm / 2;
+  controls.time.max = String(run.duration);
+  centerTrace = traceAt(0);
+  peakPositions = new Float64Array(run.n);
+  for (let base = 0; base < run.history.length; base += run.n) {
+    for (let i = run.center; i < run.n; i++) {
+      const value = run.history[base + i];
+      if (Math.abs(value) > Math.abs(peakPositions[i])) peakPositions[i] = value;
+    }
+  }
+  vertical = Math.max(5, Math.ceil(Math.abs(centerTrace.peak) * 1.12 / 5) * 5);
+  updateLabels();
+  updateProbe();
+  updateView();
+}
+
+function ticks(min, max, count) {
+  const raw = (max - min) / count;
+  const scale = 10 ** Math.floor(Math.log10(raw));
+  const step = [1, 2, 2.5, 5, 10].find((factor) => factor >= raw / scale) * scale;
+  const values = [];
+  for (let i = Math.ceil(min / step); i * step <= max; i++) values.push(i * step);
+  return values;
+}
+function line(ctx, points, stroke, width = 1, dash = []) {
+  if (!points.length) return;
+  ctx.beginPath();
+  ctx.moveTo(points[0][0], points[0][1]);
+  for (let i = 1; i < points.length; i++) ctx.lineTo(points[i][0], points[i][1]);
+  ctx.strokeStyle = stroke;
+  ctx.lineWidth = width;
+  ctx.setLineDash(dash);
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+function marker(ctx, x, y, hue, hollow = false) {
+  ctx.beginPath();
+  ctx.arc(x, y, 4.4, 0, 2 * Math.PI);
+  ctx.fillStyle = hollow ? color('paper') : hue;
+  ctx.fill();
+  ctx.lineWidth = 1.4;
+  ctx.strokeStyle = hollow ? hue : color('paper');
+  ctx.stroke();
+}
+
+function chart(canvas, xmin, xmax, ymin, ymax, xlabel, ylabel, draw) {
+  const { width, height } = canvas.getBoundingClientRect();
+  if (width < 100) return;
+  const ratio = Math.min(3, window.devicePixelRatio || 1);
+  const px = Math.round(width * ratio);
+  const py = Math.round(height * ratio);
+  if (canvas.width !== px || canvas.height !== py) {
+    canvas.width = px;
+    canvas.height = py;
+  }
+  const ctx = canvas.getContext('2d');
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  ctx.clearRect(0, 0, width, height);
+  const left = 46, right = width - 22, top = 27, bottom = height - 42;
+  const x = (value) => left + (value - xmin) / (xmax - xmin) * (right - left);
+  const y = (value) => bottom - (value - ymin) / (ymax - ymin) * (bottom - top);
+  ctx.font = '12px Inter, system-ui, sans-serif';
+  ctx.textBaseline = 'middle';
+  ctx.textAlign = 'right';
+  for (const value of ticks(ymin, ymax, 6)) {
+    const p = y(value);
+    line(ctx, [[left, p], [right, p]], value === 0 ? '#a3b2c3' : color('grid'));
+    ctx.fillStyle = color('muted');
+    ctx.fillText(labelNumber(value), left - 7, p);
+  }
+  ctx.textAlign = 'center';
+  for (const value of ticks(xmin, xmax, width < 365 ? 4 : 6)) {
+    const p = x(value);
+    line(ctx, [[p, top], [p, bottom]], color('grid'));
+    ctx.fillStyle = color('muted');
+    ctx.fillText(labelNumber(value), p, bottom + 13);
+  }
+  line(ctx, [[left, top], [left, bottom], [right, bottom]], '#8191a6');
+  ctx.fillStyle = color('ink');
+  ctx.fillText(xlabel, (left + right) / 2, height - 10);
+  ctx.textAlign = 'left';
+  ctx.fillText(ylabel, left, 11);
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(left - .5, top - 1, right - left + 1, bottom - top + 2);
+  ctx.clip();
+  draw({ ctx, x, y, top, bottom });
+  ctx.restore();
+}
+
+function attenuationChart() {
+  chart(plot.attenuation, 0, run.lengthUm / 2, 0, 105, 'Distance from center (µm)', 'Peak remaining (%)',
+    ({ ctx, x, y, top, bottom }) => {
+      const reference = [];
+      const half = run.lengthUm / 2;
+      const normalizer = Math.cosh(half / run.lambdaUm);
+      for (let i = 0; i <= 100; i++) {
+        const position = half * i / 100;
+        reference.push([x(position), y(100 * Math.cosh((half - position) / run.lambdaUm) / normalizer)]);
+      }
+      line(ctx, reference, '#657790', 1.6, [5, 4]);
+      if (remaining(centerTrace.peak) !== null) {
+        const points = [];
+        for (let i = run.center; i < run.n; i++) {
+          points.push([x((i - run.center) * run.dx), y(remaining(peakPositions[i]))]);
+        }
+        points.push([x(half), y(remaining(peakPositions[run.n - 1]))]);
+        line(ctx, points, color('accent'), 2.5);
+        line(ctx, [[x(selected), top], [x(selected), bottom]], color('probe'), 1.1, [3, 4]);
+        marker(ctx, x(selected), y(remaining(probeTrace.peak)), color('probe'));
+      }
+    });
+}
+
+function timeFrame() {
+  const number = time / run.frameMs;
+  const low = Math.min(run.frames - 1, Math.floor(number));
+  const high = Math.min(run.frames - 1, low + 1);
+  return { low, high, mix: number - low };
+}
+function traceChart() {
+  chart(plot.trace, 0, run.duration, -vertical, vertical, 'Time (ms)', 'Voltage change ΔV (mV)',
+    ({ ctx, x, y, top, bottom }) => {
+      if (run.stimulusEndMs !== null) {
+        ctx.fillStyle = 'rgba(38, 107, 118, .08)';
+        ctx.fillRect(x(run.stimulusMs), top, x(run.stimulusEndMs) - x(run.stimulusMs), bottom - top);
+      }
+      line(ctx, [[x(run.stimulusMs), top], [x(run.stimulusMs), bottom]], '#8191a6', 1, [3, 4]);
+      const f = timeFrame();
+      for (const [trace, hue, dash] of [
+        [centerTrace, color('center'), []], [probeTrace, color('probe'), [5, 4]],
+      ]) {
+        ctx.beginPath();
+        ctx.moveTo(x(0), y(trace.values[0]));
+        for (let i = 1; i < trace.values.length; i++) ctx.lineTo(x(i * run.frameMs), y(trace.values[i]));
+        ctx.strokeStyle = hue;
+        ctx.lineWidth = 2.2;
+        ctx.setLineDash(dash);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        if (Math.abs(trace.peak) >= 1e-8) marker(ctx, x(trace.peakMs), y(trace.peak), hue, true);
+        const live = trace.values[f.low] * (1 - f.mix) + trace.values[f.high] * f.mix;
+        marker(ctx, x(time), y(live), hue);
+      }
+      line(ctx, [[x(time), top], [x(time), bottom]], '#3c4a5e', 1.1);
+    });
+}
+
+function profileChart() {
+  const half = run.lengthUm / 2;
+  chart(plot.profile, -half, half, -vertical, vertical, 'Position relative to the center (µm)', 'Voltage change ΔV (mV)',
+    ({ ctx, x, y, top, bottom }) => {
+      const { low, high, mix } = timeFrame();
+      const value = (i) => run.history[low * run.n + i] * (1 - mix) + run.history[high * run.n + i] * mix;
+      const points = [[x(-half), y(value(0))]];
+      for (let i = 0; i < run.n; i++) points.push([x((i - run.center) * run.dx), y(value(i))]);
+      points.push([x(half), y(value(run.n - 1))]);
+      for (const [location, hue, dash] of [[0, color('center'), []], [selected, color('probe'), [5, 4]]]) {
+        line(ctx, [[x(location), top], [x(location), bottom]], hue, 1.1, dash);
+      }
+      line(ctx, points, color('ink'), 2.25);
+      const atProbe = atLocation(selected);
+      marker(ctx, x(selected), y(atProbe(low * run.n) * (1 - mix) + atProbe(high * run.n) * mix), color('probe'));
+    });
+}
+function updateView(rebuildAttenuation = true) {
+  controls.time.value = String(time);
+  byId('time-value').textContent = time.toFixed(1) + ' ms';
+  controls.time.setAttribute('aria-valuetext', time.toFixed(1) + ' milliseconds');
+  controls.play.textContent = frame !== null ? 'Pause' : time >= run.duration ? 'Replay' : time > 0 ? 'Resume' : 'Stimulate';
+  if (rebuildAttenuation) attenuationChart();
+  traceChart();
+  profileChart();
+}
+function stop() {
+  if (frame !== null) cancelAnimationFrame(frame);
+  frame = null;
+  previous = null;
+}
+function animate(stamp) {
+  if (previous !== null) time = Math.min(run.duration, time + Math.min(stamp - previous, 100) * run.duration / 8800);
+  previous = stamp;
+  if (time >= run.duration) stop();
+  else frame = requestAnimationFrame(animate);
+  updateView(false);
+}
+
+controls.mode.addEventListener('change', () => { setRanges(); calculate(); });
+controls.strength.addEventListener('input', () => {
+  if (controls.mode.value === 'current') currentStrength = controls.strength.valueAsNumber;
+  else synapticStrength = controls.strength.valueAsNumber;
+  calculate();
+});
+for (const name of ['length', 'diameter', 'resistance', 'duration']) {
+  controls[name].addEventListener('input', calculate);
+}
+controls.distance.addEventListener('input', () => { updateProbe(); updateView(); });
+controls.time.addEventListener('input', () => {
+  stop();
+  time = controls.time.valueAsNumber;
+  updateView(false);
+});
+controls.play.addEventListener('click', () => {
+  if (frame !== null) stop();
+  else {
+    if (time >= run.duration) time = 0;
+    frame = requestAnimationFrame(animate);
+  }
+  updateView(false);
+});
+setRanges();
+calculate();
+const resize = new ResizeObserver(() => updateView());
+for (const canvas of Object.values(plot)) resize.observe(canvas);
+</script>
+</body>
+</html>
