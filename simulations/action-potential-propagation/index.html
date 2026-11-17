@@ -27,6 +27,7 @@
   h1, h2, p { margin: 0; }
   header { margin-bottom: 1.1rem; }
   .course { color: var(--primary); font-size: .83rem; font-weight: 650; letter-spacing: .015em; }
+  .site-nav { display: flex; flex-wrap: wrap; gap: .35rem .8rem; margin-bottom: 1.15rem; font-size: .88rem; }
   h1 { font-size: clamp(1.65rem, 4vw, 2.35rem); line-height: 1.14; margin: .23rem 0 .4rem; letter-spacing: -.027em; }
   .subtitle { color: var(--muted); line-height: 1.45; }
   .panel { background: var(--paper); border: 1px solid var(--border); border-radius: 12px; }
@@ -86,6 +87,11 @@
 </head>
 <body>
 <main>
+  <nav class="site-nav" aria-label="Academic website">
+    <a href="../../simulations/">All simulations</a>
+    <a href="../../">Greg Conradi Smith</a>
+    <a href="../provenance.json">Source provenance</a>
+  </nav>
   <header>
     <p class="course">NSCI 351 · Cellular Biophysics</p>
     <h1>Action potential propagation</h1>
