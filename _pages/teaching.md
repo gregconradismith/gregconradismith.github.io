@@ -14,6 +14,15 @@ author_profile: true
 
 - [Science & Authority](https://scienceauthority.wordpress.com/): A seminar on scientific knowledge, trust, expertise, uncertainty, and the social authority of science.
 
+### Course review crossword
+
+<figure>
+<a href="{{ '/images/nsci351-course-review-crossword.png' | relative_url }}">
+<img src="{{ '/images/nsci351-course-review-crossword.png' | relative_url }}" alt="NSCI/APSC 351 course review crossword with voltage clamp and phase plane filled in" loading="lazy" width="1800" height="1391">
+</a>
+<figcaption>NSCI/APSC 351 course review crossword.</figcaption>
+</figure>
+
 ### Interactive Models
 
 [Browser simulations and games]({{ '/simulations/' | relative_url }}) for exploring dynamical systems, cellular biophysics, and qualitative reasoning.
