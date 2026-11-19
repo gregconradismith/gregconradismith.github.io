@@ -6,6 +6,12 @@ Repo: `gregconradismith.github.io`
 
 Branch: `main`
 
+## 2026-11-19 Course review crossword on Teaching
+
+- Added the approved two-answer crossword PNG between Courses and Materials and Interactive Models on `/teaching/`, under Course review crossword. Clicking the preview opens the full 1800 by 1391 image.
+- The caption is exactly "NSCI/APSC 351 course review crossword." The image is an exact copy of the NSCI 351 version with VOLTAGECLAMP and PHASEPLANE provided, with descriptive alt text and the existing responsive figure styling.
+- Published in `ffb5b6bf4c94e355c224502ea9ab8f493214e467`. GitHub Pages run `44583171238` succeeded. Source/front-matter checks, the rendered live page, image-link navigation, exact caption and public PNG byte equality were verified. PNG SHA-256 is `3d2be3631d53413982efccb804cd0186ca30863930c22821ab278ea92abc8d60`. No local Jekyll build was run under the existing handoff instruction. No remaining publication work or blockers.
+
 <!-- codex-transfer-snapshot:start -->
 ## 2026-06-22 Computer Transfer Snapshot
 
